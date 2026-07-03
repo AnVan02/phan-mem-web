@@ -1,0 +1,114 @@
+/* ===== Đối tác đáng tin cậy ===== */
+.partners-section {
+    background: #ffffff;
+    padding: 70px 0 80px;
+    font-family: Montserrat;
+    overflow: hidden;
+}
+
+.partners-section .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.partners-header {
+    margin-bottom: 40px;
+}
+
+.partners-eyebrow {
+    display: inline-block;
+    color: #7c3aed;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.partners-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+}
+
+.partners-title .highlight {
+    color: #7c3aed;
+}
+
+/* ---- Marquee chạy vô tận ---- */
+.partners-marquee {
+    position: relative;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.partners-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: partners-scroll 30s linear infinite;
+}
+
+.partners-marquee:hover .partners-track {
+    animation-play-state: paused;
+}
+
+.partner-item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 50px;
+}
+
+.partner-item img {
+    height: 70px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    /* filter: grayscale(100%); */
+    /* opacity: 0.7; */
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+.partner-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+@keyframes partners-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+    .partners-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+    .partners-section {
+        padding: 50px 0 60px;
+    }
+
+    .partners-title {
+        font-size: 24px;
+    }
+
+    .partner-item {
+        padding: 0 30px;
+    }
+
+    .partner-item img {
+        height: 26px;
+    }
+}

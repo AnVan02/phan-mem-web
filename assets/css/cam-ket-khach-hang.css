@@ -1,0 +1,126 @@
+/* ===== Cam kết khách hàng ===== */
+.commitment-section {
+    background: #fff;
+    padding: 70px 0;
+    font-family: Montserrat;
+}
+
+.commitment-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.commitment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 36px;
+}
+
+.commitment-eyebrow {
+    display: inline-block;
+    color: #7c3aed;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.commitment-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+}
+
+.commitment-title .highlight {
+    color: #7c3aed;
+}
+
+.commitment-subtitle {
+    max-width: 260px;
+    color: #6b6b70;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: right;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* ---- Grid ---- */
+.commitment-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.commitment-card {
+    background: #f4f4f6;
+    border-radius: 16px;
+    padding: 28px 24px;
+}
+
+.commitment-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #ece5fc;
+    color: #7c3aed;
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.commitment-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 10px;
+}
+
+.commitment-card-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b6b70;
+    margin: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+    .commitment-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .commitment-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .commitment-subtitle {
+        text-align: left;
+        max-width: none;
+    }
+
+    .commitment-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+    .commitment-section {
+        padding: 50px 0;
+    }
+
+    .commitment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .commitment-title {
+        font-size: 24px;
+    }
+}

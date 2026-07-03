@@ -1,0 +1,168 @@
+/* ===== Ba cách chơi game ===== */
+.services-section {
+    background: #f4f4f6;
+    padding: 70px 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.services-section .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.services-header {
+    margin-bottom: 32px;
+}
+
+.services-eyebrow {
+    display: inline-block;
+    color: #7c3aed;
+    font-size: 11px; /* Giảm 1px để chữ thanh thoát hơn */
+    font-weight: 600; /* Thay vì 700 (Bold), dùng 600 (Semi-bold) để không bị dính nét chữ tiếng Việt */
+    letter-spacing: 1.5px; /* Tăng từ 0.5px lên 1.5px để chữ viết hoa dễ đọc, sang trọng hơn */
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.4; /* Đảm bảo dấu tiếng Việt không bị cắt mất */
+}
+
+.services-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+}
+
+.services-title .highlight {
+    color: #7c3aed;
+}
+
+/* ---- Grid ---- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch; /* các card sẽ tự giãn bằng chiều cao card cao nhất */
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    height: 100%; /* lấp đầy chiều cao của grid item */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ---- Media (ảnh minh hoạ) ---- */
+.service-media {
+    position: relative;
+    height: 260px;              /* tăng cao lên, trước là 220px */
+    background-color: #ddd;     /* màu nền dự phòng nếu ảnh lỗi */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.service-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lớp phủ nhẹ để badge luôn rõ trên mọi ảnh */
+.service-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0) 45%);
+}
+
+.service-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+/* ---- Body ---- */
+.service-body {
+    padding: 22px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 300px;
+}
+
+
+.service-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 10px;
+}
+
+.service-desc {
+    /* font-size: 14px; */
+    line-height: 1.6;
+    color: #6b6b70;
+    /* margin: 0 0 20px; */
+    flex-grow: 1;
+}
+
+.service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #7c3aed;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+}
+
+.service-link:hover {
+    text-decoration: underline;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+    .services-section {
+        padding: 50px 0;
+    }
+
+    .services-title {
+        font-size: 24px;
+    }
+
+    .service-media {
+        height: 180px;
+    }
+}
