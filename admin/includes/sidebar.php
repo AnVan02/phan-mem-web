@@ -36,6 +36,7 @@
             <div class="admin-submenu" <?php echo $active_page === 'san-pham' ? '' : 'style="display:none;"'; ?>>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_sanpham/danh-sach-san-pham.php" class="admin-subnav-item <?php echo $active_sub === 'danh-sach' ? 'active' : ''; ?>">Danh sách sản phẩm</a>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_sanpham/them-san-pham.php" class="admin-subnav-item <?php echo $active_sub === 'them' ? 'active' : ''; ?>">Thêm sản phẩm mới</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php" class="admin-subnav-item <?php echo $active_sub === 'thuoc-tinh' ? 'active' : ''; ?>">Danh mục / Thương hiệu / Dung lượng</a>
             </div>
         </div>
 
