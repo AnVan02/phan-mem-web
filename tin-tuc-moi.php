@@ -3,7 +3,7 @@
 
     $linh = isset($_GET['linh']) ? trim($_GET['linh']) : '';
 
-    $stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC");
+    $stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC");
     $article_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $linh_list = $article_categories;

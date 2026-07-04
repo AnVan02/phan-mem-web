@@ -77,6 +77,9 @@
         LIMIT 4");
     $related_stmt->execute([':ma_danh_muc' => $sp['ma_danh_muc'], ':id' => $sp['ma_san_pham']]);
     $related_list = $related_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $related_articles_stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC LIMIT 6");
+    $related_articles = $related_articles_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
     <section class="product-detail">
         <div class="container">
@@ -96,7 +99,13 @@
                 <div class="product-gallery">
                     <div class="product-gallery-main">
                         <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
+                        <?php if (count($images) > 1): ?>
+                            <button type="button" class="gallery-nav-btn gallery-nav-prev" aria-label="Ảnh trước"><i class="fa-solid fa-chevron-left"></i></button>
+                        <?php endif; ?>
                         <img id="mainProductImage" src="<?php echo htmlspecialchars($hinh_anh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>">
+                        <?php if (count($images) > 1): ?>
+                            <button type="button" class="gallery-nav-btn gallery-nav-next" aria-label="Ảnh sau"><i class="fa-solid fa-chevron-right"></i></button>
+                        <?php endif; ?>
                     </div>
                     <?php if (count($images) > 1): ?>
                         <div class="product-gallery-thumbs">
@@ -208,6 +217,30 @@
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (count($related_articles) > 0): ?>
+                <div class="product-related-articles">
+                    <h2>Bài viết liên quan</h2>
+                    <div class="article-list">
+                        <?php foreach ($related_articles as $a):
+                            $art_anh  = trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp';
+                            $art_ngay = date('d/m/Y', strtotime($a['article_date']));
+                            $art_slug = tao_slug($a['article_title']);
+                        ?>
+                            <a class="article-item" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $art_slug; ?>">
+                                <div class="article-thumb">
+                                    <img src="<?php echo htmlspecialchars($art_anh); ?>" alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy">
+                                </div>
+                                <div class="article-body">
+                                    <h3 class="article-title"><?php echo htmlspecialchars($a['article_title']); ?></h3>
+                                    <span class="article-author"><i class="fa-solid fa-circle-user"></i> <?php echo htmlspecialchars($a['article_author']); ?></span>
+                                    <span class="article-date"><i class="fa-regular fa-clock"></i> <?php echo $art_ngay; ?></span>
                                 </div>
                             </a>
                         <?php endforeach; ?>

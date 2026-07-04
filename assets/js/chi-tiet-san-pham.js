@@ -1,15 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     var mainImage = document.getElementById('mainProductImage');
-    var thumbs = document.querySelectorAll('.product-gallery-thumbs .thumb');
+    var thumbs = Array.prototype.slice.call(document.querySelectorAll('.product-gallery-thumbs .thumb'));
+    var prevBtn = document.querySelector('.gallery-nav-prev');
+    var nextBtn = document.querySelector('.gallery-nav-next');
+    var galleryImages = thumbs.map(function (t) { return t.getAttribute('data-src'); });
+    var currentIndex = 0;
 
-    thumbs.forEach(function (thumb) {
-        thumb.addEventListener('click', function () {
-            if (!mainImage) return;
-            mainImage.src = thumb.getAttribute('data-src');
-            thumbs.forEach(function (t) { t.classList.remove('active'); });
-            thumb.classList.add('active');
-        });
+    function setActiveIndex(index) {
+        if (!mainImage || galleryImages.length === 0) return;
+        currentIndex = (index + galleryImages.length) % galleryImages.length;
+        mainImage.src = galleryImages[currentIndex];
+        thumbs.forEach(function (t, i) { t.classList.toggle('active', i === currentIndex); });
+    }
+
+    thumbs.forEach(function (thumb, i) {
+        thumb.addEventListener('click', function () { setActiveIndex(i); });
     });
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { setActiveIndex(currentIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { setActiveIndex(currentIndex + 1); });
 
     var qtyInput = document.querySelector('.qty-input');
     var qtyMinus = document.querySelector('.qty-minus');

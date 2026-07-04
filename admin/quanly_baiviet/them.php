@@ -93,6 +93,16 @@
                 </div>
 
                 <div class="post-box">
+                    <h3>Tab bài viết </h3>
+                    <select name="article_linh">
+                        <option value="">— Bài viết không thuộc tab nào —</option>
+                        <?php foreach ($article_categories as $l): ?>
+                            <option value="<?php echo htmlspecialchars($l); ?>"><?php echo htmlspecialchars(trim($l)); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="post-box">
                     <h3>Tác giả</h3>
                     <input type="text" name="article_author" placeholder="Tên tác giả" required>
                 </div>

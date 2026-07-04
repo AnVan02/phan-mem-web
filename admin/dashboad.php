@@ -66,7 +66,7 @@
         <main class="admin-main">
             <div class="admin-main-header">
                 <div>
-                    <h1>Dashboard</h1>
+                    <h1><img width="30" height="30" src="https://img.icons8.com/color/48/dashboard-layout.png" alt="dashboard-layout"/>Dashboard</h1>
                     <div class="subtitle"><?php echo date('d/m/Y'); ?></div>
                 </div>
                 <a href="article/them.php" class="link-out"><i class="fa-solid fa-plus"></i> Đăng bài viết mới</a>
@@ -182,6 +182,7 @@
                 plugins: { legend: { display: false } },
                 scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
             }
+            
         });
 
         <?php if (!empty($nhan_chuyen_muc)): ?>

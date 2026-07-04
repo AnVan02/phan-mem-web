@@ -6,6 +6,43 @@
     if (!isset($active_page)) $active_page = '';
     if (!isset($active_sub)) $active_sub = '';
 ?>
+<div class="admin-topbar">
+    <div class="admin-topbar-left">
+        <button type="button" class="admin-topbar-toggle" id="sidebarToggle" aria-label="Ẩn/hiện menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="admin-topbar-logo">Viết Sơn Achieva</span>
+    </div>
+
+    <div class="admin-topbar-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Tìm kiếm...">
+    </div>
+
+    <?php if (!empty($_SESSION['account_name']) || !empty($_SESSION['login'])):
+        $ten_hien_thi = $_SESSION['account_name'] ?? $_SESSION['login'];
+    ?>
+        <div class="admin-account-wrap admin-topbar-account-wrap">
+            <button type="button" class="admin-topbar-account admin-account-toggle">
+                <span>Hi, <?php echo htmlspecialchars($ten_hien_thi); ?></span>
+                <div class="admin-account-avatar">
+                    <img src="https://img.icons8.com/bubbles/100/manager.png" alt="manager"/>
+                </div>
+                <i class="fa-solid fa-chevron-down admin-account-caret"></i>
+            </button>
+            <div class="admin-account-menu" style="display:none;">
+                <a href="<?php echo $ADMIN_ROOT; ?>dang-nhap.php" class="admin-account-menu-item">
+                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                </a>
+            </div>
+        </div>
+    <?php else: ?>
+        <a href="<?php echo $ADMIN_ROOT; ?>dang-nhap.php" class="admin-topbar-account">
+            <span>Đăng nhập</span>
+        </a>
+    <?php endif; ?>
+</div>
+
 <aside class="admin-sidebar">
     <div class="admin-sidebar-logo">
         <img src="<?php echo $ADMIN_ROOT; ?>../assets/images/icon/logo VS_icon.jpg" alt="Logo">
@@ -42,19 +79,19 @@
             </div>
         </div>
 
+       <a href="<?php echo $ADMIN_ROOT; ?>../" target="_blank" class="admin-nav-item">
+            <img width="25" height="25" src="https://img.icons8.com/dusk/64/guarantee--v1.png" alt="guarantee--v1"/>Bảo hành
+        </a>
+
         <a href="<?php echo $ADMIN_ROOT; ?>../san-pham.php" target="_blank" class="admin-nav-item">
             <img width="30" height="30" src="https://img.icons8.com/fluency/48/external-link.png" alt="external-link"/>Xem trang sản phẩm
         </a>
+        
         <a href="<?php echo $ADMIN_ROOT; ?>../index.php" target="_blank" class="admin-nav-item">
            <img width="25" height="25" src="https://img.icons8.com/dusk/64/domain.png" alt="domain"/> Trang chủ website
         </a>
     </nav>
 
-    <div class="admin-sidebar-bottom">
-        <a href="<?php echo $ADMIN_ROOT; ?>dang-nhap.php" class="admin-nav-item">
-            <img width="30" height="30" src="https://img.icons8.com/fluency/48/exit--v1.png" alt="exit--v1"/> Đăng xuất
-        </a>
-    </div>
 </aside>
 
 <script>
@@ -66,4 +103,29 @@
             btn.classList.toggle('open', !dangMo);
         });
     });
+
+    var accountToggle = document.querySelector('.admin-account-toggle');
+    if (accountToggle) {
+        var accountWrap = accountToggle.closest('.admin-account-wrap');
+        var accountMenu = accountWrap.querySelector('.admin-account-menu');
+        accountToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var dangMo = accountMenu.style.display !== 'none';
+            accountMenu.style.display = dangMo ? 'none' : 'flex';
+            accountWrap.classList.toggle('open', !dangMo);
+        });
+        document.addEventListener('click', function (e) {
+            if (!accountWrap.contains(e.target)) {
+                accountMenu.style.display = 'none';
+                accountWrap.classList.remove('open');
+            }
+        });
+    }
+
+    var sidebarToggle = document.getElementById('sidebarToggle');
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+            document.querySelector('.admin-shell').classList.toggle('sidebar-collapsed');
+        });
+    }
 </script>

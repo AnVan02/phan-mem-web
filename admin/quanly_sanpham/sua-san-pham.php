@@ -126,30 +126,54 @@
 
                     <div class="post-box">
                         <h3>Giá & kho</h3>
-                        <div class="field-row">
-                            <div>
-                                <label class="field-label">Giá nhập</label>
-                                <input type="number" name="gia_nhap" min="0" value="<?php echo (int) $sp['gia_nhap']; ?>" required>
+
+                        <div class="price-stock-group">
+                            <span class="price-stock-group-label">Giá</span>
+                            <div class="field-row">
+                                <div>
+                                    <label class="field-label">Giá nhập</label>
+                                    <div class="input-suffix">
+                                        <input type="number" name="gia_nhap" id="gia_nhap" min="0" value="<?php echo (int) $sp['gia_nhap']; ?>" required>
+                                        <span class="suffix">₫</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="field-label">Giá bán</label>
+                                    <div class="input-suffix">
+                                        <input type="number" name="gia_ban" id="gia_ban" min="0" value="<?php echo (int) $sp['gia_ban']; ?>" required>
+                                        <span class="suffix">₫</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <label class="field-label">Giá bán</label>
-                                <input type="number" name="gia_ban" min="0" value="<?php echo (int) $sp['gia_ban']; ?>" required>
+                            <div class="field-row">
+                                <div>
+                                    <label class="field-label">Giảm giá</label>
+                                    <div class="input-suffix">
+                                        <input type="number" name="giam_gia" id="giam_gia" min="0" max="100" value="<?php echo (int) $sp['giam_gia']; ?>">
+                                        <span class="suffix">%</span>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="price-preview">Giá sau giảm: <strong id="gia_sau_giam_preview">0 ₫</strong></div>
                         </div>
-                        <div class="field-row">
-                            <div>
-                                <label class="field-label">Giảm giá (%)</label>
-                                <input type="number" name="giam_gia" min="0" max="100" value="<?php echo (int) $sp['giam_gia']; ?>">
-                            </div>
-                            <div>
-                                <label class="field-label">Số lượng</label>
-                                <input type="number" name="so_luong" min="0" value="<?php echo (int) $sp['so_luong']; ?>">
-                            </div>
-                        </div>
-                        <div class="field-row">
-                            <div>
-                                <label class="field-label">Đã bán</label>
-                                <input type="number" name="da_ban" min="0" value="<?php echo (int) $sp['da_ban']; ?>">
+
+                        <div class="price-stock-group">
+                            <span class="price-stock-group-label">Kho</span>
+                            <div class="field-row">
+                                <div>
+                                    <label class="field-label">Số lượng</label>
+                                    <div class="input-suffix">
+                                        <input type="number" name="so_luong" min="0" value="<?php echo (int) $sp['so_luong']; ?>">
+                                        <span class="suffix">SP</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="field-label">Đã bán</label>
+                                    <div class="input-suffix">
+                                        <input type="number" name="da_ban" min="0" value="<?php echo (int) $sp['da_ban']; ?>">
+                                        <span class="suffix">SP</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,6 +203,7 @@
         });
     </script>
     <script src="../assets/js/anh-preview.js"></script>
+    <script src="../assets/js/gia-kho-preview.js"></script>
 </body>
 
 </html>

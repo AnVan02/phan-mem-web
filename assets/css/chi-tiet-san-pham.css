@@ -69,6 +69,39 @@
     object-fit: cover;
 }
 
+.gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: #111;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    transition: background 0.2s ease;
+}
+
+.gallery-nav-btn:hover {
+    background: #fff;
+    color: #DC2626;
+}
+
+.gallery-nav-prev {
+    left: 12px;
+}
+
+.gallery-nav-next {
+    right: 12px;
+}
+
 .product-gallery-thumbs {
     display: flex;
     flex-wrap: wrap;
@@ -319,6 +352,107 @@
     gap: 20px;
 }
 
+/* ---- Related articles ---- */
+.product-related-articles {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    margin-bottom: 30px;
+}
+
+.product-related-articles h2 {
+    position: relative;
+    font-size: 19px;
+    font-weight: 800;
+    color: #111;
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+}
+
+.product-related-articles h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 48px;
+    height: 3px;
+    background: #DC2626;
+}
+
+.product-related-articles .article-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 32px;
+}
+
+.article-item {
+    display: flex;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.article-thumb {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f1f1f3;
+}
+
+.article-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.article-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.article-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-item:hover .article-title {
+    color: #DC2626;
+}
+
+.article-author,
+.article-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+}
+
+.article-author {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.article-author i {
+    color: #9b9ba1;
+}
+
+.article-date {
+    color: #9b9ba1;
+}
+
 /* ---- Empty state (reuse) ---- */
 .product-detail .product-empty {
     background: #fff;
@@ -367,6 +501,10 @@
 
 @media (max-width: 576px) {
     .product-related .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-related-articles .article-list {
         grid-template-columns: 1fr;
     }
 

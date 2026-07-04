@@ -22,11 +22,11 @@
 }
 
 .post-box h3 {
-    font-size: 12px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: #9b9ba1;
-    font-weight: 800;
+    color: #1e3c72;
+    font-weight: 600;
     margin: 0 0 14px;
 }
 
@@ -53,6 +53,7 @@
 .post-box input[type="text"],
 .post-box input[type="date"],
 .post-box input[type="file"],
+.post-box input[type="number"],
 .post-box select,
 .post-box textarea {
     font-family: inherit;
@@ -112,6 +113,56 @@
     font-weight: 700;
     color: #6b6b70;
     margin-bottom: 6px;
+}
+
+/* ---- Nhóm Giá / Kho trong post-box "Giá & kho" ---- */
+.price-stock-group {
+    margin-bottom: 18px;
+}
+
+.price-stock-group:last-child {
+    margin-bottom: 0;
+}
+
+.price-stock-group-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #b9b9be;
+    font-weight: 800;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f1f1f3;
+}
+
+.input-suffix {
+    position: relative;
+}
+
+.input-suffix input {
+    padding-right: 34px;
+}
+
+.input-suffix .suffix {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: 700;
+    color: #9b9ba1;
+    pointer-events: none;
+}
+
+.price-preview {
+    font-size: 13px;
+    color: #6b6b70;
+    margin-top: 2px;
+}
+
+.price-preview strong {
+    color: #1e3c72;
 }
 
 /* ---- Xem trước ảnh đã chọn ---- */

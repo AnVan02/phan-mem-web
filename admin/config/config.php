@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Fallback mbstring nếu server chưa bật extension
 if (!function_exists('mb_strtolower')) {
     function mb_strtolower($str, $encoding = 'UTF-8') {
