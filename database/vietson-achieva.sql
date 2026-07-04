@@ -95,6 +95,7 @@ CREATE TABLE `san_pham` (
   `gia_ban` int(11) NOT NULL,
   `giam_gia` int(11) NOT NULL DEFAULT 0,
   `mo_ta` longtext NOT NULL,
+  `thong-so` longtext NOT NULL,
   `hinh_anh` longtext NOT NULL,
   `trang_thai` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -120,6 +121,12 @@ CREATE TABLE `thuong_hieu` (
 ALTER TABLE `account`
   ADD PRIMARY KEY (`account_id`),
   ADD UNIQUE KEY `account_email` (`account_email`);
+
+--
+-- Indexes for table `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`article_id`);
 
 --
 -- Indexes for table `danh_muc`
@@ -155,6 +162,12 @@ ALTER TABLE `thuong_hieu`
 --
 ALTER TABLE `account`
   MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `article`
+--
+ALTER TABLE `article`
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `danh_muc`

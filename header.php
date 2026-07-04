@@ -1,7 +1,7 @@
 <header class="site-header">
     <div class="container header-main-inner">
         <div class="site-logo">
-            <a href="/" title="Trang chủ Viết Sơn">
+            <a href="index.php" title="Trang chủ Viết Sơn">
                 <img src="assets/image/logoVS_new.png" alt="">
             </a>
         </div>
@@ -26,7 +26,7 @@
                                 <h4>Máy tính chơi game lắp sẵn</h4>
                                 <p class="megamenu-desc">Màn hình máy tính được tối ưu hóa để chơi game mượt mà ở độ phân giải 1080p, 1440p hoặc 4K.</p>
                                 <ul>
-                                    <li><a href="/may-tinh-lap-san.php?loai=phan-khuc-1">Người chơi thứ nhất</a></li>
+                                    <li><a href="san-pham.php">Sản phẩm</a></li>
                                     <li><a href="/may-tinh-lap-san.php?loai=phan-khuc-2">Người chơi thứ hai</a></li>
                                     <li><a href="/may-tinh-lap-san.php?loai=phan-khuc-3">Người chơi thứ ba</a></li>
                                     <li><a href="/may-tinh-lap-san.php?so-sanh=1">So sánh các máy tính chơi game lắp sẵn</a></li>
@@ -46,7 +46,7 @@
 
                 <!-- Mega menu -->
                 <li class="has-megamenu">
-                    <a href="/linh-kien-may-tinh.php">
+                    <a href="san-pham.php">
                         Linh kiện máy tính
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
@@ -92,7 +92,7 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="/cong-dong.php?trang=cau-lac-bo">Câu lạc bộ Viết Sơn</a></li>
-                        <li><a href="/cong-dong.php?trang=blog">Blog</a></li>
+                        <li><a href="tin-tuc-moi.php">Blog</a></li>
                         <li><a href="/cong-dong.php?trang=podcast">Podcast</a></li>
                         <li><a href="/cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
                     </ul>

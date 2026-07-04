@@ -25,6 +25,7 @@
     <script src="assets/js/banner.js"></script>
     <script src="assets/js/header.js"></script>
 
+
     <!-- phần mục css  -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -33,6 +34,7 @@
     <link rel="stylesheet" href="assets/css/danh-muc.css">
     <link rel="stylesheet" href="assets/css/doi-tac.css">
     <link rel="stylesheet" href="assets/css/cam-ket-khach-hang.css">
+    <link red="stylesheet" href="assets/css/chi-tiet-san-pham.css">
     <link rel="stylesheet" href="assets/css/footer.css">
 
 </head>

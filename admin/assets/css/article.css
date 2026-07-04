@@ -1,0 +1,171 @@
+/* ===== Trang quản lý Tin tức (Admin) ===== */
+/* Layout khung (sidebar, .admin-main-header...) nằm trong admin-layout.css */
+
+/* ---- Flash message ---- */
+.admin-flash {
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.admin-flash.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.admin-flash.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ---- Card / Panel ---- */
+.admin-panel {
+    background: #fff;
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    margin-bottom: 26px;
+}
+
+.admin-panel h2 {
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 18px;
+}
+
+/* ---- Form ---- */
+.admin-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 22px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-admin-primary {
+    background: #ffd700;
+    color: #1e3c72;
+}
+
+.btn-admin-primary:hover {
+    background: #1e3c72;
+    color: #ffd700;
+}
+
+.btn-admin-secondary {
+    background: #f1f1f3;
+    color: #333;
+}
+
+.btn-admin-secondary:hover {
+    background: #e4e4e7;
+}
+
+/* ---- Table ---- */
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    color: #6b6b70;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.admin-table td.title-cell {
+    max-width: 320px;
+}
+
+.admin-table .thumb {
+    width: 56px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f1f1f3;
+    display: block;
+}
+
+.admin-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.admin-badge.on {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.admin-badge.off {
+    background: #f1f1f3;
+    color: #6b6b70;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.admin-actions a,
+.admin-actions button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+}
+
+.admin-actions .edit {
+    color: #2563eb;
+}
+
+.admin-actions .delete {
+    color: #DC2626;
+}
+
+.admin-actions a:hover,
+.admin-actions button:hover {
+    text-decoration: underline;
+}
+
+.admin-empty {
+    text-align: center;
+    padding: 30px;
+    color: #9b9ba1;
+}

@@ -95,26 +95,31 @@
                         $giam_gia     = (int) $sp['giam_gia'];
                         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
                         $hinh_anh     = trim($sp['hinh_anh']) !== '' ? $sp['hinh_anh'] : 'assets/image/pc.webp';
+                        $slug         = tao_slug($sp['ten_san_pham']);
                     ?>
-                        <article class="product-card">
+                        <a class="product-card" href="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>">
                             <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
                             <div class="product-media">
                                 <img src="<?php echo htmlspecialchars($hinh_anh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy">
                             </div>
                             <div class="product-body">
-                                <?php if (!empty($sp['ten_thuong_hieu'])): ?>
-                                    <span class="product-brand"><?php echo htmlspecialchars($sp['ten_thuong_hieu']); ?></span>
-                                <?php endif; ?>
+                                <div class="product-tags-row">
+                                    <?php if (!empty($sp['ten_thuong_hieu'])): ?>
+                                        <span class="product-brand"><?php echo htmlspecialchars($sp['ten_thuong_hieu']); ?></span>
+                                    <?php endif; ?>
+                                    <?php if (!empty($sp['ten_dung_luong'])): ?>
+                                        <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']); ?></span>
+                                    <?php endif; ?>
+                                </div>
                                 <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
-                                <?php if (!empty($sp['ten_dung_luong'])): ?>
-                                    <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']); ?></span>
-                                <?php endif; ?>
+
                                 <?php
                                     $mo_ta_ngan = trim(strip_tags($sp['mo_ta']));
-                                    if (mb_strlen($mo_ta_ngan) > 80) {
-                                        $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 80) . '...';
+                                    if (mb_strlen($mo_ta_ngan) > 150) {
+                                        $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
                                     }
                                 ?>
+                                
                                 <?php if ($mo_ta_ngan !== ''): ?>
                                     <p class="product-desc"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
                                 <?php endif; ?>
@@ -129,15 +134,8 @@
                                     <?php endif; ?>
                                 </div>
 
-                                <div class="product-stock">
-                                    <?php if ((int) $sp['so_luong'] > 0): ?>
-                                        <span class="in-stock"><i class="fa-solid fa-circle-check"></i> Còn hàng</span>
-                                    <?php else: ?>
-                                        <span class="out-stock"><i class="fa-solid fa-circle-xmark"></i> Hết hàng</span>
-                                    <?php endif; ?>
-                                </div>
                             </div>
-                        </article>
+                        </a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>

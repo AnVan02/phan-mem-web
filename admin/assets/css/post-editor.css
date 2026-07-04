@@ -1,0 +1,165 @@
+/* ===== Form thêm/sửa bài viết dạng 2 cột ===== */
+.post-editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 22px;
+    align-items: start;
+}
+
+.post-main,
+.post-side {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0;
+}
+
+.post-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.post-box h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9b9ba1;
+    font-weight: 800;
+    margin: 0 0 14px;
+}
+
+/* ---- Tiêu đề bài viết ---- */
+.post-title-input {
+    width: 100%;
+    border: none;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 800;
+    color: #111;
+    padding: 4px 0;
+}
+
+.post-title-input:focus {
+    outline: none;
+}
+
+.post-title-input::placeholder {
+    color: #c7c7cc;
+}
+
+/* ---- Input dùng chung trong sidebar cài đặt ---- */
+.post-box input[type="text"],
+.post-box input[type="date"],
+.post-box input[type="file"],
+.post-box select,
+.post-box textarea {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e3;
+    border-radius: 8px;
+    background: #fafafa;
+    color: #1a1a1a;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.post-box textarea {
+    resize: vertical;
+}
+
+.post-box input:focus,
+.post-box select:focus,
+.post-box textarea:focus {
+    outline: none;
+    border-color: #1e3c72;
+    background: #fff;
+}
+
+.post-box .hint {
+    display: block;
+    font-size: 12px;
+    color: #9b9ba1;
+    margin: 8px 0 8px;
+}
+
+/* ---- Box Xuất bản ---- */
+.post-box .admin-checkbox {
+    margin-bottom: 14px;
+}
+
+.post-publish-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ---- Hàng 2 cột cho các trường ngắn (giá, số lượng...) ---- */
+.post-box .field-row {
+    display: flex;
+    gap: 12px;
+}
+
+.post-box .field-row > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.post-box label.field-label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #6b6b70;
+    margin-bottom: 6px;
+}
+
+/* ---- Xem trước ảnh đã chọn ---- */
+.anh-preview-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 8px;
+}
+
+.anh-preview-item {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e3;
+}
+
+.anh-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.anh-preview-remove {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    line-height: 16px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.anh-preview-remove:hover {
+    background: #d92c2c;
+}
+
+@media (max-width: 992px) {
+    .post-editor-grid {
+        grid-template-columns: 1fr;
+    }
+}
