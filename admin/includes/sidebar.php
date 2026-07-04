@@ -36,7 +36,9 @@
             <div class="admin-submenu" <?php echo $active_page === 'san-pham' ? '' : 'style="display:none;"'; ?>>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_sanpham/danh-sach-san-pham.php" class="admin-subnav-item <?php echo $active_sub === 'danh-sach' ? 'active' : ''; ?>">Danh sách sản phẩm</a>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_sanpham/them-san-pham.php" class="admin-subnav-item <?php echo $active_sub === 'them' ? 'active' : ''; ?>">Thêm sản phẩm mới</a>
-                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php" class="admin-subnav-item <?php echo $active_sub === 'thuoc-tinh' ? 'active' : ''; ?>">Danh mục / Thương hiệu / Dung lượng</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=danh-muc" class="admin-subnav-item <?php echo $active_sub === 'danh-muc' ? 'active' : ''; ?>">Danh mục</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=thuong-hieu" class="admin-subnav-item <?php echo $active_sub === 'thuong-hieu' ? 'active' : ''; ?>">Thương hiệu</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=dung-luong" class="admin-subnav-item <?php echo $active_sub === 'dung-luong' ? 'active' : ''; ?>">Dung lượng</a>
             </div>
         </div>
 
