@@ -52,6 +52,33 @@
     font-size: 15px;
 }
 
+/* ---- Section nhóm danh mục ---- */
+.product-section {
+    margin-bottom: 52px;
+}
+
+.product-section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.product-section-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.product-section-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, #DC2626 0%, #f4f4f6 100%);
+    border-radius: 999px;
+}
+
 /* ---- Toolbar ---- */
 .product-toolbar {
     display: flex;
@@ -98,18 +125,34 @@
     display: flex;
     gap: 24px;
     overflow-x: auto;
-    padding: 4px 4px 14px;
-    margin-bottom: 28px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    background: #fef9ee;
+    border-radius: 16px;
+    scrollbar-width: none;
 }
+.category-strip::-webkit-scrollbar { display: none; }
 
 .category-circle {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
-    width: 92px;
+    width: 100px;
     text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Button reset cho filter-circle */
+.filter-circle {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
 }
 
 .category-circle-img {
@@ -169,11 +212,19 @@
 }
 
 .category-circle-name {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #444;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+    max-height: 2.6em;
+    width: 100%;
 }
 
 .category-circle.active .category-circle-name {

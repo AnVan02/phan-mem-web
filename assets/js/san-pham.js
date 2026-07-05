@@ -1,23 +1,115 @@
-// Đếm ngược khung giờ khuyến mãi trên thẻ sản phẩm (san-pham.php), kết thúc vào cuối ngày hiện tại.
-document.addEventListener('DOMContentLoaded', function () {
-    var elements = document.querySelectorAll('[data-countdown-endofday]');
-    if (!elements.length) return;
+document.addEventListener("DOMContentLoaded", function () {
 
-    function padSo(n) {
-        return String(n).padStart(2, '0');
+    // ==========================
+    // Đếm ngược khuyến mãi
+    // ==========================
+    const countdownEls = document.querySelectorAll("[data-countdown-endofday]");
+
+    if (countdownEls.length > 0) {
+
+        function padSo(n) {
+            return String(n).padStart(2, "0");
+        }
+
+        function capNhat() {
+
+            const now = new Date();
+
+            const hetHan = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate(),
+                23,
+                59,
+                59
+            );
+
+            const conLai = Math.max(0, hetHan - now);
+
+            const gio = Math.floor(conLai / 3600000);
+            const phut = Math.floor((conLai % 3600000) / 60000);
+            const giay = Math.floor((conLai % 60000) / 1000);
+
+            const text =
+                padSo(gio) + ":" +
+                padSo(phut) + ":" +
+                padSo(giay);
+
+            countdownEls.forEach(function (el) {
+                el.textContent = text;
+            });
+        }
+
+        capNhat();
+        setInterval(capNhat, 1000);
+
     }
 
-    function capNhat() {
-        var now = new Date();
-        var hetHan = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-        var conLai = Math.max(0, hetHan - now);
-        var gio = Math.floor(conLai / 3600000);
-        var phut = Math.floor((conLai % 3600000) / 60000);
-        var giay = Math.floor((conLai % 60000) / 1000);
-        var text = padSo(gio) + ':' + padSo(phut) + ':' + padSo(giay);
-        elements.forEach(function (el) { el.textContent = text; });
-    }
+    // ==========================
+    // Filter sản phẩm
+    // ==========================
+    const buttons = document.querySelectorAll(".filter-circle");
 
-    capNhat();
-    setInterval(capNhat, 1000);
+    buttons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const sectionId = this.dataset.section;
+            const filter = this.dataset.filter;
+
+            const section = document.getElementById(sectionId);
+
+            if (!section) return;
+
+            // Active button
+            const strip = this.closest(".category-strip");
+
+            strip.querySelectorAll(".filter-circle").forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            // Hiện / ẩn sản phẩm
+            const cards = section.querySelectorAll(".product-card");
+
+            cards.forEach(function (card) {
+
+                if (filter === "all") {
+
+                    card.style.display = "";
+
+                    return;
+
+                }
+
+                if (card.dataset.filter.toLowerCase() === filter.toLowerCase()) {
+
+                    card.style.display = "";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+    });
+
+    // ==========================
+    // Mặc định click "Tất cả"
+    // ==========================
+    document.querySelectorAll(".category-strip").forEach(function (strip) {
+
+        const first = strip.querySelector(".filter-circle");
+
+        if (first) {
+            first.click();
+        }
+
+    });
+
 });

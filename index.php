@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viết Sơn - Achiva</title>
     <!-- logo icon  -->
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg"/>
+    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
     <!-- Thẻ SEO Meta chuẩn Google -->
-    <meta name="description" content="<?php echo $seo_description; ?>">
     <meta name="robots" content="index, follow">
     <!--google search console -->
 
@@ -42,20 +41,20 @@
 <body>
     <?php
 
-        include 'header.php'; 
-        include 'banner.php';
-        // 
-        include 'danh-muc.php';
-        // include 'doi-tac.php';
-        include 'cam-ket-khach-hang.php';
-        // include 'thuong-hieu.php';
+    include 'header.php';
+    include 'banner.php';
+    // 
+    include 'danh-muc.php';
+    // include 'doi-tac.php';
+    include 'cam-ket-khach-hang.php';
+    // include 'thuong-hieu.php';
 
 
 
 
 
 
-        include 'footer.php';
+    include 'footer.php';
 
     ?>
 
