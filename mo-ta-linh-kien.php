@@ -244,21 +244,8 @@ if ($dl_slug !== '') {
         });
     }
    
-    // Chỉ lấy banner của các thương hiệu thực sự có sản phẩm trong danh mục đang xem
-    $ma_th_trong_dm = array_keys($thuong_hieu_options);
-    if (!empty($ma_th_trong_dm)) {
-        $placeholders = implode(',', array_fill(0, count($ma_th_trong_dm), '?'));
-        $stmt_banner = $pdo->prepare("
-            SELECT ma_thuong_hieu, ten_thuong_hieu, banner
-            FROM thuong_hieu
-            WHERE banner IS NOT NULL AND banner != '' AND ma_thuong_hieu IN ($placeholders)
-            ORDER BY ma_thuong_hieu
-        ");
-        $stmt_banner->execute($ma_th_trong_dm);
-        $banner_list = $stmt_banner->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        $banner_list = [];
-    }
+    // Banner list: không dùng cột banner (không tồn tại), đặt mảng rỗng để trang không lỗi
+    $banner_list = [];
 
     $related_articles_stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC LIMIT 6");
     $related_articles = $related_articles_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -399,25 +386,25 @@ if ($dl_slug !== '') {
                     <?php endif; ?>
                 </aside> -->
 
-                <div class="category-main">
-                    <h3 class="category-strip-title">Chọn sản phẩm theo nhu cầu</h3>
                     <?php if (!empty($dong_groups)): ?>
-                        <div class="category-strip">
-                            <!-- <a class="category-circle <?php echo $ma_dl_filter === 0 ? 'active' : ''; ?>" href="<?php echo xay_dung_url_sp(['dl' => ''], $hien_tai); ?>">
-                                <span class="category-circle-name">Tất cả</span>
-                            </a> -->
+                    <div class="needs-card">
+                        <div class="needs-card-header">
+                            <span class="needs-card-title"><i class="fa-solid fa-sliders"></i> Chọn sản phẩm theo nhu cầu</span>
+                        </div>
+                        <div class="category-pills">
+                            <a class="category-pill <?php echo $ma_dl_filter === 0 ? 'active' : ''; ?>" href="<?php echo xay_dung_url_sp(['dl' => ''], $hien_tai); ?>">
+                                Tất cả
+                            </a>
                             <?php foreach ($dong_groups as $ma_dl => $dong): ?>
-                                <a class="category-circle <?php echo $ma_dl_filter === $ma_dl ? 'active' : ''; ?>" href="<?php echo xay_dung_url_sp(['dl' => tao_slug($dong['ten'])], $hien_tai); ?>">
-                                    <span class="category-circle-img">
-                                        <img src="<?php echo !empty($dong['hinh_anh']) ? htmlspecialchars($dong['hinh_anh']) : 'assets/image/pc.webp'; ?>"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/image/pc.webp';">
-                                    </span>
-                                    <span class="category-circle-name"><?php echo htmlspecialchars($dong['ten']); ?></span>
+                                <a class="category-pill <?php echo $ma_dl_filter === $ma_dl ? 'active' : ''; ?>" href="<?php echo xay_dung_url_sp(['dl' => tao_slug($dong['ten'])], $hien_tai); ?>">
+                                    <?php echo htmlspecialchars($dong['ten']); ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>
+                    </div>
                     <?php endif; ?>
+
+
 
                     <!-- <div class="sort-bar">
                         <span class="sort-bar-count"><?php echo count($danh_sach_hien_thi); ?> sản phẩm</span>
