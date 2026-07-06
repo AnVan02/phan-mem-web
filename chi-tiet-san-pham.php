@@ -123,11 +123,11 @@
                         <span class="product-brand"><?php echo htmlspecialchars($sp['ten_thuong_hieu']); ?></span>
                     <?php endif; ?>
 
-                    <h1 class="product-detail-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h1>
+                    <?php if (!empty ($sp['ten_dung_luong'])):?>
+                        <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']);?></span>
+                    <?php endif;?>
 
-                    <?php if (!empty($sp['ten_dung_luong'])): ?>
-                        <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']); ?></span>
-                    <?php endif; ?>
+                    <h1 class="product-detail-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h1>
 
                     <div class="product-detail-price-row">
                         <?php if ($gia_ban <= 0): ?>
@@ -203,10 +203,11 @@
                                     <?php if (!empty($rp['ten_thuong_hieu'])): ?>
                                         <span class="product-brand"><?php echo htmlspecialchars($rp['ten_thuong_hieu']); ?></span>
                                     <?php endif; ?>
-                                    <h3 class="product-name"><?php echo htmlspecialchars($rp['ten_san_pham']); ?></h3>
                                     <?php if (!empty($rp['ten_dung_luong'])): ?>
                                         <span class="product-spec"><?php echo htmlspecialchars($rp['ten_dung_luong']); ?></span>
                                     <?php endif; ?>
+                                        <h3 class="product-name"><?php echo htmlspecialchars($rp['ten_san_pham']); ?></h3>
+                                   
                                     <div class="product-price-row">
                                         <?php if ($r_gia_ban <= 0): ?>
                                             <span class="product-price product-price-contact">Liên hệ</span>

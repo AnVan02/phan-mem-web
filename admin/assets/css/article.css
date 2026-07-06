@@ -77,6 +77,38 @@
     background: #e4e4e7;
 }
 
+/* ---- Filter bar ---- */
+.admin-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.admin-filter-bar select,
+.admin-filter-bar input[type="text"] {
+    font-family: inherit;
+    font-size: 13.5px;
+    padding: 9px 14px;
+    border: 1px solid #e0e0e4;
+    border-radius: 999px;
+    background: #f9f9fb;
+    color: #1a1a1a;
+}
+
+.admin-filter-bar select:focus,
+.admin-filter-bar input[type="text"]:focus {
+    outline: none;
+    border-color: #4b6cb7;
+    background: #fff;
+}
+
+.admin-filter-bar input[type="text"] {
+    flex: 1 1 220px;
+    min-width: 180px;
+}
+
 /* ---- Table ---- */
 .admin-table-wrap {
     overflow-x: auto;
@@ -131,6 +163,44 @@
 .admin-badge.off {
     background: #f1f1f3;
     color: #6b6b70;
+}
+
+/* ---- Pagination ---- */
+.admin-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.admin-pagination a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 6px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+    background: #f1f1f3;
+}
+
+.admin-pagination a:hover {
+    background: #e4e4e7;
+}
+
+.admin-pagination a.active {
+    background: #ffd700;
+    color:  #1e3c72;
+}
+
+.admin-pagination a.disabled {
+    opacity: 0.4;
+    pointer-events: none;
 }
 
 .admin-actions {

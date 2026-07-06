@@ -27,8 +27,81 @@
 
     $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
 
+    // Query string dùng chung để build lại link (giữ nguyên từ khóa tìm kiếm)
+    $qs_giu_keyword = $keyword !== '' ? '&q=' . urlencode($keyword) : '';
+
+    // Render 1 thẻ sản phẩm
+    function render_the_card($sp)
+    {
+        $gia_ban      = (int) $sp['gia_ban'];
+        $giam_gia     = (int) $sp['giam_gia'];
+        $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
+        $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
+        $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
+        $slug         = tao_slug($sp['ten_san_pham']);
+        $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
+        ?>
+        <a class="product-card"
+            href="chi-tiet-san-pham.php?id=<?php echo (int)$sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>">
+            <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
+            <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
+            <div class="product-media">
+                <img src="<?php echo htmlspecialchars($hinh_anh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+            </div>
+            <div class="product-body">
+                <?php if ($giam_gia > 0): ?>
+                    <div class="product-flash-banner">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span class="flash-countdown" data-countdown-endofday>--:--:--</span>
+                    </div>
+                <?php endif; ?>
+
+                <div class="product-tags-row">
+                    <?php if (!empty($sp['ten_thuong_hieu'])): ?>
+                        <span class="product-brand"><?php echo htmlspecialchars($sp['ten_thuong_hieu']); ?></span>
+                    <?php endif; ?>
+                    <?php if (!empty($sp['ten_dung_luong'])): ?>
+                        <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']); ?></span>
+                    <?php endif; ?>
+                </div>
+                <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
+
+                <?php
+                $mo_ta_ngan = trim(strip_tags($sp['mo_ta']));
+                if (mb_strlen($mo_ta_ngan) > 150) {
+                    $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
+                }
+                ?>
+                <?php if ($mo_ta_ngan !== ''): ?>
+                    <p class="product-desc"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
+                <?php endif; ?>
+
+                <div class="product-price-row">
+                    <?php if ($gia_ban <= 0): ?>
+                        <span class="product-price product-price-contact">Liên hệ</span>
+                    <?php else: ?>
+                        <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
+                        <?php if ($giam_gia > 0): ?>
+                            <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+
+                <?php if ($gia_ban > 0): ?>
+                    <div class="product-prepay">Hoặc trả trước <b><?php echo number_format($tra_truoc, 0, ',', '.'); ?>đ</b></div>
+                <?php endif; ?>
+
+                <div class="product-rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+        </a>
+        <?php
+    }
+
     // Lấy tất cả sản phẩm active, sắp xếp theo danh mục rồi theo id giảm dần
-    $sql = "SELECT sp.*, dm.ten_danh_muc, dm.ma_danh_muc AS dm_id, th.ten_thuong_hieu, dl.ten_dung_luong
+    $sql = "SELECT sp.*, dm.ten_danh_muc, dm.ma_danh_muc AS dm_id, th.ten_thuong_hieu,
+                   dl.ten_dung_luong, dl.hinh_anh AS dung_luong_hinh_anh
             FROM san_pham sp
             LEFT JOIN danh_muc dm ON sp.ma_danh_muc = dm.ma_danh_muc
             LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
@@ -49,7 +122,7 @@
     $san_pham_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Nhóm sản phẩm theo danh mục
-    // $nhom_danh_muc[ma_dm] = ['ten' => ..., 'san_pham' => [...], 'dong_groups' => [ten_dong => ['ten'=>, 'anh'=>]]]
+    // $nhom_danh_muc[ma_dm] = ['ten' => ..., 'san_pham' => [...], 'dong_groups' => [ma_dl => ['ten'=>, 'hinh_anh'=>]]]
     $nhom_danh_muc = [];
     foreach ($san_pham_list as $sp) {
         $ma_dm  = (int) $sp['dm_id'];
@@ -66,13 +139,15 @@
         // Thêm sản phẩm vào nhóm
         $nhom_danh_muc[$ma_dm]['san_pham'][] = $sp;
 
-        // Xây dựng danh sách "dòng" (ten_dung_luong) để hiện vòng tròn
+        // Xây dựng danh sách "dòng" (dung lượng) để hiện vòng tròn lọc
+        // Gom theo mã dung lượng (ma_dung_luong) để tránh trùng/lệch tên
+        $ma_dl    = (int) ($sp['ma_dung_luong'] ?? 0);
         $ten_dong = trim($sp['ten_dung_luong'] ?? '');
-        if ($ten_dong !== '' && !isset($nhom_danh_muc[$ma_dm]['dong_groups'][$ten_dong])) {
-            $anh_list_sp = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
-            $nhom_danh_muc[$ma_dm]['dong_groups'][$ten_dong] = [
-                'ten' => $ten_dong,
-                'anh' => !empty($anh_list_sp) ? $anh_list_sp[0] : '',
+
+        if ($ma_dl > 0 && $ten_dong !== '' && !isset($nhom_danh_muc[$ma_dm]['dong_groups'][$ma_dl])) {
+            $nhom_danh_muc[$ma_dm]['dong_groups'][$ma_dl] = [
+                'ten'      => $ten_dong,
+                'hinh_anh' => trim($sp['dung_luong_hinh_anh'] ?? ''),
             ];
         }
     }
@@ -83,14 +158,6 @@
             <div class="product-page-header">
                 <span class="product-eyebrow">— Cửa hàng Viết Sơn</span>
                 <h1 class="product-title">Sản phẩm</h1>
-            </div>
-
-            <!-- Thanh tìm kiếm -->
-            <div class="product-toolbar">
-                <form class="product-search" action="san-pham.php" method="get">
-                    <input type="text" name="q" value="<?php echo htmlspecialchars($keyword); ?>" placeholder="Tìm sản phẩm...">
-                    <button type="submit" aria-label="Tìm kiếm"><i class="fas fa-search"></i></button>
-                </form>
             </div>
 
             <?php if (count($san_pham_list) === 0): ?>
@@ -105,27 +172,27 @@
 
                         <!-- Tiêu đề danh mục -->
                         <div class="product-section-header">
-                            <h2 class="product-section-title"><?php echo htmlspecialchars($nhom['ten']); ?></h2>
+                            <h2 class="product-section-title">Sản Phẩm Nổi Bật <?php echo htmlspecialchars($nhom['ten']); ?></h2>
                             <div class="product-section-line"></div>
                         </div>
+
                         <?php if (!empty($nhom['dong_groups'])): ?>
                             <div class="category-strip" id="strip-<?php echo $ma_dm; ?>">
 
-                                <button class="category-circle filter-circle active"
-                                    data-section="section-<?php echo $ma_dm; ?>"
-                                    data-filter="all">
+                                <!-- <a class="category-circle active"
+                                    href="mo-ta-linh-kien.php?dm=<?php echo $ma_dm . $qs_giu_keyword; ?>"
+                                    target="_blank" rel="noopener">
 
                                     <span class="category-circle-name">Tất cả</span>
-                                </button>
+                                </a> -->
 
-                                <?php foreach ($nhom['dong_groups'] as $dong): ?>
+                                <?php foreach ($nhom['dong_groups'] as $ma_dl => $dong): ?>
 
-                                    <button class="category-circle filter-circle"
-                                        data-section="section-<?php echo $ma_dm; ?>"
-                                        data-filter="<?php echo strtolower(trim($dong['ten'])); ?>">
+                                    <a class="category-circle"
+                                        href="mo-ta-linh-kien.php?dm=<?php echo tao_slug($nhom['ten']); ?>&dl=<?php echo tao_slug($dong['ten']) . $qs_giu_keyword; ?>">
 
                                         <span class="category-circle-img">
-                                            <img src="<?php echo htmlspecialchars($dong['anh']); ?>"
+                                            <img src="<?php echo !empty($dong['hinh_anh']) ? htmlspecialchars($dong['hinh_anh']) : 'assets/image/pc.webp'; ?>"
                                                 loading="lazy"
                                                 onerror="this.onerror=null;this.src='assets/image/pc.webp';">
                                         </span>
@@ -134,7 +201,7 @@
                                             <?php echo htmlspecialchars($dong['ten']); ?>
                                         </span>
 
-                                    </button>
+                                    </a>
 
                                 <?php endforeach; ?>
 
@@ -143,81 +210,8 @@
 
                         <!-- Grid sản phẩm của danh mục này -->
                         <div class="product-grid" id="section-<?php echo $ma_dm; ?>">
-                            <?php foreach ($nhom['san_pham'] as $sp):
-                                $gia_ban      = (int) $sp['gia_ban'];
-                                $giam_gia     = (int) $sp['giam_gia'];
-                                $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
-                                $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
-                                $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
-                                $slug         = tao_slug($sp['ten_san_pham']);
-                                $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
-                            ?>
-                                <a class="product-card"
-                                    data-filter="<?php echo strtolower(trim($sp['ten_dung_luong'])); ?>"
-                                    href="chi-tiet-san-pham.php?id=<?php echo (int)$sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>">
-                                    <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
-                                    <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
-                                    <div class="product-media">
-                                        <img src="<?php echo htmlspecialchars($hinh_anh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
-                                    </div>
-                                    <div class="product-body">
-                                        <?php if ($giam_gia > 0): ?>
-                                            <div class="product-flash-banner">
-                                                <i class="fa-solid fa-bolt"></i>
-                                                <span class="flash-countdown" data-countdown-endofday>--:--:--</span>
-                                            </div>
-                                        <?php endif; ?>
-
-                                        <div class="product-tags-row">
-                                            <?php if (!empty($sp['ten_thuong_hieu'])): ?>
-                                                <span class="product-brand"><?php echo htmlspecialchars($sp['ten_thuong_hieu']); ?></span>
-                                            <?php endif; ?>
-                                            <?php if (!empty($sp['ten_dung_luong'])): ?>
-                                                <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']); ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                        <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
-
-                                        <?php
-                                        $mo_ta_ngan = trim(strip_tags($sp['mo_ta']));
-                                        if (mb_strlen($mo_ta_ngan) > 150) {
-                                            $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
-                                        }
-                                        ?>
-                                        <?php if ($mo_ta_ngan !== ''): ?>
-                                            <p class="product-desc"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
-                                        <?php endif; ?>
-
-                                        <?php if ($gia_ban > 0): ?>
-                                            <div class="product-installment">
-                                                <span>Trả góp <b>0%</b></span>
-                                                <span class="dot">·</span>
-                                                <span>Trước <b>0đ</b></span>
-                                                <span class="dot">·</span>
-                                                <span>Phí <b>0đ</b></span>
-                                            </div>
-                                        <?php endif; ?>
-
-                                        <div class="product-price-row">
-                                            <?php if ($gia_ban <= 0): ?>
-                                                <span class="product-price product-price-contact">Liên hệ</span>
-                                            <?php else: ?>
-                                                <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
-                                                <?php if ($giam_gia > 0): ?>
-                                                    <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
-                                                <?php endif; ?>
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <?php if ($gia_ban > 0): ?>
-                                            <div class="product-prepay">Hoặc trả trước <b><?php echo number_format($tra_truoc, 0, ',', '.'); ?>đ</b></div>
-                                        <?php endif; ?>
-
-                                        <div class="product-rating">
-                                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                        </div>
-                                    </div>
-                                </a>
+                            <?php foreach (array_slice($nhom['san_pham'], 0, 10) as $sp): ?>
+                                <?php render_the_card($sp); ?>
                             <?php endforeach; ?>
                         </div>
 
@@ -228,7 +222,7 @@
         </div>
     </section>
 
-    <?php include 'footer.php'; ?>
+        <?php include 'footer.php'; ?>
 
 </body>
 

@@ -2,6 +2,8 @@
     require_once '../config/config.php';
 
     $ma_san_pham = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+    $tro_ve      = isset($_GET['tro_ve']) ? $_GET['tro_ve'] : '';
+    $link_danh_sach = 'danh-sach-san-pham.php' . ($tro_ve !== '' ? '?' . $tro_ve : '');
 
     $stmt = $pdo->prepare("SELECT * FROM san_pham WHERE ma_san_pham = :id LIMIT 1");
     $stmt->execute([':id' => $ma_san_pham]);
@@ -44,7 +46,7 @@
         <main class="admin-main">
         <div class="admin-main-header">
             <h1>Sửa sản phẩm</h1>
-            <a href="danh-sach-san-pham.php" class="link-out">← Quay lại danh sách</a>
+            <a href="<?php echo htmlspecialchars($link_danh_sach); ?>" class="link-out">← Quay lại danh sách</a>
         </div>
 
         <?php if ($msg): ?>
@@ -60,6 +62,7 @@
                 <input type="hidden" name="action" value="sua">
                 <input type="hidden" name="ma_san_pham" value="<?php echo (int) $sp['ma_san_pham']; ?>">
                 <input type="hidden" name="anh_hien_tai" value="<?php echo htmlspecialchars($sp['hinh_anh']); ?>">
+                <input type="hidden" name="tro_ve" value="<?php echo htmlspecialchars($tro_ve); ?>">
 
                 <div class="post-main">
                     <div class="post-box">
@@ -88,7 +91,7 @@
                         <button type="submit" class="btn-admin btn-admin-primary post-publish-btn">
                             <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi
                         </button>
-                        <a href="danh-sach-san-pham.php" class="btn-admin btn-admin-secondary post-publish-btn" style="margin-top:8px;">Huỷ</a>
+                        <a href="<?php echo htmlspecialchars($link_danh_sach); ?>" class="btn-admin btn-admin-secondary post-publish-btn" style="margin-top:8px;">Huỷ</a>
                     </div>
 
                     <div class="post-box">

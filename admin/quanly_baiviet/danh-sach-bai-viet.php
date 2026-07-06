@@ -37,7 +37,7 @@
 
         <main class="admin-main">
             <div class="admin-main-header">
-                <h1>Danh sách Tin tức</h1>
+                <h1><img width="35" height="35" src="https://img.icons8.com/fluency/48/news.png" alt="news"/>Danh sách Tin tức</h1>
                 <a href="them.php" class="link-out"><i class="fa-solid fa-plus"></i> Thêm bài viết mới</a>
             </div>
 

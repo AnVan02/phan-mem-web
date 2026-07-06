@@ -41,7 +41,9 @@
 
     if ($action === 'them' || $action === 'sua') {
         $ma_san_pham = (int) ($_POST['ma_san_pham'] ?? 0);
-        $trang_loi = $action === 'sua' ? 'sua-san-pham.php?id=' . $ma_san_pham . '&' : 'them-san-pham.php?';
+        $tro_ve = trim($_POST['tro_ve'] ?? '');
+        $hau_to_tro_ve = $tro_ve !== '' ? '&tro_ve=' . urlencode($tro_ve) : '';
+        $trang_loi = $action === 'sua' ? 'sua-san-pham.php?id=' . $ma_san_pham . $hau_to_tro_ve . '&' : 'them-san-pham.php?';
 
         $ten_san_pham = trim($_POST['ten_san_pham'] ?? '');
         $ma_danh_muc = (int) ($_POST['ma_danh_muc'] ?? 0);
@@ -125,7 +127,7 @@
             ':trang_thai'   => isset($_POST['trang_thai']) ? 1 : 0,
             ':id'           => $ma_san_pham,
         ]);
-        header('Location: danh-sach-san-pham.php?msg=da_sua');
+        header('Location: danh-sach-san-pham.php?' . ($tro_ve !== '' ? $tro_ve . '&' : '') . 'msg=da_sua');
         exit;
     }
 

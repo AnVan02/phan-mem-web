@@ -1,7 +1,7 @@
 /* ===== Form thêm/sửa bài viết dạng 2 cột ===== */
 .post-editor-grid {
     display: grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: 1fr 440px;
     gap: 22px;
     align-items: start;
 }
@@ -22,7 +22,7 @@
 }
 
 .post-box h3 {
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: #1e3c72;

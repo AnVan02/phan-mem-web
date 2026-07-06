@@ -52,15 +52,17 @@
                     <input type="text" name="article_title" class="post-title-input" placeholder="Nhập tiêu đề bài viết..." required>
                 </div>
 
+                
+                <div class="post-box">
+                    <h3>Tóm tắt bài viết</h3>
+                    <textarea name="article_summary" rows="3" placeholder="Mô tả ngắn hiển thị ở trang danh sách Tin tức & Blog..."></textarea>
+                </div>
+
                 <div class="post-box">
                     <h3>Nội dung bài viết</h3>
                     <textarea name="article_content" id="article_content" rows="14"></textarea>
                 </div>
 
-                <div class="post-box">
-                    <h3>Tóm tắt ngắn</h3>
-                    <textarea name="article_summary" rows="3" placeholder="Mô tả ngắn hiển thị ở trang danh sách Tin tức & Blog..."></textarea>
-                </div>
             </div>
 
             <div class="post-side">
@@ -116,6 +118,7 @@
                     <h3>Video (không bắt buộc)</h3>
                     <input type="text" name="article_video" placeholder="https://www.youtube.com/embed/...">
                 </div>
+                
             </div>
         </form>
         </main>

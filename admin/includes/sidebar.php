@@ -60,7 +60,7 @@
                 <i class="fa-solid fa-chevron-down submenu-caret"></i>
             </button>
             <div class="admin-submenu" <?php echo $active_page === 'tin-tuc' ? '' : 'style="display:none;"'; ?>>
-                <a href="<?php echo $ADMIN_ROOT; ?>quanly_baiviet/dah-sach-bai-viet.php" class="admin-subnav-item <?php echo $active_sub === 'danh-sach' ? 'active' : ''; ?>">Danh sách bài viết</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_baiviet/danh-sach-bai-viet.php" class="admin-subnav-item <?php echo $active_sub === 'danh-sach' ? 'active' : ''; ?>">Danh sách bài viết</a>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_baiviet/them.php" class="admin-subnav-item <?php echo $active_sub === 'them' ? 'active' : ''; ?>">Thêm bài viết mới</a>
             </div>
         </div>
@@ -73,19 +73,17 @@
             <div class="admin-submenu" <?php echo $active_page === 'san-pham' ? '' : 'style="display:none;"'; ?>>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_sanpham/danh-sach-san-pham.php" class="admin-subnav-item <?php echo $active_sub === 'danh-sach' ? 'active' : ''; ?>">Danh sách sản phẩm</a>
                 <a href="<?php echo $ADMIN_ROOT; ?>quanly_sanpham/them-san-pham.php" class="admin-subnav-item <?php echo $active_sub === 'them' ? 'active' : ''; ?>">Thêm sản phẩm mới</a>
-                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=danh-muc" class="admin-subnav-item <?php echo $active_sub === 'danh-muc' ? 'active' : ''; ?>">Danh mục</a>
-                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=thuong-hieu" class="admin-subnav-item <?php echo $active_sub === 'thuong-hieu' ? 'active' : ''; ?>">Thương hiệu</a>
-                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=dung-luong" class="admin-subnav-item <?php echo $active_sub === 'dung-luong' ? 'active' : ''; ?>">Dung lượng</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_thuoctinh/danh-sach.php?type=danh-muc" class="admin-subnav-item <?php echo $active_sub === 'danh-muc' ? 'active' : ''; ?>">Thêm linh kiện</a>
             </div>
         </div>
 
-       <a href="<?php echo $ADMIN_ROOT; ?>../" target="_blank" class="admin-nav-item">
+        <a href="<?php echo $ADMIN_ROOT; ?>baohanh.php" target="_blank" class="admin-nav-item">
             <img width="25" height="25" src="https://img.icons8.com/dusk/64/guarantee--v1.png" alt="guarantee--v1"/>Bảo hành
         </a>
 
-        <a href="<?php echo $ADMIN_ROOT; ?>../san-pham.php" target="_blank" class="admin-nav-item">
+        <!-- <a href="<?php echo $ADMIN_ROOT; ?>../san-pham.php" target="_blank" class="admin-nav-item">
             <img width="30" height="30" src="https://img.icons8.com/fluency/48/external-link.png" alt="external-link"/>Xem trang sản phẩm
-        </a>
+        </a> -->
         
         <a href="<?php echo $ADMIN_ROOT; ?>../index.php" target="_blank" class="admin-nav-item">
            <img width="25" height="25" src="https://img.icons8.com/dusk/64/domain.png" alt="domain"/> Trang chủ website

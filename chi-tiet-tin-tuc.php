@@ -13,6 +13,7 @@
             }
         }
     }
+    
 
     $page_title = $bai_viet ? htmlspecialchars($bai_viet['article_title']) . ' - Viết Sơn Achieva' : 'Chi tiết tin tức - Viết Sơn Achieva';
 
@@ -31,6 +32,12 @@
         $ten_tac_gia = trim($bai_viet['article_author']);
         $chu_cai_dau = $ten_tac_gia !== '' ? mb_strtoupper(mb_substr($ten_tac_gia, 0, 1, 'UTF-8'), 'UTF-8') : '?';
     }
+
+    
+    $related_articles_stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC LIMIT 6");
+    $related_articles = $related_articles_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -110,50 +117,59 @@
                         <iframe src="<?php echo htmlspecialchars($bai_viet['article_video']); ?>" title="<?php echo htmlspecialchars($bai_viet['article_title']); ?>" allowfullscreen></iframe>
                     </div>
                 <?php endif; ?>
-
+                
+                <?php 
+                    $mo_ta_ngan =trim(strip_tags($sp['mo_ta']));
+                    if(mb_strlen($mo_ta_ngan) > 150 ) {
+                        $mo_ta_ngan = mb_substr($mo_ta_ngan)
+                    }
+                ?>
+                
                 <div class="news-detail-content">
                     <?php echo $bai_viet['article_content']; ?>
                 </div>
             </article>
 
-            <?php if (!empty($related_list)): ?>
-                <div class="news-related">
-                    <h2>Bài viết liên quan</h2>
-                    <div class="news-grid">
-                        <?php foreach ($related_list as $a):
-                            $r_mo_ta = trim(strip_tags($a['article_summary']));
-                            if (mb_strlen($r_mo_ta) > 150) {
-                                $r_mo_ta = mb_substr($r_mo_ta, 0, 150) . '...';
-                            }
-                            $r_anh = trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp';
-                            $r_ngay = date('d/m/Y', strtotime($a['article_date']));
-                            $r_slug = tao_slug($a['article_title']);
-                        ?>
-                            <a class="news-card" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $r_slug; ?>">
-                                <div class="news-media">
-                                    <img src="<?php echo htmlspecialchars($r_anh); ?>" alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy">
-                                </div>
-                                <div class="news-meta">
-                                    <?php if (!empty($a['article_linh'])): ?>
-                                        <span class="news-tag"><?php echo htmlspecialchars($a['article_linh']); ?></span> •
-                                    <?php endif; ?>
-                                    <?php echo $r_ngay; ?>
-                                </div>
-                                <h3 class="news-name"><?php echo htmlspecialchars($a['article_title']); ?></h3>
-                                <?php if ($r_mo_ta !== ''): ?>
-                                    <p class="news-desc"><?php echo htmlspecialchars($r_mo_ta); ?></p>
-                                <?php endif; ?>
-                                <span class="news-readmore">Xem thêm</span>
-                            </a>
-                        <?php endforeach; ?>
+                <?php if (count($related_articles) > 1): ?>
+                    <div class="product-related-articles">
+                        <h2>Bài viết liên quan</h2>
+                        <div class="article-list">
+                            <?php foreach ($related_articles as $a):
+                                $art_anh    = trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp';
+                                $art_ngay   = date('d/m/Y', strtotime($a['article_date']));
+                                $art_slug   = tao_slug($a['article_title']);
+
+                                $mo_ta_ngan  = trim(strip_tags($a['article_content'] ?? ''));
+                                if (mb_strlen($mo_ta_ngan) > 150) {
+                                    $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150);
+                                    $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, mb_strrpos($mo_ta_ngan, ' ')) . '...';
+                                } else {
+                                    $mo_ta_ngan = $mo_ta_ngan;
+                                }
+                            ?>
+                                <a class="article-item" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $art_slug; ?>">
+                                    <div class="article-thumb">
+                                        <img src="<?php echo htmlspecialchars($art_anh); ?>" alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy">
+                                    </div>
+                                    <div class="article-body">
+                                        <h3 class="article_title"><?php echo htmlspecialchars($a['article_title']); ?></h3>
+                                        <span class="article-date"><i class="fa-regular fa-clock"></i> <?php echo $art_ngay; ?></span>
+                                        <span class="article_author"><i class="fa-solid fa-circle-user"></i> <?php echo htmlspecialchars($a['article_author']); ?></span>
+                                        <?php if ($mo_ta_ngan !== ''): ?>
+                                            <span class="article_content"></i> <?php echo htmlspecialchars($mo_ta_ngan); ?></span>
+                                        <?php endif; ?>
+                                        
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
         </div>
     </section>
 <?php endif; ?>
 
     <?php include 'footer.php'; ?>
-</body>
+</body> 
 
 </html>
