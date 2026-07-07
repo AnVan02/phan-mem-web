@@ -13,6 +13,29 @@
     $stmt->execute([':id' => $ma_san_pham]);
     $sp = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $is_wishlisted = false;
+    if ($sp && isset($_SESSION['khach_hang_id'])) {
+        $w_stmt = $pdo->prepare("SELECT 1 FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh AND ma_san_pham = :sp LIMIT 1");
+        $w_stmt->execute([':kh' => $_SESSION['khach_hang_id'], ':sp' => $ma_san_pham]);
+        $is_wishlisted = (bool) $w_stmt->fetchColumn();
+    }
+
+    $reviews = [];
+    $avg_rating = 5;
+    if ($sp) {
+        $r_stmt = $pdo->prepare("SELECT dg.*, kh.customer_name FROM danh_gia_san_pham dg JOIN khach_hang_lien_he kh ON dg.ma_khach_hang = kh.ma_lien_he WHERE dg.ma_san_pham = :sp ORDER BY dg.ngay_danh_gia DESC");
+        $r_stmt->execute([':sp' => $ma_san_pham]);
+        $reviews = $r_stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        if (count($reviews) > 0) {
+            $sum = 0;
+            foreach ($reviews as $r) {
+                $sum += $r['so_sao'];
+            }
+            $avg_rating = round($sum / count($reviews), 1);
+        }
+    }
+
     $page_title = $sp ? htmlspecialchars($sp['ten_san_pham']) . ' - ACHIVA Achieva' : 'Chi tiết sản phẩm - ACHIVA Achieva';
     if ($sp) {
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
@@ -189,10 +212,12 @@
                         <?php endif; ?>
                         <h1 class="product-detail-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h1>
                         <div class="product-rating-row">
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <div class="stars" style="color: #fbbf24;">
+                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                    <i class="fa-<?php echo $i <= round($avg_rating) ? 'solid' : 'regular'; ?> fa-star"></i>
+                                <?php endfor; ?>
+                                <span style="color: #6b7280; font-size: 14px; margin-left: 5px;">(<?php echo count($reviews); ?> đánh giá)</span>
                             </div>
-                            <!-- <span class="rating-count">12 Đánh giá</span> -->
                             <span class="compare-btn" id="btnOpenCompareModal"><i class="fa-solid fa-plus"></i> So sánh</span>
                         </div>
                     </div>
@@ -248,9 +273,12 @@
                                 </div>
                                 <span class="qty-stock">Còn <?php echo $so_luong; ?> sản phẩm</span>
                             </div>
-                            <button type="button" class="btn-add-cart" data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>">
+                            <button type="button" class="btn-add-cart" data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>" style="flex: 1;">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 <strong>Thêm vào giỏ hàng</strong>
+                            </button>
+                            <button type="button" class="btn-wishlist <?php echo $is_wishlisted ? 'active' : ''; ?>" data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>" style="padding: 0 20px; border: 1px solid #e5e7eb; background: #fff; color: <?php echo $is_wishlisted ? '#e11d48' : '#6b7280'; ?>; border-radius: 8px; font-size: 20px; cursor: pointer; transition: all 0.2s;" title="Yêu thích">
+                                <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
                             </button>
                         <?php endif; ?>
                     </div>
@@ -343,6 +371,78 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Reviews Section -->
+            <div class="product-reviews-section" style="margin-top: 40px; padding: 20px; background: #fff; border-radius: 8px; border: 1px solid #e5e7eb;">
+                <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 20px;"><i class="fa-solid fa-comments"></i> Đánh giá sản phẩm</h2>
+                
+                <?php if (isset($_GET['msg'])): ?>
+                    <?php 
+                        $m = $_GET['msg'];
+                        $m_text = '';
+                        $m_color = '#dc2626';
+                        if ($m === 'danh_gia_thanh_cong') { $m_text = 'Cảm ơn bạn đã đánh giá sản phẩm!'; $m_color = '#16a34a'; }
+                        elseif ($m === 'loi_dang_nhap') $m_text = 'Vui lòng đăng nhập để đánh giá.';
+                        elseif ($m === 'loi_chua_mua') $m_text = 'Bạn cần mua sản phẩm này để có thể đánh giá.';
+                        elseif ($m === 'loi_thieu_thong_tin') $m_text = 'Vui lòng nhập đầy đủ thông tin đánh giá.';
+                    ?>
+                    <?php if ($m_text): ?>
+                        <div style="padding: 10px; background: <?php echo $m_color; ?>20; color: <?php echo $m_color; ?>; border-radius: 5px; margin-bottom: 20px;">
+                            <?php echo $m_text; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                    <!-- Form đánh giá -->
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="font-size: 16px; margin-bottom: 10px;">Gửi đánh giá của bạn</h3>
+                        <form action="xuly-danh-gia.php" method="POST">
+                            <input type="hidden" name="ma_san_pham" value="<?php echo (int) $sp['ma_san_pham']; ?>">
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px;">Đánh giá sao:</label>
+                                <select name="so_sao" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                                    <option value="5">5 Sao - Tuyệt vời</option>
+                                    <option value="4">4 Sao - Tốt</option>
+                                    <option value="3">3 Sao - Bình thường</option>
+                                    <option value="2">2 Sao - Kém</option>
+                                    <option value="1">1 Sao - Tệ</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px;">Nội dung đánh giá:</label>
+                                <textarea name="noi_dung" rows="4" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit" style="background: #2563eb; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Gửi đánh giá</button>
+                        </form>
+                    </div>
+
+                    <!-- Danh sách đánh giá -->
+                    <div style="flex: 2; min-width: 300px;">
+                        <h3 style="font-size: 16px; margin-bottom: 10px;">Khách hàng nhận xét (<?php echo count($reviews); ?>)</h3>
+                        <?php if (empty($reviews)): ?>
+                            <p style="color: #6b7280; font-style: italic;">Chưa có đánh giá nào cho sản phẩm này.</p>
+                        <?php else: ?>
+                            <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                                <?php foreach ($reviews as $r): ?>
+                                    <div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                            <strong style="font-size: 15px;"><?php echo htmlspecialchars($r['customer_name']); ?></strong>
+                                            <span style="color: #9ca3af; font-size: 13px;"><?php echo date('d/m/Y', strtotime($r['ngay_danh_gia'])); ?></span>
+                                        </div>
+                                        <div style="color: #fbbf24; margin-bottom: 8px; font-size: 12px;">
+                                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                <i class="fa-<?php echo $i <= (int)$r['so_sao'] ? 'solid' : 'regular'; ?> fa-star"></i>
+                                            <?php endfor; ?>
+                                        </div>
+                                        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #374151;"><?php echo nl2br(htmlspecialchars($r['noi_dung'])); ?></p>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
             <div class="hero-slide active" style="background-image: url('assets/image/banner1.png');">
                 <div class="hero-overlay"></div>
                 <div class="hero-slide-content">
@@ -382,6 +482,45 @@
     <?php include 'footer.php'; ?>
 
     <script src="assets/js/chi-tiet-san-pham.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnWishlist = document.querySelector('.btn-wishlist');
+        if (btnWishlist) {
+            btnWishlist.addEventListener('click', function() {
+                const maSp = this.dataset.maSanPham;
+                const formData = new FormData();
+                formData.append('action', 'toggle');
+                formData.append('ma_san_pham', maSp);
+                
+                fetch('yeu-thich-ajax.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.status === 'added') {
+                            this.classList.add('active');
+                            this.style.color = '#e11d48';
+                            this.querySelector('i').classList.remove('fa-regular');
+                            this.querySelector('i').classList.add('fa-solid');
+                        } else {
+                            this.classList.remove('active');
+                            this.style.color = '#6b7280';
+                            this.querySelector('i').classList.remove('fa-solid');
+                            this.querySelector('i').classList.add('fa-regular');
+                        }
+                    } else {
+                        alert(data.message);
+                        if (data.message.includes('đăng nhập')) {
+                            window.location.href = 'tai-khoan.php';
+                        }
+                    }
+                })
+                .catch(err => console.error('Lỗi khi thêm yêu thích:', err));
+            });
+        }
+    });
+    </script>
 </body>
-
 </html>

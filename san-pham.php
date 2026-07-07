@@ -209,8 +209,53 @@
 
             <?php if (count($san_pham_list) === 0): ?>
                 <div class="product-empty">
-                    <i class="fa-solid fa-box-open"></i>
-                    <p>Hiện chưa có sản phẩm nào<?php echo $keyword !== '' ? ' phù hợp với từ khóa "' . htmlspecialchars($keyword) . '"' : ''; ?>.</p>
+                    <div class="empty-illustration">
+                        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect x="130" y="60" width="220" height="155" rx="14" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="2"/>
+                            <rect x="145" y="75" width="190" height="125" rx="8" fill="#fff" stroke="#eee" stroke-width="1"/>
+                            <rect x="220" y="215" width="40" height="22" rx="4" fill="#e0e0e0"/>
+                            <rect x="195" y="234" width="90" height="10" rx="5" fill="#d0d0d0"/>
+                            <text x="240" y="155" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#e53935" opacity="0.9">404</text>
+                            <polygon points="248,85 238,118 248,118 232,148 252,108 240,108" fill="#FFD600" opacity="0.85"/>
+                            <circle cx="348" cy="58" r="16" fill="#fff5f5" stroke="#e53935" stroke-width="2"/>
+                            <text x="348" y="64" text-anchor="middle" font-family="Arial" font-size="16" fill="#e53935">!</text>
+                            <ellipse cx="118" cy="230" rx="18" ry="8" fill="#ffcdd2" opacity="0.5"/>
+                            <rect x="114" y="195" width="8" height="38" rx="4" fill="#ef9a9a"/>
+                            <ellipse cx="118" cy="195" rx="16" ry="22" fill="#ef9a9a" opacity="0.5"/>
+                            <ellipse cx="105" cy="200" rx="12" ry="16" fill="#e57373" opacity="0.4"/>
+                            <ellipse cx="131" cy="198" rx="11" ry="15" fill="#e57373" opacity="0.4"/>
+                            <circle cx="390" cy="130" r="38" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="2"/>
+                            <circle cx="378" cy="122" r="9" fill="#fff" stroke="#333" stroke-width="1.5"/>
+                            <circle cx="400" cy="118" r="9" fill="#fff" stroke="#333" stroke-width="1.5"/>
+                            <circle cx="381" cy="124" r="4" fill="#333"/>
+                            <circle cx="403" cy="120" r="4" fill="#333"/>
+                            <ellipse cx="390" cy="140" rx="7" ry="5" fill="#333"/>
+                            <ellipse cx="390" cy="185" rx="24" ry="30" fill="#e53935"/>
+                            <line x1="366" y1="175" x2="345" y2="155" stroke="#e53935" stroke-width="8" stroke-linecap="round"/>
+                            <line x1="414" y1="172" x2="435" y2="152" stroke="#e53935" stroke-width="8" stroke-linecap="round"/>
+                            <line x1="380" y1="213" x2="365" y2="245" stroke="#e53935" stroke-width="9" stroke-linecap="round"/>
+                            <line x1="400" y1="213" x2="418" y2="240" stroke="#e53935" stroke-width="9" stroke-linecap="round"/>
+                            <ellipse cx="358" cy="250" rx="16" ry="9" fill="#c62828"/>
+                            <ellipse cx="424" cy="246" rx="16" ry="9" fill="#c62828"/>
+                            <line x1="320" y1="178" x2="345" y2="178" stroke="#e53935" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+                            <line x1="314" y1="192" x2="342" y2="192" stroke="#e53935" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+                            <line x1="320" y1="206" x2="344" y2="206" stroke="#e53935" stroke-width="2" stroke-linecap="round" opacity="0.25"/>
+                        </svg>
+                    </div>
+                    <h2 class="empty-title">Oops! Không tìm thấy sản phẩm</h2>
+                    <p class="empty-subtitle">Rất tiếc, Việt Sơn Achieva chưa tìm thấy sản phẩm bạn đang cần<?php echo $keyword !== '' ? ' với từ khóa "' . htmlspecialchars($keyword) . '"' : ''; ?>.</p>
+                    <p class="empty-desc">Sản phẩm có thể chưa được cập nhật hoặc từ khóa chưa chính xác. Đừng lo, chúng tôi luôn sẵn sàng hỗ trợ bạn!</p>
+                    <div class="empty-actions">
+                        <a href="index.php" class="empty-btn empty-btn-primary">
+                            <i class="fa-solid fa-house"></i> Quay về trang chủ
+                        </a>
+                        <a href="san-pham.php" class="empty-btn empty-btn-secondary">
+                            <i class="fa-solid fa-th-large"></i> Xem tất cả sản phẩm
+                        </a>
+                        <a href="lien-he.php" class="empty-btn empty-btn-outline">
+                            <i class="fa-solid fa-phone"></i> Cần tư vấn? Liên hệ ngay
+                        </a>
+                    </div>
                 </div>
             <?php else: ?>
 

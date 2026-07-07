@@ -79,10 +79,15 @@
     margin: 0;
     padding: 0;
     color: var(--header-text);
+    position: relative;
 }
 
 .has-submenu {
     position: relative;
+}
+
+.has-megamenu {
+    position: static;
 }
 
 .main-nav a {
@@ -309,21 +314,23 @@
     color: var(--rosa-red);
 }
 
-/* ---- Mega menu (vd: Máy tính lắp sẵn, Linh kiện máy tính) ---- */
+/* ---- Mega menu (ví dụ: Máy tính lắp sẵn, Linh kiện máy tính) ---- */
 .megamenu {
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
+    transform: translateY(-8px);
     z-index: 30;
     margin-top: 8px;
-    background: #f4f4f5;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(0,0,0,0.07);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-8px);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    white-space: nowrap;
+    min-width: max-content;
 }
 
 .has-megamenu.is-open .megamenu {
@@ -333,10 +340,27 @@
 }
 
 .megamenu-inner{
-    display:grid;
-    grid-template-columns:1fr 1fr 50%;
-    gap:40px;
-    padding:36px 36px;
+    display: flex;
+    padding: 0;
+}
+
+/* Nhóm cột nội dung + ảnh lại với nhau */
+.megamenu-content-group {
+    display: flex;
+    gap: 48px;
+    padding: 32px 36px;
+    align-items: flex-start;
+}
+
+.megamenu-cols {
+    display: flex;
+    gap: 48px;
+    flex: 1;
+}
+
+.megamenu-col {
+    white-space: normal;
+    min-width: 160px;
 }
 
 .megamenu-col h4 {
@@ -352,6 +376,8 @@
     line-height: 1.5;
     color: #666;
     font-weight: 400;
+    max-width: 220px;
+    white-space: normal;
 }
 
 .megamenu-col ul {
@@ -386,7 +412,11 @@
 }
 
 .megamenu-promo {
-    align-self: start;
+    align-self: center;
+    flex-shrink: 0;
+    width: 260px;
+    border-left: 1px solid #f0f0f0;
+    padding-left: 36px;
 }
 
 .megamenu-promo a {
@@ -395,13 +425,13 @@
 }
 
 .megamenu-promo img {
-    width: 100%;
-    height: 180px;
+    width: 260px;
+    height: 175px;
     object-fit: cover;
     border-radius: 10px;
     display: block;
     background: #e2e2e5;
-    color: transparent; /* ẩn chữ alt nếu ảnh lỗi */
+    color: transparent;
 }
 
 .megamenu-promo-caption {
@@ -529,6 +559,17 @@
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 16px 0 16px 20px;
+    }
+
+    .megamenu-content-group {
+        flex-direction: column;
+        gap: 20px;
+        padding: 16px 0 16px 20px;
+    }
+
+    .megamenu-cols {
+        flex-direction: column;
+        gap: 20px;
     }
 
     .megamenu-promo {

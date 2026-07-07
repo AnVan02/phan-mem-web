@@ -48,6 +48,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'dat_h
             $tong_tien += $gia_sau_giam_i * $so_luong_dat;
         }
 
+        $ma_giam_gia_code = trim($_POST['ma_giam_gia'] ?? '');
+        $phan_tram_giam_gia = 0;
+        if (!empty($ma_giam_gia_code)) {
+            $check_voucher = $pdo->prepare("SELECT phan_tram_giam FROM ma_giam_gia WHERE code = :code AND trang_thai = 1 LIMIT 1");
+            $check_voucher->execute([':code' => $ma_giam_gia_code]);
+            $giam = $check_voucher->fetchColumn();
+            if ($giam !== false) {
+                $phan_tram_giam_gia = (int) $giam;
+            }
+        }
+        
+        if ($phan_tram_giam_gia > 0) {
+            $tong_tien = $tong_tien - ($tong_tien * $phan_tram_giam_gia / 100);
+        }
+
         $pdo->beginTransaction();
         try {
             $ins_don = $pdo->prepare("INSERT INTO don_hang (session_id, ma_khach_hang, ten_khach_hang, so_dien_thoai, dia_chi, ghi_chu, tong_tien, trang_thai)
@@ -235,6 +250,11 @@ unset($item);
                                 <?php endif; ?>
                                 <form class="cart-checkout-form" method="POST" action="gio-hang.php">
                                     <input type="hidden" name="action" value="dat_hang">
+                                    <div class="form-group" style="position: relative; display: flex; gap: 10px;">
+                                        <input type="text" name="ma_giam_gia" id="ma_giam_gia" placeholder="Nhập mã giảm giá (nếu có)" style="flex: 1; text-transform: uppercase;">
+                                        <button type="button" id="btnApplyDiscount" style="padding: 10px 15px; background: #1f2937; color: white; border: none; border-radius: 6px; cursor: pointer;">Áp dụng</button>
+                                    </div>
+                                    <div id="discountMessage" style="margin-bottom: 15px; font-size: 14px;"></div>
                                     <div class="form-group">
                                         <label for="ten_khach_hang">Họ và tên</label>
                                         <input type="text" name="ten_khach_hang" id="ten_khach_hang" placeholder="Nhập họ và tên" value="<?php echo $khach_hang_dang_nhap ? htmlspecialchars($khach_hang_dang_nhap['customer_name']) : ''; ?>" required>
@@ -269,6 +289,42 @@ unset($item);
     <?php include 'footer.php'; ?>
 
     <script src="assets/js/gio-hang.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnApply = document.getElementById('btnApplyDiscount');
+        if (btnApply) {
+            btnApply.addEventListener('click', () => {
+                const code = document.getElementById('ma_giam_gia').value.trim();
+                const msgBox = document.getElementById('discountMessage');
+                if (!code) {
+                    msgBox.innerHTML = '<span style="color: #dc2626;">Vui lòng nhập mã giảm giá</span>';
+                    return;
+                }
+                
+                const formData = new FormData();
+                formData.append('code', code);
+                
+                fetch('giam-gia-ajax.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        msgBox.innerHTML = `<span style="color: #16a34a;"><i class="fa-solid fa-check"></i> ${data.message}</span>`;
+                        // Update UI total
+                        const currentTotal = <?php echo (int) $tong_tien_gio_hang; ?>;
+                        const newTotal = currentTotal - (currentTotal * data.phan_tram_giam / 100);
+                        document.getElementById('cartSummaryTotal').innerText = new Intl.NumberFormat('vi-VN').format(newTotal) + '₫';
+                    } else {
+                        msgBox.innerHTML = `<span style="color: #dc2626;"><i class="fa-solid fa-triangle-exclamation"></i> ${data.message}</span>`;
+                        document.getElementById('cartSummaryTotal').innerText = new Intl.NumberFormat('vi-VN').format(<?php echo (int) $tong_tien_gio_hang; ?>) + '₫';
+                    }
+                })
+                .catch(err => console.error(err));
+            });
+        }
+    });
+    </script>
 </body>
-
 </html>

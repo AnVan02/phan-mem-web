@@ -22,20 +22,24 @@
                     </a>
                     <div class="megamenu">
                         <div class="megamenu-inner">
-                            <div class="megamenu-col">
-                                <h4>Máy tính chơi game lắp sẵn</h4>
-                                <p class="megamenu-desc">Màn hình máy tính được tối ưu hóa để chơi game mượt mà ở độ phân giải 1080p, 1440p hoặc 4K.</p>
-                                <ul>
-                                    <li><a href="san-pham.php">Sản phẩm</a></li>
-                                    <li><a href="san-pham.php?loai=rosa">Máy bộ PC</a></li>
-                                    <li><a href="/san-pham.php?loai=amd">Người chơi thứ ba</a></li>
-                                    <li><a href="/may-tinh-lap-san.php?so-sanh=1">So sánh các máy tính chơi game lắp sẵn</a></li>
-                                </ul>
-                            </div>
-                            <div class="megamenu-col megamenu-promo">
-                                <a href="/uu-dai.php?bo-suu-tap=007">
-                                    <img src="assets/image/pc.webp" alt="Máy tính chơi game lắp sẵn">
-                                </a>
+                            <div class="megamenu-content-group">
+                                <div class="megamenu-cols">
+                                    <div class="megamenu-col">
+                                        <h4>Máy tính chơi game lắp sẵn</h4>
+                                        <p class="megamenu-desc">Màn hình máy tính được tối ưu hóa để chơi game mượt mà ở độ phân giải 1080p, 1440p hoặc 4K.</p>
+                                        <ul>
+                                            <li><a href="san-pham.php">Sản phẩm</a></li>
+                                            <li><a href="san-pham.php?loai=rosa">Máy bộ PC</a></li>
+                                            <li><a href="/san-pham.php?loai=amd">Người chơi thứ ba</a></li>
+                                            <li><a href="/may-tinh-lap-san.php?so-sanh=1">So sánh các máy tính chơi game lắp sẵn</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="megamenu-promo">
+                                    <a href="/uu-dai.php?bo-suu-tap=007">
+                                        <img src="assets/image/pc.webp" alt="Máy tính chơi game lắp sẵn">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,37 +53,40 @@
                     </a>
                     <div class="megamenu">
                         <div class="megamenu-inner">
-                            <div class="megamenu-col">
-                                <h4>Linh kiện chính</h4>
-                                <ul>
-                                    <li><a href="san-pham.php?danh_muc=1">CPU</a></li>
-                                    <li><a href="san-pham.php?loai=mainboard">Mainboard</a></li>
-                                    <li><a href="san-pham.php?loai=vga">VGA - Card màn hình</a></li>
-                                    <li><a href="san-pham.php?loai=ram">RAM</a></li>
-                                    <li><a href="san-pham.php?loai=ssq">SSD</a></li>
-                                    <li><a href="san-pham.php?loai=manhinh">Màn hình</a></li>
-                                    <li><a href="san-pham.php?loai=asus">ASUS</a></li>
-                                </ul>
-                            </div>
-                            <div class="megamenu-col">
-                                <h4>Lưu trữ &amp; Tản nhiệt</h4>
-                                <ul>
-                                    <li><a href="sanpham.php?loai=ssd">Ổ cứng SSD/HDD</a></li>
-                                    <li><a href="san-pham.php?loai=nguon">Nguồn máy tính</a></li>
-                                    <li><a href="san-pham.php?loai=tan-nhiet">Tản nhiệt</a></li>
-                                    <li><a href="san-pham.php?loai=vo-case">Vỏ case</a></li>
-                                    <li><a href="san-pham.php?loai=agi">Agi</a></li>
-                                    <li><a href="san-pham.php?loai=gskill">Gskill</a></li>
-                                    
-                                </ul>
-                            </div>
-                            <div class="megamenu-col">
-                                <h4>Màn hình</h4>
-                                <ul>
-                                    <li><a href="san-pham.php?loai=aoc">AOC</a></li>
-                                    <li><a href="san-pham.php?loai=benq">Benq</a></li>
-                                    <li><a href="san-pham.php?loai=unv">UNV</a></li>
-                                </ul>
+                            <div class="megamenu-content-group">
+                                <div class="megamenu-cols">
+                                    <div class="megamenu-col">
+                                        <h4>Linh kiện chính</h4>
+                                        <ul>
+                                            <li><a href="san-pham.php?danh_muc=1">CPU</a></li>
+                                            <li><a href="san-pham.php?loai=mainboard">Mainboard</a></li>
+                                            <li><a href="san-pham.php?loai=vga">VGA - Card màn hình</a></li>
+                                            <li><a href="san-pham.php?loai=ram">RAM</a></li>
+                                            <li><a href="san-pham.php?loai=ssq">SSD</a></li>
+                                            <li><a href="san-pham.php?loai=manhinh">Màn hình</a></li>
+                                            <li><a href="san-pham.php?loai=asus">ASUS</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-col">
+                                        <h4>Lưu trữ &amp; Tản nhiệt</h4>
+                                        <ul>
+                                            <li><a href="sanpham.php?loai=ssd">Ổ cứng SSD/HDD</a></li>
+                                            <li><a href="san-pham.php?loai=nguon">Nguồn máy tính</a></li>
+                                            <li><a href="san-pham.php?loai=tan-nhiet">Tản nhiệt</a></li>
+                                            <li><a href="san-pham.php?loai=vo-case">Vỏ case</a></li>
+                                            <li><a href="san-pham.php?loai=agi">Agi</a></li>
+                                            <li><a href="san-pham.php?loai=gskill">Gskill</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="megamenu-col">
+                                        <h4>Màn hình</h4>
+                                        <ul>
+                                            <li><a href="san-pham.php?loai=aoc">AOC</a></li>
+                                            <li><a href="san-pham.php?loai=benq">Benq</a></li>
+                                            <li><a href="san-pham.php?loai=unv">UNV</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
