@@ -17,7 +17,7 @@
 
 .services-eyebrow {
     display: inline-block;
-    color: #7c3aed;
+    color: #DC2626;
     font-size: 11px; /* Giảm 1px để chữ thanh thoát hơn */
     font-weight: 600; /* Thay vì 700 (Bold), dùng 600 (Semi-bold) để không bị dính nét chữ tiếng Việt */
     letter-spacing: 1.5px; /* Tăng từ 0.5px lên 1.5px để chữ viết hoa dễ đọc, sang trọng hơn */
@@ -34,7 +34,7 @@
 }
 
 .services-title .highlight {
-    color: #7c3aed;
+    color: #DC2626;
 }
 
 /* ---- Grid ---- */
@@ -131,7 +131,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #7c3aed;
+    color: #DC2626;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;

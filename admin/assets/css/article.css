@@ -229,13 +229,38 @@
     color: #DC2626;
 }
 
-.admin-actions a:hover,
-.admin-actions button:hover {
-    text-decoration: underline;
+.admin-actions .delete-baner{
+    color: #c5a91a;
 }
+
 
 .admin-empty {
     text-align: center;
     padding: 30px;
     color: #9b9ba1;
 }
+.admin-actions a {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 999px;
+}
+
+.admin-actions a.edit {
+    background: #eef4ff;
+    color: #2563eb;
+}
+.admin-actions a.delete {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.admin-actions a.delete-baner{
+    background: #ffd700;
+    color:  #1e3c72;
+} 

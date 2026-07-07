@@ -112,22 +112,15 @@
                     <span class="news-date"><i class="fa-solid fa-calendar-days"></i> Ngày cập nhật: <?php echo $ngay; ?></span>
                 </div>
 
+                <div class="news-detail-content">
+                    <?php echo $bai_viet['article_content']; ?>
+                </div>
                 <?php if (!empty(trim($bai_viet['article_video']))): ?>
                     <div class="news-detail-video">
                         <iframe src="<?php echo htmlspecialchars($bai_viet['article_video']); ?>" title="<?php echo htmlspecialchars($bai_viet['article_title']); ?>" allowfullscreen></iframe>
                     </div>
                 <?php endif; ?>
                 
-                <?php 
-                    $mo_ta_ngan =trim(strip_tags($sp['mo_ta']));
-                    if(mb_strlen($mo_ta_ngan) > 150 ) {
-                        $mo_ta_ngan = mb_substr($mo_ta_ngan)
-                    }
-                ?>
-                
-                <div class="news-detail-content">
-                    <?php echo $bai_viet['article_content']; ?>
-                </div>
             </article>
 
                 <?php if (count($related_articles) > 1): ?>
@@ -154,6 +147,7 @@
                                     <div class="article-body">
                                         <h3 class="article_title"><?php echo htmlspecialchars($a['article_title']); ?></h3>
                                         <span class="article-date"><i class="fa-regular fa-clock"></i> <?php echo $art_ngay; ?></span>
+                                        
                                         <span class="article_author"><i class="fa-solid fa-circle-user"></i> <?php echo htmlspecialchars($a['article_author']); ?></span>
                                         <?php if ($mo_ta_ngan !== ''): ?>
                                             <span class="article_content"></i> <?php echo htmlspecialchars($mo_ta_ngan); ?></span>

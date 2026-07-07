@@ -63,14 +63,15 @@
                     </div>
 
                     <div class="post-box">
+                        <h3>Tóm tắt ngắn</h3>
+                        <textarea name="article_summary" rows="3"><?php echo htmlspecialchars($bai_viet['article_summary']); ?></textarea>
+                    </div>
+
+                    <div class="post-box">
                         <h3>Nội dung bài viết</h3>
                         <textarea name="article_content" id="article_content" rows="14"><?php echo $bai_viet['article_content']; ?></textarea>
                     </div>
 
-                    <div class="post-box">
-                        <h3>Tóm tắt ngắn</h3>
-                        <textarea name="article_summary" rows="3"><?php echo htmlspecialchars($bai_viet['article_summary']); ?></textarea>
-                    </div>
                 </div>
 
                 <div class="post-side">

@@ -1,8 +1,8 @@
 <?php 
 
-$GLOBALS['page_specific_title'] = "TRA CỨU BẢO HÀNH VIẾT SƠN";
-$GLOBALS['page_specific_description'] = "Tra cứu thông tin bảo hành sản phẩm theo số serial tại Công Ty Cổ Phần Viết Sơn, giúp khách hàng nhanh chóng kiểm tra thời hạn bảo hành, tình trạng bảo hành và các thông tin liên quan đến sản phẩm";
-$GLOBALS['page_specific_keywords'] = "tra cứu bảo hành Viết Sơn, tra cứu số serial Viết Sơn, bảo hành Viết Sơn ";
+$GLOBALS['page_specific_title'] = "TRA CỨU BẢO HÀNH ACHIVA";
+$GLOBALS['page_specific_description'] = "Tra cứu thông tin bảo hành sản phẩm theo số serial tại Công Ty Cổ Phần ACHIVA, giúp khách hàng nhanh chóng kiểm tra thời hạn bảo hành, tình trạng bảo hành và các thông tin liên quan đến sản phẩm";
+$GLOBALS['page_specific_keywords'] = "tra cứu bảo hành ACHIVA, tra cứu số serial ACHIVA, bảo hành ACHIVA ";
 
 ?>
 
@@ -60,10 +60,10 @@ function getWarrantyFromDb($serial)
     <div class="warranty-hero-section">
         <div class="container">
             <div class="hero-inner">
-                <h1 class="hero-main-title">TRA CỨU BẢO HÀNH VIẾT SƠN</h1>
+                <h1 class="hero-main-title">TRA CỨU BẢO HÀNH ACHIVA</h1>
                 <div class="hero-breadcrumb">
-                    <a href="index.php">TRANG CHỦ</a> / <span>TRA CỨU BẢO HÀNH VIẾT SƠN</span>
-                    <p>Tra cứu thông tin bảo hành sản phẩm theo số serial tại Công Ty Cổ Phần Viết Sơn, giúp khách hàng nhanh chóng kiểm tra thời hạn bảo hành, tình trạng bảo hành và các thông tin liên quan đến sản phẩm</p>
+                    <a href="index.php">TRANG CHỦ</a> / <span>TRA CỨU BẢO HÀNH ACHIVA</span>
+                    <p>Tra cứu thông tin bảo hành sản phẩm theo số serial tại Công Ty Cổ Phần ACHIVA, giúp khách hàng nhanh chóng kiểm tra thời hạn bảo hành, tình trạng bảo hành và các thông tin liên quan đến sản phẩm</p>
                     
                 </div>
             </div>
@@ -75,7 +75,7 @@ function getWarrantyFromDb($serial)
         <div class="container">
             <div class="warranty-card-container">
                 <div class="card-inner">
-                    <h1 class="card-title-main">TRA CỨU BẢO HÀNH VIẾT SƠN</h1>
+                    <h1 class="card-title-main">TRA CỨU BẢO HÀNH ACHIVA</h1>
                     <div class="title-divider"></div>
 
                     <div class="search-box-container">

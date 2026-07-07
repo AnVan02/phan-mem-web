@@ -77,8 +77,16 @@
             </div>
         </div>
 
+        <a href="<?php echo $ADMIN_ROOT; ?>quanly/don-hang.php" class="admin-nav-item <?php echo $active_page === 'don-hang' ? 'active' : ''; ?>">
+            <img width="25" height="25" src="https://img.icons8.com/fluency/48/receipt-approved.png" alt="receipt"/>Đơn hàng
+        </a>
+
         <a href="<?php echo $ADMIN_ROOT; ?>baohanh.php" target="_blank" class="admin-nav-item">
             <img width="25" height="25" src="https://img.icons8.com/dusk/64/guarantee--v1.png" alt="guarantee--v1"/>Bảo hành
+        </a>
+
+        <a href="<?php echo $ADMIN_ROOT; ?>quanly/banner.php" class="admin-nav-item <?php echo $active_page === 'banner' ? 'active' : ''; ?>">
+            <img width="25" height="25" src="https://img.icons8.com/fluency/48/old-shop.png" alt="guarantee--v1"/>Banner Sản Phẩm
         </a>
 
         <!-- <a href="<?php echo $ADMIN_ROOT; ?>../san-pham.php" target="_blank" class="admin-nav-item">

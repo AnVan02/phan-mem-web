@@ -11,6 +11,7 @@
     position: relative;
     background: #fff;
     font-family: 'Montserrat', Sans-Serif;
+
 }
 
 .site-header .container,
@@ -156,6 +157,50 @@
     color: #dc3545;
 }
 
+.cart-icon-btn {
+    position: relative;
+}
+
+.cart-count-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #dc3545;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-gio-hang {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 9999;
+    background: #16a34a;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.toast-gio-hang.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .header-icons .search-toggle {
     color: #28a745;
 }
@@ -289,9 +334,9 @@
 
 .megamenu-inner{
     display:grid;
-    grid-template-columns:1fr 1fr 320px;
+    grid-template-columns:1fr 1fr 50%;
     gap:40px;
-    padding:30px 36px;
+    padding:36px 36px;
 }
 
 .megamenu-col h4 {

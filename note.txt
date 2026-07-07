@@ -1,0 +1,17 @@
+Tạo bảng gio_hang, don_hang, don_hang_chi_tiet trong DB
+
+Tạo gio-hang-ajax.php (them/cap_nhat/xoa/dem)
+
+Cập nhật chi-tiet-san-pham.php: hiện giá + bộ chọn số lượng + nút thêm giỏ hàng thật
+
+Cập nhật chi-tiet-san-pham.js gọi AJAX thêm giỏ hàng thay vì alert
+
+Thêm badge số lượng giỏ hàng ở header.php + header.js
+
+Xây trang gio-hang.php (danh sách giỏ, sửa số lượng, xoá, form đặt hàng)
+
+Viết gio-hang.js + gio-hang.css cho trang giỏ hàng
+
+Tạo trang quản trị admin/quanly/don-hang.php + thêm menu sidebar
+
+Kiểm thử luồng thêm giỏ -> đặt hàng -> admin xem đơn

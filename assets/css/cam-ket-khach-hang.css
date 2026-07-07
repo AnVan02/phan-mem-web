@@ -21,7 +21,7 @@
 
 .commitment-eyebrow {
     display: inline-block;
-    color: #7c3aed;
+    color: #DC2626;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -37,7 +37,7 @@
 }
 
 .commitment-title .highlight {
-    color: #7c3aed;
+    color: #DC2626;
 }
 
 .commitment-subtitle {
@@ -71,7 +71,7 @@
     justify-content: center;
     border-radius: 12px;
     background: #ece5fc;
-    color: #7c3aed;
+    color: #DC2626;
     font-size: 18px;
     margin-bottom: 18px;
 }

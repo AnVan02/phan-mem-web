@@ -55,7 +55,7 @@
 }
 
 .card-title i {
-    color: #7c3aed;
+    color: #DC2626;
     font-size: 16px;
 }
 
@@ -100,7 +100,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #7c3aed;
+    border-color: #DC2626;
     background: #fff;
 }
 
@@ -114,7 +114,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #7c3aed;
+    background: #DC2626;
     color: #fff;
     border: none;
     border-radius: 999px;
@@ -160,7 +160,7 @@
     height: 44px;
     border-radius: 12px;
     background: #f3ecfe;
-    color: #7c3aed;
+    color: #DC2626;
     font-size: 16px;
 }
 
@@ -222,6 +222,170 @@
     color: #064e3b;
     font-size: 16px;
     font-weight: 500;
+}
+
+.contact-success.is-error {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+
+.contact-success.is-error i { color: #dc2626; }
+.contact-success.is-error span { color: #991b1b; }
+
+/* ---- Auth tabs (Đăng nhập / Đăng ký) ---- */
+.auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #ececef;
+}
+
+.auth-tab-btn {
+    border: none;
+    background: none;
+    padding: 10px 4px;
+    margin-right: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #a0a0a5;
+    cursor: pointer;
+    position: relative;
+}
+
+.auth-tab-btn.active {
+    color: #DC2626;
+}
+
+.auth-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: #DC2626;
+}
+
+.auth-tab-panel {
+    display: none;
+}
+
+.auth-tab-panel.active {
+    display: block;
+}
+
+/* ---- Account dashboard ---- */
+.account-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.account-info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed #ececef;
+    font-size: 14px;
+}
+
+.account-info-row span {
+    color: #6b6b70;
+}
+
+.account-info-row strong {
+    color: #111;
+    font-weight: 600;
+    text-align: right;
+}
+
+.btn-logout {
+    background: #fff;
+    color: #DC2626;
+    border: 1px solid #DC2626;
+}
+
+.btn-logout:hover {
+    background: #fef2f2;
+    color: #DC2626;
+    transform: none;
+}
+
+/* ---- My orders ---- */
+.my-order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.my-order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: #fafafa;
+    border-radius: 12px;
+}
+
+.my-order-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.my-order-main strong {
+    font-size: 14px;
+    color: #111;
+}
+
+.my-order-main span {
+    font-size: 12px;
+    color: #6b6b70;
+}
+
+.my-order-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.my-order-total {
+    font-weight: 700;
+    color: #DC2626;
+    font-size: 14px;
+}
+
+.my-order-status {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.my-order-view-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2563eb;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+}
+
+.my-order-view-link:hover {
+    text-decoration: underline;
+}
+
+.order-detail-status {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: #f3f4f6;
 }
 
 /* ---- Responsive ---- */

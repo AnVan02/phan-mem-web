@@ -40,16 +40,13 @@
                         </div>
                     </div>
                 </li>
-
                 <li><a href="/dang-ky-pc.php">Đăng ký PC</a></li>
-
                 <!-- Mega menu -->
                 <li class="has-megamenu">
                     <a href="san-pham.php">
                         Linh kiện máy tính
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
-                    
                     <div class="megamenu">
                         <div class="megamenu-inner">
                             <div class="megamenu-col">
@@ -62,8 +59,6 @@
                                     <li><a href="san-pham.php?loai=ssq">SSD</a></li>
                                     <li><a href="san-pham.php?loai=manhinh">Màn hình</a></li>
                                     <li><a href="san-pham.php?loai=asus">ASUS</a></li>
-
-
                                 </ul>
                             </div>
                             <div class="megamenu-col">
@@ -109,9 +104,12 @@
         </nav>
 
         <div class="header-icons">
-            <a href="tai-khoan.php" class="icon-btn" aria-label="Tài khoản"><img width="30" height="30" src="https://img.icons8.com/office/40/user.png" alt="user"/></a>
-            <button type="button" class="icon-btn search-toggle" aria-label="Tìm kiếm"><img width="30" height="30" src="https://img.icons8.com/arcade/64/search.png" alt="search"/></button>
-            <a href="/gio-hang.php" class="icon-btn" aria-label="Giỏ hàng"><img width="30" height="30" src="https://img.icons8.com/plasticine/100/shopping-cart-loaded.png" alt="shopping-cart-loaded"/></a>
+            <button type="button" class="icon-btn search-toggle" aria-label="Tìm kiếm"><img width="30" height="30" src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/external-search-user-interface-tanah-basah-detailed-outline-tanah-basah.png" alt="external-search-user-interface-tanah-basah-detailed-outline-tanah-basah"/></button>
+            <a href="tai-khoan.php" class="icon-btn" aria-label="Tài khoản"><img width="30" height="30" src="https://img.icons8.com/ios/50/user-male-circle--v1.png" alt="user"/></a>
+            <a href="gio-hang.php" class="icon-btn cart-icon-btn" aria-label="Giỏ hàng">
+                <img width="30" height="30" src="https://img.icons8.com/badges/48/add-shopping-cart.png" alt="shopping-cart-loaded"/>
+                <span class="cart-count-badge" id="cartCountBadge" style="display:none;">0</span>
+            </a>
         </div>
 
         <form class="search-box" action="/tim-kiem.php" method="get">

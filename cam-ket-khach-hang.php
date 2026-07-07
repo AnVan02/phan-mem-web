@@ -3,7 +3,7 @@
         <div class="commitment-header">
             <div class="commitment-heading">
                 <span class="commitment-eyebrow">— LỜI HỨA CỦA CHÚNG TÔI DÀNH CHO BẠN</span>
-                <h2 class="commitment-title">Tại sao nên mua hàng từ <span class="highlight">VIẾT SƠN?</span></h2>
+                <h2 class="commitment-title">Tại sao nên mua hàng từ <span class="highlight">ACHIVA?</span></h2>
             </div>
             <p class="commitment-subtitle">Hơn 20 năm đồng hành cùng anh em đam mê công nghệ, từ build PC đến nâng cấp linh kiện.</p>
         </div>

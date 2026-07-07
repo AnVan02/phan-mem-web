@@ -13,7 +13,7 @@
     $stmt->execute([':id' => $ma_san_pham]);
     $sp = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $page_title = $sp ? htmlspecialchars($sp['ten_san_pham']) . ' - Viết Sơn Achieva' : 'Chi tiết sản phẩm - Viết Sơn Achieva';
+    $page_title = $sp ? htmlspecialchars($sp['ten_san_pham']) . ' - ACHIVA Achieva' : 'Chi tiết sản phẩm - ACHIVA Achieva';
     if ($sp) {
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
         $base_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
@@ -121,21 +121,28 @@
                     </div>
                     <?php if (count($related_list) > 0): ?>
                         <div class="product-related-inline">
-                            <h2>Sản phẩm nên mua cùng</h2>
+                            <div class="related-inline-header">
+                                <h2><i class="fa-solid fa-layer-group"></i> Sản phẩm nên mua cùng</h2>
+                                <span class="related-inline-count"><?php echo count($related_list); ?> sản phẩm</span>
+                            </div>
                             <div class="product-grid-small">
                                 <?php foreach ($related_list as $rp):
                                     $r_gia_ban      = (int) $rp['gia_ban'];
                                     $r_giam_gia     = (int) $rp['giam_gia'];
                                     $r_gia_sau_giam = $r_giam_gia > 0 ? (int) round($r_gia_ban * (100 - $r_giam_gia) / 100) : $r_gia_ban;
-                                    $r_hinh_anh     = trim($rp['hinh_anh']) !== '' ? $rp['hinh_anh'] : 'assets/image/pc.webp';
+                                    $r_anh_list     = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $rp['hinh_anh']))));
+                                    $r_hinh_anh     = !empty($r_anh_list) ? $r_anh_list[0] : 'assets/image/pc.webp';
                                     $r_slug         = tao_slug($rp['ten_san_pham']);
                                 ?>
                                     <a class="product-card-small" href="chi-tiet-san-pham.php?id=<?php echo (int) $rp['ma_san_pham']; ?>&ten-san-pham=<?php echo $r_slug; ?>">
                                         <?php if ($r_giam_gia > 0): ?><span class="product-badge">-<?php echo $r_giam_gia; ?>%</span><?php endif; ?>
                                         <div class="product-media">
-                                            <img src="<?php echo htmlspecialchars($r_hinh_anh); ?>" alt="<?php echo htmlspecialchars($rp['ten_san_pham']); ?>" loading="lazy">
+                                            <img src="<?php echo htmlspecialchars($r_hinh_anh); ?>" alt="<?php echo htmlspecialchars($rp['ten_san_pham']); ?>" loading="lazy" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
                                         </div>
                                         <div class="product-body">
+                                            <?php if (!empty($rp['ten_thuong_hieu'])): ?>
+                                                <span class="product-brand"><?php echo htmlspecialchars($rp['ten_thuong_hieu']); ?></span>
+                                            <?php endif; ?>
                                             <h3 class="product-name"><?php echo htmlspecialchars($rp['ten_san_pham']); ?></h3>
                                             <div class="product-price-row">
                                                 <?php if ($r_gia_ban <= 0): ?>
@@ -148,6 +155,7 @@
                                                 <?php endif; ?>
                                             </div>
                                         </div>
+                                        <span class="product-card-small-cta">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
                                     </a>
                                 <?php endforeach; ?>
                             </div>
@@ -184,8 +192,8 @@
                             <div class="stars">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
-                            <span class="rating-count">12 Đánh giá</span>
-                            <span class="compare-btn"><i class="fa-solid fa-plus"></i> So sánh</span>
+                            <!-- <span class="rating-count">12 Đánh giá</span> -->
+                            <span class="compare-btn" id="btnOpenCompareModal"><i class="fa-solid fa-plus"></i> So sánh</span>
                         </div>
                     </div>
 
@@ -212,9 +220,9 @@
                         <?php endif; ?>
                     </div>
 
-                    <div class="promo-box">
+                    <!-- <div class="promo-box">
                         <div class="promo-header">
-                            <i class="fa-solid fa-gift"></i> Khuyến mãi trị giá 500.000₫
+                            <i class="fa-solid fa-gift"></i>
                         </div>
                         <div class="promo-body">
                             <p class="promo-note">Giá và khuyến mãi dự kiến áp dụng đến 23:59 hôm nay</p>
@@ -223,36 +231,35 @@
                                 <li><i class="fa-solid fa-circle-check"></i> Thu cũ đổi mới trợ giá đến 2 triệu đồng.</li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="product-detail-actions-vertical">
-                        <?php if ($so_luong <= 0): ?>
-                            <a href="tel:0839293770" class="btn-buy-now btn-contact">
+                        <?php if ($so_luong <= 0 || $gia_ban <= 0): ?>
+                            <a href="tel:" class="btn-buy-now btn-contact">
                                 <strong>Liên hệ đặt hàng</strong>
-                                <span>Gọi số 0839293770 để được hỗ trợ</span>
                             </a>
                         <?php else: ?>
-                            <button type="button" class="btn-buy-now">
-                                <strong>MUA NGAY</strong>
-                                <span>Giao hàng miễn phí tận nơi</span>
-                            </button>
-                            <div class="action-row">
-                                <button type="button" class="btn-add-cart-outline">
-                                    <i class="fa-solid fa-cart-plus"></i> THÊM VÀO GIỎ
-                                </button>
-                                <button type="button" class="btn-installment">
-                                    <strong>MUA TRẢ GÓP 0%</strong>
-                                    <span>Duyệt hồ sơ nhanh chóng</span>
-                                </button>
+                            <div class="qty-selector">
+                                <span class="qty-label">Số lượng:</span>
+                                <div class="qty-control">
+                                    <button type="button" class="qty-minus" aria-label="Giảm số lượng">-</button>
+                                    <input type="number" class="qty-input" value="1" min="1" max="<?php echo $so_luong; ?>">
+                                    <button type="button" class="qty-plus" aria-label="Tăng số lượng">+</button>
+                                </div>
+                                <span class="qty-stock">Còn <?php echo $so_luong; ?> sản phẩm</span>
                             </div>
+                            <button type="button" class="btn-add-cart" data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <strong>Thêm vào giỏ hàng</strong>
+                            </button>
                         <?php endif; ?>
                     </div>
 
                     <ul class="product-policies-box">
-                        <li><i class="fa-solid fa-box-open"></i> Bộ sản phẩm gồm: Hộp, Sách hướng dẫn, Cáp, Củ sạc</li>
+                        <li><i class="fa-solid fa-box-open"></i>Lựa chọn sản phẩm chính hãng</li>
                         <li><i class="fa-solid fa-rotate-left"></i> 1 đổi 1 trong 30 ngày đối với sản phẩm lỗi</li>
                         <li><i class="fa-solid fa-shield-halved"></i> Bảo hành chính hãng 12 tháng</li>
-                        <li><i class="fa-solid fa-truck-fast"></i> Giao hàng hỏa tốc trong 2 giờ</li>
+                        <li><i class="fa-solid fa-truck-fast"></i> Giao hàng hỏa tốc</li>
                     </ul>
 
                     <?php if (!empty(trim($sp['thong-so'] ?? ''))): ?>
@@ -279,10 +286,69 @@
                             </div>
                         </div>
                     <?php endif; ?>
+
+                    <!-- Compare Modal -->
+                    <div id="compareModal" class="compare-modal" data-current-id="<?php echo (int) $sp['ma_san_pham']; ?>" data-danh-muc="<?php echo (int) $sp['ma_danh_muc']; ?>">
+                        <div class="compare-modal-dialog">
+                            <div class="compare-modal-header">
+                                <h3>So Sánh Sản Phẩm</h3>
+                                <button type="button" class="btn-close-modal" id="btnCloseCompareModal"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <div class="compare-modal-body">
+                                <div class="compare-search-box">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="compareSearchInput" placeholder="Nhập tên sản phẩm cần so sánh...">
+                                    <div class="compare-search-results" id="compareSearchResults"></div>
+                                </div>
+                                <div class="compare-placeholder" id="comparePlaceholder">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                    <p>Nhập tên sản phẩm ở trên để bắt đầu so sánh.</p>
+                                </div>
+                                <div class="compare-table-wrapper" id="compareTableWrapper" style="display:none;">
+                                    <table class="compare-table">
+                                        <tbody>
+                                            <tr class="compare-row-image">
+                                                <th></th>
+                                                <td>
+                                                    <img src="<?php echo htmlspecialchars($hinh_anh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>">
+                                                    <div class="compare-product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></div>
+                                                </td>
+                                                <td id="compareOtherImage"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Thương hiệu</th>
+                                                <td><?php echo htmlspecialchars($sp['ten_thuong_hieu'] ?? ''); ?></td>
+                                                <td id="compareOtherBrand"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dung lượng</th>
+                                                <td><?php echo htmlspecialchars($sp['ten_dung_luong'] ?? ''); ?></td>
+                                                <td id="compareOtherCapacity"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Giá</th>
+                                                <td><?php echo $gia_ban <= 0 ? 'Liên hệ' : number_format($gia_sau_giam, 0, ',', '.') . '₫'; ?></td>
+                                                <td id="compareOtherPrice"></td>
+                                            </tr>
+                                            <tr class="compare-row-specs">
+                                                <th>Thông số kỹ thuật</th>
+                                                <td><?php echo $sp['thong-so'] ?? ''; ?></td>
+                                                <td id="compareOtherSpecs"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
+            <div class="hero-slide active" style="background-image: url('assets/image/banner1.png');">
+                <div class="hero-overlay"></div>
+                <div class="hero-slide-content">
+                    <!-- <h2 class="hero-title">Chào mừng đến với cửa hàng</h2> -->
+                </div>
+            </div>
 
             <?php if (count($related_articles) > 0): ?>
                 <div class="product-related-articles">
@@ -301,6 +367,8 @@
                                     <h3 class="article-title"><?php echo htmlspecialchars($a['article_title']); ?></h3>
                                     <span class="article-author"><i class="fa-solid fa-circle-user"></i> <?php echo htmlspecialchars($a['article_author']); ?></span>
                                     <span class="article-date"><i class="fa-regular fa-clock"></i> <?php echo $art_ngay; ?></span>
+                                    <!-- <span class="article-content"><i class=""></i><?php echo htmlspecialchars($a['article_content']);?></span> -->
+                                    <span class="article-summary"><i class=""></i><?php echo htmlspecialchars($a['article_summary']);?>
                                 </div>
                             </a>
                         <?php endforeach; ?>
