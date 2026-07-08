@@ -128,6 +128,43 @@
                     </div>
 
                     <div class="post-box">
+                        <h3>Thông tin nhanh</h3>
+                        <label class="field-label">Mã sản phẩm (SKU)</label>
+                        <input type="text" name="sku" value="<?php echo htmlspecialchars($sp['sku'] ?? ''); ?>" placeholder="VD: AGI-AI238-1TB">
+
+                        <label class="field-label">Loại sản phẩm</label>
+                        <input type="text" name="loai_san_pham" value="<?php echo htmlspecialchars($sp['loai_san_pham'] ?? ''); ?>" placeholder="VD: SSD gắn ngoài">
+
+                        <label class="field-label">Chuẩn kết nối</label>
+                        <input type="text" name="chuan_ket_noi" value="<?php echo htmlspecialchars($sp['chuan_ket_noi'] ?? ''); ?>" placeholder="VD: USB 3.2 Gen 1">
+
+                        <div class="field-row">
+                            <div>
+                                <label class="field-label">Tốc độ đọc</label>
+                                <input type="text" name="toc_do_doc" value="<?php echo htmlspecialchars($sp['toc_do_doc'] ?? ''); ?>" placeholder="VD: Lên đến 520 MB/s">
+                            </div>
+                            <div>
+                                <label class="field-label">Tốc độ ghi</label>
+                                <input type="text" name="toc_do_ghi" value="<?php echo htmlspecialchars($sp['toc_do_ghi'] ?? ''); ?>" placeholder="VD: Lên đến 500 MB/s">
+                            </div>
+                        </div>
+
+                        <div class="field-row">
+                            <div>
+                                <label class="field-label">Kích thước</label>
+                                <input type="text" name="kich_thuoc" value="<?php echo htmlspecialchars($sp['kich_thuoc'] ?? ''); ?>" placeholder="VD: 110 x 41 x 9 mm">
+                            </div>
+                            <div>
+                                <label class="field-label">Trọng lượng</label>
+                                <input type="text" name="trong_luong" value="<?php echo htmlspecialchars($sp['trong_luong'] ?? ''); ?>" placeholder="VD: ~80g">
+                            </div>
+                        </div>
+
+                        <label class="field-label">Bảo hành</label>
+                        <input type="text" name="bao_hanh" value="<?php echo htmlspecialchars($sp['bao_hanh'] ?? ''); ?>" placeholder="VD: 36 tháng chính hãng">
+                    </div>
+
+                    <div class="post-box">
                         <h3>Giá & kho</h3>
 
                         <div class="price-stock-group">

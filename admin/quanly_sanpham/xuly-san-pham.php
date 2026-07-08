@@ -49,6 +49,14 @@
         $ma_danh_muc = (int) ($_POST['ma_danh_muc'] ?? 0);
         $ma_thuong_hieu = (int) ($_POST['ma_thuong_hieu'] ?? 0);
         $ma_dung_luong = (int) ($_POST['ma_dung_luong'] ?? 0);
+        $sku = trim($_POST['sku'] ?? '');
+        $loai_san_pham = trim($_POST['loai_san_pham'] ?? '');
+        $chuan_ket_noi = trim($_POST['chuan_ket_noi'] ?? '');
+        $toc_do_doc = trim($_POST['toc_do_doc'] ?? '');
+        $toc_do_ghi = trim($_POST['toc_do_ghi'] ?? '');
+        $kich_thuoc = trim($_POST['kich_thuoc'] ?? '');
+        $trong_luong = trim($_POST['trong_luong'] ?? '');
+        $bao_hanh = trim($_POST['bao_hanh'] ?? '');
         $so_luong = max(0, (int) ($_POST['so_luong'] ?? 0));
         $da_ban = max(0, (int) ($_POST['da_ban'] ?? 0));
         $gia_nhap = max(0, (int) ($_POST['gia_nhap'] ?? 0));
@@ -76,13 +84,21 @@
 
         if ($action === 'them') {
             $stmt = $pdo->prepare("INSERT INTO san_pham
-                (ten_san_pham, ma_danh_muc, ma_thuong_hieu, ma_dung_luong, so_luong, da_ban, gia_nhap, gia_ban, giam_gia, mo_ta, `thong-so`, hinh_anh, trang_thai)
-                VALUES (:ten, :danh_muc, :thuong_hieu, :dung_luong, :so_luong, 0, :gia_nhap, :gia_ban, :giam_gia, :mo_ta, :thong_so, :hinh_anh, :trang_thai)");
+                (ten_san_pham, ma_danh_muc, ma_thuong_hieu, ma_dung_luong, sku, loai_san_pham, chuan_ket_noi, toc_do_doc, toc_do_ghi, kich_thuoc, trong_luong, bao_hanh, so_luong, da_ban, gia_nhap, gia_ban, giam_gia, mo_ta, `thong-so`, hinh_anh, trang_thai)
+                VALUES (:ten, :danh_muc, :thuong_hieu, :dung_luong, :sku, :loai_san_pham, :chuan_ket_noi, :toc_do_doc, :toc_do_ghi, :kich_thuoc, :trong_luong, :bao_hanh, :so_luong, 0, :gia_nhap, :gia_ban, :giam_gia, :mo_ta, :thong_so, :hinh_anh, :trang_thai)");
             $stmt->execute([
                 ':ten'          => $ten_san_pham,
                 ':danh_muc'     => $ma_danh_muc,
                 ':thuong_hieu'  => $ma_thuong_hieu,
                 ':dung_luong'   => $ma_dung_luong,
+                ':sku'          => $sku,
+                ':loai_san_pham'=> $loai_san_pham,
+                ':chuan_ket_noi'=> $chuan_ket_noi,
+                ':toc_do_doc'   => $toc_do_doc,
+                ':toc_do_ghi'   => $toc_do_ghi,
+                ':kich_thuoc'   => $kich_thuoc,
+                ':trong_luong'  => $trong_luong,
+                ':bao_hanh'     => $bao_hanh,
                 ':so_luong'     => $so_luong,
                 ':gia_nhap'     => $gia_nhap,
                 ':gia_ban'      => $gia_ban,
@@ -101,6 +117,14 @@
                 ma_danh_muc = :danh_muc,
                 ma_thuong_hieu = :thuong_hieu,
                 ma_dung_luong = :dung_luong,
+                sku = :sku,
+                loai_san_pham = :loai_san_pham,
+                chuan_ket_noi = :chuan_ket_noi,
+                toc_do_doc = :toc_do_doc,
+                toc_do_ghi = :toc_do_ghi,
+                kich_thuoc = :kich_thuoc,
+                trong_luong = :trong_luong,
+                bao_hanh = :bao_hanh,
                 so_luong = :so_luong,
                 da_ban = :da_ban,
                 gia_nhap = :gia_nhap,
@@ -116,6 +140,14 @@
             ':danh_muc'     => $ma_danh_muc,
             ':thuong_hieu'  => $ma_thuong_hieu,
             ':dung_luong'   => $ma_dung_luong,
+            ':sku'          => $sku,
+            ':loai_san_pham'=> $loai_san_pham,
+            ':chuan_ket_noi'=> $chuan_ket_noi,
+            ':toc_do_doc'   => $toc_do_doc,
+            ':toc_do_ghi'   => $toc_do_ghi,
+            ':kich_thuoc'   => $kich_thuoc,
+            ':trong_luong'  => $trong_luong,
+            ':bao_hanh'     => $bao_hanh,
             ':so_luong'     => $so_luong,
             ':da_ban'       => $da_ban,
             ':gia_nhap'     => $gia_nhap,

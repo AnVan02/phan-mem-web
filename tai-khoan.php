@@ -4,6 +4,8 @@ require_once 'admin/config/config.php';
 $da_dang_nhap = isset($_SESSION['khach_hang_id']);
 $khach_hang   = null;
 $don_hang_toi = [];
+$san_pham_yeu_thich = [];
+$lich_su_danh_gia = [];
 
 if ($da_dang_nhap) {
     $stmt = $pdo->prepare("SELECT * FROM khach_hang_lien_he WHERE ma_lien_he = :id LIMIT 1");
@@ -29,6 +31,13 @@ if ($da_dang_nhap) {
     }
 }
 
+// Số liệu cho dải thống kê đầu trang
+$so_don_hang    = count($don_hang_toi);
+$so_yeu_thich   = count($san_pham_yeu_thich);
+$so_danh_gia    = count($lich_su_danh_gia);
+// Chưa có bảng mã giảm giá trong CSDL, tạm để 0 - bổ sung sau khi có bảng thật.
+$so_ma_giam_gia = 0;
+
 $trang_thai_nhan = [
     0 => ['Chờ xử lý', '#6b7280'],
     1 => ['Đã xác nhận', '#2563eb'],
@@ -53,6 +62,12 @@ $thong_bao = [
 ];
 $msg = isset($_GET['msg']) && isset($thong_bao[$_GET['msg']]) ? $thong_bao[$_GET['msg']] : null;
 $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
+
+// Helper lấy ảnh đầu tiên của sản phẩm (cột hinh_anh có thể chứa nhiều ảnh phân tách bởi , ;)
+function lay_anh_dau($chuoi_anh) {
+    $ds = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', (string) $chuoi_anh))));
+    return !empty($ds) ? $ds[0] : 'assets/image/pc.webp';
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -81,7 +96,7 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
     <div class="main-content layout-contact">
         <div class="page-header contact-header">
             <?php if ($da_dang_nhap): ?>
-                <h1 class="page-title">Xin chào, <?php echo htmlspecialchars($khach_hang['customer_name']); ?></h1>
+                <h1 class="page-title">Xin chào, <?php echo htmlspecialchars($khach_hang['customer_name']); ?> 👋</h1>
                 <p class="page-subtitle">Quản lý thông tin tài khoản và theo dõi đơn hàng của bạn tại đây.</p>
             <?php else: ?>
                 <h1 class="page-title">Đăng nhập / Đăng ký tài khoản</h1>
@@ -98,15 +113,53 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
             </div>
         <?php endif; ?>
 
-        <div class="contact-grid">
-            <!-- Left Column -->
-            <?php if ($da_dang_nhap): ?>
+        <?php if ($da_dang_nhap): ?>
+
+            <!-- Dải thống kê -->
+            <div class="stat-bar">
+                <a href="#don-hang-toi" class="stat-item">
+                    <div class="stat-icon" style="background:#fee2e2; color:#dc2626;"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <div>
+                        <div class="stat-num"><?php echo $so_don_hang; ?></div>
+                        <div class="stat-label">Đơn hàng</div>
+                        <span class="stat-link" style="color:#dc2626;">Xem lịch sử</span>
+                    </div>
+                </a>
+                <a href="#yeu-thich" class="stat-item">
+                    <div class="stat-icon" style="background:#f3e8ff; color:#9333ea;"><i class="fa-solid fa-heart"></i></div>
+                    <div>
+                        <div class="stat-num"><?php echo $so_yeu_thich; ?></div>
+                        <div class="stat-label">Sản phẩm yêu thích</div>
+                        <span class="stat-link" style="color:#9333ea;">Xem danh sách</span>
+                    </div>
+                </a>
+                <a href="#danh-gia" class="stat-item">
+                    <div class="stat-icon" style="background:#fef3c7; color:#ca8a04;"><i class="fa-solid fa-star"></i></div>
+                    <div>
+                        <div class="stat-num"><?php echo $so_danh_gia; ?></div>
+                        <div class="stat-label">Đánh giá của bạn</div>
+                        <span class="stat-link" style="color:#ca8a04;">Viết đánh giá</span>
+                    </div>
+                </a>
+                <a href="#" class="stat-item" title="Tính năng mã giảm giá đang được phát triển">
+                    <div class="stat-icon" style="background:#dbeafe; color:#2563eb;"><i class="fa-solid fa-gift"></i></div>
+                    <div>
+                        <div class="stat-num"><?php echo $so_ma_giam_gia; ?></div>
+                        <div class="stat-label">Mã giảm giá</div>
+                        <span class="stat-link" style="color:#2563eb;">Xem mã của bạn</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Hàng 1: Thông tin tài khoản | Đơn hàng của tôi -->
+            <div class="row-2col">
                 <div class="contact-card form-card">
                     <div class="card-title">
                         <i class="fa-regular fa-id-card"></i> Thông tin tài khoản
                     </div>
-                    
-                    <form class="contact-form" action="xuly-tai-khoan.php" method="POST" style="margin-bottom: 20px;">
+                    <p class="page-subtitle" style="margin:0 0 16px;">Quản lý thông tin cá nhân của bạn</p>
+
+                    <form class="contact-form" action="xuly-tai-khoan.php" method="POST" style="margin-bottom: 0;">
                         <input type="hidden" name="action" value="cap_nhat_thong_tin">
                         <div class="form-group">
                             <label for="update_name">Họ và tên</label>
@@ -126,35 +179,21 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
                         </div>
                         <button type="submit" class="btn-submit">Lưu thay đổi &nbsp;<i class="fa-solid fa-floppy-disk"></i></button>
                     </form>
-
-                    <div class="card-title" style="margin-top: 30px;">
-                        <i class="fa-solid fa-lock"></i> Đổi mật khẩu
-                    </div>
-                    <form class="contact-form" action="xuly-tai-khoan.php" method="POST" style="margin-bottom: 20px;">
-                        <input type="hidden" name="action" value="doi_mat_khau">
-                        <div class="form-group">
-                            <label for="old_password">Mật khẩu hiện tại</label>
-                            <input type="password" name="mat_khau_cu" id="old_password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="new_password">Mật khẩu mới</label>
-                            <input type="password" name="mat_khau_moi" id="new_password" required>
-                        </div>
-                        <button type="submit" class="btn-submit" style="background-color: #4b5563;">Cập nhật mật khẩu</button>
-                    </form>
-
-                    <form action="xuly-tai-khoan.php" method="POST">
-                        <input type="hidden" name="action" value="dang_xuat">
-                        <button type="submit" class="btn-submit btn-logout" style="width:100%; margin-top:20px; background-color: #dc2626;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
-                    </form>
                 </div>
 
-                <div class="contact-card form-card">
+                <div class="contact-card form-card" id="don-hang-toi">
                     <div class="card-title">
                         <i class="fa-solid fa-receipt"></i> Đơn hàng của tôi
                     </div>
+                    <p class="page-subtitle" style="margin:0 0 16px;">Theo dõi và quản lý đơn hàng của bạn</p>
+
                     <?php if (empty($don_hang_toi)): ?>
-                        <p class="page-subtitle" style="margin:0;">Bạn chưa có đơn hàng nào. <a href="san-pham.php">Mua sắm ngay</a></p>
+                        <div class="empty-box" style="background:#fef2f2; border:1px solid #fecaca;">
+                            <div class="empty-icon" style="background:#fee2e2; color:#dc2626;"><i class="fa-solid fa-cart-shopping"></i></div>
+                            <p style="font-weight:600; margin:0 0 4px;">Bạn chưa có đơn hàng nào</p>
+                            <p style="font-size:13px; color:#6b7280; margin:0 0 16px;">Khám phá sản phẩm và đặt hàng ngay để trải nghiệm dịch vụ của chúng tôi!</p>
+                            <a href="san-pham.php" style="display:inline-block; border:1px solid #dc2626; color:#dc2626; padding:8px 18px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">Mua sắm ngay</a>
+                        </div>
                     <?php else: ?>
                         <div class="my-order-list">
                             <?php foreach ($don_hang_toi as $dh): ?>
@@ -175,49 +214,132 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
                         </div>
                     <?php endif; ?>
                 </div>
+            </div>
+
+            <!-- Hàng 2: Đổi mật khẩu | Bảo mật tài khoản -->
+            <div class="row-2col">
+                <div class="contact-card form-card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-lock"></i> Đổi mật khẩu
+                    </div>
+                    <p class="page-subtitle" style="margin:0 0 16px;">Bảo mật tài khoản của bạn</p>
+
+                    <form class="contact-form" action="xuly-tai-khoan.php" method="POST" style="margin-bottom: 20px;">
+                        <input type="hidden" name="action" value="doi_mat_khau">
+                        <div class="form-group">
+                            <label for="old_password">Mật khẩu hiện tại</label>
+                            <input type="password" name="mat_khau_cu" id="old_password" placeholder="Nhập mật khẩu hiện tại" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password">Mật khẩu mới</label>
+                            <input type="password" name="mat_khau_moi" id="new_password" placeholder="Nhập mật khẩu mới" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password_confirm">Xác nhận mật khẩu mới</label>
+                            <input type="password" name="mat_khau_moi_nhac_lai" id="new_password_confirm" placeholder="Nhập lại mật khẩu mới">
+                        </div>
+                        <button type="submit" class="btn-submit" style="background-color: #4b5563;"><i class="fa-solid fa-lock"></i> Cập nhật mật khẩu</button>
+                    </form>
+
+                    <form action="xuly-tai-khoan.php" method="POST">
+                        <input type="hidden" name="action" value="dang_xuat">
+                        <button type="submit" class="btn-submit btn-logout" style="width:100%; background-color: #dc2626;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
+                    </form>
+                </div>
 
                 <div class="contact-card form-card">
+                    <div class="card-title" style="color:#16a34a;">
+                        <i class="fa-solid fa-shield-halved"></i> Bảo mật tài khoản
+                    </div>
+                    <p class="page-subtitle" style="margin:0 0 16px;">Giữ tài khoản của bạn luôn an toàn</p>
+
+                    <ul style="list-style:none; margin:0 0 16px; padding:0; display:flex; flex-direction:column; gap:14px;">
+                        <li style="display:flex; gap:10px; align-items:flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color:#16a34a; margin-top:2px;"></i>
+                            <div>
+                                <strong style="font-size:14px; display:block;">Sử dụng mật khẩu mạnh</strong>
+                                <span style="font-size:12px; color:#6b7280;">Kết hợp chữ hoa, chữ thường, số và ký tự đặc biệt</span>
+                            </div>
+                        </li>
+                        <li style="display:flex; gap:10px; align-items:flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color:#16a34a; margin-top:2px;"></i>
+                            <div>
+                                <strong style="font-size:14px; display:block;">Không chia sẻ thông tin đăng nhập</strong>
+                                <span style="font-size:12px; color:#6b7280;">Không chia sẻ mật khẩu với người khác</span>
+                            </div>
+                        </li>
+                        <li style="display:flex; gap:10px; align-items:flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color:#16a34a; margin-top:2px;"></i>
+                            <div>
+                                <strong style="font-size:14px; display:block;">Đăng xuất khi không sử dụng</strong>
+                                <span style="font-size:12px; color:#6b7280;">Đăng xuất khỏi tài khoản trên thiết bị công cộng</span>
+                            </div>
+                        </li>
+                        <li style="display:flex; gap:10px; align-items:flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color:#16a34a; margin-top:2px;"></i>
+                            <div>
+                                <strong style="font-size:14px; display:block;">Cập nhật thông tin thường xuyên</strong>
+                                <span style="font-size:12px; color:#6b7280;">Cập nhật thông tin cá nhân để bảo mật tài khoản</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" style="display:block; text-align:center; border:1px solid #16a34a; color:#16a34a; padding:9px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">Tìm hiểu thêm về bảo mật</a>
+                </div>
+            </div>
+
+            <!-- Hàng 3: Sản phẩm yêu thích | Lịch sử đánh giá -->
+            <div class="row-2col">
+                <div class="contact-card form-card" id="yeu-thich">
                     <div class="card-title" style="color: #e11d48;">
                         <i class="fa-solid fa-heart"></i> Sản phẩm yêu thích
                     </div>
+                    <p class="page-subtitle" style="margin:0 0 16px;">Các sản phẩm bạn đã yêu thích</p>
+
                     <?php if (empty($san_pham_yeu_thich)): ?>
                         <p class="page-subtitle" style="margin:0;">Bạn chưa lưu sản phẩm nào. <a href="san-pham.php">Khám phá ngay</a></p>
                     <?php else: ?>
-                        <div class="wishlist-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 15px;">
-                            <?php foreach ($san_pham_yeu_thich as $sp): ?>
-                                <div class="wishlist-item" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px; text-align: center; position: relative;">
-                                    <a href="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>" style="text-decoration: none; color: inherit;">
-                                        <img src="<?php echo htmlspecialchars($sp['hinh_anh_dau'] ?? 'assets/images/placeholder.png'); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" style="width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px;">
-                                        <h4 style="font-size: 14px; margin: 0 0 5px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h4>
-                                        <strong style="color: #dc2626; font-size: 14px;"><?php echo number_format((int) $sp['gia_ban'], 0, ',', '.'); ?>₫</strong>
+                        <div class="wishlist-list">
+                            <?php foreach ($san_pham_yeu_thich as $i => $sp):
+                                $sp_hinh = lay_anh_dau($sp['hinh_anh'] ?? '');
+                                $sp_gia  = (int) ($sp['gia_ban'] ?? 0);
+                            ?>
+                                <div class="wishlist-row wishlist-extra-item" data-id="<?php echo (int) $sp['ma_san_pham']; ?>" style="<?php echo $i >= 3 ? 'display:none;' : ''; ?>">
+                                    <a href="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; flex:1; min-width:0;">
+                                        <img src="<?php echo htmlspecialchars($sp_hinh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>">
+                                        <div style="flex:1; min-width:0;">
+                                            <p style="font-size:14px; font-weight:600; margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></p>
+                                            <strong style="font-size:14px; color:#dc2626;"><?php echo $sp_gia <= 0 ? 'Liên hệ' : number_format($sp_gia, 0, ',', '.') . '₫'; ?></strong>
+                                        </div>
                                     </a>
-                                    <button type="button" class="btn-remove-wishlist" data-id="<?php echo (int) $sp['ma_san_pham']; ?>" style="position: absolute; top: 5px; right: 5px; background: rgba(255,255,255,0.8); border: none; color: #6b7280; border-radius: 50%; width: 25px; height: 25px; cursor: pointer;" title="Xoá">
-                                        <i class="fa-solid fa-xmark"></i>
+                                    <button type="button" class="btn-remove-wishlist" data-id="<?php echo (int) $sp['ma_san_pham']; ?>" style="background:none; border:none; color:#e11d48; font-size:16px; cursor:pointer; flex-shrink:0;" title="Bỏ yêu thích">
+                                        <i class="fa-solid fa-heart"></i>
                                     </button>
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                        <?php if (count($san_pham_yeu_thich) > 3): ?>
+                            <button type="button" id="btnToggleWishlist" style="display:block; width:100%; text-align:center; border:1px solid #e5e7eb; background:#fff; color:#374151; padding:9px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; margin-top:6px;">
+                                Xem tất cả sản phẩm yêu thích <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        <?php endif; ?>
                         <script>
                         document.querySelectorAll('.btn-remove-wishlist').forEach(btn => {
-                            btn.addEventListener('click', function() {
+                            btn.addEventListener('click', function(e) {
+                                e.preventDefault();
                                 if(!confirm('Xoá khỏi danh sách yêu thích?')) return;
                                 const ma_sp = this.dataset.id;
-                                const item = this.closest('.wishlist-item');
+                                const item = this.closest('.wishlist-row');
                                 const formData = new FormData();
                                 formData.append('action', 'remove');
                                 formData.append('ma_san_pham', ma_sp);
-                                
-                                fetch('yeu-thich-ajax.php', {
-                                    method: 'POST',
-                                    body: formData
-                                })
+
+                                fetch('yeu-thich-ajax.php', { method: 'POST', body: formData })
                                 .then(res => res.json())
                                 .then(data => {
-                                    if(data.success) {
+                                    if (data.success) {
                                         item.remove();
-                                        // Optional: if empty, show empty message
-                                        if(document.querySelectorAll('.wishlist-item').length === 0) {
-                                            document.querySelector('.wishlist-grid').innerHTML = '<p class="page-subtitle" style="margin:0;">Bạn chưa lưu sản phẩm nào.</p>';
+                                        if (document.querySelectorAll('.wishlist-row').length === 0) {
+                                            document.querySelector('.wishlist-list').innerHTML = '<p class="page-subtitle" style="margin:0;">Bạn chưa lưu sản phẩm nào.</p>';
                                         }
                                     } else {
                                         alert(data.message);
@@ -225,18 +347,41 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
                                 });
                             });
                         });
+                        const btnToggleWishlist = document.getElementById('btnToggleWishlist');
+                        if (btnToggleWishlist) {
+                            let expanded = false;
+                            btnToggleWishlist.addEventListener('click', function() {
+                                expanded = !expanded;
+                                document.querySelectorAll('.wishlist-extra-item').forEach(el => {
+                                    el.style.display = expanded ? 'flex' : (el === document.querySelectorAll('.wishlist-extra-item')[0] ? 'flex' : el.style.display);
+                                });
+                                document.querySelectorAll('.wishlist-extra-item').forEach((el, idx) => {
+                                    el.style.display = expanded || idx < 3 ? 'flex' : 'none';
+                                });
+                                this.innerHTML = expanded
+                                    ? 'Thu gọn <i class="fa-solid fa-arrow-up"></i>'
+                                    : 'Xem tất cả sản phẩm yêu thích <i class="fa-solid fa-arrow-right"></i>';
+                            });
+                        }
                         </script>
                     <?php endif; ?>
                 </div>
 
-                <div class="contact-card form-card">
+                <div class="contact-card form-card" id="danh-gia">
                     <div class="card-title" style="color: #ca8a04;">
                         <i class="fa-solid fa-star"></i> Lịch sử đánh giá
                     </div>
+                    <p class="page-subtitle" style="margin:0 0 16px;">Các đánh giá bạn đã viết</p>
+
                     <?php if (empty($lich_su_danh_gia)): ?>
-                        <p class="page-subtitle" style="margin:0;">Bạn chưa viết đánh giá nào.</p>
+                        <div class="empty-box" style="background:#fffbeb; border:1px solid #fde68a;">
+                            <div class="empty-icon" style="background:#fef3c7; color:#ca8a04;"><i class="fa-solid fa-comment-dots"></i></div>
+                            <p style="font-weight:600; margin:0 0 4px;">Bạn chưa viết đánh giá nào</p>
+                            <p style="font-size:13px; color:#6b7280; margin:0 0 16px;">Chia sẻ trải nghiệm của bạn với sản phẩm đã mua</p>
+                            <a href="san-pham.php" style="display:inline-block; border:1px solid #ca8a04; color:#ca8a04; padding:8px 18px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">Viết đánh giá ngay</a>
+                        </div>
                     <?php else: ?>
-                        <div class="review-history-list" style="margin-top: 15px;">
+                        <div class="review-history-list">
                             <?php foreach ($lich_su_danh_gia as $dg): ?>
                                 <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
                                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
@@ -256,11 +401,16 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
                         </div>
                     <?php endif; ?>
                 </div>
+            </div>
 
-                <div class="contact-card form-card" style="margin-top: 20px;">
+            <!-- Hàng 4: Gửi yêu cầu hỗ trợ | Thông tin liên hệ + bản đồ -->
+            <div class="row-2col">
+                <div class="contact-card form-card">
                     <div class="card-title" style="color: #0ea5e9;">
                         <i class="fa-solid fa-headset"></i> Gửi yêu cầu hỗ trợ
                     </div>
+                    <p class="page-subtitle" style="margin:0 0 16px;">Chúng tôi luôn sẵn sàng hỗ trợ bạn</p>
+
                     <form class="contact-form" action="xuly-tai-khoan.php" method="POST" style="margin-bottom: 0;">
                         <input type="hidden" name="action" value="gui_ho_tro">
                         <div class="form-group">
@@ -279,7 +429,77 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
                         <button type="submit" class="btn-submit" style="background-color: #0ea5e9;"><i class="fa-solid fa-paper-plane"></i> Gửi yêu cầu</button>
                     </form>
                 </div>
-            <?php else: ?>
+
+                <div class="contact-right-col" style="display:flex; flex-direction:column; gap:20px;">
+                    <div class="contact-card info-card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-calendar-lines" style="color: #2563EB;"></i> Thông tin liên hệ
+                        </div>
+                        <p class="page-subtitle" style="margin:0 0 16px;">Chúng tôi luôn sẵn sàng hỗ trợ bạn</p>
+
+                        <div class="info-list">
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="info-content">
+                                    <div class="info-label">Địa chỉ</div>
+                                    <div class="info-text">150Ter Bùi Thị Xuân, Phường Bến Thành,<br>Quận 1, TP.HCM</div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-regular fa-envelope"></i></div>
+                                <div class="info-content">
+                                    <div class="info-label">Email hỗ trợ</div>
+                                    <div class="info-text">support@vietsontdc.com</div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div class="info-content">
+                                    <div class="info-label">Hotline</div>
+                                    <div class="info-text">(028) 3929 3770<br>(028) 3929 3765<br>8:00 - 21:00 (T2 - CN)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card map-card" style="padding:0; overflow:hidden;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5496399842823!2d106.68491307573582!3d10.769150259326477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f55d6772055%3A0xc89a20fe4db883fa!2zQ8O0bmcgdHkgQ-G7lSBQaOG6p24gVGluIEjhu41jIFZp4bq_dCBTxqFu!5e0!3m2!1svi!2s!4v1772254314094!5m2!1svi!2s" width="100%" height="230" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dải icon uy tín -->
+            <div class="trust-badges">
+                <div>
+                    <i class="fa-solid fa-shield-halved" style="color:#16a34a; font-size:20px;"></i>
+                    <p style="font-weight:600; font-size:13px; margin:8px 0 2px;">Sản phẩm chính hãng</p>
+                    <p style="font-size:11px; color:#6b7280; margin:0;">100% chính hãng</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-rotate-left" style="color:#2563eb; font-size:20px;"></i>
+                    <p style="font-weight:600; font-size:13px; margin:8px 0 2px;">1 đổi 1 trong 30 ngày</p>
+                    <p style="font-size:11px; color:#6b7280; margin:0;">Nếu sản phẩm lỗi</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-shield-halved" style="color:#ca8a04; font-size:20px;"></i>
+                    <p style="font-weight:600; font-size:13px; margin:8px 0 2px;">Bảo hành chính hãng</p>
+                    <p style="font-size:11px; color:#6b7280; margin:0;">Từ 3 - 5 năm</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-truck-fast" style="color:#e11d48; font-size:20px;"></i>
+                    <p style="font-weight:600; font-size:13px; margin:8px 0 2px;">Giao hàng toàn quốc</p>
+                    <p style="font-size:11px; color:#6b7280; margin:0;">Kiểm tra trước khi thanh toán</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-headset" style="color:#0ea5e9; font-size:20px;"></i>
+                    <p style="font-weight:600; font-size:13px; margin:8px 0 2px;">Hỗ trợ 24/7</p>
+                    <p style="font-size:11px; color:#6b7280; margin:0;">Tư vấn tận tâm</p>
+                </div>
+            </div>
+
+        <?php else: ?>
+
+            <div class="contact-grid">
                 <div class="contact-card form-card">
                     <div class="auth-tabs">
                         <button type="button" class="auth-tab-btn <?php echo $tab_mac_dinh === 'dang-nhap' ? 'active' : ''; ?>" data-tab="dang-nhap">Đăng nhập</button>
@@ -336,60 +556,47 @@ $tab_mac_dinh = ($_GET['tab'] ?? '') === 'dang-ky' ? 'dang-ky' : 'dang-nhap';
                         </form>
                     </div>
                 </div>
-            <?php endif; ?>
 
-            <!-- Right Column -->
-            <div class="contact-right-col">
-                <!-- Contact Info -->
-                <div class="contact-card info-card">
-                    <div class="card-title">
-                        <i class="fa-regular fa-calendar-lines" style="color: #2563EB;"></i> Thông tin liên hệ
-                    </div>
-
-                    <div class="info-list">
-                        <!-- Dia chi -->
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div class="info-content">
-                                <div class="info-label">Địa chỉ</div>
-                                <div class="info-text">150Ter Bùi Thị Xuân, Phường Bến Thành,<br>Quận 1, TP.HCM</div>
-                            </div>
+                <div class="contact-right-col">
+                    <div class="contact-card info-card">
+                        <div class="card-title">
+                            <i class="fa-regular fa-calendar-lines" style="color: #2563EB;"></i> Thông tin liên hệ
                         </div>
 
-                        <!-- Email -->
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fa-regular fa-envelope"></i>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="info-content">
+                                    <div class="info-label">Địa chỉ</div>
+                                    <div class="info-text">150Ter Bùi Thị Xuân, Phường Bến Thành,<br>Quận 1, TP.HCM</div>
+                                </div>
                             </div>
-                            <div class="info-content">
-                                <div class="info-label">Email hỗ trợ</div>
-                                <div class="info-text">support@vietsontdc.com</div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-regular fa-envelope"></i></div>
+                                <div class="info-content">
+                                    <div class="info-label">Email hỗ trợ</div>
+                                    <div class="info-text">support@vietsontdc.com</div>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Hotline -->
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div class="info-content">
-                                <div class="info-label">Hotline</div>
-                                <div class="info-text">(028) 3929 3770<br>(028) 3929 3765</div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div class="info-content">
+                                    <div class="info-label">Hotline</div>
+                                    <div class="info-text">(028) 3929 3770<br>(028) 3929 3765</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Map Card -->
-                <div class="contact-card map-card">
-                    <div class="map-container" style="padding: 0; background: transparent;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5496399842823!2d106.68491307573582!3d10.769150259326477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f55d6772055%3A0xc89a20fe4db883fa!2zQ8O0bmcgdHkgQ-G7lSBQaOG6p24gVGluIEjhu41jIFZp4bq_dCBTxqFu!5e0!3m2!1svi!2s!4v1772254314094!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="contact-card map-card">
+                        <div class="map-container" style="padding: 0; background: transparent;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.5496399842823!2d106.68491307573582!3d10.769150259326477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f55d6772055%3A0xc89a20fe4db883fa!2zQ8O0bmcgdHkgQ-G7lSBQaOG6p24gVGluIEjhu41jIFZp4bq_dCBTxqFu!5e0!3m2!1svi!2s!4v1772254314094!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        <?php endif; ?>
     </div>
 
     <?php include 'footer.php'; ?>

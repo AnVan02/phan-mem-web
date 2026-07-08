@@ -241,7 +241,7 @@
 }
 
 .cart-account-hint {
-    display: flex;
+    /* display: flex; */
     align-items: flex-start;
     gap: 8px;
     background: #eff6ff;
@@ -251,6 +251,8 @@
     font-size: 13px;
     line-height: 1.5;
     margin-bottom: 16px;
+    font-family: Montserrat ,Arial, sans-serif;
+
 }
 
 .cart-account-hint i { margin-top: 2px; }
@@ -262,7 +264,7 @@
 
 .cart-checkout-form label {
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #374151;
     margin-bottom: 6px;
@@ -275,7 +277,7 @@
     border-radius: 10px;
     padding: 10px 12px;
     font-size: 14px;
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
     resize: vertical;
 }
 

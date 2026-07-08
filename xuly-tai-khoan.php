@@ -112,7 +112,6 @@ if ($action === 'doi_mat_khau') {
         header('Location: tai-khoan.php');
         exit;
     }
-    
     $mk_cu = (string) ($_POST['mat_khau_cu'] ?? '');
     $mk_moi = (string) ($_POST['mat_khau_moi'] ?? '');
     $ma_kh = $_SESSION['khach_hang_id'];

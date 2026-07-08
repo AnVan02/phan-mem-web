@@ -316,9 +316,9 @@ if ($dl_slug !== '') {
 
             <section class="hero-banner">
                 <div class="container hero-slider">
-                    <button class="hero-arrow hero-arrow-prev" type="button" aria-label="Slide trước">
+                    <!-- <button class="hero-arrow hero-arrow-prev" type="button" aria-label="Slide trước">
                         <i class="fas fa-chevron-left"></i>
-                    </button>
+                    </button> -->
 
                     <div class="hero-slides-wrapper">
                         <?php if (count($banner_list) > 0): ?>
@@ -348,9 +348,42 @@ if ($dl_slug !== '') {
                         <?php endif; ?>
                     </div>
 
-                    <button class="hero-arrow hero-arrow-next" type="button" aria-label="Slide sau">
+                    <!-- <button class="hero-arrow hero-arrow-next" type="button" aria-label="Slide sau">
                         <i class="fas fa-chevron-right"></i>
-                    </button>
+                    </button> -->
+                
+                    <div class="stat-bar">
+                        <a href="#don-hang-toi" class="stat-item">
+                            <div class="stat-icon" style="background:#fee2e2; color:#dc2626;"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <div>
+                                <div class="stat-label">Hàng chính hãng </div>
+                                <span class="stat-link" style="color:#dc2626;">100% sản phẩm chính hãng</span>
+                            </div>
+                        </a>
+                        <a href="#yeu-thich" class="stat-item">
+                            <div class="stat-icon" style="background:#f3e8ff; color:#9333ea;"><i class="fa-solid fa-heart"></i></div>
+                            <div>
+                                <div class="stat-label">Bảo hành từ 3 đến 5 năm</div>
+                                <span class="stat-link" style="color:#9333ea;">Hỗ trợ bảo hành nhanh chóng</span>
+                            </div>
+                        </a>
+                        <a href="#danh-gia" class="stat-item">
+                            <div class="stat-icon" style="background:#fef3c7; color:#ca8a04;"><i class="fa-solid fa-star"></i></div>
+                            <div>
+                                <div class="stat-label">1 đổi 1 trong 30 ngày</div>
+                                <span class="stat-link" style="color:#ca8a04;">Nếu sản phẩm lỗi do NSX</span>
+                            </div>
+                        </a>
+                        <a href="#" class="stat-item" title="Tính năng mã giảm giá đang được phát triển">
+                            <div class="stat-icon" style="background:#dbeafe; color:#2563eb;"><i class="fa-solid fa-gift"></i></div>
+                            <div>
+                                <div class="stat-label">Giao hàng toàn quốc</div>
+                                <span class="stat-link" style="color:#2563eb;">Kiểm tra trước khi thanh toán </span>
+                            </div>
+                        </a>
+
+                        
+                    </div>
                 </div>
             </section>
 
@@ -400,7 +433,7 @@ if ($dl_slug !== '') {
                     <?php if (!empty($dong_groups)): ?>
                     <div class="needs-card" id="chon-theo-nhu-cau">
                         <div class="needs-card-header">
-                            <span class="needs-card-title"><i class="fa-solid fa-sliders"></i> Chọn sản phẩm theo nhu cầu</span>
+                            <span class="needs-card-title"><i class="fa-solid fa-sliders"></i> Chọn dòng sản phẩm</span>
                         </div>
                         <div class="category-pills">
                             <a class="category-pill <?php echo $ma_dl_filter === 0 ? 'active' : ''; ?>" href="<?php echo xay_dung_url_sp(['dl' => ''], $hien_tai); ?>#chon-theo-nhu-cau">
@@ -415,17 +448,17 @@ if ($dl_slug !== '') {
                     </div>
                     <?php endif; ?>
 
-                    <!-- <div class="sort-bar">
-                        <span class="sort-bar-count"><?php echo count($danh_sach_hien_thi); ?> sản phẩm</span>
+                    <div class="sort-bar">
+                        <span class="sort-bar-count">Hiển thị <?php echo count($danh_sach_hien_thi); ?> sản phẩm</span>
                         <label class="sort-bar-label">
                             Sắp xếp
                             <select onchange="window.location.href=this.value">
-                                <option value="<?php echo xay_dung_url_sp(['sort' => ''], $hien_tai); ?>" <?php echo $sort === '' ? 'selected' : ''; ?>>Mặc định</option>
+                                <option value="<?php echo xay_dung_url_sp(['sort' => ''], $hien_tai); ?>" <?php echo $sort === '' ? 'selected' : ''; ?>>Mới nhất </option>
                                 <option value="<?php echo xay_dung_url_sp(['sort' => 'gia-tang'], $hien_tai); ?>" <?php echo $sort === 'gia-tang' ? 'selected' : ''; ?>>Giá tăng dần</option>
                                 <option value="<?php echo xay_dung_url_sp(['sort' => 'gia-giam'], $hien_tai); ?>" <?php echo $sort === 'gia-giam' ? 'selected' : ''; ?>>Giá giảm dần</option>
                             </select>
                         </label>
-                    </div> -->
+                    </div>
 
                     <?php if (count($danh_sach_hien_thi) === 0): ?>
                         <div class="product-empty">
@@ -532,14 +565,98 @@ if ($dl_slug !== '') {
                             </div>
                         </div>
                     <?php endif; ?>
-                    
 
+                    <div class="needs-card-header">
+                        <span class="needs-card-title"><i class="fa-solid fa-sliders"></i>Vì sao nên chọn sản phẩm <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></span>
+                    </div>
+                    <div class="info-list">
+                        <!-- Dòng 1 -->
+                        <div class="info-icon">
+                            <i class="fa-solid fa-gauge-high icon-perform"></i>
+                            <div class="info-content">
+                                <div class="info-label">Hiệu suất cao</div>
+                                <div class="info-text">Tốc độ đọc ghi vượt trội mọi tác vụ</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-shield-halved icon-durable"></i>
+                            <div class="info-content">
+                                <div class="info-label">Bền bỉ đáng tin cậy</div>
+                                <div class="info-text">MTBF lên đến 2 triệu giờ hoạt động ổn định</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-microchip icon-tech"></i>
+                            <div class="info-content">
+                                <div class="info-label">Công nghệ hiện đại</div>
+                                <div class="info-text">Ứng dụng công nghệ 3D NAND mới nhất</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-computer icon-tech"></i>
+                            <div class="info-content">
+                                <div class="info-label">Tương thích rộng rãi</div>
+                                <div class="info-text">Hỗ trợ Windows, macOS, Linux</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-leaf icon-save"></i>
+                            <div class="info-content">
+                                <div class="info-label">Tiết kiệm năng lượng</div>
+                                <div class="info-text">Hiệu quả tối ưu, giảm nhiệt tiết kiệm điện năng</div>
+                            </div>
+                        </div>
+
+                        <!-- Dòng 2 -->
+                        <div class="info-icon">
+                            <i class="fa-solid fa-certificate icon-authen"></i>
+                            <div class="info-content">
+                                <div class="info-label">Sản phẩm chính hãng</div>
+                                <div class="info-text">100% chính hãng <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-arrows-rotate icon-warranty"></i>
+                            <div class="info-content">
+                                <div class="info-label">Đổi trả 30 ngày</div>
+                                <div class="info-text">Nếu sản phẩm lỗi do nhà sản xuất</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-file-contract icon-warranty"></i>
+                            <div class="info-content">
+                                <div class="info-label">Bảo hành chính hãng</div>
+                                <div class="info-text">Từ 3 đến 5 năm toàn quốc</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-truck-fast icon-delivery"></i>
+                            <div class="info-content">
+                                <div class="info-label">Giao hàng toàn quốc</div>
+                                <div class="info-text">Kiểm tra trước khi thanh toán</div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-headset icon-support"></i>
+                            <div class="info-content">
+                                <div class="info-label">Hỗ trợ 24/7</div>
+                                <div class="info-text">Tư vấn kỹ thuật tận tâm</div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 
-</body>
-
-</html>
