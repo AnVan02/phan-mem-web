@@ -338,7 +338,7 @@
 
                     <div class="product-detail-actions-vertical">
                         <?php if ($so_luong <= 0 || $gia_ban <= 0): ?>
-                        <a href="tel:02839293770" class="btn-buy-now btn-contact">
+                        <a href="tel:0886853007" class="btn-buy-now btn-contact">
                             <i class="fa-solid fa-phone-volume"></i>
                             <strong>Liên hệ đặt hàng</strong>
                         </a>
@@ -375,12 +375,11 @@
                                 <span>Tư vấn nhanh</span>
                             </div>
                         </a>
-                        <a href="mailto:support@vietsontdc.com?subject=<?php echo rawurlencode('Yêu cầu báo giá: ' . $sp['ten_san_pham']); ?>"
-                            class="contact-item">
+                        <a href="ho-tro-khach-hang.php" class="contact-item">
                             <i class="fa-solid fa-envelope"></i>
                             <div>
                                 <strong>Gửi yêu cầu</strong>
-                                <span>Báo giá qua email</span>
+                                <span>Hỗ trợ nhu cầu sản phẩm</span>
                             </div>
                         </a>
                     </div>

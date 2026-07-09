@@ -1,8 +1,8 @@
 :root {
      --bg-dark: #07090e;
      --bg-card: #121620;
-     --primary: #94cc44;
-     --primary-hover: #a3e635;
+     --primary: #76b900;
+     --primary-hover: #76b900;
      --text-main: #f8fafc;
      --text-muted: #94a3b8;
      --border: rgba(255, 255, 255, 0.08);
@@ -26,7 +26,7 @@ body {
 }
 
 .container {
-     max-width: 1490px;
+     max-width: 1400px;
      margin: 0 auto;
      padding: 0 24px;
 }
@@ -34,6 +34,18 @@ body {
 a {
      text-decoration: none;
      color: inherit;
+}
+
+.mockup-title {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+.inline-logo {
+     width: 56px;
+     height: 56px;
+     object-fit: contain;
 }
 
 /* Utilities */
@@ -107,18 +119,17 @@ a {
      display: flex;
      align-items: center;
      gap: 10px;
-     font-size: 20px;
-     font-weight: 700;
-     letter-spacing: 1px;
 }
 
 .logo-icon {
-     width: 24px;
-     height: 24px;
-     border: 2px solid var(--primary);
-     border-radius: 50%;
-     position: relative;
+     width: 40px;
+     /* chỉnh theo ý muốn */
+     object-fit: contain;
+     width: 130px;
+     height: auto;
+     /* Giữ đúng tỉ lệ ảnh */
 }
+
 
 .logo-icon::after {
      content: '';
@@ -167,8 +178,8 @@ a {
      align-items: center;
      gap: 12px;
      color: var(--primary);
-     font-weight: 600;
-     font-size: 14px;
+     font-weight: 500;
+     font-size: 18px;
      margin-bottom: 24px;
 }
 
@@ -204,7 +215,7 @@ a {
      display: flex;
      align-items: center;
      justify-content: space-between;
-     padding: 80px 24px;
+     padding: 40px 24px;
      gap: 40px;
 }
 
@@ -228,21 +239,29 @@ a {
 
 .features-list {
      display: flex;
-     flex-wrap: wrap;
      gap: 20px;
-     margin-bottom: 40px;
+     margin-bottom: 0;
+     /* hoặc 10px nếu vẫn muốn có khoảng cách */
+}
+
+.feature-item h4 {
+     margin: 0 0 4px 0;
+}
+
+.feature-item p {
+     margin: 0;
 }
 
 .feature-item {
      display: flex;
      align-items: flex-start;
      gap: 12px;
-     flex: 1 1 calc(50% - 20px);
+     flex: 0 0 calc((100% - 40px) / 3);
 }
 
 .feature-item i {
      color: var(--primary);
-     font-size: 24px;
+     font-size: 32px;
 }
 
 .feature-item h4 {
@@ -259,6 +278,8 @@ a {
 .hero-buttons {
      display: flex;
      gap: 16px;
+     margin-top: 20px;
+
 }
 
 .hero-right {
@@ -269,13 +290,53 @@ a {
      text-align: right;
 }
 
+.n8n-card h3,
+.n8n-card p {
+     text-align: center;
+}
+
 .logos-top {
      display: flex;
-     gap: 24px;
-     font-size: 24px;
-     font-weight: 800;
-     margin-bottom: 16px;
-     font-style: italic;
+     justify-content: center;
+     /* Căn giữa ngang */
+     align-items: center;
+     margin-top: 20px;
+}
+
+.brand-logo {
+     width: 180px;
+     /* Điều chỉnh kích thước */
+     height: auto;
+     object-fit: contain;
+}
+
+.logos-top {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+     margin-bottom: 20px;
+}
+
+.brand-logo {
+     display: block;
+     height: 42px;
+     width: auto;
+     object-fit: contain;
+     background: transparent;
+}
+
+.asus-logo {
+     height: 48px;
+}
+
+.nvidia-logo {
+     height: 38px;
+}
+
+.logo-divider {
+     width: 1px;
+     height: 36px;
+     background: rgba(255, 255, 255, .3);
 }
 
 .product-title {
@@ -299,11 +360,13 @@ a {
 }
 
 .product-image {
-     width: 100%;
+     width: 120%;
      height: auto;
      border-radius: 12px;
      mix-blend-mode: screen;
      filter: drop-shadow(0 20px 40px rgba(148, 204, 68, 0.25));
+     transform: translateX(-100px) scale(1.4);
+     transform-origin: center;
 }
 
 /* Platform Section */
@@ -326,12 +389,13 @@ a {
 }
 
 .card h3 {
-     font-size: 20px;
+     font-size: 22px;
      margin-bottom: 8px;
+     color: var(--primary);
 }
 
 .card p {
-     font-size: 14px;
+     font-size: 16px;
      color: var(--text-muted);
      margin-bottom: 24px;
 }
@@ -465,7 +529,7 @@ a {
      align-items: center;
      gap: 12px;
      margin-bottom: 16px;
-     font-size: 14px;
+     font-size: 16px;
 }
 
 .n8n-features li i {
@@ -489,6 +553,8 @@ a {
      flex: 1;
 }
 
+
+
 .tag-green {
      display: inline-block;
      padding: 6px 16px;
@@ -509,8 +575,8 @@ a {
 }
 
 .feature-item-chat .icon-box {
-     width: 48px;
-     height: 48px;
+     width: 55px;
+     height: 55px;
      border-radius: 12px;
      background: rgba(148, 204, 68, 0.1);
      color: var(--primary);
@@ -594,7 +660,7 @@ a {
 
 .mockup-body {
      display: flex;
-     height: 450px;
+     min-height: 450px;
 }
 
 .mockup-sidebar {
@@ -1209,6 +1275,158 @@ a {
 .f-social a:hover {
      background: var(--primary);
      color: #000;
+}
+
+/* ===== Mockup shell - dark theme ===== */
+.chatbot-mockup {
+     background: #1A1A1A;
+     border-radius: 12px;
+     overflow: hidden;
+     color: #fff;
+}
+
+.mockup-header {
+     background: #141414;
+     display: flex;
+     align-items: center;
+     padding: 12px 16px;
+     border-bottom: 1px solid #2A2A2A;
+}
+
+.mockup-title {
+     color: #fff;
+     font-weight: 600;
+}
+
+/* ===== Sidebar ===== */
+.mockup-sidebar {
+     background: #1A1A1A;
+     border-right: 1px solid #2A2A2A;
+     padding: 16px 8px;
+}
+
+.nav-item {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     padding: 10px 14px;
+     border-radius: 8px;
+     color: #9A9A9A;
+     font-size: 14px;
+     cursor: pointer;
+}
+
+.nav-item.active {
+     background: rgba(139, 217, 74, 0.12);
+     color: #8BD94A;
+     border: 1px solid rgba(139, 217, 74, 0.3);
+}
+
+/* ===== Chat area ===== */
+.mockup-main {
+     background: #1E1E1E;
+}
+
+.chat-message .msg-content {
+     background: #2A2A2A;
+     color: #E8E8E8;
+     border-radius: 12px;
+     padding: 12px 16px;
+}
+
+.chat-message.user .msg-content {
+     background: #2F3B2A;
+     color: #E8E8E8;
+     margin-left: auto;
+}
+
+/* Bot avatar - green lightning icon */
+.bot-avatar {
+     width: 32px;
+     height: 32px;
+     border-radius: 50%;
+     background: #8BD94A;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+}
+
+.bot-avatar::before {
+     content: "\e19c";
+     /* ph-lightning */
+     font-family: "Phosphor-Fill";
+     color: #1A1A1A;
+     font-size: 16px;
+}
+
+/* ===== Doc reference card (dark) ===== */
+.doc-card {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     margin-top: 10px;
+     padding: 8px 12px;
+     background: #fff;
+     border-radius: 8px;
+     width: fit-content;
+     font-size: 13px;
+     color: #1A1A1A;
+     font-weight: 500;
+}
+
+.doc-card .doc-icon {
+     font-size: 18px;
+     color: #E5484D;
+}
+
+/* ===== Meeting summary list (dark) ===== */
+.summary-list {
+     margin: 8px 0 0;
+     padding-left: 4px;
+     list-style: none;
+     font-size: 13px;
+     line-height: 1.8;
+     color: #B5B5B5;
+}
+
+.summary-list li::before {
+     content: "•";
+     color: #8BD94A;
+     margin-right: 8px;
+}
+
+/* ===== Audio player (dark) ===== */
+.audio-player {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     margin-top: 10px;
+     padding: 6px 10px;
+     background: #2A2A2A;
+     border-radius: 20px;
+     width: fit-content;
+}
+
+.audio-player .play-icon {
+     font-size: 22px;
+     color: #6C8CFF;
+}
+
+.audio-progress {
+     height: 2px;
+     width: 90px;
+     background-image: repeating-linear-gradient(to right,
+               #6C8CFF 0px,
+               #6C8CFF 3px,
+               transparent 3px,
+               transparent 6px);
+     border-radius: 2px;
+}
+
+.audio-player .time {
+     font-size: 12px;
+     color: #9A9A9A;
 }
 
 /* Responsive adjustments */
