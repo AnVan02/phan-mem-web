@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="icon" href="images/rosa-icon.png" type="image/png">
 
@@ -338,50 +339,154 @@
             </div>
         </section>
 
-        <!-- Section 4: Target Audience -->
-        <section class="audience container">
-            <h2 class="section-title text-center">Đối tượng khách hàng phù hợp</h2>
-            <p class="section-desc text-center">
-                Giải pháp phù hợp với các tổ chức, doanh nghiệp có khối lượng tài liệu lớn và thường xuyên cần tra cứu
-                thông tin.
-            </p>
+       <!-- Section 4: Target Audience -->
+<section class="audience container">
+    <h2 class="section-title text-center">Đối tượng khách hàng phù hợp</h2>
+    <p class="section-desc text-center">
+        Giải pháp phù hợp với các tổ chức, doanh nghiệp có khối lượng tài liệu lớn và thường xuyên cần tra cứu
+        thông tin.
+    </p>
 
-            <div class="audience-cards">
-                <div class="a-card">
-                    <div class="img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=500&q=80"
-                            alt="Cơ quan hành chính">
-                    </div>
-                    <div class="a-content">
-                        <h3>Cơ quan hành chính</h3>
-                        <p>Quản lý và tra cứu nhanh các văn bản, quy định, hồ sơ hành chính.</p>
-                    </div>
-                </div>
+    <div class="audience-cards">
 
-                <div class="a-card">
-                    <div class="img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=500&q=80"
-                            alt="Công ty luật">
-                    </div>
-                    <div class="a-content">
-                        <h3>Công ty luật</h3>
-                        <p>Tìm kiếm nhanh hồ sơ vụ việc, hợp đồng và tài liệu pháp lý.</p>
-                    </div>
-                </div>
-
-                <div class="a-card">
-                    <div class="img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80"
-                            alt="Doanh nghiệp Logistics">
-                    </div>
-                    <div class="a-content">
-                        <h3>Doanh nghiệp Logistics</h3>
-                        <p>Quản lý chứng từ, quy trình vận hành và tài liệu nội bộ hiệu quả.</p>
-                    </div>
-                </div>
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-blue"><i class="fa-solid fa-landmark"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2942/2942076.png" alt="Cơ quan hành chính">
             </div>
-        </section>
+            <div class="a-content">
+                <h3>Cơ quan hành chính</h3>
+                <span class="underline underline-blue"></span>
+                <p>Quản lý và tra cứu nhanh các văn bản, quy định, hồ sơ hành chính.</p>
+            </div>
+            <div class="check-badge check-blue"><i class="fa-solid fa-check"></i></div>
+        </div>
 
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-green"><i class="fa-solid fa-scale-balanced"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/3068/3068757.png" alt="Công ty luật">
+            </div>
+            <div class="a-content">
+                <h3>Công ty luật</h3>
+                <span class="underline underline-green"></span>
+                <p>Tìm kiếm nhanh hồ sơ vụ việc, hợp đồng và tài liệu pháp lý.</p>
+            </div>
+            <div class="check-badge check-green"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-lightblue"><i class="fa-solid fa-hospital"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Bệnh viện">
+            </div>
+            <div class="a-content">
+                <h3>Bệnh viện</h3>
+                <span class="underline underline-lightblue"></span>
+                <p>Quản lý hồ sơ bệnh án, quy trình chuyên môn và tài liệu nội bộ.</p>
+            </div>
+            <div class="check-badge check-lightblue"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-purple"><i class="fa-solid fa-building-columns"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" alt="Ngân hàng">
+            </div>
+            <div class="a-content">
+                <h3>Ngân hàng</h3>
+                <span class="underline underline-purple"></span>
+                <p>Quản lý hồ sơ khách hàng, hợp đồng, tài liệu nghiệp vụ và tuân thủ.</p>
+            </div>
+            <div class="check-badge check-purple"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-orange"><i class="fa-solid fa-truck"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png" alt="Doanh nghiệp Logistics">
+            </div>
+            <div class="a-content">
+                <h3>Doanh nghiệp Logistics</h3>
+                <span class="underline underline-orange"></span>
+                <p>Quản lý chứng từ, quy trình vận hành và tài liệu nội bộ hiệu quả.</p>
+            </div>
+            <div class="check-badge check-orange"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-teal"><i class="fa-solid fa-industry"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png" alt="Doanh nghiệp sản xuất">
+            </div>
+            <div class="a-content">
+                <h3>Doanh nghiệp sản xuất</h3>
+                <span class="underline underline-teal"></span>
+                <p>Quản lý tài liệu kỹ thuật, quy trình sản xuất và hồ sơ chất lượng.</p>
+            </div>
+            <div class="check-badge check-teal"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-blue2"><i class="fa-solid fa-city"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1670/1670080.png" alt="Doanh nghiệp bất động sản">
+            </div>
+            <div class="a-content">
+                <h3>Doanh nghiệp bất động sản</h3>
+                <span class="underline underline-blue2"></span>
+                <p>Quản lý hồ sơ dự án, hợp đồng, pháp lý và tài liệu liên quan bất động sản.</p>
+            </div>
+            <div class="check-badge check-blue2"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+        <div class="a-card">
+            <div class="a-top">
+                <div class="icon-circle icon-yellow"><i class="fa-solid fa-chart-line"></i></div>
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" alt="Chứng khoán">
+            </div>
+            <div class="a-content">
+                <h3>Chứng khoán</h3>
+                <span class="underline underline-yellow"></span>
+                <p>Quản lý hồ sơ khách hàng, báo cáo, tài liệu phân tích và giao dịch.</p>
+            </div>
+            <div class="check-badge check-yellow"><i class="fa-solid fa-check"></i></div>
+        </div>
+
+    </div>
+
+    <!-- Bottom feature strip -->
+    <div class="audience-features">
+        <div class="af-item">
+            <div class="af-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="af-text">
+                <h4>Tra cứu nhanh chóng</h4>
+                <p>Tìm kiếm thông tin tức thì, tiết kiệm thời gian.</p>
+            </div>
+        </div>
+        <div class="af-item">
+            <div class="af-icon"><i class="fa-solid fa-server"></i></div>
+            <div class="af-text">
+                <h4>Quản lý tập trung</h4>
+                <p>Lưu trữ tập trung, dễ dàng quản lý và khai thác.</p>
+            </div>
+        </div>
+        <div class="af-item">
+            <div class="af-icon"><i class="fa-solid fa-lock"></i></div>
+            <div class="af-text">
+                <h4>Bảo mật an toàn</h4>
+                <p>Kiểm soát quyền truy cập, bảo vệ dữ liệu tối đa.</p>
+            </div>
+        </div>
+        <div class="af-item">
+            <div class="af-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+            <div class="af-text">
+                <h4>Tối ưu hiệu quả</h4>
+                <p>Nâng cao hiệu suất làm việc, giảm chi phí và vận hành.</p>
+            </div>
+        </div>
+    </div>
+</section>
         <!-- Section 5: Strategy -->
         <section class="strategy container">
             <div class="strategy-content">
