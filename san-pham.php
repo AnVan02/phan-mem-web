@@ -32,6 +32,14 @@
     require_once 'admin/config/config.php';
     include 'header.php';
 
+    // Danh sách mã sản phẩm khách hàng đang đăng nhập đã yêu thích (1 truy vấn, dùng chung cho mọi thẻ sản phẩm)
+    $wishlisted_ids = [];
+    if (isset($_SESSION['khach_hang_id'])) {
+        $wl_stmt = $pdo->prepare("SELECT ma_san_pham FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh");
+        $wl_stmt->execute([':kh' => $_SESSION['khach_hang_id']]);
+        $wishlisted_ids = array_map('intval', $wl_stmt->fetchAll(PDO::FETCH_COLUMN));
+    }
+
     $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
 
     // Query string dùng chung để build lại link (giữ nguyên từ khóa tìm kiếm)
@@ -81,7 +89,6 @@
             }
         }
     }
-
     // Danh sách dung lượng để làm bộ lọc, kèm số lượng sản phẩm đang active mỗi dung lượng
     $dung_luong_stmt = $pdo->query("SELECT dl.ma_dung_luong, dl.ten_dung_luong, COUNT(*) AS so_luong
         FROM san_pham sp
@@ -138,6 +145,8 @@
     // Render 1 thẻ sản phẩm
     function render_the_card($sp)
     {
+        global $wishlisted_ids;
+        $is_wishlisted = in_array((int) $sp['ma_san_pham'], $wishlisted_ids, true);
         $gia_ban      = (int) $sp['gia_ban'];
         $giam_gia     = (int) $sp['giam_gia'];
         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
@@ -179,25 +188,27 @@
             </div>
             <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
 
-            <?php
-                $fields = [
-                    'sku' => 'SKU',
-                    'loai_san_pham' => 'Loại sản phẩm',
-                    'chuan_ket_noi' => 'Chuẩn kết nối',
-                    'toc_do_doc' => 'Tốc độ đọc',
-                    'toc_do_ghi' => 'Tốc độ ghi',
-                    'kich_thuoc' => 'Kích thước',
-                    'trong_luong' => 'Trọng lượng',
-                    'bao_hanh' => 'Bảo hành'
-                ];
+          <?php
+            $fields = [
+                'loai_san_pham' => ['label' => 'Loại sản phẩm',  'icon' => 'fa-box-open'],
+                'chuan_ket_noi' => ['label' => 'Chuẩn kết nối',  'icon' => 'fa-plug'],
+                'toc_do_doc'    => ['label' => 'Tốc độ đọc',     'icon' => 'fa-gauge-high'],
+                'toc_do_ghi'    => ['label' => 'Tốc độ ghi',     'icon' => 'fa-gauge'],
+                'kich_thuoc'    => ['label' => 'Kích thước',     'icon' => 'fa-ruler-combined'],
+                'trong_luong'   => ['label' => 'Trọng lượng',    'icon' => 'fa-weight-scale'],
+                'bao_hanh'      => ['label' => 'Bảo hành',       'icon' => 'fa-shield-halved'],
+            ];
             ?>
 
             <?php if (!empty($fields) && !empty($sp)): ?>
-            <table class="table table-bordered product-desc">
-                <?php foreach ($fields as $key => $label): ?>
+            <table class="product-desc">
+                <?php foreach ($fields as $key => $f): ?>
                 <?php if (!empty($sp[$key])): ?>
                 <tr>
-                    <th><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></th>
+                    <th>
+                        <i class="fa-solid <?= $f['icon'] ?>"></i>
+                        <span><?= htmlspecialchars($f['label'], ENT_QUOTES, 'UTF-8') ?></span>
+                    </th>
                     <td><?= htmlspecialchars($sp[$key], ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>
                 <?php endif; ?>
@@ -207,12 +218,25 @@
             <div class="product-price-row">
                 <?php if ($gia_ban <= 0): ?>
                 <span class="product-price product-price-contact">Liên hệ</span>
-                <?php else: ?>
-                <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
-                <?php if ($giam_gia > 0): ?>
-                <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
-                <?php endif; ?>
-                <?php endif; ?>
+                <div class="product-card-actions">
+                    <button type="button" class="btn-wishlist <?php echo $is_wishlisted ? 'active' : ''; ?>"
+                        data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>" aria-label="Yêu thích"
+                        title="Yêu thích">
+                        <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
+                    </button>
+                    <button type="button" class="btn-share-product" data-share-product
+                        data-share-url="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>"
+                        data-share-title="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" aria-label="Chia sẻ"
+                        title="Chia sẻ">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </div>
+                    <?php else: ?>
+                    <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
+                    <?php if ($giam_gia > 0): ?>
+                    <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
+                    <?php endif; ?>
+                    <?php endif; ?>
             </div>
 
             <?php if ($gia_ban > 0): ?>
@@ -352,7 +376,6 @@
                                     Tất cả
                                 </a>
                             </li>
-
                             <?php 
                 // CẤU HÌNH: Số lượng hiển thị ban đầu
                 $limit = 5; 
@@ -445,7 +468,7 @@
                         <h3 class="sidebar-title">Hỗ trợ khách hàng</h3>
                         <p><strong>Tư vấn bán hàng</strong><br><a href="tel:0283929377    0">(028) 3929 3770</a></p>
                         <p><strong>Kỹ thuật - Bảo hành</strong><br><a href="tel:02839260996">(028) 3926 0996</a></p>
-                        <p><strong>Thời gian làm việc</strong><br>8:00 - 17:30 (T2 - T7)</p>
+                        <p><strong>Thời gian làm việc</strong><br><a href="">8:00 - 17:30 (T2 - T7)</a></p>
                     </div>
 
 

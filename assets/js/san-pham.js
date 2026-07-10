@@ -82,4 +82,69 @@ document.addEventListener("DOMContentLoaded", function () {
             viewTarget.classList.toggle("list-view", btn.dataset.view === "list");
         });
     }
+
+    // ==========================
+    // 4. Yêu thích / Chia sẻ trên thẻ sản phẩm (danh sách)
+    // ==========================
+    document.addEventListener("click", function (e) {
+        const btnWishlist = e.target.closest(".btn-wishlist");
+        if (btnWishlist) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const maSp = btnWishlist.dataset.maSanPham;
+            const formData = new FormData();
+            formData.append("action", "toggle");
+            formData.append("ma_san_pham", maSp);
+
+            fetch("yeu-thich-ajax.php", { method: "POST", body: formData })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.success) {
+                        const icon = btnWishlist.querySelector("i");
+                        if (data.status === "added") {
+                            btnWishlist.classList.add("active");
+                            icon.classList.remove("fa-regular");
+                            icon.classList.add("fa-solid");
+                        } else {
+                            btnWishlist.classList.remove("active");
+                            icon.classList.remove("fa-solid");
+                            icon.classList.add("fa-regular");
+                        }
+                    } else {
+                        alert(data.message);
+                        if (data.message.includes("đăng nhập")) {
+                            window.location.href = "tai-khoan.php";
+                        }
+                    }
+                })
+                .catch((err) => console.error("Lỗi khi thêm yêu thích:", err));
+            return;
+        }
+
+        const btnShare = e.target.closest("[data-share-product]");
+        if (btnShare) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const url = new URL(btnShare.dataset.shareUrl || window.location.href, window.location.href).href;
+            const shareData = {
+                title: btnShare.dataset.shareTitle || document.title,
+                url: url,
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => {
+                    /* người dùng huỷ chia sẻ */
+                });
+            } else if (navigator.clipboard) {
+                navigator.clipboard
+                    .writeText(shareData.url)
+                    .then(() => alert("Đã sao chép liên kết sản phẩm!"))
+                    .catch(() => alert(shareData.url));
+            } else {
+                alert(shareData.url);
+            }
+        }
+    });
 });

@@ -1,6 +1,14 @@
 <?php
 require_once 'admin/config/config.php';
 
+// Danh sách mã sản phẩm khách hàng đang đăng nhập đã yêu thích (1 truy vấn, dùng chung cho mọi thẻ sản phẩm)
+$wishlisted_ids = [];
+if (isset($_SESSION['khach_hang_id'])) {
+    $wl_stmt = $pdo->prepare("SELECT ma_san_pham FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh");
+    $wl_stmt->execute([':kh' => $_SESSION['khach_hang_id']]);
+    $wishlisted_ids = array_map('intval', $wl_stmt->fetchAll(PDO::FETCH_COLUMN));
+}
+
 // Nhận danh mục / dòng qua tên (slug) thay vì mã số, vd: ?dm=ram&dl=agi-ssd
 $dm_slug      = isset($_GET['dm']) ? trim($_GET['dm']) : '';
 $ma_dm_filter = 0;
@@ -77,6 +85,8 @@ if ($dl_slug !== '') {
     // Render 1 thẻ sản phẩm
     function render_the_card($sp)
     {
+        global $wishlisted_ids;
+        $is_wishlisted = in_array((int) $sp['ma_san_pham'], $wishlisted_ids, true);
         $gia_ban      = (int) $sp['gia_ban'];
         $giam_gia     = (int) $sp['giam_gia'];
         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
@@ -111,26 +121,72 @@ if ($dl_slug !== '') {
         <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
 
         <?php
+                    $fields = [
+                        'loai_san_pham' => ['label' => 'Loại sản phẩm',  'icon' => 'fa-box-open'],
+                        'chuan_ket_noi' => ['label' => 'Chuẩn kết nối',  'icon' => 'fa-plug'],
+                        'toc_do_doc'    => ['label' => 'Tốc độ đọc',     'icon' => 'fa-gauge-high'],
+                        'toc_do_ghi'    => ['label' => 'Tốc độ ghi',     'icon' => 'fa-gauge'],
+                        'kich_thuoc'    => ['label' => 'Kích thước',     'icon' => 'fa-ruler-combined'],
+                        'trong_luong'   => ['label' => 'Trọng lượng',    'icon' => 'fa-weight-scale'],
+                        'bao_hanh'      => ['label' => 'Bảo hành',       'icon' => 'fa-shield-halved'],
+                    ];
+                    $co_thong_so = false;
+                    foreach ($fields as $key => $f) {
+                        if (!empty($sp[$key])) {
+                            $co_thong_so = true;
+                            break;
+                        }
+                    }
+                    ?>
+        <?php if ($co_thong_so): ?>
+        <table class="product-desc">
+            <?php foreach ($fields as $key => $f): ?>
+            <?php if (!empty($sp[$key])): ?>
+            <tr>
+                <th>
+                    <i class="fa-solid <?= $f['icon'] ?>"></i>
+                    <span><?= htmlspecialchars($f['label'], ENT_QUOTES, 'UTF-8') ?></span>
+                </th>
+                <td><?= htmlspecialchars($sp[$key], ENT_QUOTES, 'UTF-8') ?></td>
+            </tr>
+            <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+        <?php else:
                     $mo_ta_ngan = trim(strip_tags($sp['mo_ta']));
                     if (mb_strlen($mo_ta_ngan) > 150) {
                         $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
                     }
                     ?>
         <?php if ($mo_ta_ngan !== ''): ?>
-        <p class="product-desc"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
+        <p class="product-desc-text"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
+        <?php endif; ?>
         <?php endif; ?>
 
 
         <div class="product-price-row">
             <?php if ($gia_ban <= 0): ?>
-            <span class="product-price product-price-contact">Liên hệ</span>
-            <?php else: ?>
-            <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
-            <?php if ($giam_gia > 0): ?>
-            <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
-            <?php endif; ?>
-            <?php endif; ?>
-        </div>
+                <span class="product-price product-price-contact">Liên hệ</span>
+                <div class="product-card-actions">
+                    <button type="button" class="btn-wishlist <?php echo $is_wishlisted ? 'active' : ''; ?>"
+                        data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>" aria-label="Yêu thích"
+                        title="Yêu thích">
+                        <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
+                    </button>
+                    <button type="button" class="btn-share-product" data-share-product
+                        data-share-url="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>"
+                        data-share-title="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" aria-label="Chia sẻ"
+                        title="Chia sẻ">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </div>
+                    <?php else: ?>
+                    <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
+                    <?php if ($giam_gia > 0): ?>
+                    <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
+                    <?php endif; ?>
+                    <?php endif; ?>
+            </div>
         <!-- <div class="product-rating">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div> -->
@@ -767,7 +823,7 @@ if ($dl_slug !== '') {
                 </div>
             </div>
             <div class="needs-card-header">
-                <span class="needs-card-title"><i class="fa-solid fa-sliders"></i>Vì sao nên chọn
+                <span class="needs-card-title"><i class="fa-solid fa-sliders"></i>Vì sao nên chọn 
                     <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></span>
             </div>
             <div class="info-list">

@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="/dang-ky-pc.php">Đăng ký PC</a></li>
+                <li><a href="bao-hanh.php">Bảo hành </a></li>
                 <!-- Mega menu -->
                 <li class="has-megamenu">
                     <a href="san-pham.php">

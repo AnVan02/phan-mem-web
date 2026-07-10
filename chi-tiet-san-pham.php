@@ -269,11 +269,10 @@
                             <div class="product-header-top-actions">
                                 <button type="button" class="btn-wishlist <?php echo $is_wishlisted ? 'active' : ''; ?>"
                                     data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>">
-                                    <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i> Yêu
-                                    thích
+                                    <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
                                 </button>
                                 <button type="button" class="btn-share-product" id="btnShareProduct">
-                                    <i class="fa-solid fa-share-nodes"></i> Chia sẻ
+                                    <i class="fa-solid fa-share-nodes"></i>
                                 </button>
                             </div>
                         </div>
