@@ -1,34 +1,10 @@
 
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/bao-hanh.css">
-    <script src="assets/js/bao-hanh.js" defer></script>
-
-    <!--
-        Ghi chú: khối CSS bên dưới dành riêng cho sidebar "Danh mục sản phẩm" vừa thêm.
-        Bạn có thể copy phần này qua assets/css/san-pham.css rồi xoá thẻ <style> này đi,
-        và chỉnh lại màu sắc (--vs-primary...) cho khớp theme hiện tại của site.
-    -->
-</head>
-
-<body>
+<?php
+$page_title       = 'Sản phẩm - Viết Sơn Achieva';
+$extra_css        = ['assets/css/bao-hanh.css'];
+$post_css_scripts = ['assets/js/bao-hanh.js'];
+require 'head.php';
+?>
     <?php
     require_once 'admin/config/config.php';
     include 'header.php';
@@ -270,18 +246,19 @@ function parseVnDate($str)
                     <div class="feature-text">
                         <h4>Hotline</h4>
                         <p class="feature-highlight">1900 1234</p>
-                        <p class="feature-sub">(8:00 - 18:00, T2 - CN)</p>
+                        <p class="feature-sub">(8:00 - 17:30, T2 - T7)</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
                     <div class="feature-text">
                         <h4>Website</h4>
-                        <p class="feature-highlight"><a href="https://www.vietson.com.vn"
-                                target="_blank">www.vietson.com.vn</a></p>
+                        <p class="feature-highlight"><a href="https://www.vietsontdc.com/"
+                                target="_blank">www.vietsontdc.com</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php require 'footer.php' ?>

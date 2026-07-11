@@ -51,6 +51,7 @@
                         Linh kiện máy tính
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
+                    
                     <div class="megamenu">
                         <div class="megamenu-inner">
                             <div class="megamenu-content-group">
@@ -108,6 +109,10 @@
 
                 <li><a href="/ung-ho.php">Ủng hộ</a></li>
             </ul>
+
+            <a href="tai-khoan.php" class="main-nav-account">
+                <i class="fa-solid fa-circle-user"></i> Tài khoản
+            </a>
         </nav>
 
         <div class="header-icons">

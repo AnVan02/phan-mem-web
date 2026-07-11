@@ -7,30 +7,12 @@
     $article_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $linh_list = $article_categories;
+
+    $page_title       = 'Tin tức & Blog - Viết Sơn Achieva';
+    $extra_css        = ['assets/css/tin-tuc-moi.css'];
+    $post_css_scripts = ['assets/js/tin-tuc-moi.js'];
+    require 'head.php';
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tin tức & Blog - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg"/>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/tin-tuc-moi.css">
-    <script src="assets/js/tin-tuc-moi.js" defer></script>
-</head>
-
-<body>
 <?php include 'header.php'; ?>
 
     <section class="news-page">
@@ -57,7 +39,7 @@
             <?php else: ?>
                 <div class="news-grid">
                     <?php foreach ($article_list as $a):
-                        $mo_ta_ngan = trim(strip_tags($a['article_summary']));
+                        $mo_ta_ngan = trim(strip_tags(html_entity_decode($a['article_summary'], ENT_QUOTES, 'UTF-8')));
                         if (mb_strlen($mo_ta_ngan) > 150) {
                             $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
                         }
@@ -68,7 +50,8 @@
 
                         <a class="news-card" data-linh="<?php echo htmlspecialchars($a['article_linh']); ?>" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $slug; ?>">
                             <div class="news-media">
-                                <img src="<?php echo htmlspecialchars($anh); ?>" alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy">
+                                <img src="<?php echo htmlspecialchars($anh); ?>" alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy"
+                                    onerror="this.onerror=null;this.src='assets/image/pc.webp';">
                             </div>
                             <div class="news-meta">
                                 <?php if (!empty($a['article_linh'])): ?>

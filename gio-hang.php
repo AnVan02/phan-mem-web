@@ -141,29 +141,11 @@ foreach ($gio_hang_items as &$item) {
     $tong_tien_gio_hang    += $item['thanh_tien'];
 }
 unset($item);
+
+$page_title = 'Giỏ hàng - Viết Sơn Achieva';
+$extra_css  = ['assets/css/gio-hang.css'];
+require 'head.php';
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hàng - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/gio-hang.css">
-</head>
-
-<body>
     <?php include 'header.php'; ?>
 
     <section class="cart-page">

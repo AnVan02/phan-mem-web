@@ -1,6 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // ==========================
+    // 0. Bộ lọc trên di động (ẩn/hiện sidebar khi bấm nút "Bộ lọc")
+    // ==========================
+    const filterToggleBtn = document.querySelector("[data-mobile-filter-toggle]");
+    if (filterToggleBtn) {
+        const targetEl = document.querySelector(filterToggleBtn.dataset.mobileFilterToggle);
+        if (targetEl) {
+            filterToggleBtn.addEventListener("click", function () {
+                const isOpen = targetEl.classList.toggle("is-open");
+                filterToggleBtn.classList.toggle("is-active", isOpen);
+                filterToggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+        }
+    }
+
+    // ==========================
     // 1. Đếm ngược khuyến mãi
     // ==========================
     const countdownEls = document.querySelectorAll("[data-countdown-endofday]");

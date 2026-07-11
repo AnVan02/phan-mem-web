@@ -26,33 +26,9 @@
         $base_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
         $canonical_url = rtrim($base_url, '/') . '/chi-tiet-san-pham.php?id=' . (int) $sp['ma_san_pham'] . '&ten-san-pham=' . tao_slug($sp['ten_san_pham']);
     }
+    $extra_css = ['assets/css/san-pham.css', 'assets/css/chi-tiet-san-pham.css'];
+    require 'head.php';
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_title; ?></title>
-    <?php if ($sp): ?>
-    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url); ?>"><?php endif; ?>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/san-pham.css">
-    <link rel="stylesheet" href="assets/css/chi-tiet-san-pham.css">
-</head>
-
-<body>
     <?php include 'header.php'; ?>
 
     <?php if (!$sp): ?>
@@ -186,6 +162,7 @@
                         </div>
                         <?php endif; ?>
                     </div>
+
                     <?php if (count($related_list) > 0): ?>
                     <div class="product-related-inline">
                         <div class="related-inline-header">

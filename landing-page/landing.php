@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="icon" href="images/rosa-icon.png" type="image/png">
 
@@ -361,8 +362,8 @@
                         <li><i class="fa-solid fa-check"></i>Đảm bảo tính chính xác</li>
                         <li><i class="fa-solid fa-check"></i>Tuân thủ quy định</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2942/2942076.png"
-                        alt="Cơ quan hành chính">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2942/2942076.png"
+                        alt="Cơ quan hành chính"> -->
                 </div>
 
                 <div class="a-card">
@@ -378,8 +379,8 @@
                         <li><i class="fa-solid fa-check"></i>Chia sẻ và cộng tác</li>
                         <li><i class="fa-solid fa-check"></i>Bảo mật tuyệt đối</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/3068/3068757.png"
-                        alt="Công ty luật">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/3068/3068757.png"
+                        alt="Công ty luật"> -->
                 </div>
 
                 <div class="a-card">
@@ -395,8 +396,8 @@
                         <li><i class="fa-solid fa-check"></i>Bảo mật thông tin bệnh nhân</li>
                         <li><i class="fa-solid fa-check"></i>Truy xuất nhanh chóng</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png"
-                        alt="Bệnh viện">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png"
+                        alt="Bệnh viện"> -->
                 </div>
 
                 <div class="a-card">
@@ -412,8 +413,8 @@
                         <li><i class="fa-solid fa-check"></i>Tuân thủ quy định tài chính</li>
                         <li><i class="fa-solid fa-check"></i>Tra cứu tức thì</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png"
-                        alt="Ngân hàng">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png"
+                        alt="Ngân hàng"> -->
                 </div>
 
                 <div class="a-card">
@@ -429,8 +430,8 @@
                         <li><i class="fa-solid fa-check"></i>Dễ dàng truy xuất</li>
                         <li><i class="fa-solid fa-check"></i>Tối ưu hiệu suất</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png"
-                        alt="Doanh nghiệp Logistics">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png"
+                        alt="Doanh nghiệp Logistics"> -->
                 </div>
 
                 <div class="a-card">
@@ -446,8 +447,8 @@
                         <li><i class="fa-solid fa-check"></i>Hồ sơ chất lượng rõ ràng</li>
                         <li><i class="fa-solid fa-check"></i>Truy xuất nhanh chóng</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png"
-                        alt="Doanh nghiệp sản xuất">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png"
+                        alt="Doanh nghiệp sản xuất"> -->
                 </div>
 
                 <div class="a-card">
@@ -463,8 +464,8 @@
                         <li><i class="fa-solid fa-check"></i>Tra cứu thông tin dễ dàng</li>
                         <li><i class="fa-solid fa-check"></i>Vận hành hiệu quả</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1670/1670080.png"
-                        alt="Trường học">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1670/1670080.png"
+                        alt="Trường học"> -->
                 </div>
 
                 <div class="a-card">
@@ -480,8 +481,8 @@
                         <li><i class="fa-solid fa-check"></i>Tra cứu giao dịch nhanh</li>
                         <li><i class="fa-solid fa-check"></i>Tuân thủ quy định tài chính</li>
                     </ul>
-                    <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png"
-                        alt="Chứng khoán">
+                    <!-- <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png"
+                        alt="Chứng khoán"> -->
                 </div>
 
             </div>

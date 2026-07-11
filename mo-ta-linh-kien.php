@@ -92,16 +92,23 @@ if ($dl_slug !== '') {
         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
         $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
         $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
+        $hinh_anh_hover = !empty($anh_list_sp[1]) ? $anh_list_sp[1] : '';
         $slug         = tao_slug($sp['ten_san_pham']);
         $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
         ?>
-<a class="product-card"
+<a class="product-card<?php echo $hinh_anh_hover !== '' ? ' has-hover-image' : ''; ?>"
     href="chi-tiet-san-pham.php?id=<?php echo (int)$sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>">
     <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
     <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
     <div class="product-media">
-        <img src="<?php echo htmlspecialchars($hinh_anh); ?>" alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>"
-            loading="lazy" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+        <img class="is-primary" src="<?php echo htmlspecialchars($hinh_anh); ?>"
+            alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
+            onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+        <?php if ($hinh_anh_hover !== ''): ?>
+        <img class="is-secondary" src="<?php echo htmlspecialchars($hinh_anh_hover); ?>"
+            alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
+            onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+        <?php endif; ?>
     </div>
     <div class="product-body">
         <?php if ($giam_gia > 0): ?>
@@ -121,46 +128,13 @@ if ($dl_slug !== '') {
         <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
 
         <?php
-                    $fields = [
-                        'loai_san_pham' => ['label' => 'Loại sản phẩm',  'icon' => 'fa-box-open'],
-                        'chuan_ket_noi' => ['label' => 'Chuẩn kết nối',  'icon' => 'fa-plug'],
-                        'toc_do_doc'    => ['label' => 'Tốc độ đọc',     'icon' => 'fa-gauge-high'],
-                        'toc_do_ghi'    => ['label' => 'Tốc độ ghi',     'icon' => 'fa-gauge'],
-                        'kich_thuoc'    => ['label' => 'Kích thước',     'icon' => 'fa-ruler-combined'],
-                        'trong_luong'   => ['label' => 'Trọng lượng',    'icon' => 'fa-weight-scale'],
-                        'bao_hanh'      => ['label' => 'Bảo hành',       'icon' => 'fa-shield-halved'],
-                    ];
-                    $co_thong_so = false;
-                    foreach ($fields as $key => $f) {
-                        if (!empty($sp[$key])) {
-                            $co_thong_so = true;
-                            break;
-                        }
-                    }
-                    ?>
-        <?php if ($co_thong_so): ?>
-        <table class="product-desc">
-            <?php foreach ($fields as $key => $f): ?>
-            <?php if (!empty($sp[$key])): ?>
-            <tr>
-                <th>
-                    <i class="fa-solid <?= $f['icon'] ?>"></i>
-                    <span><?= htmlspecialchars($f['label'], ENT_QUOTES, 'UTF-8') ?></span>
-                </th>
-                <td><?= htmlspecialchars($sp[$key], ENT_QUOTES, 'UTF-8') ?></td>
-            </tr>
-            <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-        <?php else:
-                    $mo_ta_ngan = trim(strip_tags($sp['mo_ta']));
+                    $mo_ta_ngan = trim(strip_tags(html_entity_decode($sp['mo_ta'], ENT_QUOTES, 'UTF-8')));
                     if (mb_strlen($mo_ta_ngan) > 150) {
                         $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
                     }
                     ?>
         <?php if ($mo_ta_ngan !== ''): ?>
         <p class="product-desc-text"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
-        <?php endif; ?>
         <?php endif; ?>
 
 
@@ -390,38 +364,18 @@ if ($dl_slug !== '') {
 
 
     
+    $page_title       = 'Danh mục sản phẩm - Viết Sơn Achieva';
+    $extra_css        = ['assets/css/mo-ta-linh-kien.css'];
+    $post_css_scripts = ['assets/js/san-pham.js'];
+    require 'head.php';
     ?>
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh mục sản phẩm - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/mo-ta-linh-kien.css">
-    <script src="assets/js/san-pham.js" defer></script>
-</head>
-
-<body>
     <?php include 'header.php'; ?>
 
     <section class="product-page">
         <div class="container">
             <div class="category-hero">
                 <div class="category-breadcrumb">
-                    <a href="index.php">Trang chủ</a>
+                    <a href="/index.php">Trang chủ</a>
                     <span class="crumb-sep">/</span>
                     <a href="san-pham.php">Sản phẩm</a>
                     <span class="crumb-sep">/</span>
@@ -482,11 +436,11 @@ if ($dl_slug !== '') {
 
                     <div class="stat-bar">
                         <a href="#don-hang-toi" class="stat-item">
-                            <div class="stat-icon" style="background:#fee2e2; color:#dc2626;"><i
+                            <div class="stat-icon" style="background:#eaf1fb; color:#1e3c72;"><i
                                     class="fa-solid fa-bag-shopping"></i></div>
                             <div>
                                 <div class="stat-label">Hàng chính hãng </div>
-                                <span class="stat-link" style="color:#dc2626;">100% sản phẩm chính hãng</span>
+                                <span class="stat-link" style="color:#1e3c72;">100% sản phẩm chính hãng</span>
                             </div>
                         </a>
                         <a href="#yeu-thich" class="stat-item">
@@ -519,8 +473,13 @@ if ($dl_slug !== '') {
                 </div>
             </section>
 
+            <button type="button" class="mobile-filter-toggle" data-mobile-filter-toggle="#categorySidebar"
+                aria-expanded="false">
+                <i class="fa-solid fa-sliders"></i> Bộ lọc &amp; Danh mục
+            </button>
+
             <div class="category-layout">
-                <aside class="category-sidebar">
+                <aside class="category-sidebar" id="categorySidebar">
                     <?php if (!empty($dong_groups)): ?>
                     <div class="sidebar-filter-group">
                         <h3 class="sidebar-filter-title"><i class="fa-solid fa-list"></i> Danh mục sản phẩm</h3>
@@ -789,7 +748,7 @@ if ($dl_slug !== '') {
                                     $art_ngay   = date('d/m/Y', strtotime($a['article_date']));
                                     $art_slug   = tao_slug($a['article_title']);
 
-                                    $mo_ta_goc  = trim(strip_tags($a['article_content'] ?? ''));
+                                    $mo_ta_goc  = trim(strip_tags(html_entity_decode($a['article_content'] ?? '', ENT_QUOTES, 'UTF-8')));
                                     if (mb_strlen($mo_ta_goc) > 150) {
                                         $mo_ta_ngan = mb_substr($mo_ta_goc, 0, 150);
                                         $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, mb_strrpos($mo_ta_ngan, ' ')) . '...';
@@ -822,92 +781,95 @@ if ($dl_slug !== '') {
 
                 </div>
             </div>
-            <div class="needs-card-header">
-                <span class="needs-card-title"><i class="fa-solid fa-sliders"></i>Vì sao nên chọn 
-                    <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></span>
-            </div>
-            <div class="info-list">
-                <!-- Dòng 1 -->
-                <div class="info-icon">
-                    <i class="fa-solid fa-gauge-high icon-perform"></i>
-                    <div class="info-content">
-                        <div class="info-label">Hiệu suất cao</div>
-                        <div class="info-text">Tốc độ đọc ghi vượt trội mọi tác vụ</div>
-                    </div>
+            <div class="needs-card">
+                <div class="needs-card-header">
+                    <span class="needs-card-title"><i class="fa-solid fa-sliders"></i>Vì sao nên chọn
+                        <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></span>
                 </div>
+                <div class="info-list">
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <i class="fa-solid fa-gauge-high icon-perform"></i>
+                            <div class="info-content">
+                                <div class="info-label">Hiệu suất cao</div>
+                                <div class="info-text">Tốc độ đọc ghi vượt trội mọi tác vụ</div>
+                            </div>
+                        </div>
 
-                <div class="info-icon">
-                    <i class="fa-solid fa-shield-halved icon-durable"></i>
-                    <div class="info-content">
-                        <div class="info-label">Bền bỉ đáng tin cậy</div>
-                        <div class="info-text">MTBF lên đến 2 triệu giờ hoạt động ổn định</div>
+                        <div class="info-icon">
+                            <i class="fa-solid fa-shield-halved icon-durable"></i>
+                            <div class="info-content">
+                                <div class="info-label">Bền bỉ đáng tin cậy</div>
+                                <div class="info-text">MTBF lên đến 2 triệu giờ hoạt động ổn định</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-microchip icon-tech"></i>
+                            <div class="info-content">
+                                <div class="info-label">Công nghệ hiện đại</div>
+                                <div class="info-text">Ứng dụng công nghệ 3D NAND mới nhất</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-computer icon-tech"></i>
+                            <div class="info-content">
+                                <div class="info-label">Tương thích rộng rãi</div>
+                                <div class="info-text">Hỗ trợ Windows, macOS, Linux</div>
+                            </div>
+                        </div>
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-leaf icon-save"></i>
+                            <div class="info-content">
+                                <div class="info-label">Tiết kiệm năng lượng</div>
+                                <div class="info-text">Hiệu quả tối ưu, giảm nhiệt tiết kiệm điện năng</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="info-icon">
-                    <i class="fa-solid fa-microchip icon-tech"></i>
-                    <div class="info-content">
-                        <div class="info-label">Công nghệ hiện đại</div>
-                        <div class="info-text">Ứng dụng công nghệ 3D NAND mới nhất</div>
-                    </div>
-                </div>
+                    <div class="info-row info-row-secondary">
+                        <div class="info-icon">
+                            <i class="fa-solid fa-certificate icon-authen"></i>
+                            <div class="info-content">
+                                <div class="info-label">Sản phẩm chính hãng</div>
+                                <div class="info-text">100% chính hãng
+                                    <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></div>
+                            </div>
+                        </div>
 
-                <div class="info-icon">
-                    <i class="fa-solid fa-computer icon-tech"></i>
-                    <div class="info-content">
-                        <div class="info-label">Tương thích rộng rãi</div>
-                        <div class="info-text">Hỗ trợ Windows, macOS, Linux</div>
-                    </div>
-                </div>
+                        <div class="info-icon">
+                            <i class="fa-solid fa-arrows-rotate icon-warranty"></i>
+                            <div class="info-content">
+                                <div class="info-label">Đổi trả 30 ngày</div>
+                                <div class="info-text">Nếu sản phẩm lỗi do nhà sản xuất</div>
+                            </div>
+                        </div>
 
-                <div class="info-icon">
-                    <i class="fa-solid fa-leaf icon-save"></i>
-                    <div class="info-content">
-                        <div class="info-label">Tiết kiệm năng lượng</div>
-                        <div class="info-text">Hiệu quả tối ưu, giảm nhiệt tiết kiệm điện năng</div>
-                    </div>
-                </div>
+                        <div class="info-icon">
+                            <i class="fa-solid fa-file-contract icon-warranty"></i>
+                            <div class="info-content">
+                                <div class="info-label">Bảo hành chính hãng</div>
+                                <div class="info-text">Từ 3 đến 5 năm toàn quốc</div>
+                            </div>
+                        </div>
 
-                <!-- Dòng 2 -->
-                <div class="info-icon">
-                    <i class="fa-solid fa-certificate icon-authen"></i>
-                    <div class="info-content">
-                        <div class="info-label">Sản phẩm chính hãng</div>
-                        <div class="info-text">100% chính hãng
-                            <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></div>
-                    </div>
-                </div>
+                        <div class="info-icon">
+                            <i class="fa-solid fa-truck-fast icon-delivery"></i>
+                            <div class="info-content">
+                                <div class="info-label">Giao hàng toàn quốc</div>
+                                <div class="info-text">Kiểm tra trước khi thanh toán</div>
+                            </div>
+                        </div>
 
-                <div class="info-icon">
-                    <i class="fa-solid fa-arrows-rotate icon-warranty"></i>
-                    <div class="info-content">
-                        <div class="info-label">Đổi trả 30 ngày</div>
-                        <div class="info-text">Nếu sản phẩm lỗi do nhà sản xuất</div>
-                    </div>
-                </div>
-
-                <div class="info-icon">
-                    <i class="fa-solid fa-file-contract icon-warranty"></i>
-                    <div class="info-content">
-                        <div class="info-label">Bảo hành chính hãng</div>
-                        <div class="info-text">Từ 3 đến 5 năm toàn quốc</div>
-                    </div>
-                </div>
-
-                <div class="info-icon">
-                    <i class="fa-solid fa-truck-fast icon-delivery"></i>
-                    <div class="info-content">
-                        <div class="info-label">Giao hàng toàn quốc</div>
-                        <div class="info-text">Kiểm tra trước khi thanh toán</div>
-                    </div>
-                </div>
-
-
-                <div class="info-icon">
-                    <i class="fa-solid fa-headset icon-support"></i>
-                    <div class="info-content">
-                        <div class="info-label">Hỗ trợ 24/7</div>
-                        <div class="info-text">Tư vấn kỹ thuật tận tâm</div>
+                        <div class="info-icon">
+                            <i class="fa-solid fa-headset icon-support"></i>
+                            <div class="info-content">
+                                <div class="info-label">Hỗ trợ 24/7</div>
+                                <div class="info-text">Tư vấn kỹ thuật tận tâm</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -24,6 +24,7 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 │   └── index.php
 ├── assets/                 css, js, image, uploads dùng chung cho site
 ├── database/                Các file SQL
+├── head.php                  Khối <head> (meta, title, CSS/JS chung) dùng chung, các trang `require` thay vì lặp lại
 ├── header.php / footer.php  Layout dùng chung cho trang người dùng
 ├── index.php                 Trang chủ
 ├── san-pham.php               Danh sách sản phẩm
@@ -39,6 +40,18 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 ├── thuong-hieu.php / danh-muc.php          Trang thương hiệu / danh mục
 └── mailer.php                              Gửi email (đơn hàng, liên hệ...)
 ```
+
+## Quy ước dùng head.php
+
+Các trang phía người dùng không tự viết `<!DOCTYPE html>...<head>...<body>` nữa, mà set vài biến rồi `require 'head.php';`:
+
+```php
+$page_title = 'Tiêu đề trang - Viết Sơn Achieva';
+$extra_css  = ['assets/css/xxx.css'];   // CSS riêng của trang
+require 'head.php';
+```
+
+Biến tuỳ chọn khác: `$canonical_url`, `$html_lang` (mặc định `vi`), `$meta_robots`, `$pre_css_scripts` (script không defer, render trước CSS), `$post_css_scripts` (script defer, render sau CSS).
 
 ## Chức năng đã hoàn thành
 

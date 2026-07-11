@@ -55,7 +55,7 @@
 }
 
 .card-title i {
-    color: #DC2626;
+    color: #1e3c72;
     font-size: 16px;
 }
 
@@ -100,7 +100,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #DC2626;
+    border-color: #1e3c72;
     background: #fff;
 }
 
@@ -114,8 +114,8 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #DC2626;
-    color: #fff;
+    background: #1e3c72;
+    color: #ffd700;
     border: none;
     border-radius: 999px;
     padding: 14px 26px;
@@ -127,7 +127,7 @@
 }
 
 .btn-submit:hover {
-    background: #6d28d9;
+    background: #2a5298;
     transform: translateY(-1px);
 }
 
@@ -160,7 +160,7 @@
     height: 44px;
     border-radius: 12px;
     background: #f3ecfe;
-    color: #DC2626;
+    color: #1e3c72;
     font-size: 16px;
 }
 
@@ -253,7 +253,7 @@
 }
 
 .auth-tab-btn.active {
-    color: #DC2626;
+    color: #1e3c72;
 }
 
 .auth-tab-btn.active::after {
@@ -263,7 +263,7 @@
     right: 0;
     bottom: -1px;
     height: 2px;
-    background: #DC2626;
+    background: #1e3c72;
 }
 
 .auth-tab-panel {
@@ -303,13 +303,13 @@
 
 .btn-logout {
     background: #fff;
-    color: #DC2626;
-    border: 1px solid #DC2626;
+    color: #1e3c72;
+    border: 1px solid #1e3c72;
 }
 
 .btn-logout:hover {
-    background: #fef2f2;
-    color: #DC2626;
+    background: #eef2f8;
+    color: #1e3c72;
     transform: none;
 }
 
@@ -355,7 +355,7 @@
 
 .my-order-total {
     font-weight: 700;
-    color: #DC2626;
+    color: #1e3c72;
     font-size: 14px;
 }
 

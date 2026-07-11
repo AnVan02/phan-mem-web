@@ -359,6 +359,7 @@ a {
      border-radius: 12px;
      background: radial-gradient(circle, rgba(148, 204, 68, 0.08) 0%, transparent 60%);
      padding: 20px;
+     overflow: hidden;
 }
 
 .product-image {
@@ -1751,7 +1752,8 @@ a {
 
      .hero-right,
      .chatbot-right,
-     .s-right {
+     .s-right,
+     .s-left {
           width: 100%;
           align-items: center;
      }
@@ -1930,5 +1932,7 @@ a {
 
      .logos-top {
           font-size: 20px;
+          flex-wrap: wrap;
+          justify-content: center;
      }
 }

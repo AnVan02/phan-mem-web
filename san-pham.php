@@ -1,33 +1,9 @@
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/san-pham.css">
-    <script src="assets/js/san-pham.js" defer></script>
-
-    <!--
-        Ghi chú: khối CSS bên dưới dành riêng cho sidebar "Danh mục sản phẩm" vừa thêm.
-        Bạn có thể copy phần này qua assets/css/san-pham.css rồi xoá thẻ <style> này đi,
-        và chỉnh lại màu sắc (--vs-primary...) cho khớp theme hiện tại của site.
-    -->
-</head>
-
-<body>
+<?php
+$page_title       = 'Sản phẩm - Viết Sơn Achieva';
+$extra_css        = ['assets/css/san-pham.css'];
+$post_css_scripts = ['assets/js/san-pham.js'];
+require 'head.php';
+?>
     <?php
     require_once 'admin/config/config.php';
     include 'header.php';
@@ -187,34 +163,16 @@
                 <?php endif; ?>
             </div>
             <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
+      
 
           <?php
-            $fields = [
-                'loai_san_pham' => ['label' => 'Loại sản phẩm',  'icon' => 'fa-box-open'],
-                'chuan_ket_noi' => ['label' => 'Chuẩn kết nối',  'icon' => 'fa-plug'],
-                'toc_do_doc'    => ['label' => 'Tốc độ đọc',     'icon' => 'fa-gauge-high'],
-                'toc_do_ghi'    => ['label' => 'Tốc độ ghi',     'icon' => 'fa-gauge'],
-                'kich_thuoc'    => ['label' => 'Kích thước',     'icon' => 'fa-ruler-combined'],
-                'trong_luong'   => ['label' => 'Trọng lượng',    'icon' => 'fa-weight-scale'],
-                'bao_hanh'      => ['label' => 'Bảo hành',       'icon' => 'fa-shield-halved'],
-            ];
+            $mo_ta_ngan = trim(strip_tags(html_entity_decode($sp['mo_ta'] ?? '', ENT_QUOTES, 'UTF-8')));
+            if (mb_strlen($mo_ta_ngan) > 250) {
+                $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 250) . '...';
+            }
             ?>
 
-            <?php if (!empty($fields) && !empty($sp)): ?>
-            <table class="product-desc">
-                <?php foreach ($fields as $key => $f): ?>
-                <?php if (!empty($sp[$key])): ?>
-                <tr>
-                    <th>
-                        <i class="fa-solid <?= $f['icon'] ?>"></i>
-                        <span><?= htmlspecialchars($f['label'], ENT_QUOTES, 'UTF-8') ?></span>
-                    </th>
-                    <td><?= htmlspecialchars($sp[$key], ENT_QUOTES, 'UTF-8') ?></td>
-                </tr>
-                <?php endif; ?>
-                <?php endforeach; ?>
-            </table>
-            <?php endif; ?>
+            <p class="product-desc-text"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
             <div class="product-price-row">
                 <?php if ($gia_ban <= 0): ?>
                 <span class="product-price product-price-contact">Liên hệ</span>
@@ -337,15 +295,19 @@
     <section class="product-page">
         <div class="container">
             <div class="product-page-header">
+                <a href="/index.php">Trang chủ</a>
                 <span class="product-eyebrow">— Cửa hàng Viết Sơn</span>
                 <h1 class="product-title">Sản phẩm</h1>
             </div>
+            
+            <button type="button" class="mobile-filter-toggle" data-mobile-filter-toggle="#productSidebar"
+                aria-expanded="false">
+                <i class="fa-solid fa-sliders"></i> Bộ lọc &amp; Danh mục
+            </button>
 
             <div class="product-page-layout">
-
                 <!-- ===== SIDEBAR: Danh mục sản phẩm + bộ lọc ===== -->
-                <aside class="product-sidebar">
-
+                <aside class="product-sidebar" id="productSidebar">
                     <div class="sidebar-block">
                         <h3 class="sidebar-title">Danh mục sản phẩm</h3>
                         <ul class="sidebar-category-list">
@@ -355,6 +317,7 @@
                                     Tất cả sản phẩm
                                 </a>
                             </li>
+                            
                             <?php foreach ($nhom_danh_muc as $ma_dm => $nhom): ?>
                             <li>
                                 <a class="sidebar-category-link" href="#section-<?php echo $ma_dm; ?>">
@@ -365,6 +328,8 @@
                             <?php endforeach; ?>
                         </ul>
                     </div>
+                    
+
 
                     <?php if (!empty($dung_luong_options)): ?>
                     <div class="sidebar-block">

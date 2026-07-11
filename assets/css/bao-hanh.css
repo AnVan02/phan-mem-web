@@ -30,7 +30,7 @@
 .card-title-main {
     font-size: 32px;
     font-weight: 800;
-    color: #DC2626;
+    color: #1B4EF6;
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 14px;
@@ -41,7 +41,7 @@
     width: 90px;
     height: 4px;
     border-radius: 2px;
-    background-color: #DC2626;
+    background-color: #1B4EF6;
     margin: 0 auto 20px;
 }
 
@@ -63,7 +63,7 @@
     display: flex;
     align-items: center;
     background: #fdfdfd;
-    border: 1px solid #DC2626;
+    border: 1px solid #1B4EF6;
     border-radius: 100px;
     padding: 8px 8px 8px 24px;
     gap: 12px;
@@ -72,7 +72,7 @@
 }
 
 .search-input-wrapper:focus-within {
-    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.35);
     background: #fff;
 }
 
@@ -125,21 +125,17 @@
 }
 
 .warranty-submit-btn {
-    background: #DC2626;
-    color: #fff;
+    background:  #1e3c72;
+    color: #ffd700;
     border: none;
     border-radius: 100px;
     padding: 15px 40px;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    box-shadow:0 4px 15px rgba(255, 215, 0, 0.35);
     flex-shrink: 0;
-}
-
-.warranty-submit-btn:hover {
-    background: #b91c1c;
 }
 
 /* Valid / Error messages */
@@ -202,7 +198,7 @@
     height: 220px;
     border-radius: 12px;
     background: linear-gradient(135deg, #fdf1f1, #fce8e8);
-    color: #DC2626;
+    color: #1B4EF6;
     font-size: 56px;
 }
 
@@ -231,8 +227,9 @@
 
 .result-media-caption span {
     display: block;
-    font-size: 12px;
+    font-size: 14px;
     color: #64748b;
+    font-weight: 500;
 }
 
 /* Detail rows */
@@ -262,7 +259,7 @@
     flex-shrink: 0;
     border-radius: 10px;
     background: #fdf1f1;
-    color: #DC2626;
+    color: #1B4EF6;
     font-size: 15px;
 }
 
@@ -283,7 +280,7 @@
 }
 
 .serial-number {
-    color: #DC2626;
+    color: #1B4EF6;
 }
 
 .warranty-value {
@@ -318,8 +315,8 @@
 }
 
 .expiry-badge.expiry-ok {
-    background: #FEE2E2;
-    color: #DC2626;
+    background:  #1e3c72;
+    color: #ffd700;
 }
 
 .expiry-badge.expiry-expired {
@@ -332,21 +329,23 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    background: #fdf1f1;
     border-radius: 12px;
     padding: 18px 22px;
     margin-top: 24px;
-    color: #7a1f1f;
-    font-size: 14px;
+    background:  #1e3c72;
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 600;
+
 }
 
 .warranty-notice-bar i {
-    color: #DC2626;
+    color: #1B4EF6;
     margin-top: 2px;
 }
 
 .warranty-notice-bar strong {
-    color: #DC2626;
+    color: #ffd700;
 }
 
 @keyframes fadeIn {
@@ -384,33 +383,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: #fdf1f1;
-    color: #DC2626;
+    background:  #1e3c72;
+    color: #ffd700;
     font-size: 18px;
 }
 
 .feature-text h4 {
     margin: 0 0 4px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     color: #1a1a1a;
 }
 
 .feature-text p {
     margin: 0;
-    font-size: 13px;
+    font-size: 16px;
     color: #64748b;
+    font-weight: 500;
     line-height: 1.5;
 }
 
 .feature-highlight {
     font-size: 16px !important;
     font-weight: 700 !important;
-    color: #DC2626 !important;
+    color: #1B4EF6 !important;
 }
 
 .feature-highlight a {
