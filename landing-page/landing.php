@@ -1,3 +1,7 @@
+    <?php
+    $cssVersion = filemtime(__DIR__ . '/landing.css');
+    $jsVersion = filemtime(__DIR__ . '/landing.js');
+    ?>
     <!DOCTYPE html>
 <html lang="vi">
 
@@ -5,13 +9,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROSA - AI Local cho doanh nghiệp</title>
-    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="landing.css?v=<?php echo $cssVersion; ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="icon" href="images/rosa-icon.png" type="image/png">
+    <script src="landing.js?v=<?php echo $jsVersion; ?>" defer></script>
 
 </head>
 
@@ -24,12 +29,16 @@
             </div>
             <nav class="nav-links">
                 <a href="#">Giải pháp</a>
-                <a href="#">Sản phẩm</a>
-                <a href="#">Ứng dụng</a>
-                <a href="#">Khách hàng</a>
+                <a href="khachhang.php">Khách hàng</a>
                 <a href="#">Về ROSA</a>
+                <a href="#">Ứng dụng</a>
+                <a href="#">Sản phâm</a>
+                <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
             </nav>
-            <a href="#" class="btn btn-primary">Liên hệ tư vấn</a>
+            <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn</a>
+            <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false">
+                <i class="ph ph-list"></i>
+            </button>
         </div>
     </header>
 
@@ -573,6 +582,40 @@
                 </div>
             </div>
         </section>
+        <!-- Modal Liên Hệ -->
+        <div id="contactModal" class="modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-modal">&times;</button>
+                <div class="modal-header">
+                    <h2>Đăng ký tư vấn giải pháp AI</h2>
+                    <p>Để lại thông tin, đội ngũ ROSA sẽ liên hệ lại với bạn trong vòng 24h.</p>
+                </div>
+                <form id="consultationForm" class="modal-form">
+                    <div class="form-group">
+                        <label for="fullname">Họ và tên *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="0901 234 567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email công việc *</label>
+                        <input type="email" id="email" name="email" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Tên doanh nghiệp</label>
+                        <input type="text" id="company" name="company" placeholder="Công ty ABC">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nhu cầu của bạn</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Ví dụ: Tôi muốn tư vấn về Chatbot nội bộ..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu tư vấn</button>
+                </form>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->

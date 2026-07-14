@@ -30,16 +30,14 @@ function getWarrantyFromApi($serial)
 
 function getWarrantyFromDb($serial)
 {
-    global $mysqli;
-    if (!$mysqli)
+    global $pdo;
+    if (!$pdo)
         return null;
 
     try {
-        $stmt = $mysqli->prepare("SELECT * FROM bao_hanh WHERE SOSERIAL = ?");
-        $stmt->bind_param("s", $serial);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+        $stmt = $pdo->prepare("SELECT * FROM bao_hanh WHERE SOSERIAL = ?");
+        $stmt->execute([$serial]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
             return [

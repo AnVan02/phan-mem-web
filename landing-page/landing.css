@@ -174,6 +174,21 @@ a {
      color: var(--text-main);
 }
 
+.nav-cta {
+     display: none;
+}
+
+.nav-toggle {
+     display: none;
+     background: none;
+     border: none;
+     color: var(--text-main);
+     font-size: 26px;
+     line-height: 1;
+     cursor: pointer;
+     padding: 4px;
+}
+
 /* Badge Label */
 .badge-label {
      display: inline-flex;
@@ -359,17 +374,18 @@ a {
      border-radius: 12px;
      background: radial-gradient(circle, rgba(148, 204, 68, 0.08) 0%, transparent 60%);
      padding: 20px;
-     overflow: hidden;
+     overflow: visible;
 }
 
 .product-image {
-     width: 120%;
+     width: 110%;
      height: auto;
      border-radius: 12px;
      mix-blend-mode: screen;
-     filter: drop-shadow(0 20px 40px rgba(148, 204, 68, 0.25));
-     transform: translateX(-100px) scale(1.4);
+     /* filter: drop-shadow(0 20px 40px rgba(148, 204, 68, 0.25)); */
+     transform:translateX(-40px) scale(1.15);
      transform-origin: center;
+
 }
 
 /* Platform Section */
@@ -1483,8 +1499,110 @@ a {
      filter: brightness(0.9) contrast(1.1) drop-shadow(0 0 50px rgba(148, 204, 68, 0.2));
      mix-blend-mode: screen;
 }
+/* liên hệ  */
+/* Giao diện Modal */
+.modal {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    z-index: 10001;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
+
+.modal-header h2 {
+    color: #1a1a1a;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.modal-header p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* Form Styles */
+.modal-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.modal-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.modal-form input, 
+.modal-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+}
+
+.modal-form input:focus {
+    outline: none;
+    border-color: #e60012;
+}
+
+.w-full {
+    width: 100%;
+    margin-top: 10px;
+}
+
 
 /* CTA Banner */
+
+
 .cta-banner {
      padding: 60px 24px;
 }
@@ -1803,8 +1921,42 @@ a {
 }
 
 @media (max-width: 768px) {
+     .nav-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+     }
+
+     .nav-cta-desktop {
+          display: none;
+     }
+
      .nav-links {
           display: none;
+          flex-direction: column;
+          gap: 0;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: #0b0d13;
+          border-bottom: 1px solid var(--border);
+          padding: 8px 24px 16px;
+     }
+
+     .nav-links.active {
+          display: flex;
+     }
+
+     .nav-links a {
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+     }
+
+     .nav-cta {
+          display: block;
+          text-align: center;
+          margin-top: 16px;
      }
 
      .hero {

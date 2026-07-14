@@ -11,21 +11,20 @@ $extra_css       = [
 ];
 require 'head.php';
 ?>
-    <?php
+<?php
 
-    include 'header.php';
-    include 'banner.php';
-    // 
-    include 'danh-muc.php';
-    // include 'doi-tac.php';
-    include 'cam-ket-khach-hang.php';
-    // include 'thuong-hieu.php';
+include 'header.php';
+include 'banner.php';
+// 
+include 'danh-muc.php';
+// include 'doi-tac.php';
+include 'cam-ket-khach-hang.php';
+// include 'thuong-hieu.php';
 
 
+include 'footer.php';
 
-    include 'footer.php';
-
-    ?>
+?>
 
 
 </body>

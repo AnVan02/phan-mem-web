@@ -17,13 +17,14 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 │   ├── quanly/             Quản lý banner, đơn hàng
 │   ├── quanly_sanpham/     Quản lý sản phẩm (thêm/sửa/xoá/danh sách)
 │   ├── quanly_baiviet/     Quản lý bài viết/tin tức
-│   ├── quanly_baohanh/     Quản lý bảo hành
+│   ├── quanly_baohanh/     Quản lý bảo hành (kể cả nhập hàng loạt số serial từ file Excel/CSV)
 │   ├── quanly_thuoctinh/   Quản lý thuộc tính sản phẩm
 │   ├── dang-nhap.php       Đăng nhập quản trị
 │   ├── dashboad.php        Trang tổng quan
 │   └── index.php
 ├── assets/                 css, js, image, uploads dùng chung cho site
 ├── database/                Các file SQL
+├── landing-page/             Microsite marketing ROSA AI, độc lập với site chính (xem mục riêng bên dưới)
 ├── head.php                  Khối <head> (meta, title, CSS/JS chung) dùng chung, các trang `require` thay vì lặp lại
 ├── header.php / footer.php  Layout dùng chung cho trang người dùng
 ├── index.php                 Trang chủ
@@ -53,6 +54,17 @@ require 'head.php';
 
 Biến tuỳ chọn khác: `$canonical_url`, `$html_lang` (mặc định `vi`), `$meta_robots`, `$pre_css_scripts` (script không defer, render trước CSS), `$post_css_scripts` (script defer, render sau CSS).
 
+## Microsite landing-page/ (ROSA AI)
+
+Thư mục [landing-page/](landing-page/) là một microsite marketing riêng (sản phẩm "ROSA AI Bridge"), không dùng chung DB/config với site bán hàng — mỗi trang tự chứa HTML/CSS/JS của nó.
+
+- `landing.php` + `landing.css` / `landing.js` — trang landing chính
+- `khach-hang.php` + `khach-hang.css` — landing dành cho nhóm "người tích hợp" (công ty phần mềm, đội IT dùng Claude Code/Cursor/ComfyUI...)
+- `van-hanh-ems.php` + `van-hanh-ems.css` — landing dành cho nhóm "người vận hành/SME" (đang là file trống, chưa dựng nội dung)
+- `test.php` — bản nháp/thử nghiệm một hướng thiết kế khác cho nhóm SME, chưa gắn vào luồng chính
+- `luu-lien-he.php` — endpoint AJAX nhận form đăng ký demo, ghi vào `data/lien-he.txt`
+- `images/` — hình ảnh minh hoạ (kể cả các ảnh sơ đồ AI-generated dùng cho hero/step section)
+
 ## Chức năng đã hoàn thành
 
 **Người dùng**
@@ -69,7 +81,7 @@ Biến tuỳ chọn khác: `$canonical_url`, `$html_lang` (mặc định `vi`), 
 - Quản lý bài viết/tin tức (CRUD)
 - Quản lý banner trang chủ
 - Quản lý đơn hàng (danh sách, chi tiết, cập nhật trạng thái)
-- Quản lý bảo hành
+- Quản lý bảo hành, kể cả nhập hàng loạt số serial từ file Excel/CSV (tải file mẫu, đọc `.xlsx` bằng `ZipArchive`/`SimpleXMLElement` không cần thư viện ngoài)
 
 ## Ghi chú tiến độ
 
