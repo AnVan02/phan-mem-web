@@ -80,17 +80,17 @@ if ($action === 'cap_nhat_thong_tin') {
         header('Location: tai-khoan.php');
         exit;
     }
-    
+
     $ten = trim($_POST['customer_name'] ?? '');
     $sdt = trim($_POST['customer_phone'] ?? '');
     $dia_chi = trim($_POST['customer_address'] ?? '');
     $ma_kh = $_SESSION['khach_hang_id'];
-    
+
     if ($ten === '' || $sdt === '' || $dia_chi === '') {
         header('Location: tai-khoan.php?msg=loi_thieu_du_lieu');
         exit;
     }
-    
+
     try {
         $stmt = $pdo->prepare("UPDATE khach_hang_lien_he SET customer_name = :ten, customer_phone = :sdt, customer_address = :dc WHERE ma_lien_he = :id");
         $stmt->execute([
@@ -115,7 +115,7 @@ if ($action === 'doi_mat_khau') {
     $mk_cu = (string) ($_POST['mat_khau_cu'] ?? '');
     $mk_moi = (string) ($_POST['mat_khau_moi'] ?? '');
     $ma_kh = $_SESSION['khach_hang_id'];
-    
+
     if ($mk_cu === '' || $mk_moi === '') {
         header('Location: tai-khoan.php?msg=loi_thieu_du_lieu');
         exit;
@@ -124,20 +124,20 @@ if ($action === 'doi_mat_khau') {
         header('Location: tai-khoan.php?msg=loi_mat_khau_ngan');
         exit;
     }
-    
+
     $stmt = $pdo->prepare("SELECT mat_khau FROM khach_hang_lien_he WHERE ma_lien_he = :id LIMIT 1");
     $stmt->execute([':id' => $ma_kh]);
     $kh = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     if (!$kh || !password_verify($mk_cu, $kh['mat_khau'])) {
         header('Location: tai-khoan.php?msg=loi_mk_cu_sai');
         exit;
     }
-    
+
     $mk_ma_hoa = password_hash($mk_moi, PASSWORD_DEFAULT);
     $upd = $pdo->prepare("UPDATE khach_hang_lien_he SET mat_khau = :mk WHERE ma_lien_he = :id");
     $upd->execute([':mk' => $mk_ma_hoa, ':id' => $ma_kh]);
-    
+
     header('Location: tai-khoan.php?msg=doi_mk_thanh_cong');
     exit;
 }

@@ -26,13 +26,14 @@ function gui_email_dang_ky_thanh_cong($email_nhan, $ten_khach_hang) {
             <div style='font-family: Arial, sans-serif; max-width:600px; margin:auto;'>
                 <h2 style='color:#2563eb;'>Xin chào {$ten_khach_hang},</h2>
                 <p>Cảm ơn bạn đã đăng ký tài khoản tại <strong>Viết Sơn Achieva </strong>.</p>
-                <p>Tài khoản của bạn với email <strong>{$email_nhan}</strong> của bạn đã kích hoạt thành công</p>
+                <p>Tài khoản của bạn với email <strong>{$email_nhan}</strong> của bạn đã kích hoạt</p>
                 <p>Bây giờ bạn có thể đăng nhập để mua sắm và theo dõi đơn hàng dễ dàng hơn.</p>
                 <br>
-                <p>Trân trọng,<br>Đội ngũ Viết Sơn Achieva</p>
+                <p>Trân trọng,<br>Đội ngũ Achieva</p>
             </div>
         ";
         $mail->AltBody = "Xin chào {$ten_khach_hang}, tài khoản của bạn đã đăng ký thành công tại Viết Sơn Achieva.";
+        
 
         $mail->send();
         return true;
@@ -41,5 +42,6 @@ function gui_email_dang_ky_thanh_cong($email_nhan, $ten_khach_hang) {
         return false;
     }
 }
+
 
 ?>

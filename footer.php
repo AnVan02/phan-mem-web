@@ -77,7 +77,7 @@
                 <img width="40" height="40" src="https://img.icons8.com/color/48/vietnam.png" alt="vietnam" />
                 <span>Việt Nam</span>
             </div>
-            <p class="footer__copyright">&copy; <span id="current-year"></span> - VIẾT SƠN</p>
+            <p class="footer__copyright">© Copyright 2022, ACHIEVA VIETSON Co., Ltd</p>
         </div>
 
         <!-- Bottom legal bar -->

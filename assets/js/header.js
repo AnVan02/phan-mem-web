@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Nút 3 gạch (mobile): mở/đóng menu chính
+    var navToggle = document.querySelector('.nav-toggle');
+    var mainNav = document.querySelector('.main-nav');
+    var siteHeader = document.querySelector('.site-header');
+    if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = mainNav.classList.toggle('is-open');
+            navToggle.classList.toggle('is-active', isOpen);
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            if (isOpen && siteHeader) {
+                mainNav.style.top = siteHeader.offsetHeight + 'px';
+            } else {
+                mainNav.style.top = '';
+            }
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Bấm ra ngoài menu thì đóng lại
+        document.addEventListener('click', function (e) {
+            if (mainNav.classList.contains('is-open') && !e.target.closest('.main-nav') && !e.target.closest('.nav-toggle')) {
+                mainNav.classList.remove('is-open');
+                navToggle.classList.remove('is-active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                mainNav.style.top = '';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
     var dropdownItems = document.querySelectorAll('.has-submenu, .has-megamenu');
 
     function closeAll(except) {

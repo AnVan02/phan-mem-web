@@ -1,259 +1,425 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
+    <title>Đối tượng khách hàng</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <script src="assets/js/header.js"></script>
+    <style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to bottom, #f3f6fb, #e9eef5);
+    }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/san-pham.css">
-    <script src="assets/js/san-pham.js" defer></script>
+    .audience {
+        padding: 80px 5%;
+        max-width: 1500px;
+        margin: auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .section-desc {
+        text-align: center;
+        max-width: 750px;
+        margin: 0 auto 60px;
+        color: #555;
+        font-size: 18px;
+    }
+
+    .audience-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+    }
+
+    /* CARD */
+    .a-card {
+        position: relative;
+        padding: 40px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, #ffffff, #f4f7fc);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        transition: .3s ease;
+    }
+
+    .a-card:hover {
+        transform: translateY(-8px);
+    }
+
+    /* Background soft shape */
+    .a-card::after {
+        content: "";
+        position: absolute;
+        right: -60px;
+        bottom: -60px;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+        border-radius: 50%;
+    }
+
+    /* Header */
+    .a-top {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .icon-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        color: #fff;
+    }
+
+    /* Different colors */
+    .blue .icon-circle {
+        background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    }
+
+    .green .icon-circle {
+        background: linear-gradient(135deg, #16a34a, #065f46);
+    }
+
+    .orange .icon-circle {
+        background: linear-gradient(135deg, #f97316, #c2410c);
+    }
+
+    .a-card h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .a-card p {
+        margin: 15px 0;
+        color: #555;
+        font-size: 15px;
+    }
+
+    /* checklist */
+    .a-checklist {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .a-checklist li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+    }
+
+    .a-checklist i {
+        color: #22c55e;
+    }
+
+    /* Illustration */
+    .a-illustration {
+        position: absolute;
+        right: 25px;
+        bottom: 25px;
+        width: 120px;
+        z-index: 2;
+        transition: .3s;
+    }
+
+    .a-card:hover .a-illustration {
+        transform: scale(1.05);
+    }
+
+    /* Feature strip */
+    .audience-features {
+        margin-top: 80px;
+        padding: 40px;
+        border-radius: 25px;
+        background: #ffffff;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .af-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .af-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .af-icon.blue {
+        background: #3b82f6;
+    }
+
+    .af-icon.green {
+        background: #22c55e;
+    }
+
+    .af-icon.purple {
+        background: #8b5cf6;
+    }
+
+    .af-icon.orange {
+        background: #f97316;
+    }
+
+    .af-text h4 {
+        margin: 0 0 5px;
+        font-size: 16px;
+    }
+
+    .af-text p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Responsive */
+    @media(max-width:1100px) {
+        .audience-cards {
+            grid-template-columns: 1fr;
+        }
+
+        .audience-features {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    </style>
 </head>
 
 <body>
-    <?php
-    require_once 'admin/config/config.php';
-    include 'header.php';
 
-    $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
+    <section class="audience">
 
-    // Query string dùng chung để build lại link (giữ nguyên từ khóa tìm kiếm)
-    $qs_giu_keyword = $keyword !== '' ? '&q=' . urlencode($keyword) : '';
+        <h2 class="section-title">Đối tượng khách hàng phù hợp</h2>
+        <p class="section-desc">
+            Giải pháp phù hợp với các tổ chức, doanh nghiệp có khối lượng tài liệu lớn và thường xuyên cần tra cứu thông
+            tin.
+        </p>
 
-    // Danh sách thương hiệu để làm bộ lọc, kèm số lượng sản phẩm đang active của mỗi thương hiệu
-    $thuong_hieu_stmt = $pdo->query("SELECT th.ma_thuong_hieu, th.ten_thuong_hieu, COUNT(*) AS so_luong
-        FROM san_pham sp
-        JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
-        WHERE sp.trang_thai = 1
-        GROUP BY th.ma_thuong_hieu, th.ten_thuong_hieu
-        ORDER BY th.ten_thuong_hieu ASC");
-    $thuong_hieu_options = $thuong_hieu_stmt->fetchAll(PDO::FETCH_ASSOC);
+        <div class="audience-cards">
 
-    // Nhận thương hiệu lọc qua tên (slug) thay vì mã số, vd: ?th=agi
-    $th_slug      = isset($_GET['th']) ? trim($_GET['th']) : '';
-    $ma_th_filter = 0;
-    if ($th_slug !== '') {
-        foreach ($thuong_hieu_options as $th_row) {
-            if (tao_slug($th_row['ten_thuong_hieu']) === $th_slug) {
-                $ma_th_filter = (int) $th_row['ma_thuong_hieu'];
-                break;
-            }
-        }
-    }
-
-    // Render 1 thẻ sản phẩm
-    function render_the_card($sp)
-    {
-        $gia_ban      = (int) $sp['gia_ban'];
-        $giam_gia     = (int) $sp['giam_gia'];
-        $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
-        $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
-        $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
-        $hinh_anh_hover = !empty($anh_list_sp[1]) ? $anh_list_sp[1] : '';
-        $slug         = tao_slug($sp['ten_san_pham']);
-        $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
-        ?>
-    <a class="product-card<?php echo $hinh_anh_hover !== '' ? ' has-hover-image' : ''; ?>"
-        href="chi-tiet-san-pham.php?id=<?php echo (int)$sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>">
-        <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
-        <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
-        <div class="product-media">
-            <img class="product-media-img is-primary" src="<?php echo htmlspecialchars($hinh_anh); ?>"
-                alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
-            <?php if ($hinh_anh_hover !== ''): ?>
-            <img class="product-media-img is-secondary" src="<?php echo htmlspecialchars($hinh_anh_hover); ?>"
-                alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
-            <?php endif; ?>
-        </div>
-        <div class="product-body">
-            <?php if ($giam_gia > 0): ?>
-            <div class="product-flash-banner">
-                <i class="fa-solid fa-bolt"></i>
-                <span class="flash-countdown" data-countdown-endofday>--:--:--</span>
-            </div>
-            <?php endif; ?>
-
-            <div class="product-tags-row">
-                <?php if (!empty($sp['ten_thuong_hieu'])): ?>
-                <span class="product-brand"><?php echo htmlspecialchars($sp['ten_thuong_hieu']); ?></span>
-                <?php endif; ?>
-                <?php if (!empty($sp['ten_dung_luong'])): ?>
-                <span class="product-spec"><?php echo htmlspecialchars($sp['ten_dung_luong']); ?></span>
-                <?php endif; ?>
-            </div>
-            <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
-
-            <?php
-                $mo_ta_ngan = trim(strip_tags($sp['mo_ta']));
-                if (mb_strlen($mo_ta_ngan) > 150) {
-                    $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
-                }
-                ?>
-            <?php if ($mo_ta_ngan !== ''): ?>
-            <p class="product-desc"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
-            <?php endif; ?>
-            <div class="product-price-row">
-                <?php if ($gia_ban <= 0): ?>
-                <span class="product-price product-price-contact">Liên hệ</span>
-                <?php else: ?>
-                <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
-                <?php if ($giam_gia > 0): ?>
-                <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
-                <?php endif; ?>
-                <?php endif; ?>
-            </div>
-
-            <?php if ($gia_ban > 0): ?>
-            <div class="product-prepay">Hoặc trả trước <b><?php echo number_format($tra_truoc, 0, ',', '.'); ?>đ</b>
-            </div>
-            <?php endif; ?>
-
-            <!-- <div class="product-rating">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div> -->
-        </div>
-    </a>
-    <?php
-    }
-
-    // Lấy tất cả sản phẩm active, sắp xếp theo danh mục rồi theo id giảm dần
-    $sql = "SELECT sp.*, dm.ten_danh_muc, dm.ma_danh_muc AS dm_id, th.ten_thuong_hieu,
-                   dl.ten_dung_luong, dl.hinh_anh AS dung_luong_hinh_anh
-            FROM san_pham sp
-            LEFT JOIN danh_muc dm ON sp.ma_danh_muc = dm.ma_danh_muc
-            LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
-            LEFT JOIN dung_luong dl ON sp.ma_dung_luong = dl.ma_dung_luong
-            WHERE sp.trang_thai = 1";
-
-    $params = [];
-    if ($keyword !== '') {
-        $sql .= " AND (sp.ten_san_pham LIKE :keyword OR sp.ma_san_pham = :ma_san_pham)";
-        $params[':keyword']    = '%' . $keyword . '%';
-        $params[':ma_san_pham'] = ctype_digit($keyword) ? (int) $keyword : 0;
-    }
-
-    if ($ma_th_filter > 0) {
-        $sql .= " AND sp.ma_thuong_hieu = :ma_th";
-        $params[':ma_th'] = $ma_th_filter;
-    }
-
-    $sql .= " ORDER BY dm.ten_danh_muc ASC, sp.ma_san_pham DESC";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-    $san_pham_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Nhóm sản phẩm theo danh mục
-    // $nhom_danh_muc[ma_dm] = ['ten' => ..., 'san_pham' => [...], 'dong_groups' => [ma_dl => ['ten'=>, 'hinh_anh'=>]]]
-    $nhom_danh_muc = [];
-    foreach ($san_pham_list as $sp) {
-        $ma_dm  = (int) $sp['dm_id'];
-        $ten_dm = $sp['ten_danh_muc'] ?? 'Khác';
-
-        if (!isset($nhom_danh_muc[$ma_dm])) {
-            $nhom_danh_muc[$ma_dm] = [
-                'ten'         => $ten_dm,
-                'san_pham'    => [],
-                'dong_groups' => [],
-            ];
-        }
-
-        // Thêm sản phẩm vào nhóm
-        $nhom_danh_muc[$ma_dm]['san_pham'][] = $sp;
-
-        // Xây dựng danh sách "dòng" (dung lượng) để hiện vòng tròn lọc
-        // Gom theo mã dung lượng (ma_dung_luong) để tránh trùng/lệch tên
-        $ma_dl    = (int) ($sp['ma_dung_luong'] ?? 0);
-        $ten_dong = trim($sp['ten_dung_luong'] ?? '');
-
-        if ($ma_dl > 0 && $ten_dong !== '' && !isset($nhom_danh_muc[$ma_dm]['dong_groups'][$ma_dl])) {
-            $nhom_danh_muc[$ma_dm]['dong_groups'][$ma_dl] = [
-                'ten'      => $ten_dong,
-                'hinh_anh' => trim($sp['dung_luong_hinh_anh'] ?? ''),
-            ];
-        }
-    }
-    ?>
-
-    <section class="product-page">
-        <div class="container">
-            <div class="product-page-header">
-                <span class="product-eyebrow">— Cửa hàng Viết Sơn</span>
-                <h1 class="product-title">Sản phẩm</h1>
-            </div>
-
-            <?php if (!empty($thuong_hieu_options)): ?>
-            <div class="brand-filter-bar">
-                <span class="brand-filter-label"><i class="fa-solid fa-filter"></i> Thương hiệu</span>
-                <div class="brand-filter-list">
-                    <a class="brand-filter-pill <?php echo $ma_th_filter === 0 ? 'active' : ''; ?>"
-                        href="san-pham.php?<?php echo ltrim($qs_giu_keyword, '&') ?: ''; ?>">
-                        Tất cả
-                    </a>
-                    <?php foreach ($thuong_hieu_options as $th): ?>
-                    <a class="brand-filter-pill <?php echo $ma_th_filter === (int) $th['ma_thuong_hieu'] ? 'active' : ''; ?>"
-                        href="san-pham.php?th=<?php echo tao_slug($th['ten_thuong_hieu']) . $qs_giu_keyword; ?>">
-                        <?php echo htmlspecialchars(trim($th['ten_thuong_hieu'])); ?>
-                    </a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-
-
-            <?php foreach ($nhom_danh_muc as $ma_dm => $nhom): ?>
-            <div class="product-section">
-                <!-- Tiêu đề danh mục -->
-                <div class="product-section-header">
-                    <h2 class="product-section-title">Sản Phẩm Nổi Bật <?php echo htmlspecialchars($nhom['ten']); ?>
-                    </h2>
-                    <div class="product-section-line"></div>
-                </div>
-                <?php if (!empty($nhom['dong_groups'])): ?>
-                <div class="category-strip" id="strip-<?php echo $ma_dm; ?>">
-                    <?php foreach ($nhom['dong_groups'] as $ma_dl => $dong): ?>
-                    <a class="category-circle"
-                        href="mo-ta-linh-kien.php?dm=<?php echo tao_slug($nhom['ten']); ?>&dl=<?php echo tao_slug($dong['ten']) . $qs_giu_keyword; ?>">
-                        <span class="category-circle-img">
-                            <img src="<?php echo !empty($dong['hinh_anh']) ? htmlspecialchars($dong['hinh_anh']) : 'assets/image/pc.webp'; ?>"
-                                loading="lazy" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
-                        </span>
-                        <span class="category-circle-name">
-                            <?php echo htmlspecialchars($dong['ten']); ?>
-                        </span>
-                    </a>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-
-                <!-- Grid sản phẩm của danh mục này -->
-                <div class="product-grid" id="section-<?php echo $ma_dm; ?>">
-                    <?php foreach (array_slice($nhom['san_pham'], 0, 10) as $sp): ?>
-                    <?php render_the_card($sp); ?>
-                    <?php endforeach; ?>
+            <!-- CARD 1 -->
+            <div class="a-card blue">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-landmark"></i></div>
+                    <h3>Cơ quan hành chính</h3>
                 </div>
 
-            </div><!-- /.product-section -->
-            <?php endforeach; ?>
+                <p>Quản lý và tra cứu nhanh các văn bản, quy định, hồ sơ hành chính.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Lưu trữ tập trung</li>
+                    <li><i class="fa-solid fa-check"></i>Tra cứu nhanh chóng</li>
+                    <li><i class="fa-solid fa-check"></i>Đảm bảo tính chính xác</li>
+                    <li><i class="fa-solid fa-check"></i>Tuân thủ quy định</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2942/2942076.png">
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="a-card green">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>Công ty luật</h3>
+                </div>
+
+                <p>Tìm kiếm nhanh hồ sơ vụ việc, hợp đồng và tài liệu pháp lý.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý hồ sơ vụ việc</li>
+                    <li><i class="fa-solid fa-check"></i>Tìm kiếm thông minh</li>
+                    <li><i class="fa-solid fa-check"></i>Chia sẻ và cộng tác</li>
+                    <li><i class="fa-solid fa-check"></i>Bảo mật tuyệt đối</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/3068/3068757.png">
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="a-card green">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>Công ty luật</h3>
+                </div>
+
+                <p>Tìm kiếm nhanh hồ sơ vụ việc, hợp đồng và tài liệu pháp lý.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý hồ sơ vụ việc</li>
+                    <li><i class="fa-solid fa-check"></i>Tìm kiếm thông minh</li>
+                    <li><i class="fa-solid fa-check"></i>Chia sẻ và cộng tác</li>
+                    <li><i class="fa-solid fa-check"></i>Bảo mật tuyệt đối</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/3068/3068757.png">
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="a-card orange">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Ngân hàng</h3>
+                </div>
+
+                <p>Quản lý hồ sơ khách hàng, hợp đồng, tài liệu nghiệp vụ và tuân thủ.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý hồ sơ khách hàng</li>
+                    <li><i class="fa-solid fa-check"></i>Lưu trữ hợp đồng an toàn</li>
+                    <li><i class="fa-solid fa-check"></i>Tuân thủ quy định tài chính</li>
+                    <li><i class="fa-solid fa-check"></i>Tra cứu tức thì</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png">
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="a-card orange">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Doanh nghiệp Logistics</h3>
+                </div>
+
+                <p>Quản lý chứng từ, quy trình vận hành và tài liệu nội bộ hiệu quả.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý chứng từ</li>
+                    <li><i class="fa-solid fa-check"></i>Quy trình vận hành</li>
+                    <li><i class="fa-solid fa-check"></i>Dễ dàng truy xuất</li>
+                    <li><i class="fa-solid fa-check"></i>Tối ưu hiệu suất</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png">
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="a-card orange">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Doanh nghiệp sản xuất</h3>
+                </div>
+
+                <p>Quản lý tài liệu kỹ thuật, quy trình sản xuất và hồ sơ chất lượng.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý tài liệu kỹ thuật</li>
+                    <li><i class="fa-solid fa-check"></i>Kiểm soát quy trình sản xuất</li>
+                    <li><i class="fa-solid fa-check"></i>Hồ sơ chất lượng rõ ràng</li>
+                    <li><i class="fa-solid fa-check"></i>Truy xuất nhanh chóng</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png">
+            </div>
+
+
+            <!-- CARD 7 -->
+            <div class="a-card orange">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Trường học</h3>
+                </div>
+
+                <p>Quản lý hồ sơ học sinh, quy trình vận hành và tài liệu nội bộ hiệu quả</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý hồ sơ học sinh</li>
+                    <li><i class="fa-solid fa-check"></i>Lưu trữ tài liệu giảng dạy</li>
+                    <li><i class="fa-solid fa-check"></i>Tra cứu thông tin dễ dàng</li>
+                    <li><i class="fa-solid fa-check"></i>Vận hành hiệu quả</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png">
+            </div>
+
+            <!-- CARD 8 -->
+            <div class="a-card orange">
+                <div class="a-top">
+                    <div class="icon-circle"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Chứng khoán </h3>
+                </div>
+
+                <p>Quản lý hồ sơ khách hàng, báo cáo, tài liệu phân tích và giao dịch.</p>
+
+                <ul class="a-checklist">
+                    <li><i class="fa-solid fa-check"></i>Quản lý hồ sơ khách hàng</li>
+                    <li><i class="fa-solid fa-check"></i>Lưu trữ báo cáo phân tích</li>
+                    <li><i class="fa-solid fa-check"></i>Tra cứu giao dịch nhanh</li>
+                    <li><i class="fa-solid fa-check"></i>Tuân thủ quy định tài chính</li>
+                </ul>
+
+                <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png">
+            </div>
 
         </div>
+
+        <!-- Feature Strip -->
+        <div class="audience-features">
+
+            <div class="af-item">
+                <div class="af-icon blue"><i class="fa-solid fa-bolt"></i></div>
+                <div class="af-text">
+                    <h4>Tìm kiếm nhanh chóng</h4>
+                    <p>Tiết kiệm thời gian tra cứu.</p>
+                </div>
+            </div>
+
+            <div class="af-item">
+                <div class="af-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="af-text">
+                    <h4>Bảo mật an toàn</h4>
+                    <p>Kiểm soát quyền truy cập.</p>
+                </div>
+            </div>
+
+            <div class="af-item">
+                <div class="af-icon purple"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="af-text">
+                    <h4>Quản lý tập trung</h4>
+                    <p>Lưu trữ và khai thác dễ dàng.</p>
+                </div>
+            </div>
+
+            <div class="af-item">
+                <div class="af-icon orange"><i class="fa-solid fa-chart-pie"></i></div>
+                <div class="af-text">
+                    <h4>Tối ưu chi phí</h4>
+                    <p>Giảm chi phí vận hành.</p>
+                </div>
+            </div>
+
+        </div>
+
     </section>
-
-    <?php include 'footer.php'; ?>
 
 </body>
 

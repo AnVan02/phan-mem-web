@@ -1,36 +1,20 @@
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/san-pham.css">
-    <script src="assets/js/san-pham.js" defer></script>
-
-    <!--
-        Ghi chú: khối CSS bên dưới dành riêng cho sidebar "Danh mục sản phẩm" vừa thêm.
-        Bạn có thể copy phần này qua assets/css/san-pham.css rồi xoá thẻ <style> này đi,
-        và chỉnh lại màu sắc (--vs-primary...) cho khớp theme hiện tại của site.
-    -->
-</head>
-
-<body>
+<?php
+$page_title       = 'Sản phẩm - Viết Sơn Achieva';
+$extra_css        = ['assets/css/san-pham.css'];
+$post_css_scripts = ['assets/js/san-pham.js'];
+require 'head.php';
+?>
     <?php
     require_once 'admin/config/config.php';
     include 'header.php';
+
+    // Danh sách mã sản phẩm khách hàng đang đăng nhập đã yêu thích (1 truy vấn, dùng chung cho mọi thẻ sản phẩm)
+    $wishlisted_ids = [];
+    if (isset($_SESSION['khach_hang_id'])) {
+        $wl_stmt = $pdo->prepare("SELECT ma_san_pham FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh");
+        $wl_stmt->execute([':kh' => $_SESSION['khach_hang_id']]);
+        $wishlisted_ids = array_map('intval', $wl_stmt->fetchAll(PDO::FETCH_COLUMN));
+    }
 
     $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
 
@@ -81,7 +65,6 @@
             }
         }
     }
-
     // Danh sách dung lượng để làm bộ lọc, kèm số lượng sản phẩm đang active mỗi dung lượng
     $dung_luong_stmt = $pdo->query("SELECT dl.ma_dung_luong, dl.ten_dung_luong, COUNT(*) AS so_luong
         FROM san_pham sp
@@ -138,6 +121,8 @@
     // Render 1 thẻ sản phẩm
     function render_the_card($sp)
     {
+        global $wishlisted_ids;
+        $is_wishlisted = in_array((int) $sp['ma_san_pham'], $wishlisted_ids, true);
         $gia_ban      = (int) $sp['gia_ban'];
         $giam_gia     = (int) $sp['giam_gia'];
         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
@@ -178,41 +163,38 @@
                 <?php endif; ?>
             </div>
             <h3 class="product-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h3>
+      
 
-            <?php
-                $fields = [
-                    'sku' => 'SKU',
-                    'loai_san_pham' => 'Loại sản phẩm',
-                    'chuan_ket_noi' => 'Chuẩn kết nối',
-                    'toc_do_doc' => 'Tốc độ đọc',
-                    'toc_do_ghi' => 'Tốc độ ghi',
-                    'kich_thuoc' => 'Kích thước',
-                    'trong_luong' => 'Trọng lượng',
-                    'bao_hanh' => 'Bảo hành'
-                ];
+          <?php
+            $mo_ta_ngan = trim(strip_tags(html_entity_decode($sp['mo_ta'] ?? '', ENT_QUOTES, 'UTF-8')));
+            if (mb_strlen($mo_ta_ngan) > 250) {
+                $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 250) . '...';
+            }
             ?>
 
-            <?php if (!empty($fields) && !empty($sp)): ?>
-            <table class="table table-bordered product-desc">
-                <?php foreach ($fields as $key => $label): ?>
-                <?php if (!empty($sp[$key])): ?>
-                <tr>
-                    <th><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></th>
-                    <td><?= htmlspecialchars($sp[$key], ENT_QUOTES, 'UTF-8') ?></td>
-                </tr>
-                <?php endif; ?>
-                <?php endforeach; ?>
-            </table>
-            <?php endif; ?>
+            <p class="product-desc-text"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
             <div class="product-price-row">
                 <?php if ($gia_ban <= 0): ?>
                 <span class="product-price product-price-contact">Liên hệ</span>
-                <?php else: ?>
-                <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
-                <?php if ($giam_gia > 0): ?>
-                <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
-                <?php endif; ?>
-                <?php endif; ?>
+                <div class="product-card-actions">
+                    <button type="button" class="btn-wishlist <?php echo $is_wishlisted ? 'active' : ''; ?>"
+                        data-ma-san-pham="<?php echo (int) $sp['ma_san_pham']; ?>" aria-label="Yêu thích"
+                        title="Yêu thích">
+                        <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
+                    </button>
+                    <button type="button" class="btn-share-product" data-share-product
+                        data-share-url="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>"
+                        data-share-title="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" aria-label="Chia sẻ"
+                        title="Chia sẻ">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </div>
+                    <?php else: ?>
+                    <span class="product-price"><?php echo number_format($gia_sau_giam, 0, ',', '.'); ?>₫</span>
+                    <?php if ($giam_gia > 0): ?>
+                    <span class="product-price-old"><?php echo number_format($gia_ban, 0, ',', '.'); ?>₫</span>
+                    <?php endif; ?>
+                    <?php endif; ?>
             </div>
 
             <?php if ($gia_ban > 0): ?>
@@ -313,15 +295,19 @@
     <section class="product-page">
         <div class="container">
             <div class="product-page-header">
+                <a href="/index.php">Trang chủ</a>
                 <span class="product-eyebrow">— Cửa hàng Viết Sơn</span>
                 <h1 class="product-title">Sản phẩm</h1>
             </div>
+            
+            <button type="button" class="mobile-filter-toggle" data-mobile-filter-toggle="#productSidebar"
+                aria-expanded="false">
+                <i class="fa-solid fa-sliders"></i> Bộ lọc &amp; Danh mục
+            </button>
 
             <div class="product-page-layout">
-
                 <!-- ===== SIDEBAR: Danh mục sản phẩm + bộ lọc ===== -->
-                <aside class="product-sidebar">
-
+                <aside class="product-sidebar" id="productSidebar">
                     <div class="sidebar-block">
                         <h3 class="sidebar-title">Danh mục sản phẩm</h3>
                         <ul class="sidebar-category-list">
@@ -331,6 +317,7 @@
                                     Tất cả sản phẩm
                                 </a>
                             </li>
+                            
                             <?php foreach ($nhom_danh_muc as $ma_dm => $nhom): ?>
                             <li>
                                 <a class="sidebar-category-link" href="#section-<?php echo $ma_dm; ?>">
@@ -341,6 +328,8 @@
                             <?php endforeach; ?>
                         </ul>
                     </div>
+                    
+
 
                     <?php if (!empty($dung_luong_options)): ?>
                     <div class="sidebar-block">
@@ -352,7 +341,6 @@
                                     Tất cả
                                 </a>
                             </li>
-
                             <?php 
                 // CẤU HÌNH: Số lượng hiển thị ban đầu
                 $limit = 5; 
@@ -445,7 +433,7 @@
                         <h3 class="sidebar-title">Hỗ trợ khách hàng</h3>
                         <p><strong>Tư vấn bán hàng</strong><br><a href="tel:0283929377    0">(028) 3929 3770</a></p>
                         <p><strong>Kỹ thuật - Bảo hành</strong><br><a href="tel:02839260996">(028) 3926 0996</a></p>
-                        <p><strong>Thời gian làm việc</strong><br>8:00 - 17:30 (T2 - T7)</p>
+                        <p><strong>Thời gian làm việc</strong><br><a href="">8:00 - 17:30 (T2 - T7)</a></p>
                     </div>
 
 

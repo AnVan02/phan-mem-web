@@ -7,7 +7,7 @@
 }
 
 .news-page .container {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -100,7 +100,7 @@
 }
 
 .news-meta .news-tag {
-    color: #DC2626;
+    color: #1e3c72;
 }
 
 .news-name {
@@ -121,7 +121,7 @@
 .news-readmore {
     font-size: 14px;
     font-weight: 700;
-    color: #DC2626;
+    color: #1e3c72;
 }
 
 .news-card:hover .news-readmore {
@@ -156,7 +156,7 @@
 .news-pagination .page-number.active {
     color: #111;
     font-weight: 800;
-    border-bottom: 2px solid #DC2626;
+    border-bottom: 2px solid #1e3c72;
 }
 
 .news-pagination .page-ellipsis {
@@ -203,7 +203,8 @@
 
 @media (max-width: 640px) {
     .news-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
     }
 
     .news-filter {
@@ -211,5 +212,37 @@
         overflow-x: auto;
         gap: 16px;
         padding-bottom: 4px;
+    }
+
+    .news-media {
+        height: 110px;
+        margin-bottom: 8px;
+    }
+
+    .news-meta {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+
+    .news-name {
+        font-size: 14px;
+        margin-bottom: 6px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .news-desc {
+        font-size: 12px;
+        margin-bottom: 6px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .news-readmore {
+        font-size: 12px;
     }
 }

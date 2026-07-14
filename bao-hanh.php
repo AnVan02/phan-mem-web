@@ -1,12 +1,16 @@
-<?php 
-
-$GLOBALS['page_specific_title'] = "TRA CỨU BẢO HÀNH ACHIVA";
-$GLOBALS['page_specific_description'] = "Tra cứu thông tin bảo hành sản phẩm theo số serial tại Công Ty Cổ Phần ACHIVA, giúp khách hàng nhanh chóng kiểm tra thời hạn bảo hành, tình trạng bảo hành và các thông tin liên quan đến sản phẩm";
-$GLOBALS['page_specific_keywords'] = "tra cứu bảo hành ACHIVA, tra cứu số serial ACHIVA, bảo hành ACHIVA ";
-
-?>
 
 <?php
+$page_title       = 'Sản phẩm - Viết Sơn Achieva';
+$extra_css        = ['assets/css/bao-hanh.css'];
+$post_css_scripts = ['assets/js/bao-hanh.js'];
+require 'head.php';
+?>
+    <?php
+    require_once 'admin/config/config.php';
+    include 'header.php';
+
+
+
 function getWarrantyFromApi($serial)
 {
     $url = 'https://baohanhvs.rosaoffice.com/api/warranty/serial/' . rawurlencode($serial);
@@ -26,16 +30,14 @@ function getWarrantyFromApi($serial)
 
 function getWarrantyFromDb($serial)
 {
-    global $mysqli;
-    if (!$mysqli)
+    global $pdo;
+    if (!$pdo)
         return null;
 
     try {
-        $stmt = $mysqli->prepare("SELECT * FROM sanpham WHERE SOSERIAL = ?");
-        $stmt->bind_param("s", $serial);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+        $stmt = $pdo->prepare("SELECT * FROM bao_hanh WHERE SOSERIAL = ?");
+        $stmt->execute([$serial]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
             return [
@@ -54,21 +56,24 @@ function getWarrantyFromDb($serial)
     return null;
 }
 
+function parseVnDate($str)
+{
+    if (!$str || $str === '—')
+        return null;
+
+    foreach (['Y-m-d H:i:s', 'Y-m-d', 'd/m/Y H:i:s', 'd/m/Y'] as $format) {
+        $date = DateTime::createFromFormat($format, $str);
+        if ($date !== false) {
+            return $date;
+        }
+    }
+
+    $ts = strtotime($str);
+    return $ts !== false ? (new DateTime())->setTimestamp($ts) : null;
+}
 ?>
+
 <div class="warranty-page-wrapper">
-    <!-- Header/Hero Section -->
-    <div class="warranty-hero-section">
-        <div class="container">
-            <div class="hero-inner">
-                <h1 class="hero-main-title">TRA CỨU BẢO HÀNH ACHIVA</h1>
-                <div class="hero-breadcrumb">
-                    <a href="index.php">TRANG CHỦ</a> / <span>TRA CỨU BẢO HÀNH ACHIVA</span>
-                    <p>Tra cứu thông tin bảo hành sản phẩm theo số serial tại Công Ty Cổ Phần ACHIVA, giúp khách hàng nhanh chóng kiểm tra thời hạn bảo hành, tình trạng bảo hành và các thông tin liên quan đến sản phẩm</p>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Main Content Section -->
     <div class="warranty-content-section">
@@ -77,13 +82,17 @@ function getWarrantyFromDb($serial)
                 <div class="card-inner">
                     <h1 class="card-title-main">TRA CỨU BẢO HÀNH ACHIVA</h1>
                     <div class="title-divider"></div>
+                    <p class="card-subtitle">Nhập số Serial để kiểm tra thông tin bảo hành sản phẩm chính hãng</p>
 
                     <div class="search-box-container">
                         <form name="test" action="#" method="POST" class="warranty-search-form">
                             <div class="search-input-wrapper">
+                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
                                 <input type="text" name="search" id="serial-search"
-                                    placeholder="Nhập số serial của sản phẩm để tra cứu" required
+                                    placeholder="Nhập số Serial..." required autocomplete="off"
                                     value="<?php echo isset($_POST['search']) ? htmlspecialchars($_POST['search']) : ''; ?>">
+                                <button type="button" class="clear-search-btn" id="clear-search"
+                                    aria-label="Xóa"><i class="fa-solid fa-xmark"></i></button>
                                 <button type="submit" class="warranty-submit-btn">Kiểm tra</button>
                             </div>
                         </form>
@@ -106,50 +115,107 @@ function getWarrantyFromDb($serial)
                             if ($data) {
                                 // Ngày xuất: ưu tiên ngày bán cho KH, fallback về ngày nhập kho
                                 $ngayXuat = $data['baoHanhKH']['ngayBan'] ?? $data['ngayNhapKho'] ?? '—';
+                                $ngayXuatDate = parseVnDate($ngayXuat);
+                                $ngayXuatLabel = $ngayXuatDate ? $ngayXuatDate->format('d/m/Y') : htmlspecialchars($ngayXuat);
+
+                                $soThang = $data['soThangBH'] ?? '0';
+                                $isLifetime = ($soThang == -1);
+
+                                $ngayHetHanLabel = '—';
+                                $remainingBadge = '';
+                                $expiryStateClass = 'is-lifetime';
+                                if ($isLifetime) {
+                                    $ngayHetHanLabel = 'Trọn đời';
+                                } elseif ($ngayXuatDate) {
+                                    $expiryDate = clone $ngayXuatDate;
+                                    $expiryDate->modify('+' . intval($soThang) . ' months');
+                                    $ngayHetHanLabel = $expiryDate->format('d/m/Y');
+
+                                    $today = new DateTime('today');
+                                    $diffDays = (int) $today->diff($expiryDate)->format('%r%a');
+
+                                    if ($diffDays >= 0) {
+                                        $expiryStateClass = 'is-active';
+                                        $remainingBadge = '<span class="expiry-badge expiry-ok"><i class="fa-regular fa-clock"></i> Còn ' . $diffDays . ' ngày</span>';
+                                    } else {
+                                        $expiryStateClass = 'is-expired';
+                                        $remainingBadge = '<span class="expiry-badge expiry-expired"><i class="fa-regular fa-clock"></i> Hết hạn ' . abs($diffDays) . ' ngày trước</span>';
+                                    }
+                                }
                         ?>
+                                <div class="valid-msg">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span>Serial hợp lệ! Đây là sản phẩm chính hãng.</span>
+                                </div>
+
                                 <div class="results-layout">
                                     <div class="result-card-item">
+                                        <div class="result-media">
+                                            <div class="result-media-box">
+                                                <i class="fa-solid fa-hard-drive"></i>
+                                            </div>
+                                            <div class="result-media-caption">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                                <div>
+                                                    <strong>Sản phẩm chính hãng</strong>
+                                                    <span>Được phân phối chính hãng tại Việt Nam</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="result-details">
                                             <div class="detail-line">
-                                                <span class="label">Số Serial:</span>
+                                                <span class="detail-icon"><i class="fa-solid fa-barcode"></i></span>
+                                                <span class="label">Số Serial</span>
                                                 <span
                                                     class="value serial-number"><?php echo htmlspecialchars($data['serial']); ?></span>
-                                                <?php if (isset($data['isSpecial']) && $data['isSpecial']): ?>
-                                                    
-                                                <?php endif; ?>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="label">Mã Hàng:</span>
+                                                <span class="detail-icon"><i class="fa-solid fa-tag"></i></span>
+                                                <span class="label">Mã Hãng</span>
                                                 <span
                                                     class="value"><?php echo htmlspecialchars($data['maHang'] ?? '—'); ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="label">Tên sản phẩm:</span>
+                                                <span class="detail-icon"><i class="fa-solid fa-cube"></i></span>
+                                                <span class="label">Tên sản phẩm</span>
                                                 <span
                                                     class="value"><?php echo htmlspecialchars($data['tenHang'] ?? '—'); ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="label">Ngày Xuất:</span>
-                                                <span class="value"><?php echo htmlspecialchars($ngayXuat); ?></span>
+                                                <span class="detail-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                                                <span class="label">Ngày Xuất</span>
+                                                <span class="value"><?php echo $ngayXuatLabel; ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="label">Thời hạn bảo hành:</span>
+                                                <span class="detail-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                                                <span class="label">Thời hạn bảo hành</span>
                                                 <span
                                                     class="value warranty-value"><?php
-                                                        $soThang = $data['soThangBH'] ?? '0';
-                                                        echo $soThang == -1 ? 'Bảo hành trọn đời' : htmlspecialchars($soThang) . ' tháng';
+                                                        echo $isLifetime ? 'Bảo hành trọn đời' : htmlspecialchars($soThang) . ' tháng';
                                                     ?></span>
+                                            </div>
+                                            <div class="detail-line">
+                                                <span class="detail-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                                                <span class="label">Ngày hết hạn</span>
+                                                <span class="value expiry-value <?php echo $expiryStateClass; ?>">
+                                                    <?php echo htmlspecialchars($ngayHetHanLabel); ?>
+                                                    <?php echo $remainingBadge; ?>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="warranty-notice-bar">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    <span><strong>Lưu ý:</strong> Vui lòng giữ lại hóa đơn/phiếu mua hàng để được hỗ
+                                        trợ bảo hành nhanh chóng.</span>
+                                </div>
                         <?php
                             } else {
                                 echo '<div class="search-error-msg">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V13H11V15ZM11 11H9V5H11V11Z" fill="#ff4d4f"/>
-                                        </svg>
-                                        <span>Không tìm thấy thông tin cho mã serial: ' . htmlspecialchars($search) . '</span>
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        <span>Mã serial: ' . htmlspecialchars($search) . ' không hợp lệ. Đây không phải là sản phẩm chính hãng</span>
                                       </div>';
                             }
                         }
@@ -157,357 +223,40 @@ function getWarrantyFromDb($serial)
                     </div>
                 </div>
             </div>
+
+            <div class="warranty-features-row">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="feature-text">
+                        <h4>Bảo hành chính hãng</h4>
+                        <p>Sản phẩm được bảo hành tại TT bảo hành chính hãng</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+                    <div class="feature-text">
+                        <h4>Hỗ trợ 24/7</h4>
+                        <p>Đội ngũ hỗ trợ sẵn sàng giải đáp mọi thắc mắc</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div class="feature-text">
+                        <h4>Hotline</h4>
+                        <p class="feature-highlight">1900 1234</p>
+                        <p class="feature-sub">(8:00 - 17:30, T2 - T7)</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="feature-text">
+                        <h4>Website</h4>
+                        <p class="feature-highlight"><a href="https://www.vietsontdc.com/"
+                                target="_blank">www.vietsontdc.com</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<style>
-    /* Premium Look & Feel Setup */
-    .warranty-page-wrapper {
-        font-family: Montserrat;
-        color: #1a1a1a;
-        width: 100%;
-        background-color: #f8f9fa;
-        min-height: 100vh;
-    }
-
-    .warranty-page-wrapper .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-
-    /* Hero Banner - matching screenshot precisely */
-    .warranty-hero-section {
-        /*background: #004691;*/
-        background-image: url('assets/images/banner/bao-hanh.webp');
-        background-size: cover;
-        background-position: center right;
-        padding: 100px 0;
-        color: #ffffff;
-    }
-
-    .warranty-hero-section .hero-inner {
-        text-align: left;
-    }
-
-    /* ... (and so on for other styles) ... */
-
-    .hero-main-title {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 15px;
-        letter-spacing: -0.5px;
-        text-transform: uppercase;
-    }
-
-    .hero-breadcrumb {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.75);
-        font-weight: 500;
-    }
-
-    .hero-breadcrumb a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.2s;
-    }
-
-    .hero-breadcrumb a:hover {
-        color: #fff;
-    }
-
-    /* Card Content Area */
-    .warranty-content-section {
-        padding: 60px 0;
-    }
-
-    .warranty-card-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
-        padding: 60px 40px;
-    }
-
-    .card-title-main {
-        font-size: 28px;
-        font-weight: 700;
-        color: #DC2626;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-    }
-
-    .title-divider {
-        width: 100px;
-        height: 3px;
-        background-color: #DC2626;
-        margin: 0 auto 40px;
-    }
-
-    /* Search Box - refined */
-    .search-box-container {
-        max-width: 750px;
-        margin: 0 auto;
-    }
-
-    .search-input-wrapper {
-        display: flex;
-        background: #fdfdfd;
-        border: 1px solid #e0e6ed;
-        border-radius: 100px;
-        padding: 8px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
-    }
-
-    .search-input-wrapper:focus-within {
-        border-color: #0068b5;
-        box-shadow: 0 0 0 4px rgba(0, 104, 181, 0.1);
-        background: #fff;
-    }
-
-    .search-input-wrapper input {
-        flex: 1;
-        border: none;
-        background: transparent;
-        padding: 15px 30px;
-        font-size: 16px;
-        font-family: Montserrat;
-        color: #333;
-        outline: none;
-        font-weight: 500;
-
-    }
-
-    .search-input-wrapper input::placeholder {
-        color: #aeb9c6;
-        font-weight: 400;
-    }
-
-    .warranty-submit-btn {
-        background: #DC2626;
-        color: #fff;
-        border: none;
-        border-radius: 100px;
-        padding: 0 40px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 4px 12px rgba(0, 104, 181, 0.2);
-    }
-
-    /*.warranty-submit-btn:hover {*/
-    /*    background: #005a9e;*/
-    /*    transform: translateY(-1px);*/
-    /*    box-shadow: 0 6px 15px rgba(0, 104, 181, 0.3);*/
-    /*}*/
-
-    /* Results layout - professional */
-    .warranty-results-area {
-        margin-top: 50px;
-    }
-
-    .results-layout {
-        display: grid;
-        gap: 20px;
-    }
-
-    .result-card-item {
-        background: #fcfdfe;
-        border: 1px solid #f0f4f8;
-        border-radius: 16px;
-        padding: 30px;
-        transition: transform 0.2s;
-        border-color: #0068b5;
-    }
-
-    .detail-line {
-        display: grid;
-        grid-template-columns: 180px 1fr;
-        padding: 15px 0;
-        border-bottom: 1px solid #f0f4f8;
-        gap: 15px;
-        align-items: flex-start;
-        /* Ensure label stays at top if info wraps */
-    }
-
-    .detail-line:last-child {
-        border-bottom: none;
-    }
-
-    .label {
-        font-size: 15px;
-        font-weight: 500;
-        color: #64748b;
-    }
-
-    .value {
-        font-size: 16px;
-        font-weight: 700;
-        color: #1a1a1a;
-        text-align: left;
-        /* Values are now left-aligned in their column */
-    }
-
-    .serial-number {
-        color: #FF3300;
-        /* Crimson Red */
-    }
-
-    .special-badge {
-        display: inline-block;
-        background: #fff7e6;
-        color: #d46b08;
-        border: 1px solid #ffd591;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 4px;
-        margin-left: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-        vertical-align: middle;
-    }
-
-    .warranty-value {
-        color: #1d4ed8;
-        /* Corporate Blue */
-    }
-
-    .search-error-msg {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        background: #fff1f0;
-        border: 1px solid #ffa39e;
-        color: #cf1322;
-        padding: 20px;
-        border-radius: 12px;
-        font-weight: 500;
-        animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .warranty-card-container {
-            padding: 30px 15px;
-        }
-
-        .search-input-wrapper {
-            flex-direction: column;
-            border-radius: 20px;
-            padding: 10px;
-        }
-
-        .search-input-wrapper input {
-            padding: 12px 15px;
-            text-align: center;
-        }
-
-        .warranty-submit-btn {
-            width: 100%;
-            height: 50px;
-            margin-top: 10px;
-        }
-
-        /* Sửa chính: chuyển grid thành flex column */
-        .detail-line {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 12px 0;
-            text-align: left;
-        }
-
-        .label {
-            font-size: 12px;
-            color: #94a3b8;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .value {
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .result-card-item {
-            padding: 20px 15px;
-        }
-
-        .hero-main-title {
-            font-size: 22px;
-        }
-
-        .card-title-main {
-            font-size: 20px;
-        }
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('.warranty-search-form');
-        const resultsArea = document.querySelector('.warranty-results-area');
-
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault(); // Ngăn chặn load lại trang
-
-                const searchInput = document.querySelector('#serial-search').value;
-
-                // Hiển thị trạng thái đang tải mượt mà
-                resultsArea.innerHTML = `
-                <div style="text-align:center; padding: 40px; animation: fadeIn 0.3s ease;">
-                    <div style="display:inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #DC2626; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                    <p style="margin-top: 15px; color: #64748b; font-weight: 500;">Đang tra cứu hệ thống vui lòng đợi...</p>
-                </div>
-                <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
-            `;
-
-                // Tạo dữ liệu gửi đi 
-                const formData = new FormData();
-                formData.append('search', searchInput);
-
-                // Fetch dữ liệu ngầm không load lại trang
-                fetch(window.location.href, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.text())
-                    .then(html => {
-                        // Cắt lấy mỗi phần hiển thị kết quả để thay thế
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-                        const newResults = doc.querySelector('.warranty-results-area');
-
-                        if (newResults) {
-                            resultsArea.innerHTML = newResults.innerHTML;
-                        } else {
-                            resultsArea.innerHTML = '<div class="search-error-msg">Có lỗi hiển thị, vui lòng tải lại website!</div>';
-                        }
-                    })
-                    .catch(error => {
-                        resultsArea.innerHTML = '<div class="search-error-msg">Mất kết nối mạng, vui lòng thử lại!</div>';
-                    });
-            });
-        }
-    });
-</script>
+<?php require 'footer.php' ?>

@@ -68,30 +68,11 @@ function lay_anh_dau($chuoi_anh) {
     $ds = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', (string) $chuoi_anh))));
     return !empty($ds) ? $ds[0] : 'assets/image/pc.webp';
 }
+
+$page_title = ($da_dang_nhap ? 'Tài khoản của tôi' : 'Đăng nhập / Đăng ký') . ' - Viết Sơn Achieva';
+$extra_css  = ['assets/css/tai-khoan.css'];
+require 'head.php';
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $da_dang_nhap ? 'Tài khoản của tôi' : 'Đăng nhập / Đăng ký'; ?> - Viết Sơn Achieva</title>
-    <link rel="shortcut icon" href="assets/images/icon/logo VS_icon.jpg">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="assets/js/header.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/tai-khoan.css">
-</head>
-
-<body>
     <?php include 'header.php'; ?>
 
     <div class="main-content layout-contact">
@@ -120,12 +101,12 @@ function lay_anh_dau($chuoi_anh) {
         <!-- Dải thống kê -->
         <div class="stat-bar">
             <a href="#don-hang-toi" class="stat-item">
-                <div class="stat-icon" style="background:#fee2e2; color:#dc2626;"><i
+                <div class="stat-icon" style="background:#eaf1fb; color:#1e3c72;"><i
                         class="fa-solid fa-bag-shopping"></i></div>
                 <div>
                     <div class="stat-num"><?php echo $so_don_hang; ?></div>
                     <div class="stat-label">Đơn hàng</div>
-                    <span class="stat-link" style="color:#dc2626;">Xem lịch sử</span>
+                    <span class="stat-link" style="color:#1e3c72;">Xem lịch sử</span>
                 </div>
             </a>
             <a href="#yeu-thich" class="stat-item">
@@ -197,14 +178,14 @@ function lay_anh_dau($chuoi_anh) {
                 <p class="page-subtitle" style="margin:0 0 16px;">Theo dõi và quản lý đơn hàng của bạn</p>
 
                 <?php if (empty($don_hang_toi)): ?>
-                <div class="empty-box" style="background:#fef2f2; border:1px solid #fecaca;">
-                    <div class="empty-icon" style="background:#fee2e2; color:#dc2626;"><i
+                <div class="empty-box" style="background:#eaf1fb; border:1px solid #cddcf2;">
+                    <div class="empty-icon" style="background:#dce7f7; color:#1e3c72;"><i
                             class="fa-solid fa-cart-shopping"></i></div>
                     <p style="font-weight:600; margin:0 0 4px;">Bạn chưa có đơn hàng nào</p>
                     <p style="font-size:13px; color:#6b7280; margin:0 0 16px;">Khám phá sản phẩm và đặt hàng ngay để
                         trải nghiệm dịch vụ của chúng tôi!</p>
                     <a href="san-pham.php"
-                        style="display:inline-block; border:1px solid #dc2626; color:#dc2626; padding:8px 18px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">Mua
+                        style="display:inline-block; border:1px solid #1e3c72; color:#1e3c72; padding:8px 18px; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none;">Mua
                         sắm ngay</a>
                 </div>
                 <?php else: ?>
@@ -265,7 +246,7 @@ function lay_anh_dau($chuoi_anh) {
                 <form action="xuly-tai-khoan.php" method="POST">
                     <input type="hidden" name="action" value="dang_xuat">
                     <button type="submit" class="btn-submit btn-logout"
-                        style="width:100%; background-color: #dc2626;"><i class="fa-solid fa-right-from-bracket"></i>
+                        style="width:100%; background-color: #1e3c72; color: #ffd700;"><i class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất</button>
                 </form>
             </div>
@@ -343,7 +324,7 @@ function lay_anh_dau($chuoi_anh) {
                                     style="font-size:14px; font-weight:600; margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
                                     <?php echo htmlspecialchars($sp['ten_san_pham']); ?></p>
                                 <strong
-                                    style="font-size:14px; color:#dc2626;"><?php echo $sp_gia <= 0 ? 'Liên hệ' : number_format($sp_gia, 0, ',', '.') . '₫'; ?></strong>
+                                    style="font-size:14px; color:#1e3c72;"><?php echo $sp_gia <= 0 ? 'Liên hệ' : number_format($sp_gia, 0, ',', '.') . '₫'; ?></strong>
                             </div>
                         </a>
                         <button type="button" class="btn-remove-wishlist"

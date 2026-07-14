@@ -21,7 +21,7 @@ if ($action === 'toggle') {
     $check = $pdo->prepare("SELECT ma_yeu_thich FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh AND ma_san_pham = :sp LIMIT 1");
     $check->execute([':kh' => $ma_kh, ':sp' => $ma_sp]);
     $exists = $check->fetch();
-    
+
     if ($exists) {
         $del = $pdo->prepare("DELETE FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh AND ma_san_pham = :sp");
         $del->execute([':kh' => $ma_kh, ':sp' => $ma_sp]);
