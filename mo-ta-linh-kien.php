@@ -359,6 +359,10 @@ if (!empty($ma_th_trong_dm)) {
     $banner_list = $banner_stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// Tên thương hiệu dùng cho khối "Vì sao nên chọn ..." bên dưới trang
+// (lấy từ banner đầu tiên nếu có, nếu không thì dùng luôn tên danh mục)
+$ten_thuong_hieu_hien_thi = !empty($banner_list) ? trim($banner_list[0]['ten_thuong_hieu']) : $ten_danh_muc;
+
 $related_articles_stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC LIMIT 1");
 $related_articles = $related_articles_stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -784,7 +788,7 @@ require 'head.php';
         <div class="needs-card">
             <div class="needs-card-header">
                 <span class="needs-card-title"><i class="fa-solid fa-sliders"></i>Vì sao nên chọn
-                    <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></span>
+                    <?php echo htmlspecialchars($ten_thuong_hieu_hien_thi); ?></span>
             </div>
             <div class="info-list">
                 <div class="info-row">
@@ -835,7 +839,7 @@ require 'head.php';
                         <div class="info-content">
                             <div class="info-label">Sản phẩm chính hãng</div>
                             <div class="info-text">100% chính hãng
-                                <?php echo htmlspecialchars(trim($b['ten_thuong_hieu'])); ?></div>
+                                <?php echo htmlspecialchars($ten_thuong_hieu_hien_thi); ?></div>
                         </div>
                     </div>
 

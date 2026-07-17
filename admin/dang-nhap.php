@@ -1,19 +1,25 @@
 <?php
-    session_start();
     require_once 'config/config.php';
+
+    // Đã đăng nhập rồi thì vào thẳng dashboard, khỏi đăng nhập lại
+    if (isset($_SESSION['account_id_admin'])) {
+        header('Location: dashboad.php');
+        exit;
+    }
+
     if (isset($_POST['login'])) {
         $account_email = trim($_POST['account_email'] ?? '');
         $account_password = trim($_POST['account_password'] ?? '');
 
-        $stmt = $pdo->prepare("SELECT * FROM account WHERE account_email = :email AND account_password = :password AND account_type IN (0, 1, 2)");
-        $stmt->execute([':email' => $account_email, ':password' => $account_password]);
+        $stmt = $pdo->prepare("SELECT * FROM account WHERE account_email = :email AND account_type IN (0, 1, 2) LIMIT 1");
+        $stmt->execute([':email' => $account_email]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if ($row && password_verify($account_password, $row['account_password'])) {
             $_SESSION['login'] = $row['account_email'];
             $_SESSION['account_id_admin'] = $row['account_id'];
             $_SESSION['account_name'] = $row['account_name'];
-            $_SESSION['account_type'] = $row['account_type'];
+            $_SESSION['account_type'] = (int) $row['account_type'];
             header('Location: dashboad.php');
             exit;
         } else {
@@ -45,9 +51,9 @@
                         <input type="password" name="account_password" placeholder=" " required>
                         <label for="">Password</label>
                     </div>
+
                     <div class="forget">
                         <label for=""><input type="checkbox">Remember Me  <a href="#">Forget Password</a></label>
-                      
                     </div>
                     <button type="submit" name="login">Log in</button>
                     <div class="register">

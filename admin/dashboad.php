@@ -1,5 +1,6 @@
 <?php
     require_once 'config/config.php';
+    yeu_cau_dang_nhap();
 
     $tong_san_pham   = (int) $pdo->query("SELECT COUNT(*) FROM san_pham")->fetchColumn();
     $tong_bai_viet   = (int) $pdo->query("SELECT COUNT(*) FROM article")->fetchColumn();

@@ -29,6 +29,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Nút kính lúp: mở/đóng ô tìm kiếm
+    var searchToggle = document.querySelector('.search-toggle');
+    var searchBox = document.querySelector('.search-box');
+    if (searchToggle && searchBox) {
+        searchToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = searchBox.classList.toggle('is-open');
+            if (isOpen) {
+                var input = searchBox.querySelector('input[name="q"]');
+                if (input) input.focus();
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (searchBox.classList.contains('is-open') && !e.target.closest('.search-box') && !e.target.closest('.search-toggle')) {
+                searchBox.classList.remove('is-open');
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') searchBox.classList.remove('is-open');
+        });
+    }
+
     var dropdownItems = document.querySelectorAll('.has-submenu, .has-megamenu');
 
     function closeAll(except) {

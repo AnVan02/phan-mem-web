@@ -124,8 +124,9 @@
             </a>
         </div>
 
-        <form class="search-box" action="/tim-kiem.php" method="get">
-            <input type="text" name="q" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+        <form class="search-box" action="san-pham.php" method="get">
+            <input type="text" name="q" placeholder="Tìm theo tên hoặc mã sản phẩm..." aria-label="Tìm kiếm"
+                value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
             <button type="submit" aria-label="Tìm kiếm">
                 <i class="fas fa-search"></i>
             </button>

@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     $ma_bai_viet = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 

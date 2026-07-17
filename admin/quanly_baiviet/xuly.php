@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     function upload_anh_bai_viet($file) {
         if (!isset($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {

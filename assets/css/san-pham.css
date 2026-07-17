@@ -577,6 +577,50 @@
     border-radius: 999px;
 }
 
+/* ---- Pagination (theo từng danh mục) ---- */
+.product-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.product-pagination .page-nav,
+.product-pagination .page-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 6px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b6b70;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+}
+
+.product-pagination .page-num:hover,
+.product-pagination .page-nav:hover:not(.disabled) {
+    color: #1e3c72;
+    border-color: #1e3c72;
+}
+
+.product-pagination .page-num.active {
+    background: #1e3c72;
+    border-color: #1e3c72;
+    color: #fff;
+}
+
+.product-pagination .page-nav.disabled {
+    color: #d1d5db;
+    pointer-events: none;
+}
+
 /* ---- Toolbar ---- */
 .product-toolbar {
     display: flex;

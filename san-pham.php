@@ -290,6 +290,35 @@ require 'head.php';
             ];
         }
     }
+
+    // Phân trang riêng cho từng danh mục: mỗi trang hiển thị 10 sản phẩm,
+    // điều hướng bằng query string dạng trang[ma_danh_muc]=so_trang
+    $SO_SP_MOI_TRANG = 10;
+    foreach ($nhom_danh_muc as $ma_dm => &$nhom) {
+        $tong_sp        = count($nhom['san_pham']);
+        $tong_trang     = max(1, (int) ceil($tong_sp / $SO_SP_MOI_TRANG));
+        $trang_hien_tai = (isset($_GET['trang']) && is_array($_GET['trang']) && isset($_GET['trang'][$ma_dm]))
+            ? (int) $_GET['trang'][$ma_dm] : 1;
+        if ($trang_hien_tai < 1) $trang_hien_tai = 1;
+        if ($trang_hien_tai > $tong_trang) $trang_hien_tai = $tong_trang;
+        $bat_dau = ($trang_hien_tai - 1) * $SO_SP_MOI_TRANG;
+
+        $nhom['san_pham_trang'] = array_slice($nhom['san_pham'], $bat_dau, $SO_SP_MOI_TRANG);
+        $nhom['trang_hien_tai'] = $trang_hien_tai;
+        $nhom['tong_trang']     = $tong_trang;
+    }
+    unset($nhom);
+
+    // Xây link chuyển trang cho 1 danh mục, giữ nguyên bộ lọc & trang của các danh mục khác
+    function xay_url_trang_danh_muc($ma_dm, $trang)
+    {
+        $params = $_GET;
+        if (!isset($params['trang']) || !is_array($params['trang'])) {
+            $params['trang'] = [];
+        }
+        $params['trang'][$ma_dm] = $trang;
+        return 'san-pham.php?' . http_build_query($params) . '#section-' . $ma_dm;
+    }
     ?>
 
     <section class="product-page">
@@ -489,10 +518,27 @@ require 'head.php';
                         <?php endif; ?>
                         <!-- Grid sản phẩm của danh mục này -->
                         <div class="product-grid" id="section-<?php echo $ma_dm; ?>">
-                            <?php foreach (array_slice($nhom['san_pham'], 0, 10) as $sp): ?>
+                            <?php foreach ($nhom['san_pham_trang'] as $sp): ?>
                             <?php render_the_card($sp); ?>
                             <?php endforeach; ?>
                         </div>
+
+                        <?php if ($nhom['tong_trang'] > 1): ?>
+                        <div class="product-pagination">
+                            <a class="page-nav <?php echo $nhom['trang_hien_tai'] <= 1 ? 'disabled' : ''; ?>"
+                                href="<?php echo xay_url_trang_danh_muc($ma_dm, max(1, $nhom['trang_hien_tai'] - 1)); ?>">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <?php for ($i = 1; $i <= $nhom['tong_trang']; $i++): ?>
+                            <a class="page-num <?php echo $i === $nhom['trang_hien_tai'] ? 'active' : ''; ?>"
+                                href="<?php echo xay_url_trang_danh_muc($ma_dm, $i); ?>"><?php echo $i; ?></a>
+                            <?php endfor; ?>
+                            <a class="page-nav <?php echo $nhom['trang_hien_tai'] >= $nhom['tong_trang'] ? 'disabled' : ''; ?>"
+                                href="<?php echo xay_url_trang_danh_muc($ma_dm, min($nhom['tong_trang'], $nhom['trang_hien_tai'] + 1)); ?>">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                        <?php endif; ?>
                     </div><!-- /.product-section -->
                     <?php endforeach; ?>
 

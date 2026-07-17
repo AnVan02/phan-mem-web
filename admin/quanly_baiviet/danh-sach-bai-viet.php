@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     $danh_sach_stmt = $pdo->query("SELECT * FROM article ORDER BY article_date DESC, article_id DESC");
     $danh_sach = $danh_sach_stmt->fetchAll(PDO::FETCH_ASSOC);

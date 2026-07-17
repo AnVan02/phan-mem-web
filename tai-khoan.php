@@ -35,6 +35,22 @@ if ($da_dang_nhap) {
 $so_don_hang    = count($don_hang_toi);
 $so_yeu_thich   = count($san_pham_yeu_thich);
 $so_danh_gia    = count($lich_su_danh_gia);
+
+// Phân trang cho danh sách "Đơn hàng của tôi"
+$SO_DH_MOI_TRANG = 5;
+$tong_trang_dh   = max(1, (int) ceil($so_don_hang / $SO_DH_MOI_TRANG));
+$trang_dh        = isset($_GET['trang_dh']) ? (int) $_GET['trang_dh'] : 1;
+if ($trang_dh < 1) $trang_dh = 1;
+if ($trang_dh > $tong_trang_dh) $trang_dh = $tong_trang_dh;
+$don_hang_trang  = array_slice($don_hang_toi, ($trang_dh - 1) * $SO_DH_MOI_TRANG, $SO_DH_MOI_TRANG);
+
+function xay_url_trang_dh($trang)
+
+{
+    $params = $_GET;
+    $params['trang_dh'] = $trang;
+    return 'tai-khoan.php?' . http_build_query($params) . '#don-hang-toi';
+}
 // Chưa có bảng mã giảm giá trong CSDL, tạm để 0 - bổ sung sau khi có bảng thật.
 $so_ma_giam_gia = 0;
 
@@ -78,8 +94,13 @@ require 'head.php';
     <div class="main-content layout-contact">
         <div class="page-header contact-header">
             <?php if ($da_dang_nhap): ?>
-            <h1 class="page-title">Xin chào, <?php echo htmlspecialchars($khach_hang['customer_name']); ?> 👋</h1>
-            <p class="page-subtitle">Quản lý thông tin tài khoản và theo dõi đơn hàng của bạn tại đây.</p>
+            <div class="account-banner">
+                <div class="account-avatar"><?php echo htmlspecialchars(mb_strtoupper(mb_substr($khach_hang['customer_name'], 0, 1, 'UTF-8'), 'UTF-8')); ?></div>
+                <div class="account-banner-text">
+                    <h1 class="page-title">Xin chào, <?php echo htmlspecialchars($khach_hang['customer_name']); ?> <span class="wave">👋</span></h1>
+                    <p class="page-subtitle">Quản lý thông tin tài khoản và theo dõi đơn hàng của bạn tại đây.</p>
+                </div>
+            </div>
             <?php else: ?>
             <h1 class="page-title">Đăng nhập / Đăng ký tài khoản</h1>
             <p class="page-subtitle">
@@ -101,37 +122,35 @@ require 'head.php';
         <!-- Dải thống kê -->
         <div class="stat-bar">
             <a href="#don-hang-toi" class="stat-item">
-                <div class="stat-icon" style="background:#eaf1fb; color:#1e3c72;"><i
-                        class="fa-solid fa-bag-shopping"></i></div>
+                <div class="stat-icon is-blue"><i class="fa-solid fa-bag-shopping"></i></div>
                 <div>
                     <div class="stat-num"><?php echo $so_don_hang; ?></div>
                     <div class="stat-label">Đơn hàng</div>
-                    <span class="stat-link" style="color:#1e3c72;">Xem lịch sử</span>
+                    <span class="stat-link is-blue">Xem lịch sử</span>
                 </div>
             </a>
             <a href="#yeu-thich" class="stat-item">
-                <div class="stat-icon" style="background:#f3e8ff; color:#9333ea;"><i class="fa-solid fa-heart"></i>
-                </div>
+                <div class="stat-icon is-purple"><i class="fa-solid fa-heart"></i></div>
                 <div>
                     <div class="stat-num"><?php echo $so_yeu_thich; ?></div>
                     <div class="stat-label">Sản phẩm yêu thích</div>
-                    <span class="stat-link" style="color:#9333ea;">Xem danh sách</span>
+                    <span class="stat-link is-purple">Xem danh sách</span>
                 </div>
             </a>
             <a href="#danh-gia" class="stat-item">
-                <div class="stat-icon" style="background:#fef3c7; color:#ca8a04;"><i class="fa-solid fa-star"></i></div>
+                <div class="stat-icon is-amber"><i class="fa-solid fa-star"></i></div>
                 <div>
                     <div class="stat-num"><?php echo $so_danh_gia; ?></div>
                     <div class="stat-label">Đánh giá của bạn</div>
-                    <span class="stat-link" style="color:#ca8a04;">Viết đánh giá</span>
+                    <span class="stat-link is-amber">Viết đánh giá</span>
                 </div>
             </a>
             <a href="#" class="stat-item" title="Tính năng mã giảm giá đang được phát triển">
-                <div class="stat-icon" style="background:#dbeafe; color:#2563eb;"><i class="fa-solid fa-gift"></i></div>
+                <div class="stat-icon is-sky"><i class="fa-solid fa-gift"></i></div>
                 <div>
                     <div class="stat-num"><?php echo $so_ma_giam_gia; ?></div>
                     <div class="stat-label">Mã giảm giá</div>
-                    <span class="stat-link" style="color:#2563eb;">Xem mã của bạn</span>
+                    <span class="stat-link is-sky">Xem mã của bạn</span>
                 </div>
             </a>
         </div>
@@ -190,7 +209,7 @@ require 'head.php';
                 </div>
                 <?php else: ?>
                 <div class="my-order-list">
-                    <?php foreach ($don_hang_toi as $dh): ?>
+                    <?php foreach ($don_hang_trang as $dh): ?>
                     <div class="my-order-item">
                         <div class="my-order-main">
                             <strong>Đơn #<?php echo (int) $dh['ma_don_hang']; ?></strong>
@@ -210,6 +229,23 @@ require 'head.php';
                     </div>
                     <?php endforeach; ?>
                 </div>
+
+                <?php if ($tong_trang_dh > 1): ?>
+                <div class="order-pagination">
+                    <a class="page-nav <?php echo $trang_dh <= 1 ? 'disabled' : ''; ?>"
+                        href="<?php echo xay_url_trang_dh(max(1, $trang_dh - 1)); ?>">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                    <?php for ($i = 1; $i <= $tong_trang_dh; $i++): ?>
+                    <a class="page-num <?php echo $i === $trang_dh ? 'active' : ''; ?>"
+                        href="<?php echo xay_url_trang_dh($i); ?>"><?php echo $i; ?></a>
+                    <?php endfor; ?>
+                    <a class="page-nav <?php echo $trang_dh >= $tong_trang_dh ? 'disabled' : ''; ?>"
+                        href="<?php echo xay_url_trang_dh(min($tong_trang_dh, $trang_dh + 1)); ?>">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+                <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     // Thư mục lưu ảnh banner (đường dẫn vật lý) và đường dẫn tương đối lưu vào DB
     define('THUMOC_LUU_BANNER_VAT_LY', __DIR__ . '/../../assets/image/thuong-hieu/');

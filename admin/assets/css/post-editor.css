@@ -54,6 +54,8 @@
 .post-box input[type="date"],
 .post-box input[type="file"],
 .post-box input[type="number"],
+.post-box input[type="email"],
+.post-box input[type="password"],
 .post-box select,
 .post-box textarea {
     font-family: inherit;

@@ -1,10 +1,15 @@
 <?php
     // $ADMIN_ROOT: đường dẫn tương đối tới thư mục admin/, khai báo trước khi include file này.
-    // $active_page: 'dashboard' | 'tin-tuc'
-    // $active_sub (khi $active_page = 'tin-tuc'): 'danh-sach' | 'them'
+    // $active_page: 'dashboard' | 'tin-tuc' | 'san-pham' | 'don-hang' | 'banner' | 'tai-khoan'
+    // $active_sub (khi $active_page = 'tin-tuc' hoặc 'san-pham'): 'danh-sach' | 'them' | 'danh-muc'
     if (!isset($ADMIN_ROOT)) $ADMIN_ROOT = '';
     if (!isset($active_page)) $active_page = '';
     if (!isset($active_sub)) $active_sub = '';
+
+    $vai_tro_hien_tai = (int) ($_SESSION['account_type'] ?? -1);
+    $duoc_xem_noi_dung = in_array($vai_tro_hien_tai, [VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], true);
+    $duoc_xem_don_hang = in_array($vai_tro_hien_tai, [VAI_TRO_QUAN_TRI, VAI_TRO_DON_HANG], true);
+    $la_quan_tri       = $vai_tro_hien_tai === VAI_TRO_QUAN_TRI;
 ?>
 <div class="admin-topbar">
     <div class="admin-topbar-left">
@@ -20,18 +25,24 @@
     </div>
 
     <?php if (!empty($_SESSION['account_name']) || !empty($_SESSION['login'])):
-        $ten_hien_thi = $_SESSION['account_name'] ?? $_SESSION['login'];
+        $ten_hien_thi  = $_SESSION['account_name'] ?? $_SESSION['login'];
+        $ten_vai_tro   = $DS_VAI_TRO[$vai_tro_hien_tai] ?? '';
     ?>
         <div class="admin-account-wrap admin-topbar-account-wrap">
             <button type="button" class="admin-topbar-account admin-account-toggle">
-                <span>Hi, <?php echo htmlspecialchars($ten_hien_thi); ?></span>
+                <span>Hi, <?php echo htmlspecialchars($ten_hien_thi); ?><?php echo $ten_vai_tro !== '' ? ' <small>(' . htmlspecialchars($ten_vai_tro) . ')</small>' : ''; ?></span>
                 <div class="admin-account-avatar">
                     <img src="https://img.icons8.com/bubbles/100/manager.png" alt="manager"/>
                 </div>
                 <i class="fa-solid fa-chevron-down admin-account-caret"></i>
             </button>
             <div class="admin-account-menu" style="display:none;">
-                <a href="<?php echo $ADMIN_ROOT; ?>dang-nhap.php" class="admin-account-menu-item">
+                <?php if ($la_quan_tri): ?>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_taikhoan/tai-khoan.php" class="admin-account-menu-item">
+                    <i class="fa-solid fa-users-gear"></i> Tài khoản quản trị
+                </a>
+                <?php endif; ?>
+                <a href="<?php echo $ADMIN_ROOT; ?>dang-xuat.php" class="admin-account-menu-item">
                     <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
                 </a>
             </div>
@@ -54,6 +65,7 @@
             <img width="30" height="30" src="https://img.icons8.com/fluency/48/dashboard-layout.png" alt="dashboard-layout"/> Dashboard
         </a>
 
+        <?php if ($duoc_xem_noi_dung): ?>
         <div class="admin-nav-group">
             <button type="button" class="admin-nav-item admin-nav-toggle <?php echo $active_page === 'tin-tuc' ? 'active open' : ''; ?>">
                <img width="30" height="30" src="https://img.icons8.com/3d-fluency/94/blog.png" alt="blog"/> Tin tức
@@ -77,6 +89,12 @@
             </div>
         </div>
 
+        <a href="<?php echo $ADMIN_ROOT; ?>quanly/banner.php" class="admin-nav-item <?php echo $active_page === 'banner' ? 'active' : ''; ?>">
+            <img width="25" height="25" src="https://img.icons8.com/fluency/48/old-shop.png" alt="guarantee--v1"/>Banner Sản Phẩm
+        </a>
+        <?php endif; ?>
+
+        <?php if ($duoc_xem_don_hang): ?>
         <a href="<?php echo $ADMIN_ROOT; ?>quanly/don-hang.php" class="admin-nav-item <?php echo $active_page === 'don-hang' ? 'active' : ''; ?>">
             <img width="25" height="25" src="https://img.icons8.com/fluency/48/receipt-approved.png" alt="receipt"/>Đơn hàng
         </a>
@@ -84,10 +102,13 @@
         <a href="<?php echo $ADMIN_ROOT; ?>quanly_baohanh/bao-hanh.php" target="_blank" class="admin-nav-item">
             <img width="25" height="25" src="https://img.icons8.com/dusk/64/guarantee--v1.png" alt="guarantee--v1"/>Bảo hành
         </a>
+        <?php endif; ?>
 
-        <a href="<?php echo $ADMIN_ROOT; ?>quanly/banner.php" class="admin-nav-item <?php echo $active_page === 'banner' ? 'active' : ''; ?>">
-            <img width="25" height="25" src="https://img.icons8.com/fluency/48/old-shop.png" alt="guarantee--v1"/>Banner Sản Phẩm
+        <?php if ($la_quan_tri): ?>
+        <a href="<?php echo $ADMIN_ROOT; ?>quanly_taikhoan/tai-khoan.php" class="admin-nav-item <?php echo $active_page === 'tai-khoan' ? 'active' : ''; ?>">
+            <i class="fa-solid fa-users-gear" style="width:25px;text-align:center;font-size:20px;"></i> Tài khoản quản trị
         </a>
+        <?php endif; ?>
 
         <!-- <a href="<?php echo $ADMIN_ROOT; ?>../san-pham.php" target="_blank" class="admin-nav-item">
             <img width="30" height="30" src="https://img.icons8.com/fluency/48/external-link.png" alt="external-link"/>Xem trang sản phẩm

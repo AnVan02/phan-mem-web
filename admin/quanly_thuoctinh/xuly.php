@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     // Whitelist bảng/cột theo loại — không lấy trực tiếp từ input người dùng.
     $cau_hinh = [

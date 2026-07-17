@@ -1,4 +1,7 @@
 <?php
+    require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_DON_HANG], '../dang-nhap.php');
+
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="mau-import-bao-hanh.csv"');
 

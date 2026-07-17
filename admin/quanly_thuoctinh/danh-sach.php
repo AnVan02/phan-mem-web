@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     function dem_san_pham_dung($pdo, $cot_khoa, $id) {
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM san_pham WHERE `$cot_khoa` = :id");

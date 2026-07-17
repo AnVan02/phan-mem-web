@@ -1,5 +1,6 @@
 <?php
     require_once '../config/config.php';
+    yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
     $ma_dm_loc       = isset($_GET['dm']) ? (int) $_GET['dm'] : 0;
     $ma_th_loc       = isset($_GET['th']) ? (int) $_GET['th'] : 0;
