@@ -25,11 +25,12 @@
                 <img src="images/rosa.png" alt="ROSA Logo" class="logo-icon">
             </div>
             <nav class="nav-links">
-                <a href="landing.php">Giải pháp</a>
+                <a href="landing.php">GIẢI PHÁP</a>
                 <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
                 <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
-                <a href="#">Ứng dụng</a>
-                <a href="#">Sản phẩm</a>
+                <a href="#">ỨNG DỤNG </a>
+                <a href="#">SẢN PHẨM</a>
+                <a href="#" class="btn btn-primary nav-cta js-open-modal">Liên hệ tư vấn</a>
             </nav>
             <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn <i class="ph ph-arrow-right"></i></a>
             <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false">
@@ -95,53 +96,69 @@
                     <div class="eyebrow">VẤN ĐỀ</div>
                     <h2 class="section-title">Đội ngũ của bạn đang mất quá nhiều thời gian vào những việc lặp lại.</h2>
                 </div>
+
                 <div class="grid problem-grid">
                     <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-magnifying-glass"></i></div>
-                        <p>Nhân viên muốn tra một chính sách, một mức chiết khấu, một chương trình khuyến mãi đang chạy — phải lục file hoặc hỏi quản lý rồi ngồi chờ.</p>
+                        <div class="problem-icon">
+                            <i class="ph-fill ph-file-search"></i>
+                        </div>
+                        <h4 class="problem-title">Tra cứu thông tin mất thời gian</h4>
+                        <p>Nhân viên muốn tra chính sách, mức chiết khấu hoặc chương trình khuyến mãi phải lục file hoặc hỏi quản lý rồi ngồi chờ.</p>
                     </div>
+
                     <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-user-plus"></i></div>
-                        <p>Nhân viên mới mất hàng tuần mới thuộc hết bảng giá, quy trình, chính sách công ty.</p>
+                        <div class="problem-icon">
+                            <i class="ph-fill ph-user-plus"></i>
+                        </div>
+                        <h4 class="problem-title">Nhân viên mới onboarding chậm</h4>
+                        <p>Nhân viên mới mất hàng tuần để nắm bảng giá, quy trình và chính sách của công ty.</p>
                     </div>
+
                     <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-chat-circle-dots"></i></div>
-                        <p>Cùng một câu hỏi của khách, nhân viên trả lời đi trả lời lại hàng trăm lần mỗi ngày.</p>
+                        <div class="problem-icon">
+                            <i class="ph-fill ph-chat-circle-dots"></i>
+                        </div>
+                        <h4 class="problem-title">Trả lời khách lặp đi lặp lại</h4>
+                        <p>Cùng một câu hỏi của khách, nhân viên phải trả lời hàng trăm lần mỗi ngày.</p>
                     </div>
+
                     <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-clock"></i></div>
-                        <p>Khách nhắn tin lúc 11 giờ đêm — không ai trả lời cho đến sáng hôm sau.</p>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-file-text"></i></div>
-                        <p>Họp xong, quyết định trôi vào quên lãng, việc giao ra không ai theo dõi.</p>
+                        <div class="problem-icon">
+                            <i class="ph-fill ph-clock"></i>
+                        </div>
+                        <h4 class="problem-title">Mất cơ hội ngoài giờ làm việc</h4>
+                        <p>Khách nhắn tin ngoài giờ không được phản hồi kịp thời, đồng thời các đầu việc sau cuộc họp cũng dễ bị bỏ quên và không được theo dõi.</p>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- 3. Solution -->
         <section class="section-padding">
-            <div class="container solution-section">
-                <div class="solution-left">
-                    <div class="eyebrow">GIẢI PHÁP</div>
-                    <h2 class="section-title" style="margin-bottom: 24px;">ROSA AI Workspace — trợ lý giúp cả công ty làm việc nhẹ hơn.</h2>
-                    <p class="solution-desc">
-                        ROSA AI Workspace không thay thế đội ngũ của bạn. Nó gánh phần việc lặp đi lặp lại, để mọi người tập trung vào điều thật sự quan trọng: khách hàng và chất lượng công việc.
-                    </p>
-                    <p class="solution-desc">
-                        Hình dung đơn giản: có một trợ lý AI đóng vai bộ não, hiểu hết tài liệu công ty và trả lời mọi câu hỏi. Còn n8n là tay chân, mang bộ não đó ra khắp các kênh khách hàng và tự tay chạy những quy trình lặp đi lặp lại khác trong công ty.
-                    </p>
-                    <div class="solution-quote">
-                        "Một bộ não, nhiều đôi tay — vừa hiểu công ty bạn, vừa tự làm việc thay bạn."
+            <div class="container">
+                <div class="solution-card">
+                    <div class="text-center" style="text-align: left; margin-bottom: 32px;">
+                        <div class="eyebrow">GIẢI PHÁP</div>
+                        <h2 class="section-title" style="margin-bottom: 0;">ROSA AI Workspace giúp bạn</h2>
+                    </div>
+                    <div class="solution-flex">
+                        <div class="solution-left">
+                            <ul class="solution-checklist">
+                                <li><i class="ph-fill ph-check-circle"></i> Gánh phần việc lặp đi lặp lại, để đội ngũ tập trung vào khách hàng và chất lượng công việc.</li>
+                                <li><i class="ph-fill ph-check-circle"></i> Một trợ lý AI đóng vai bộ não — hiểu hết tài liệu công ty và trả lời mọi câu hỏi.</li>
+                                <li><i class="ph-fill ph-check-circle"></i> n8n là tay chân — mang bộ não đó ra khắp các kênh khách hàng và tự chạy những quy trình lặp lại khác trong công ty.</li>
+                            </ul>
+                            <div class="solution-quote">
+                                "Một bộ não, nhiều đôi tay — vừa hiểu công ty bạn, vừa tự làm việc thay bạn."
+                            </div>
+                        </div>
+                       <div class="solution-right">
+                            <div class="video-box">
+                                <img src="images/giai-phap.png" alt="Giải pháp">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="solution-right">
-                    <div class="video-box">
-                        <video src="images/chat_ai.mp4" autoplay muted loop playsinline></video>
-                    </div>
-                </div>
-            </div>  
+            </div>
         </section>
 
         <!-- 4. Phần 1 - Trợ lý AI nội bộ (bộ não) -->
@@ -152,139 +169,172 @@
                     <h2 class="section-title" style="margin-bottom: 0;">Một trợ lý hiểu công ty bạn.</h2>
                 </div>
                 <div class="grid value-grid value-grid-4">
+
+                    <!-- 1 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-blue"><i class="ph-fill ph-magnifying-glass"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-folder-open"></i></div>
+                        <div class="icon-square">
+                            <img width="64" height="64" src="https://img.icons8.com/external-ddara-lineal-color-ddara/64/external-check-business-elements-ddara-lineal-color-ddara.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
                         </div>
                         <div class="a-content">
-                            <h3>Tra cứu thông tin nội bộ</h3>
-                            <span class="underline underline-blue"></span>
-                            <p>Hỏi bảng giá, chiết khấu, chính sách hay quy trình bảo hành là có câu trả lời ngay, kèm nguồn trong tài liệu gốc — không cần lục file, không cần chờ quản lý.</p>
+                            <h3>Tra cứu thông tin nội bộ tức thì</h3>
+                            <p>Hỏi bảng giá, mức chiết khấu, chính sách, chương trình khuyến mãi hay quy trình bảo hành và nhận câu trả lời ngay, kèm nguồn trong tài liệu gốc.</p>
                         </div>
                     </div>
+
+                    <!-- 2 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-green"><i class="ph-fill ph-squares-four"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-robot"></i></div>
+                        <div class="icon-square">
+                            <img width="60" height="60" src="https://img.icons8.com/color/48/people-working-together.png" alt="people-working-together"/>
+                        </div>
+                        <div class="a-content">
+                            <h3>Nhân viên mới hòa nhập nhanh hơn</h3>
+                            <p>Không cần lục file hay hỏi quản lý. AI giúp nhân viên mới nắm bảng giá, quy trình và chính sách chỉ trong thời gian ngắn.</p>
+                        </div>
+                    </div>
+
+                    <!-- 3 -->
+                    <div class="a-card">
+                        <div class="icon-square">
+                            <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/3d-blue-ai-chatbot-assistant-icon.png" alt="3d-blue-ai-chatbot-assistant-icon"/>
                         </div>
                         <div class="a-content">
                             <h3>Tạo nhiều chatbot, mỗi bot một nhiệm vụ</h3>
-                            <span class="underline underline-green"></span>
-                            <p>Bot chăm sóc khách, bot nội bộ, bot HR — mỗi bot có kho kiến thức và nhiệm vụ riêng.</p>
+                            <p>Bot chăm sóc khách hàng, bot nội bộ, bot HR... Mỗi bot có kho kiến thức và nhiệm vụ riêng.</p>
                         </div>
                     </div>
+
+                    <!-- 4 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-lightblue"><i class="ph-fill ph-file-arrow-up"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-files"></i></div>
+                        <div class="icon-square">
+                            <img width="64" height="64" src="https://img.icons8.com/dusk/64/download--v1.png" alt="download--v1"/>
                         </div>
                         <div class="a-content">
                             <h3>Tải tài liệu lên là bot biết</h3>
-                            <span class="underline underline-lightblue"></span>
-                            <p>Bảng giá, hợp đồng, quy trình, chính sách — đọc được cả PDF, Word, Excel lẫn ảnh chụp hay bản scan.</p>
+                            <p>Hỗ trợ PDF, Word, Excel, ảnh chụp và PDF scan. Chỉ cần tải lên, AI sẽ đọc và hiểu nội dung.</p>
                         </div>
                     </div>
+
+                    <!-- 5 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-purple"><i class="ph-fill ph-users"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-lock-key"></i></div>
+                        <div class="icon-square">
+                            <img width="84" height="84" src="images/2.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
                         </div>
                         <div class="a-content">
-                            <h3>Phân quyền cho từng người, từng phòng ban</h3>
-                            <span class="underline underline-purple"></span>
-                            <p>Ai được dùng bot nào, xem kho kiến thức nào — bạn là người quyết định.</p>
+                            <h3>Phân quyền theo phòng ban</h3>
+                            <p>Quản lý ai được sử dụng bot nào và được truy cập kho kiến thức nào theo từng vai trò.</p>
                         </div>
                     </div>
+
+                    <!-- 6 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-orange"><i class="ph-fill ph-sparkle"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-shield-check"></i></div>
+                        <div class="icon-square">
+                            <img width="85" height="80" src="images/1.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
                         </div>
                         <div class="a-content">
-                            <h3>AI cho bạn thấy bằng chứng</h3>
-                            <span class="underline underline-orange"></span>
-                            <p>Mỗi câu trả lời đều chỉ rõ nguồn trong tài liệu gốc, bạn kiểm tra lại được ngay — không lo AI "bịa".</p>
+                            <h3>AI trả lời có nguồn tham chiếu</h3>
+                            <p>Mỗi câu trả lời đều dẫn nguồn từ tài liệu gốc, giúp kiểm chứng thông tin và hạn chế AI "bịa".</p>
                         </div>
                     </div>
+
+                    <!-- 7 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-teal"><i class="ph-fill ph-table"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-chart-bar"></i></div>
+                        <div class="icon-square">
+                            <img width="60" height="60" src="https://img.icons8.com/color/48/microsoft-excel-2025.png" alt="microsoft-excel-2025"/>                       
                         </div>
                         <div class="a-content">
                             <h3>Hỏi Excel như hỏi kế toán</h3>
-                            <span class="underline underline-teal"></span>
-                            <p>Đặt câu hỏi thẳng về file số liệu, nhận đúng từng con số theo đúng định dạng tiếng Việt.</p>
+                            <p>Đặt câu hỏi về file số liệu và nhận đúng từng con số theo đúng định dạng tiếng Việt.</p>
                         </div>
                     </div>
+
+                    <!-- 8 -->
                     <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-blue2"><i class="ph-fill ph-check-circle"></i></div>
-                            <div class="a-illustration-icon"><i class="ph ph-calendar-check"></i></div>
+                        <div class="icon-square icon-sq-red">
+                             <img width="85" height="85"  src="images/3.png" alt="Trả lời khách">
                         </div>
                         <div class="a-content">
                             <h3>Biên bản họp và giao việc tự động</h3>
-                            <span class="underline underline-blue2"></span>
-                            <p>Ghi âm hoặc tải file cuộc họp lên, AI gỡ băng kèm tên người nói, tóm tắt quyết định rồi giao việc đúng người kèm hạn chót — xuất luôn ra PDF/Word.</p>
+                            <p>AI gỡ băng cuộc họp, tóm tắt quyết định, giao việc đúng người kèm hạn chót và xuất biên bản PDF/Word.</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
+        
         <!-- 5. Phần 2 - n8n (tay và chân) -->
-        <section class="section-padding">
+        <section class="section-padding n8n-dark-section">
             <div class="container">
-                <div class="text-center" style="text-align: left; margin-bottom: 48px;">
-                    <div class="eyebrow">PHẦN 2 · TỰ ĐỘNG HÓA VỚI N8N</div>
-                    <h2 class="section-title" style="margin-bottom: 0;">Mang trợ lý đi khắp nơi — và tự động hoá phần còn lại</h2>
+                <div class="n8n-header">
+                    <div class="eyebrow eyebrow-green">PHẦN 2 · TỰ ĐỘNG HÓA VỚI N8N</div>
+                    <h2 class="section-title n8n-title">Mang trợ lý đi khắp nơi — và <span class="text-green-grad">tự động hoá</span> phần còn lại</h2>
+                    <p class="n8n-subtitle">Kết nối đa kênh & tự động hóa các quy trình lặp lại trong công ty bạn.</p>
                 </div>
-                <div class="tasks-grid">
-                    <div class="task-card">
-                        <div class="icon-circle icon-blue"><i class="ph-fill ph-share-network"></i></div>
-                        <h4 class="task-title">Việc 1 — Đưa trợ lý AI ra mọi kênh khách hàng</h4>
-                        <p class="task-desc">Con bot bạn xây trong ROSA AI Workspace được n8n mang lên website, Facebook Messenger, Zalo, Telegram… Cùng một "bộ não" trả lời khách ở khắp nơi, không phải dựng bốn con bot khác nhau hay cấu hình lại bốn lần.</p>
+
+                <!-- 2 card chính -->
+                <div class="n8n-main-cards">
+                    <div class="n8n-main-card n8n-card-blue-border">
+                        <div class="n8n-card-top">
+                            <div class="icon-circle"><img width="80" height="80" src="https://img.icons8.com/stickers/60/message-bot.png" alt="message-bot"/></div>
+                            <span class="n8n-card-label">VỚI AI — MANG TRỢ LÝ AI ĐI KHẮP MỌI KÊNH</span>
+                        </div>
+                        <p>Giúp AI của bạn giao tiếp, hỗ trợ và chăm sóc khách hàng qua nhiều nền tảng: Zalo, Messenger, Website, Email, Telegram, CRM, tổng đài, chatbot,...</p>
+                        <p>Khách hàng có thể hỏi bất kỳ đâu — AI hiểu, trả lời và hỗ trợ tức thì.</p>
                     </div>
-                    <div class="task-card">
-                        <div class="icon-circle icon-purple"><i class="ph-fill ph-gear-six"></i></div>
-                        <h4 class="task-title">Việc 2 — Tự động hoá các quy trình khác trong công ty</h4>
-                        <p class="task-desc">n8n đảm nhận phần tự động hoá còn lại. Vì chạy trên AI nội bộ của bạn nên không tốn phí theo từng lượt xử lý.</p>
-                    </div>
-                </div>
-                <div class="automation-grid">
-                    <div class="automation-item">
-                        <i class="ph-fill ph-megaphone"></i>
-                        <span>Tạo nội dung: lấy tin tức, soạn bài đăng cho từng nền tảng, duyệt rồi tự đăng.</span>
-                    </div>
-                    <div class="automation-item">
-                        <i class="ph-fill ph-envelope-simple-open"></i>
-                        <span>Xử lý email & lead: đọc email đến, phân loại, sàng lọc lead từ quảng cáo, gán đúng nhân viên sale và nhắc follow-up.</span>
-                    </div>
-                    <div class="automation-item">
-                        <i class="ph-fill ph-file-text"></i>
-                        <span>Xử lý tài liệu: đọc hoá đơn, chứng từ, hợp đồng rồi bóc số liệu vào file hoặc phần mềm kế toán.</span>
-                    </div>
-                    <div class="automation-item">
-                        <i class="ph-fill ph-bell-ringing"></i>
-                        <span>Nhắc lịch hẹn tự động qua Zalo ZNS / SMS.</span>
-                    </div>
-                    <div class="automation-item">
-                        <i class="ph-fill ph-chart-line-up"></i>
-                        <span>Theo dõi giá đối thủ, cảnh báo khi có thay đổi.</span>
-                    </div>
-                    <div class="automation-item">
-                        <i class="ph-fill ph-clipboard-text"></i>
-                        <span>Tổng hợp và gửi báo cáo ngày/tuần tự động.</span>
+                    <div class="n8n-main-card n8n-card-purple-border">
+                        <div class="n8n-card-top">
+                            <div class="icon-circle"><img width="90" height="90" src="images/logoo.png" alt="message-bot"/></div>
+                            <span class="n8n-card-label">VỚI N8N — TỰ ĐỘNG HOÁ CÁC QUY TRÌNH KHÁC TRONG CÔNG TY</span>
+                        </div>
+                        <p>n8n là công cụ giúp bạn tự động hoá các tác vụ lặp lại: xử lý dữ liệu, gửi báo cáo, đồng bộ hệ thống, phê duyệt, nhắc việc,...</p>
+                        <p>Giúp tiết kiệm thời gian – giảm sai sót – tối ưu hiệu suất đội ngũ.</p>
                     </div>
                 </div>
 
-                <div class="n8n-quote-banner">
-                    <i class="ph-fill ph-quotes"></i>
-                    <p class="quote-text">Gần như bất kỳ quy trình lặp đi lặp lại nào khác trong công ty bạn cũng tự động hoá được.</p>
-                    <div class="quote-author">Đội ROSA sẽ cùng bạn thiết kế và cấu hình các quy trình này — <span>bạn không cần biết kỹ thuật.</span></div>
+                <!-- Lưới 6 tính năng -->
+                <div class="n8n-features-grid">
+                    <div class="n8n-feat-item">
+                        <div class="n8n-feat-icon n8n-feat-teal"><i class="ph-fill ph-telegram-logo"></i></div>
+                        <p>Trợ lý AI luôn sẵn sàng, tham gia mọi điểm chạm khách hàng của bạn.</p>
+                    </div>
+                    <div class="n8n-feat-item">
+                        <div class="n8n-feat-icon n8n-feat-blue"><i class="ph-fill ph-users-three"></i></div>
+                        <p>Đội ngũ mai it thao tác thủ công, giảm tải áp lực và tập trung vào công việc quan trọng, sáng tạo hơn.</p>
+                    </div>
+                    <div class="n8n-feat-item">
+                        <div class="n8n-feat-icon n8n-feat-green"><i class="ph-fill ph-file-text"></i></div>
+                        <p>Xử lý dữ liệu, báo cáo, cập nhật hệ thống diễn ra tự động, nhanh chóng, chính xác 24/7.</p>
+                    </div>
+                    <div class="n8n-feat-item">
+                        <div class="n8n-feat-icon n8n-feat-orange"><i class="ph-fill ph-database"></i></div>
+                        <p>Dễ tích hợp với hệ thống: Zalo, Telesale, CRM,...</p>
+                    </div>
+                    <div class="n8n-feat-item">
+                        <div class="n8n-feat-icon n8n-feat-purple"><i class="ph-fill ph-shield-check"></i></div>
+                        <p>Theo dõi quy trình & quản lý toàn bộ luồng dễ dàng.</p>
+                    </div>
+                    <div class="n8n-feat-item">
+                        <div class="n8n-feat-icon n8n-feat-lime"><i class="ph-fill ph-check-circle"></i></div>
+                        <p>Tăng hiệu quả giá bán, sản xuất, vận hành.</p>
+                    </div>
+                </div>
+
+                <!-- Banner tổng kết -->
+                <div class="n8n-summary-banner">
+                    <div class="n8n-summary"><img width="80" height="80" src="https://img.icons8.com/external-flat-icons-vectorslab/68/external-Ai-artificial-and-intelligence-flat-icons-vectorslab.png" alt="external-Ai-artificial-and-intelligence-flat-icons-vectorslab"/>
+                </div>
+                    <p class="n8n-summary-title">Điểm nhấn nổi bật: Tự động hóa toàn diện để tăng năng suất và giảm gánh nặng vận hành.</p>
+                    <div class="n8n-summary-checks">
+                        <span><i class="ph-fill ph-check-circle"></i> Thông minh hơn</span>
+                        <span><i class="ph-fill ph-check-circle"></i> Nhanh hơn</span>
+                        <span><i class="ph-fill ph-check-circle"></i> Ít sai sót hơn</span>
+                        <span><i class="ph-fill ph-check-circle"></i> Hiệu quả hơn</span>
+                    </div>
+                    <p class="n8n-summary-cta">Để <span class="text-primary">ROSA AI</span> đồng hành cùng bạn kiến tạo hệ thống vận hành tự động – <span class="text-green-grad">Tăng trưởng bền vững.</span></p>
                 </div>
             </div>
         </section>
+
 
         <!-- 6. Differences -->
         <section class="section-padding">
@@ -293,62 +343,128 @@
                     <div class="eyebrow">ĐIỂM KHÁC BIỆT</div>
                     <h2 class="section-title">Không chỉ là một chatbot.</h2>
                 </div>
+
                 <div class="grid diff-grid">
                     <div class="diff-col">
                         <h3>01</h3>
                         <h4>Hỗ trợ đội ngũ, không thay thế</h4>
-                        <p>AI lo phần việc lặp lại, con người lo phần cần đầu óc và cảm xúc.</p>
+                        <p>AI tự động xử lý các công việc lặp lại để nhân viên tập trung vào những việc tạo ra giá trị.</p>
                     </div>
+
                     <div class="diff-col">
                         <h3>02</h3>
-                        <h4>Đặt tại công ty bạn</h4>
-                        <p>Dữ liệu không rời khỏi mạng nội bộ.</p>
+                        <h4>Hiểu dữ liệu của doanh nghiệp</h4>
+                        <p>Được huấn luyện từ tài liệu, quy trình và chính sách của công ty để trả lời chính xác.</p>
                     </div>
+
                     <div class="diff-col">
                         <h3>03</h3>
-                        <h4>Hiểu tiếng Việt sâu sắc</h4>
-                        <p>Trả lời chuẩn tiếng Việt, kể cả khi khách gõ không dấu.</p>
+                        <h4>Trả lời có nguồn, đáng tin cậy</h4>
+                        <p>Mỗi câu trả lời đều có thể dẫn nguồn từ tài liệu nội bộ, hạn chế tối đa thông tin sai lệch.</p>
                     </div>
+
                     <div class="diff-col">
                         <h3>04</h3>
-                        <h4>Trả lời có nguồn</h4>
-                        <p>AI đáng tin, luôn kiểm chứng được, không bịa đặt.</p>
-                    </div>
-                    <div class="diff-col">
-                        <h3>05</h3>
-                        <h4>Chi phí cố định</h4>
-                        <p>Tự động hoá bao nhiêu tuỳ thích, không tính phí theo từng tin nhắn.</p>
+                        <h4>Triển khai theo nhu cầu doanh nghiệp</h4>
+                        <p>Tích hợp với website, Zalo, Facebook, CRM hoặc hệ thống nội bộ, dễ mở rộng khi doanh nghiệp phát triển.</p>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- 7. Applications -->
         <section class="section-padding">
             <div class="container">
                 <div class="app-section">
                     <div class="app-left">
                         <div class="eyebrow">ỨNG DỤNG THỰC TẾ</div>
-                        <h2 class="section-title">ROSA AI Workspace giúp gì được cho đội ngũ của bạn?</h2>
+                        <h2 class="section-title">ROSA AI Workspace giúp gì được cho <span class="text-primary">đội ngũ của bạn</span>?</h2>
                         <ul class="app-list">
-                            <li><i class="ph-fill ph-check-circle"></i> Nhân viên sale tra bảng giá, chiết khấu, khuyến mãi đang chạy — trả lời khách ngay tại chỗ.</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Nhân viên mới tự tra quy trình, chính sách, tài liệu đào tạo — rút ngắn thời gian hoà nhập.</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Nhân viên CSKH tra chính sách bảo hành, đổi trả — trả lời khách chính xác, có dẫn nguồn.</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Chăm sóc khách hàng tự động trên Zalo & Facebook 24/7, chuyển người thật khi cần.</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Biên bản họp và giao việc tự động sau mỗi cuộc họp.</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Nhắc lịch hẹn khách hàng qua Zalo ZNS / SMS.</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Theo dõi giá đối thủ, tổng hợp báo cáo tự động.</li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-tag"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Nhân viên sale</strong> tra bảng giá, chiết khấu, khuyến mãi đang chạy — trả lời khách ngay tại chỗ.</div>
+                            </li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-graduation-cap"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Nhân viên mới</strong> tự tra quy trình, chính sách, tài liệu đào tạo — rút ngắn thời gian hoà nhập.</div>
+                            </li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-headset"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Nhân viên CSKH</strong> tra chính sách bảo hành, đổi trả — trả lời khách chính xác, có dẫn nguồn.</div>
+                            </li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-chats-circle"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Chăm sóc khách hàng</strong> tự động trên Zalo & Facebook 24/7, chuyển người thật khi cần.</div>
+                            </li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-file-text"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Biên bản họp</strong> và giao việc tự động sau mỗi cuộc họp.</div>
+                            </li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-calendar-check"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Nhắc lịch hẹn</strong> khách hàng qua Zalo ZNS / SMS.</div>
+                            </li>
+                            <li>
+                                <!-- <div class="app-icon"><i class="ph-fill ph-chart-line-up"></i></div> -->
+                                <div class="app-text"><i class="ph-fill ph-check-circle app-check"></i><strong>Theo dõi giá đối thủ</strong>, tổng hợp báo cáo tự động.</div>
+                            </li>
                         </ul>
                     </div>
                     <div class="app-right">
-                        <div class="quote-box">
-                            <div class="eyebrow eyebrow-quote">BẰNG CHỨNG</div>
-                            <!-- <i class="ph-fill ph-quotes"></i> -->
-                            <p class="quote-text">
-                                "Khu vực chèn câu chuyện khách hàng thật, kèm ảnh chụp màn hình bot đang chạy trên Zalo hoặc biên bản họp được tạo tự động."
-                            </p>
-                            <div class="quote-author">
-                                <span>— CT TNHH DOANH NGHIỆP</span> — Giám đốc vận hành
+                        <img src="images/page3.png" alt="Bằng chứng ROSA AI Workspace" style="width:100%; height:auto; border-radius:16px; display:block;">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 8. Pricing + FAQ -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="pricing-faq-row">
+                    <div class="pricing-faq-col pricing-faq-col-price">
+                    
+                        <div class="pricing-img-wrap">
+                            <img src="images/cau-hoi.png" alt="Bảng giá ROSA AI Workspace" style="width:100%; height:auto; border-radius:16px; display:block;">
+                        </div>
+                    </div>
+                    <div class="pricing-faq-col pricing-faq-col-faq">
+                        <div class="text-center" style="text-align: left; margin-bottom: 32px;">
+                            <div class="eyebrow">CÂU HỎI THƯỜNG GẶP</div>
+                            <h2 class="section-title" style="margin-bottom: 0;">Giải đáp câu hỏi phổ biến</h2>
+                        </div>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-item-left">
+                                    <div class="faq-q">AI này có thay thế nhân viên của tôi không?</div>
+                                    <div class="faq-a">Không. Mục tiêu là gánh phần việc lặp lại để đội ngũ tập trung vào khách hàng và những việc cần con người. Nhân viên dùng nó như một trợ lý tra cứu và hỗ trợ hằng ngày.</div>
+                                </div>
+                                <div class="faq-icon"><i class="ph ph-plus"></i></div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-item-left">
+                                    <div class="faq-q">AI làm việc bằng tiếng Việt có tốt không?</div>
+                                    <div class="faq-a">Có. ROSA AI Workspace được tối ưu cho tiếng Việt, cả văn bản lẫn giọng nói.</div>
+                                </div>
+                                <div class="faq-icon"><i class="ph ph-plus"></i></div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-item-left">
+                                    <div class="faq-q">Dữ liệu của tôi có an toàn không?</div>
+                                    <div class="faq-a">Có. Dữ liệu công ty không rời khỏi mạng nội bộ của bạn.</div>
+                                </div>
+                                <div class="faq-icon"><i class="ph ph-plus"></i></div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-item-left">
+                                    <div class="faq-q">AI có trả lời sai hay bịa không?</div>
+                                    <div class="faq-a">Hiếm khi. Hệ thống có nhiều lớp chống bịa, và mọi câu trả lời đều kiểm chứng được nguồn trong tài liệu gốc.</div>
+                                </div>
+                                <div class="faq-icon"><i class="ph ph-plus"></i></div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-item-left">
+                                    <div class="faq-q">Chúng tôi không rành kỹ thuật, có dùng được không?</div>
+                                    <div class="faq-a">Được. Đội ROSA sẽ cài đặt và cấu hình sẵn các quy trình cho bạn, không cần đội ngũ IT riêng.</div>
+                                </div>
+                                <div class="faq-icon"><i class="ph ph-plus"></i></div>
                             </div>
                         </div>
                     </div>
@@ -356,63 +472,21 @@
             </div>
         </section>
 
-        <!-- 8. FAQ -->
-        <section class="section-padding">
-            <div class="container">
-                <div class="text-center" style="text-align: left; max-width: 1500px; margin: 0 auto 32px; font-size:20px">
-                    <div class="eyebrow">CÂU HỎI THƯỜNG GẶP</div>
-                    <h2 class="section-title"> Giải đáp những câu hỏi phổ biến về ROSA AI Workspace</h2>
-                </div>
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <div class="faq-item-left">
-                            <div class="faq-q">AI này có thay thế nhân viên của tôi không?</div>
-                            <div class="faq-a">Không. Mục tiêu là gánh phần việc lặp lại để đội ngũ tập trung vào khách hàng và những việc cần con người. Nhân viên dùng nó như một trợ lý tra cứu và hỗ trợ hằng ngày.</div>
-                        </div>
-                        <div class="faq-icon"><i class="ph ph-plus"></i></div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-left">
-                            <div class="faq-q">AI làm việc bằng tiếng Việt có tốt không?</div>
-                            <div class="faq-a">Có. ROSA AI Workspace được tối ưu cho tiếng Việt, cả văn bản lẫn giọng nói.</div>
-                        </div>
-                        <div class="faq-icon"><i class="ph ph-plus"></i></div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-left">
-                            <div class="faq-q">Dữ liệu của tôi có an toàn không?</div>
-                            <div class="faq-a">Có. Dữ liệu công ty không rời khỏi mạng nội bộ của bạn.</div>
-                        </div>
-                        <div class="faq-icon"><i class="ph ph-plus"></i></div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-left">
-                            <div class="faq-q">AI có trả lời sai hay bịa không?</div>
-                            <div class="faq-a">Hiếm khi. Hệ thống có nhiều lớp chống bịa, và mọi câu trả lời đều kiểm chứng được nguồn trong tài liệu gốc.</div>
-                        </div>
-                        <div class="faq-icon"><i class="ph ph-plus"></i></div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-left">
-                            <div class="faq-q">Chúng tôi không rành kỹ thuật, có dùng được không?</div>
-                            <div class="faq-a">Được. Đội ROSA sẽ cài đặt và cấu hình sẵn các quy trình cho bạn, không cần đội ngũ IT riêng.</div>
-                        </div>
-                        <div class="faq-icon"><i class="ph ph-plus"></i></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- 9. CTA cuối trang -->
         <section class="cta-banner container">
-            <div class="cta-card kh-cta-card">
-                <div class="kh-cta-icon"><img src="https://img.icons8.com/office/40/crowd.png" alt="Claude Code"></div>
-                <div class="cta-left">
-                    <h2>Để đội ngũ của bạn tập trung vào điều quan trọng nhất.</h2>
-                    <p>Đặt lịch demo miễn phí — xem ROSA AI Workspace chạy thử ngay trên tài liệu và quy trình của chính bạn.</p>
-                </div>
-                <div class="cta-right">
-                    <a href="#" class="btn btn-primary js-open-modal">Đặt lịch demo miễn phí <i class="ph ph-arrow-right"></i></a>
+            <div class="cta-card">
+                <div class="kh-cta-card">
+                    <div class="cta-left">
+                        <div class="kh-cta-icon"><i class="ph-fill ph-rocket-launch"></i></div>
+                        <h2>Để đội ngũ của bạn tập trung vào điều quan trọng nhất.</h2>
+                        <p>Đặt lịch demo miễn phí — xem ROSA AI Workspace chạy thử ngay trên tài liệu và quy trình của chính bạn.</p>
+                        <a href="#" class="btn btn-primary js-open-modal">Đặt lịch demo miễn phí <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                    <div class="cta-right cta-trust">
+                        <span><i class="ph-fill ph-check-circle"></i> AI hiểu tiếng Việt</span>
+                        <span><i class="ph-fill ph-check-circle"></i> Mỗi câu trả lời đều kiểm chứng được nguồn</span>
+                        <span><i class="ph-fill ph-check-circle"></i> Dữ liệu trong mạng nội bộ</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -479,6 +553,39 @@
     </div>
 
     <script>
+        // Menu di động (hamburger)
+        var navToggle = document.querySelector('.nav-toggle');
+        var navLinks = document.querySelector('.nav-links');
+
+        function closeNavMenu() {
+            navLinks.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.innerHTML = '<i class="ph ph-list"></i>';
+            document.body.style.overflow = '';
+        }
+
+        function openNavMenu() {
+            navLinks.style.top = document.querySelector('.navbar').getBoundingClientRect().bottom + 'px';
+            navLinks.classList.add('active');
+            navToggle.setAttribute('aria-expanded', 'true');
+            navToggle.innerHTML = '<i class="ph ph-x"></i>';
+            document.body.style.overflow = 'hidden';
+        }
+
+        navToggle.addEventListener('click', function() {
+            if (navLinks.classList.contains('active')) {
+                closeNavMenu();
+            } else {
+                openNavMenu();
+            }
+        });
+
+        navLinks.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                closeNavMenu();
+            });
+        });
+
         // Mở modal
         document.querySelectorAll('.js-open-modal').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
@@ -506,6 +613,16 @@
                 document.getElementById('contactModal').classList.remove('active');
                 document.body.style.overflow = '';
             }
+        });
+
+        // Chọn gói giá: bấm vào thẻ nào thì thẻ đó nổi bật
+        document.querySelectorAll('.price-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.price-card').forEach(function(other) {
+                    other.classList.remove('is-selected');
+                });
+                card.classList.add('is-selected');
+            });
         });
 
         // Toggle FAQ: bấm câu hỏi để hiện/ẩn câu trả lời

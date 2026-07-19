@@ -28,13 +28,12 @@
                     <img src="images/rosa.png" alt="ROSA Logo" class="logo-icon">
                 </div>
                 <nav class="nav-links">
-                    <a href="landing.php">Giải pháp</a>
+                    <a href="landing.php">GIẢI PHÁP</a>
                     <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
                     <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
-                    <a href="#">Ứng dụng</a>
-                    <a href="#">Sản phẩm</a>
-                </nav>
-                <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
+                    <a href="#">ỨNG DỤNG </a>
+                    <a href="#">SẢN PHẨM</a>
+                    <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
                 </nav>
                 <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn</a>
                 <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false">
@@ -42,7 +41,7 @@
                 </button>
             </div>
         </header>
-        
+
 
         <main>
             <!-- Section 1: Hero -->
@@ -104,7 +103,7 @@
             <!-- Section 2: Platform AI -->
             <section class="platform container">
                 <div class="badge-label">
-                    <span class="number">2</span> Platform AI - Kết nối & Tự động hóa
+                    <span class="number">2</span> ROSA AI Platform - Kết nối & Tự động hóa
                 </div>
                 <h2 class="section-title text-center">Kết nối AI Local với các ứng dụng hàng đầu</h2>
                 <p class="section-desc text-center">Thay vì tốn tiền thuê cloud, doanh nghiệp dùng chính AI chạy trên máy
@@ -116,7 +115,7 @@
                         <p>Sử dụng AI Local để vận hành các công cụ bạn yêu thích</p>
                         <div class="platform-grid reveal">
                             <div class="diagram-wrap">
-                                <svg viewBox="0 0 520 400" width="100%" role="img"
+                                <svg viewBox="0 0 560 460" width="100%" role="img"
                                     aria-label="Sơ đồ kết nối AI Local với các ứng dụng AI">
                                     <defs>
                                         <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
@@ -124,79 +123,106 @@
                                             <stop offset="100%" stop-color="#52d6c6" stop-opacity=".15" />
                                         </linearGradient>
                                         <clipPath id="clip-center">
-                                            <circle cx="260" cy="180" r="40" />
+                                            <circle cx="280" cy="220" r="44" />
                                         </clipPath>
                                         <clipPath id="clip-tl">
-                                            <circle cx="110" cy="70" r="34" />
+                                            <circle cx="90" cy="85" r="34" />
                                         </clipPath>
                                         <clipPath id="clip-tr">
-                                            <circle cx="410" cy="70" r="34" />
+                                            <circle cx="470" cy="85" r="34" />
+                                        </clipPath>
+                                        <clipPath id="clip-ml">
+                                            <circle cx="40" cy="220" r="34" />
+                                        </clipPath>
+                                        <clipPath id="clip-mr">
+                                            <circle cx="520" cy="220" r="34" />
                                         </clipPath>
                                         <clipPath id="clip-bl">
-                                            <circle cx="110" cy="290" r="34" />
+                                            <circle cx="90" cy="355" r="34" />
                                         </clipPath>
                                         <clipPath id="clip-br">
-                                            <circle cx="410" cy="290" r="34" />
+                                            <circle cx="470" cy="355" r="34" />
                                         </clipPath>
                                     </defs>
+
                                     <!-- connecting lines -->
                                     <g stroke="url(#lineGrad)" stroke-width="1.6" fill="none">
-                                        <path d="M260,180 L110,70" stroke-dasharray="4 5">
-                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.6s"
-                                                repeatCount="indefinite" />
+                                        <path d="M280,220 L90,85" stroke-dasharray="4 5">
+                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.6s" repeatCount="indefinite" />
                                         </path>
-                                        <path d="M260,180 L410,70" stroke-dasharray="4 5">
-                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s"
-                                                repeatCount="indefinite" />
+                                        <path d="M280,220 L470,85" stroke-dasharray="4 5">
+                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite" />
                                         </path>
-                                        <path d="M260,180 L110,290" stroke-dasharray="4 5">
-                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="2s"
-                                                repeatCount="indefinite" />
+                                        <path d="M280,220 L40,220" stroke-dasharray="4 5">
+                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="2.1s" repeatCount="indefinite" />
                                         </path>
-                                        <path d="M260,180 L410,290" stroke-dasharray="4 5">
-                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.7s"
-                                                repeatCount="indefinite" />
+                                        <path d="M280,220 L520,220" stroke-dasharray="4 5">
+                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.9s" repeatCount="indefinite" />
+                                        </path>
+                                        <path d="M280,220 L90,355" stroke-dasharray="4 5">
+                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="2s" repeatCount="indefinite" />
+                                        </path>
+                                        <path d="M280,220 L470,355" stroke-dasharray="4 5">
+                                            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.7s" repeatCount="indefinite" />
                                         </path>
                                     </g>
+
                                     <!-- center node: AI Local -->
-                                    <circle cx="260" cy="180" r="40" fill="#1d222d" stroke="#d89b4a" stroke-width="1.6" />
-                                    <image href="images/pc.jpg" x="220" y="140" width="80" height="80"
+                                    <circle cx="280" cy="220" r="44" fill="#1d222d" stroke="#d89b4a" stroke-width="1.6" />
+                                    <image href="images/pc.jpg" x="236" y="176" width="88" height="88"
                                         clip-path="url(#clip-center)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="260" y="240" text-anchor="middle" fill="#edeff3"
-                                        font-family=" 'Montserrat', Arial, sans-serif" font-size="13" font-weight="600">ASUS
-                                        Ascent</text>
-                                    <text x="260" y="254" text-anchor="middle" fill="#9aa3b2"
-                                        font-family=" 'Montserrat', Arial, sans-serif" font-size="9">GX10</text>
+                                    <text x="280" y="282" text-anchor="middle" fill="#edeff3"
+                                        font-family="'Montserrat', Arial, sans-serif" font-size="13" font-weight="600">ASUS Ascent</text>
+                                    <text x="280" y="296" text-anchor="middle" fill="#9aa3b2"
+                                        font-family="'Montserrat', Arial, sans-serif" font-size="9">GX10</text>
+
                                     <!-- outer nodes -->
-                                    <g font-family=" 'Montserrat', Arial, sans-serif" font-size="11" fill="#edeff3">
-                                        <circle cx="110" cy="70" r="40" fill="#1d222d" stroke="#52d6c6"
-                                            stroke-width="1.2" />
-                                        <image href="images/claude.png" x="76" y="36" width="68" height="68"
+                                    <g font-family="'Montserrat', Arial, sans-serif" font-size="11" fill="#edeff3">
+
+                                        <!-- TL: Claude Code -->
+                                        <circle cx="90" cy="85" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
+                                        <image href="images/claude.png" x="56" y="51" width="68" height="68"
                                             clip-path="url(#clip-tl)" preserveAspectRatio="xMidYMid slice" />
-                                        <text x="110" y="126" text-anchor="middle">Claude Code</text>
+                                        <text x="90" y="141" text-anchor="middle">Claude Code</text>
 
-                                        <circle cx="410" cy="70" r="40" fill="#1d222d" stroke="#52d6c6"
-                                            stroke-width="1.2" />
-                                        <image href="images/logo-n8n.png" x="376" y="36" width="68" height="68"
+                                        <!-- TR: n8n -->
+                                        <circle cx="470" cy="85" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
+                                        <image href="images/logo-n8n.png" x="436" y="51" width="68" height="68"
                                             clip-path="url(#clip-tr)" preserveAspectRatio="xMidYMid slice" />
-                                        <text x="410" y="126" text-anchor="middle">n8n</text>
+                                        <text x="470" y="141" text-anchor="middle">n8n</text>
 
-                                        <circle cx="110" cy="290" r="40" fill="#1d222d" stroke="#52d6c6"
-                                            stroke-width="1.2" />
-                                        <image href="images/hermes.png" x="76" y="256" width="68" height="68"
+                                        <!-- ML: Krita -->
+                                        <circle cx="40" cy="220" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
+                                        <image href="images/krita.svg" x="6" y="186" width="68" height="68"
+                                            clip-path="url(#clip-ml)" preserveAspectRatio="xMidYMid slice" />
+                                        <text x="40" y="276" text-anchor="middle">Krita</text>
+
+                                        <!-- MR: Photoshop -->
+                                        <circle cx="520" cy="220" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
+                                        <rect x="486" y="186" width="68" height="68" rx="10" fill="#31A8FF"
+                                            clip-path="url(#clip-mr)" />
+                                        <text x="520" y="228" text-anchor="middle" fill="white"
+                                            font-family="'Montserrat', Arial, sans-serif" font-size="22" font-weight="800">Ps</text>
+                                        <text x="520" y="276" text-anchor="middle">Photoshop</text>
+
+                                        <!-- BL: Hermes -->
+                                        <circle cx="90" cy="355" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
+                                        <image href="images/hermes.png" x="56" y="321" width="68" height="68"
                                             clip-path="url(#clip-bl)" preserveAspectRatio="xMidYMid slice" />
-                                        <text x="110" y="346" text-anchor="middle">Hermes</text>
+                                        <text x="90" y="411" text-anchor="middle">Hermes</text>
 
-                                        <circle cx="410" cy="290" r="40" fill="#1d222d" stroke="#52d6c6"
-                                            stroke-width="1.2" />
-                                        <image href="images/openclaw.png" x="376" y="256" width="68" height="68"
+                                        <!-- BR: OpenClaw -->
+                                        <circle cx="470" cy="355" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
+                                        <image href="images/openclaw.png" x="436" y="321" width="68" height="68"
                                             clip-path="url(#clip-br)" preserveAspectRatio="xMidYMid slice" />
-                                        <text x="410" y="346" text-anchor="middle">OpenClaw</text>
+                                        <text x="470" y="411" text-anchor="middle">OpenClaw</text>
+
                                     </g>
                                 </svg>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="card n8n-card">
                         <h3>Tích hợp n8n – Tự động hóa quy trình</h3>
@@ -229,7 +255,20 @@
                             giải pháp hỗ trợ doanh nghiệp quản lý tập trung, khai thác hiệu quả kho tài liệu
                             và tối ưu hiệu suất làm việc.
                         </p>
-                        <div class="tag-green">3 chức năng chính</div>
+                        
+                        <!-- CTA -->
+                        <div class="chatbot-actions">
+                            <a href="#" class="btn-primary">
+                                <i class="ph ph-rocket-launch"></i>
+                                Dùng thử ngay
+                            </a>
+
+                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-WORKSPACE.php" class="btn-outline">
+                                <i class="ph ph-arrow-square-out"></i>
+                                Xem chi tiết giải pháp
+                            </a>
+                        </div>
+
 
                         <div class="chatbot-features">
                             <div class="feature-item-chat">
@@ -260,91 +299,8 @@
                         </div>
                     </div>
                     <div class="chatbot-right">
-                        <div class="chatbot-mockup">
-                            <div class="mockup-header">
-                                <div class="window-controls">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
-                                </div>
-                                <span class="mockup-title">
-                                    <img src="images/rosa.png" alt="ROSA" class="inline-logo">
-                                </span>
-                                <i class="ph ph-dots-three"></i>
-                            </div>
-                            <div class="mockup-body">
-                                <div class="mockup-sidebar">
-                                    <div class="nav-item active"><i class="ph-fill ph-house"></i> Trang chủ</div>
-                                    <div class="nav-item"><i class="ph ph-chat-circle"></i> Hội thoại</div>
-                                    <div class="nav-item"><i class="ph ph-folder"></i> Tài liệu</div>
-                                    <div class="nav-item"><i class="ph ph-users"></i> Cuộc họp</div>
-                                    <div class="nav-item mt-auto"><i class="ph ph-gear"></i> Cài đặt</div>
-                                </div>
-                                <div class="mockup-main">
-
-                                    <!-- User asks about contract process -->
-                                    <div class="chat-message user">
-                                        <div class="msg-content">Quy trình xử lý hợp đồng của công ty là gì?</div>
-                                    </div>
-
-                                    <!-- Bot answers with doc reference -->
-                                    <div class="chat-message">
-                                        <div class="bot-avatar"></div>
-                                        <div class="msg-content">
-                                            Dựa trên tài liệu nội bộ, quy trình xử lý hợp đồng gồm 5 bước:
-                                            <div class="doc-card">
-                                                <i class="ph-fill ph-file-pdf doc-icon"></i>
-                                                <span>Quy trình xử lý hợp đồng.pdf</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- User asks for meeting summary -->
-                                    <div class="chat-message user">
-                                        <div class="msg-content">Tóm tắt cuộc họp dự án hôm nay</div>
-                                    </div>
-
-                                    <!-- Bot answers with summary + voice player -->
-                                    <div class="chat-message">
-                                        <div class="bot-avatar"></div>
-                                        <div class="msg-content">
-                                            Dưới đây là tóm tắt cuộc họp:
-                                            <ul class="summary-list">
-                                                <li>Tiến độ dự án: 75%</li>
-                                                <li>Vấn đề: Thiếu dữ liệu đầu vào</li>
-                                                <li>Kế hoạch: Hoàn thành trong 2 tuần tới</li>
-                                            </ul>
-                                            <div class="audio-player">
-                                                <i class="ph-fill ph-play-circle play-icon"></i>
-                                                <div class="audio-progress"></div>
-                                                <span class="time">05:24</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Input area -->
-                                    <div class="chat-input-area">
-                                        <div class="input-actions-top">
-                                            <span class="tag"><i class="ph ph-paperclip"></i> Tài liệu công ty</span>
-                                            <span class="tag"><i class="ph ph-arrows-out-line-horizontal"></i> Quy trình làm
-                                                việc</span>
-                                        </div>
-                                        <div class="input-box-wrapper">
-                                            <i class="ph ph-plus-circle input-icon"></i>
-                                            <div class="input-text">Hỏi bất kỳ điều gì...</div>
-                                            <div class="audio-wave">
-                                                <i class="ph-fill ph-microphone"></i>
-                                                <div class="wave-bars active">
-                                                    <span></span><span></span><span></span><span></span><span></span><span></span>
-                                                </div>
-                                                <span class="time">00:12</span>
-                                            </div>
-                                            <button class="send-btn"><i class="ph-fill ph-paper-plane-right"></i></button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="chatbot-mockup chatbot-mockup-image">
+                            <img src="images/chat_ai.png" alt="Giao diện chatbot ROSA AI Workspace" class="chatbot-screenshot">
                         </div>
                     </div>
                 </div>
@@ -527,6 +483,18 @@
                             <div class="s-logo text-logo"><i class="ph ph-dots-three"
                                     style="font-size: 24px; color: var(--primary);"></i><span>và nhiều<br>hơn nữa...</span>
                             </div>
+                        </div>
+                           <!-- CTA -->
+                        <div class="chatbot-actions">
+                            <a href="#" class="btn-primary">
+                                <i class="ph ph-rocket-launch"></i>
+                                Dùng thử ngay
+                            </a>
+
+                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-CONNECT.php" class="btn-outline">
+                                <i class="ph ph-arrow-square-out"></i>
+                                Xem chi tiết giải pháp
+                            </a>
                         </div>
                         <p class="s-desc">Tận dụng sức mạnh của các nền tảng hàng đầu thế giới,<br>kết hợp với AI Local để
                             mang lại giải pháp tối ưu cho doanh nghiệp.</p>

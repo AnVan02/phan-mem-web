@@ -28,13 +28,12 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                 <img src="images/rosa.png" alt="ROSA Logo" class="logo-icon">
             </div>
             <nav class="nav-links">
-                <a href="landing.php">Giải pháp</a>
+                <a href="landing.php">GIẢI PHÁP</a>
                 <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
                 <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
-                <a href="#">Ứng dụng</a>
-                <a href="#">Sản phẩm</a>
-            </nav>
-            <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
+                <a href="#">ỨNG DỤNG </a>
+                <a href="#">SẢN PHẨM</a>
+                <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
             </nav>
             <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn <i class="ph ph-arrow-right"></i></a>
             <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false">
@@ -70,7 +69,7 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
             </div>
             <div class="kh-hero-right">
                 <div class="hero-diagram">
-                    <img src="images/landing_1.png" alt="Sơ đồ ROSA AI Connect kết nối Claude Code, Cursor, VS Code, ComfyUI qua API nội bộ">
+                    <img src="images/landing_6.png" alt="Sơ đồ ROSA AI Connect kết nối Claude Code, Cursor, VS Code, ComfyUI qua API nội bộ">
                 </div>
                 <div class="hero-features">
                     <div class="hf-item">
@@ -93,32 +92,38 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
             </div>
         </section>
 
-        <!-- 2. Vấn đề -->
         <section class="kh-section problem container">
             <div class="eyebrow">01 / Vấn đề</div>
+
             <div class="problem-head">
-                <h2 class="kh-title">Bạn đang thuê AI theo từng token<br>— và <span class="grad-text-sm">trả tiền mãi mãi.</span></h2>
+                <h2 class="kh-title">
+                    Bạn đang thuê AI theo từng token<br>
+                    — và <span class="grad-text-sm">trả tiền mãi mãi.</span>
+                </h2>
 
                 <div class="problem-grid">
                     <div class="problem-card">
                         <div class="problem-icon"><i class="ph-fill ph-trend-up"></i></div>
-                        <h4>Hết tháng, hoá đơn OpenAI và Anthropic lại tăng theo token.</h4>
-                        <p>Càng dùng nhiều, càng tốn nhiều — và không bao giờ đủ.</p>
+                        <h4>Chi phí AI tăng theo mỗi lần sử dụng.</h4>
+                        <p>Càng nhiều người dùng, càng nhiều yêu cầu xử lý, hóa đơn càng phình to mỗi tháng.</p>
                     </div>
+
                     <div class="problem-card">
                         <div class="problem-icon"><i class="ph-fill ph-shield-warning"></i></div>
-                        <h4>Mã nguồn, hợp đồng, dữ liệu khách hàng bị gửi ra máy chủ.</h4>
-                        <p>Nguy cơ rò rỉ hoặc bị dùng AI bên ngoài.</p>
+                        <h4>Dữ liệu quan trọng phải gửi lên hạ tầng bên thứ ba.</h4>
+                        <p>Mã nguồn, tài liệu nội bộ và dữ liệu khách hàng luôn tiềm ẩn rủi ro về quyền riêng tư.</p>
                     </div>
+
                     <div class="problem-card">
                         <div class="problem-icon"><i class="ph-fill ph-hourglass-medium"></i></div>
-                        <h4>Đang chạy giữa chừng thì hết quota.</h4>
-                        <p>Công việc gián đoạn, phải chờ hoặc ngồi chơi.</p>
+                        <h4>Hết quota giữa lúc đang làm việc.</h4>
+                        <p>Công việc bị gián đoạn, phải chờ nâng hạn mức hoặc mua thêm lượt sử dụng.</p>
                     </div>
+
                     <div class="problem-card">
                         <div class="problem-icon"><i class="ph-fill ph-lock-key"></i></div>
-                        <h4>Bạn bị khoá vào một nhà cung cấp.</h4>
-                        <p>Bị tính tiền theo mức dùng — cho đội bạn dùng cả ngày.</p>
+                        <h4>Phụ thuộc vào một nền tảng duy nhất.</h4>
+                        <p>Khó chuyển đổi, chi phí khó kiểm soát và luôn bị ràng buộc vào chính sách của nhà cung cấp.</p>
                     </div>
                 </div>
             </div>
@@ -128,108 +133,63 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
         <section class="kh-section solution container">
             <div class="eyebrow">02 / Giải pháp</div>
             <div class="solution-grid">
-                <div class="solution-left">
+                <div class="solution-top">
                     <h2 class="kh-title">ROSA AI Connect — AI của riêng bạn, dùng không giới hạn.</h2>
                     <p>
                         Thay vì thuê AI từ cloud theo từng token, bạn sở hữu nó. ROSA AI Connect là nền tảng giúp
                         bạn triển khai AI mạnh mẽ ngay trong hệ thống nội bộ — an toàn, chủ động và không giới
-                        hạn. Tương thích ROSA AI Connect dễ dàng kết nối các ứng dụng mô hình AI local đến nhiều ứng dụng phổ biến như : Claude AI, Cursor, Comfyui, Krita .
+                        hạn.ROSA AI Connect dễ dàng kết nối các ứng dụng mô hình AI local đến nhiều ứng dụng phổ biến như : Claude AI, Cursor, Comfyui, Krita...
                     </p>
                     <div class="tool-pills">
                         <span class="tool-pill"><img src="images/claude.png" alt="Claude Code">Claude Code</span>
-                        <span class="tool-pill"><i class="images/Cursor_logo.png" alt="Cursor Code"></i>Cursor</span>
-                        <span class="tool-pill"><i class="images/comfy.webp" alt="ComfyUI"></i>ComfyUI</span>
-                        <span class="tool-pill"><i class="ph ph-dots-three" alt="Code"></i>và hơn thế nữa...</span>
+                        <span class="tool-pill"><img src="images/Cursor_logo.png" alt="Cursor Code">Cursor</span>
+                        <span class="tool-pill"><img src="images/comfy.webp" alt="ComfyUI">ComfyUI</span>
+                        <span class="tool-pill"><i class="ph ph-dots-three"></i>và hơn thế nữa...</span>
                     </div>
                 </div>
-                <div class="solution-right">
-                    <div class="mini-diagram">
-                        <svg viewBox="0 0 480 340" width="100%" role="img"
-                            aria-label="Sơ đồ ROSA AI Connect kết nối với các công cụ AI">
-                            <defs>
-                                <linearGradient id="miniLine" x1="0" y1="0" x2="1" y2="0">
-                                    <stop offset="0%" stop-color="#c084fc" stop-opacity=".9" />
-                                    <stop offset="100%" stop-color="#c084fc" stop-opacity=".2" />
-                                </linearGradient>
-                                <linearGradient id="miniCore" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#1b1030" />
-                                    <stop offset="100%" stop-color="#0b0710" />
-                                </linearGradient>
-                                <radialGradient id="miniGlow" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="#8b5cf6" stop-opacity=".5" />
-                                    <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
-                                </radialGradient>
-                            </defs>
 
-                            <!-- connecting lines -->
-                            <g stroke="url(#miniLine)" stroke-width="1.6" fill="none">
-                                <path d="M92,64 H150 V120" stroke-dasharray="4 5">
-                                    <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.6s"
-                                        repeatCount="indefinite" />
-                                </path>
-                                <path d="M92,264 H150 V220" stroke-dasharray="4 5">
-                                    <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s"
-                                        repeatCount="indefinite" />
-                                </path>
-                                <path d="M388,64 H330 V120" stroke-dasharray="4 5">
-                                    <animate attributeName="stroke-dashoffset" values="0;-18" dur="2s"
-                                        repeatCount="indefinite" />
-                                </path>
-                                <path d="M388,264 H330 V220" stroke-dasharray="4 5">
-                                    <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.7s"
-                                        repeatCount="indefinite" />
-                                </path>
-                            </g>
+                <div class="hub">
+                    <div class="hub-grid">
+                        <div class="hub-card hub-tl">
+                            <div class="hub-avatar"><img src="images/claude.png" alt="Claude AI"></div>
+                            <h4>CLAUDE AI</h4>
+                            <p>Kết nối và sử dụng mô hình AI qua Claude</p>
+                        </div>
+                        <span class="hub-line hub-line-tl"></span>
 
-                            <!-- base glow -->
-                            <ellipse cx="240" cy="234" rx="90" ry="14" fill="url(#miniGlow)" />
+                        <div class="hub-card hub-bl">
+                            <div class="hub-avatar"><img src="images/Cursor_logo.png" alt="Cursor"></div>
+                            <h4>CURSOR</h4>
+                            <p>Kết nối với Cursor để hỗ trợ lập trình AI</p>
+                        </div>
+                        <span class="hub-line hub-line-bl"></span>
 
-                            <!-- core rack -->
-                            <rect x="190" y="120" width="100" height="100" rx="12" fill="url(#miniCore)"
-                                stroke="#8b5cf6" stroke-width="1.4" />
-                            <g stroke="rgba(192,132,252,.35)" stroke-width="1">
-                                <rect x="200" y="132" width="80" height="12" rx="3" fill="#150f22" />
-                                <rect x="200" y="150" width="80" height="12" rx="3" fill="#150f22" />
-                                <rect x="200" y="168" width="80" height="12" rx="3" fill="#150f22" />
-                                <rect x="200" y="186" width="80" height="12" rx="3" fill="#150f22" />
-                            </g>
-                            <g fill="#c084fc">
-                                <circle cx="208" cy="138" r="1.6" />
-                                <circle cx="208" cy="156" r="1.6" />
-                                <circle cx="208" cy="174" r="1.6" />
-                                <circle cx="208" cy="192" r="1.6" />
-                            </g>
-                            <rect x="195" y="100" width="90" height="24" rx="6" fill="#0b0710" stroke="#76b900"
-                                stroke-width="1.4" />
-                            <text x="240" y="116" text-anchor="middle" font-family="'Montserrat', Arial, sans-serif"
-                                font-size="13" font-weight="800" fill="#76b900">ROSA</text>
+                        <div class="hub-center">
+                            <div class="hub-glow"></div>
+                            <div class="hub-logo"><img src="images/rosa.png" alt="ROSA"></div>
+                            <div class="hub-feature"><i class="ph-fill ph-cube"></i><span>Quản lý mô hình AI</span></div>
+                            <div class="hub-feature"><i class="ph ph-plug"></i><span>Kết nối &amp; API</span></div>
+                            <div class="hub-feature"><i class="ph-fill ph-shield-check"></i><span>Bảo mật &amp; Quyền
+                                    truy cập</span></div>
+                            <div class="hub-feature"><i class="ph ph-chart-line"></i><span>Giám sát &amp; Nhật ký</span>
+                            </div>
+                        </div>
 
-                            <!-- outer nodes -->
-                            <circle cx="60" cy="64" r="32" fill="#0b0710" stroke="#8b5cf6" stroke-width="1.2" />
-                            <foreignObject x="42" y="46" width="36" height="36">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="mini-fo"><i
-                                        class="ph-fill ph-cube"></i></div>
-                            </foreignObject>
+                        <span class="hub-line hub-line-tr"></span>
+                        <div class="hub-card hub-tr">
+                            <div class="hub-avatar"><img src="images/comfy.webp" alt="ComfyUI"></div>
+                            <h4>COMFYUI</h4>
+                            <p>Kết nối ComfyUI để tạo và xử lý hình ảnh AI</p>
+                        </div>
 
-                            <circle cx="60" cy="264" r="32" fill="#0b0710" stroke="#8b5cf6" stroke-width="1.2" />
-                            <foreignObject x="42" y="246" width="36" height="36">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="mini-fo"><i
-                                        class="ph ph-cursor-click"></i></div>
-                            </foreignObject>
-
-                            <circle cx="420" cy="64" r="32" fill="#0b0710" stroke="#8b5cf6" stroke-width="1.2" />
-                            <foreignObject x="402" y="46" width="36" height="36">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="mini-fo"><i
-                                        class="ph-fill ph-cloud"></i></div>
-                            </foreignObject>
-
-                            <circle cx="420" cy="264" r="32" fill="#0b0710" stroke="#8b5cf6" stroke-width="1.2" />
-                            <foreignObject x="402" y="246" width="36" height="36">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="mini-fo"><i
-                                        class="ph ph-arrow-right"></i></div>
-                            </foreignObject>
-                        </svg>
+                        <span class="hub-line hub-line-br"></span>
+                        <div class="hub-card hub-br">
+                            <div class="hub-avatar"><img src="images/krita.svg" alt="Krita"></div>
+                            <h4>KRITA</h4>
+                            <p>Kết nối Krita để hỗ trợ vẽ và chỉnh sửa AI</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -246,8 +206,8 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     <div class="step-illust-wrap">
                         <img src="images/may-chu.png" alt="Máy chủ ROSA AI Connect" class="step-illust-img">
                     </div>
-                    <h4>Tối ưu mô hình AI bạn muốn triển khai</h4>
-                    <p>Kết nối vào mạng nội bộ<br>của công ty một cách an toàn.</p>
+                    <h4>Chọn mô hình AI bạn muốn triển khai</h4>
+                    <p>ROSA hỗ trợ tối ưu mô hình AI chạy trên phần cứng máy trạm /server</p>
                 </div>
                 <div class="step-arrow"><i class="ph ph-arrow-right"></i></div>
                 <div class="step-card">
@@ -255,8 +215,8 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     <div class="step-illust-wrap">
                         <img src="images/cong-cu.png" alt="Kết nối công cụ Claude Code, Cursor, ComfyUI, VS Code, API" class="step-illust-img">
                     </div>
-                    <h4>Trỏ công cụ của bạn vào địa chỉ máy chủ</h4>
-                    <p>Claude Code, Cursor, ComfyUI,<br>Hermes, API... đều trỏ về máy chủ.</p>
+                    <h4>Kết nối công cụ với máy chủ ROSA</h4>
+                    <p>Claude Code, Cursor, ComfyUI, Hermes, VS Code hoặc API đều có thể kết nối đến cùng một máy chủ</p>
                 </div>
                 <div class="step-arrow"><i class="ph ph-arrow-right"></i></div>
                 <div class="step-card">
@@ -264,15 +224,15 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     <div class="step-illust-wrap">
                         <img src="images/vo_cuc.png" alt="Không giới hạn token" class="step-illust-img">
                     </div>
-                    <h4>Dùng thoải mái.</h4>
-                    <p>Không đếm token, không quota,<br>Kết nối vào mạng nội bộ của công ty một cách an toàn .</p>
+                    <h4>Sử dụng không giới hạn</h4>
+                    <p>Không giới hạn token, không quota, dữ liệu được xử lý an toàn ngay trong mạng nội bộ của doanh nghiệp.</p>
                 </div>
             </div>
 
             <div class="steps-trust">
-                <div class="steps-trust-item"><i class="ph-fill ph-shield-check"></i> Dữ liệu 100% nội bộ</div>
-                <div class="steps-trust-item"><img width="60" height="60" src="https://img.icons8.com/fluency/48/cash--v1.png" alt="get-revenue" /> Không phát sinh chi phi</div>
-                <div class="steps-trust-item"><i class="ph ph-cloud-slash"></i> Sử dụng không giới hạn </div>
+                <div class="steps-trust-item"><img width="80" height="80" src="https://img.icons8.com/officel/80/database.png" alt="get-revenue" /> Dữ liệu 100% nội bộ</div>
+                <div class="steps-trust-item"><img width="80" height="80" src="https://img.icons8.com/fluency/80/cash--v1.png" alt="get-revenue" /> Không phát sinh chi phi</div>
+                <div class="steps-trust-item"><img width="80" height="80" src="https://img.icons8.com/fluency/80/infinity.png" alt="get-revenue" /> Sử dụng không giới hạn </div>
             </div>
         </section>
 
@@ -293,7 +253,7 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     <p>Kết nối trực tiếp Cursor IDE với máy chủ AI nội bộ, code mượt không giới hạn.</p>
                 </a>
                 <a href="https://www.comfy.org" target="_blank" rel="noopener noreferrer" class="value-card">
-                    <div class="value-icon value"><img width="60" height="60" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/comfyui.png" alt="comfyui" /></div>
+                    <div class="value-icon value"><img width="60" height="60" src="images/comfy1.webp" alt="comfyui" /></div>
                     <h4>ComfyUI</h4>
                     <p>Chạy workflow tạo ảnh node-based ComfyUI ngay trên hạ tầng của bạn.</p>
                 </a>
@@ -362,33 +322,12 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
 
         <!-- 7 & 8. Bằng chứng + FAQ -->
         <section class="kh-section proof-faq container">
-            <div class="proof-col">
-                <div class="eyebrow">5 / Bằng chứng</div>
-                <div class="proof-card">
-                    <i class="ph-fill ph-quotes"></i>
-                    <p> "Chúng tôi đã cắt đến 80% chi phí cloud mỗi tháng."</p>
-                    <span>— Khách hàng của ROSA</span>
-                </div>
-                <div class="logo-strip">
-                    <div class="logo-chip">
-                        <img src="images/logoVS_new.png" alt="Viết Sơn ">
-                    </div>
-
-                    <div class="logo-chip">
-                        <img src="images/logoABC.png" alt="">
-                    </div>
-
-                    <div class="logo-chip">
-                        <img src="images/logoXYZ.png" alt="">
-                    </div>
-
-                    <div class="logo-chip">
-                        <img src="images/logoTech.png" alt="">
-                    </div>
-                </div>
+            <div class="faq-visual">
+                <img src="images/ai-connect.png"
+                    alt="Sơ đồ ROSA AI Connect kết nối Claude Code, Cursor, Photoshop, Krita, ComfyUI">
             </div>
             <div class="faq-col">
-                <div class="eyebrow">07 / Câu hỏi thường gặp</div>
+                <div class="eyebrow">05 / Câu hỏi thường gặp</div>
                 <div class="faq-list">
                     <details class="faq-item">
                         <summary>Tôi có phải thay đổi code không?</summary>
@@ -414,13 +353,20 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
         <!-- 9. CTA cuối trang -->
         <section class="cta-banner container">
             <div class="cta-card kh-cta-card">
-                <div class="kh-cta  "><img width="90" height="80" src="https://img.icons8.com/external-soft-fill-juicy-fish/60/external-ai-contact-us-soft-fill-soft-fill-juicy-fish.png"></div>
-                <div class="cta-left">
-                    <h2>Ngừng thuê AI. Bắt đầu sở hữu nó.</h2>
-                    <p>Đặt lịch demo 20 phút — chúng tôi sẽ chạy thử ngay trên chính công cụ và bài toán của bạn.</p>
+                <div class="kh-cta-icon">
+                    <img width="90" height="80" src="https://img.icons8.com/external-soft-fill-juicy-fish/60/external-ai-contact-us-soft-fill-soft-fill-juicy-fish.png">
                 </div>
+        
+                <div class="cta-left">
+                    <h2>Đưa AI về doanh nghiệp của bạn.</h2>
+                    <p>Đặt lịch demo 20 phút để trải nghiệm AI chạy ngay trên dữ liệu và quy trình làm việc của bạn.</p>
+                </div>
+        
                 <div class="cta-right">
-                    <a href="#" class="btn btn-primary">Đặt lịch demo miễn phí <i class="ph ph-arrow-right"></i></a>
+                    <a href="#" class="btn btn-primary">
+                        Đặt lịch demo miễn phí
+                        <i class="ph ph-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </section>
