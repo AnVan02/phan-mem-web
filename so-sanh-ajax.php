@@ -81,7 +81,7 @@ if ($action === 'detail') {
         'ten_thuong_hieu' => $sp['ten_thuong_hieu'] ?? '',
         'ten_dung_luong'  => $sp['ten_dung_luong'] ?? '',
         'thong_so'        => $sp['thong-so'] ?? '',
-        'url'             => 'chi-tiet-san-pham.php?id=' . (int) $sp['ma_san_pham'] . '&ten-san-pham=' . tao_slug($sp['ten_san_pham']),
+        'url'             => tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']),
     ]);
     exit;
 }

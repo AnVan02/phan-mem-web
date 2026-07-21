@@ -97,7 +97,7 @@ function render_the_card($sp)
     $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
 ?>
     <a class="product-card<?php echo $hinh_anh_hover !== '' ? ' has-hover-image' : ''; ?>"
-        href="chi-tiet-san-pham.php?id=<?php echo (int)$sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>">
+        href="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>">
         <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
         <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
         <div class="product-media">
@@ -148,7 +148,7 @@ function render_the_card($sp)
                             <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
                         </button>
                         <button type="button" class="btn-share-product" data-share-product
-                            data-share-url="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>&ten-san-pham=<?php echo $slug; ?>"
+                            data-share-url="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>"
                             data-share-title="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" aria-label="Chia sẻ"
                             title="Chia sẻ">
                             <i class="fa-solid fa-share-nodes"></i>

@@ -36,7 +36,7 @@ foreach ($trang_tinh as $t) {
 // Sản phẩm đang hoạt động - tự lấy từ database, có sản phẩm mới là xuất hiện ngay
 $sp_stmt = $pdo->query("SELECT ma_san_pham, ten_san_pham FROM san_pham WHERE trang_thai = 1");
 while ($sp = $sp_stmt->fetch(PDO::FETCH_ASSOC)) {
-    $loc = 'chi-tiet-san-pham.php?id=' . (int) $sp['ma_san_pham'] . '&ten-san-pham=' . tao_slug($sp['ten_san_pham']);
+    $loc = tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']);
     xml_url($base_url, $loc, null, 'weekly', '0.8');
 }
 

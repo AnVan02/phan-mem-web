@@ -1,3 +1,10 @@
+<?php
+header('Content-Type: text/plain; charset=utf-8');
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+// Lấy thư mục hiện tại để phục vụ cho cả localhost chạy thư mục con và production chạy tên miền riêng
+$base_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
+$base_url = rtrim($base_url, '/\\');
+?>
 User-agent: *
 Allow: /
 
@@ -34,5 +41,5 @@ Disallow: /database/
 Disallow: /scratch/
 Disallow: /_shot/
 
-# TODO: điền domain thật khi lên production, ví dụ https://vietsontdc.com/sitemap.php
-Sitemap: https://<domain-cua-ban>/sitemap.php
+# Sitemap tự động cập nhật đúng tên miền hiện tại
+Sitemap: <?php echo $base_url; ?>/sitemap.php

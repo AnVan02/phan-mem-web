@@ -24,7 +24,7 @@ $page_title = $sp ? htmlspecialchars($sp['ten_san_pham']) . ' - ACHIVA Achieva' 
 if ($sp) {
     $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $base_url = $scheme . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
-    $canonical_url = rtrim($base_url, '/') . '/chi-tiet-san-pham.php?id=' . (int) $sp['ma_san_pham'] . '&ten-san-pham=' . tao_slug($sp['ten_san_pham']);
+    $canonical_url = rtrim($base_url, '/') . '/' . tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']);
 }
 $extra_css = ['assets/css/san-pham.css', 'assets/css/chi-tiet-san-pham.css'];
 require 'head.php';
@@ -176,10 +176,9 @@ require 'head.php';
                                     $r_gia_sau_giam = $r_giam_gia > 0 ? (int) round($r_gia_ban * (100 - $r_giam_gia) / 100) : $r_gia_ban;
                                     $r_anh_list     = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $rp['hinh_anh']))));
                                     $r_hinh_anh     = !empty($r_anh_list) ? $r_anh_list[0] : 'assets/image/pc.webp';
-                                    $r_slug         = tao_slug($rp['ten_san_pham']);
                                 ?>
                                     <a class="product-card-small"
-                                        href="chi-tiet-san-pham.php?id=<?php echo (int) $rp['ma_san_pham']; ?>&ten-san-pham=<?php echo $r_slug; ?>">
+                                        href="<?php echo tao_url_san_pham($rp['ma_san_pham'], $rp['ten_san_pham']); ?>">
                                         <?php if ($r_giam_gia > 0): ?><span
                                                 class="product-badge">-<?php echo $r_giam_gia; ?>%</span><?php endif; ?>
                                         <div class="product-media">

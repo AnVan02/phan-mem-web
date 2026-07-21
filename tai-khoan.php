@@ -351,7 +351,7 @@ require 'head.php';
                             ?>
                     <div class="wishlist-row wishlist-extra-item" data-id="<?php echo (int) $sp['ma_san_pham']; ?>"
                         style="<?php echo $i >= 3 ? 'display:none;' : ''; ?>">
-                        <a href="chi-tiet-san-pham.php?id=<?php echo (int) $sp['ma_san_pham']; ?>"
+                        <a href="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>"
                             style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; flex:1; min-width:0;">
                             <img src="<?php echo htmlspecialchars($sp_hinh); ?>"
                                 alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>">
@@ -450,7 +450,7 @@ require 'head.php';
                     <?php foreach ($lich_su_danh_gia as $dg): ?>
                     <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <a href="chi-tiet-san-pham.php?id=<?php echo (int) $dg['ma_san_pham']; ?>"
+                            <a href="<?php echo tao_url_san_pham($dg['ma_san_pham'], $dg['ten_san_pham']); ?>"
                                 style="font-weight: 600; color: #2563eb; text-decoration: none; font-size: 15px;">
                                 <?php echo htmlspecialchars($dg['ten_san_pham']); ?>
                             </a>

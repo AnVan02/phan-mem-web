@@ -1,5 +1,11 @@
 RewriteEngine On
 
+# Chuyển hướng robots.txt sang robots.php động
+RewriteRule ^robots\.txt$ robots.php [L]
+
+# Pretty URL cho chi tiết sản phẩm: chuyển hướng ten-san-pham-id thành chi-tiet-san-pham.php?id=id&ten-san-pham=ten-san-pham
+RewriteRule ^([a-zA-Z0-9-]+)-([0-9]+)$ chi-tiet-san-pham.php?id=$2&ten-san-pham=$1 [L,QSA]
+
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([^/.]+)$ $1.php [L]
 
