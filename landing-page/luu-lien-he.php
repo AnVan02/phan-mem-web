@@ -19,22 +19,53 @@ if ($fullname === '' || $phone === '' || $email === '') {
     exit;
 }
 
-$dataDir = __DIR__ . '/data';
-if (!is_dir($dataDir)) {
-    mkdir($dataDir, 0755, true);
+$refererPage = basename(parse_url($_SERVER['HTTP_REFERER'] ?? '', PHP_URL_PATH) ?? '');
+$sourceMap = [
+    'landing.php' => 'landing',
+    'ROSA-AI-CONNECT.php' => 'ai-connect',
+    'ROSA-AI-WORKSPACE.php' => 'ai-workspace',
+];
+$source = $sourceMap[$refererPage] ?? 'khac';
+
+mysqli_report(MYSQLI_REPORT_OFF);
+
+$fail = function ($debugReason) {
+    file_put_contents(__DIR__ . '/data/db-error.log', '[' . date('Y-m-d H:i:s') . '] ' . $debugReason . PHP_EOL, FILE_APPEND | LOCK_EX);
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Không thể lưu thông tin, vui lòng thử lại sau.']);
+    exit;
+};
+
+if (!is_dir(__DIR__ . '/data')) {
+    mkdir(__DIR__ . '/data', 0755, true);
 }
 
-$line = sprintf(
-    "[%s] Họ tên: %s | SĐT: %s | Email: %s | Công ty: %s | Nhu cầu: %s%s",
-    date('Y-m-d H:i:s'),
-    str_replace(["\r", "\n"], ' ', $fullname),
-    str_replace(["\r", "\n"], ' ', $phone),
-    str_replace(["\r", "\n"], ' ', $email),
-    str_replace(["\r", "\n"], ' ', $company !== '' ? $company : '-'),
-    str_replace(["\r", "\n"], ' ', $message !== '' ? $message : '-'),
-    PHP_EOL
+$mysqli = @new mysqli("localhost", "root", "", "vietson-achieva");
+
+if ($mysqli->connect_errno) {
+    $fail('connect: ' . $mysqli->connect_error);
+}
+
+$mysqli->set_charset('utf8mb4');
+
+$stmt = $mysqli->prepare(
+    'INSERT INTO dang_ky_tu_van (ho_ten, so_dien_thoai, email, ten_cong_ty, nhu_cau, trang_nguon)
+     VALUES (?, ?, ?, ?, ?, ?)'
 );
 
-file_put_contents($dataDir . '/lien-he.txt', $line, FILE_APPEND | LOCK_EX);
+if ($stmt === false) {
+    $fail('prepare: ' . $mysqli->error);
+}
 
-echo json_encode(['success' => true]);
+$companyValue = $company !== '' ? $company : null;
+$messageValue = $message !== '' ? $message : null;
+$stmt->bind_param('ssssss', $fullname, $phone, $email, $companyValue, $messageValue, $source);
+
+if ($stmt->execute()) {
+    echo json_encode(['success' => true]);
+} else {
+    $fail('execute: ' . $stmt->error);
+}
+
+$stmt->close();
+$mysqli->close();

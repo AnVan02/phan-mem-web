@@ -99,32 +99,33 @@
 
                 <div class="grid problem-grid">
                     <div class="problem-card">
-                        <div class="problem-icon">
-                            <i class="ph-fill ph-file-search"></i>
+                        <div class="problem">
+                            <img width="64" height="64" src="https://img.icons8.com/dusk/64/find-user-male.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
+
                         </div>
-                        <h4 class="problem-title">Tra cứu thông tin mất thời gian</h4>
+                        <h4 class="problem-title">   thông tin mất thời gian</h4>
                         <p>Nhân viên muốn tra chính sách, mức chiết khấu hoặc chương trình khuyến mãi phải lục file hoặc hỏi quản lý rồi ngồi chờ.</p>
                     </div>
 
                     <div class="problem-card">
-                        <div class="problem-icon">
-                            <i class="ph-fill ph-user-plus"></i>
+                        <div class="problem">
+                            <img width="64" height="64" src="https://img.icons8.com/color/48/people-working-together.png" alt="people-working-together"/>
                         </div>
                         <h4 class="problem-title">Nhân viên mới onboarding chậm</h4>
                         <p>Nhân viên mới mất hàng tuần để nắm bảng giá, quy trình và chính sách của công ty.</p>
                     </div>
 
                     <div class="problem-card">
-                        <div class="problem-icon">
-                            <i class="ph-fill ph-chat-circle-dots"></i>
+                        <div class="problem">
+                            <img width="64" height="64" src="https://img.icons8.com/hands/100/repeat.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
                         </div>
                         <h4 class="problem-title">Trả lời khách lặp đi lặp lại</h4>
                         <p>Cùng một câu hỏi của khách, nhân viên phải trả lời hàng trăm lần mỗi ngày.</p>
                     </div>
 
                     <div class="problem-card">
-                        <div class="problem-icon">
-                            <i class="ph-fill ph-clock"></i>
+                        <div class="problem">
+                            <img width="64" height="64" src="https://img.icons8.com/badges/48/business-time.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
                         </div>
                         <h4 class="problem-title">Mất cơ hội ngoài giờ làm việc</h4>
                         <p>Khách nhắn tin ngoài giờ không được phản hồi kịp thời, đồng thời các đầu việc sau cuộc họp cũng dễ bị bỏ quên và không được theo dõi.</p>
@@ -509,9 +510,9 @@
                     <span><i class="ph ph-globe"></i> https://rosacomputer.vn/</span>
                 </div>
                 <div class="f-social">
-                    <a href="#"><i class="ph ph-facebook-logo"></i></a>
-                    <a href="#"><i class="ph ph-linkedin-logo"></i></a>
-                    <a href="#"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="https://www.facebook.com/rosaaicomputer/"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="https://www.linkedin.com/in/rosa-ai-computer-20980b352/"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="https://www.youtube.com/@rosaaicomputer"><i class="ph ph-youtube-logo"></i></a>
                 </div>
             </div>
         </footer>
@@ -549,6 +550,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu</button>
             </form>
+            <div class="form-success" id="formSuccess">
+                <div class="form-success-icon"><i class="ph-fill ph-check-circle"></i></div>
+                <h3>Cảm ơn bạn!</h3>
+                <p>ROSA đã nhận được thông tin và sẽ liên hệ sớm.</p>
+                <button type="button" class="btn btn-primary form-success-close">Đóng</button>
+            </div>
         </div>
     </div>
 
@@ -595,24 +602,66 @@
             });
         });
 
-        // Đóng modal khi bấm nút &times;
-        document.querySelector('.close-modal').addEventListener('click', function() {
-            document.getElementById('contactModal').classList.remove('active');
+        var demoModal = document.getElementById('contactModal');
+        var demoModalHeader = demoModal.querySelector('.modal-header');
+        var demoForm = document.getElementById('demoForm');
+        var demoFormSuccess = document.getElementById('formSuccess');
+
+        function resetDemoModal() {
+            demoModal.classList.remove('active');
             document.body.style.overflow = '';
-        });
+            demoModalHeader.style.display = '';
+            demoForm.style.display = '';
+            demoFormSuccess.classList.remove('active');
+        }
+
+        // Đóng modal khi bấm nút &times;
+        document.querySelector('.close-modal').addEventListener('click', resetDemoModal);
 
         // Đóng modal khi bấm vào overlay
-        document.querySelector('.modal-overlay').addEventListener('click', function() {
-            document.getElementById('contactModal').classList.remove('active');
-            document.body.style.overflow = '';
-        });
+        document.querySelector('.modal-overlay').addEventListener('click', resetDemoModal);
 
         // Đóng modal khi nhấn Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                document.getElementById('contactModal').classList.remove('active');
-                document.body.style.overflow = '';
+                resetDemoModal();
             }
+        });
+
+        // Đóng modal khi bấm nút Đóng ở trạng thái thành công
+        document.querySelector('.form-success-close').addEventListener('click', resetDemoModal);
+
+        // Xử lý gửi Form
+        demoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var form = this;
+            var submitBtn = form.querySelector('button[type="submit"]');
+            var originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Đang gửi...';
+
+            fetch('luu-lien-he.php', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        form.reset();
+                        demoModalHeader.style.display = 'none';
+                        demoForm.style.display = 'none';
+                        demoFormSuccess.classList.add('active');
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+                    }
+                })
+                .catch(function() {
+                    alert('Không thể gửi yêu cầu, vui lòng kiểm tra kết nối và thử lại.');
+                })
+                .finally(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                });
         });
 
         // Chọn gói giá: bấm vào thẻ nào thì thẻ đó nổi bật

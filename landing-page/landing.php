@@ -51,8 +51,8 @@
                         <span class="number">1</span> Máy trạm AI – HOST AI LOCAL
                     </div>
                     <h1 class="hero-title">Sức mạnh AI<br>ngay tại doanh nghiệp</h1>
-                    <p class="hero-desc">ASUS Ascent GX10 (NVIDIA® DXG Spark) là siêu máy tính AI để bàn nhỏ gọn, giúp doanh
-                        nghiệp chạy AI ngay tại chỗ, bảo mật dữ liệu và không phụ thuộc cloud.</p>
+                    <p class="hero-desc">Máy trạm AI để bàn nhỏ gọn, được thiết kế nhằm đáp ứng nhu cầu phát triển, thử nghiệm và triển khai các mô hình AI trên hạ tầng cục bộ (on-premises),
+                        phù hợp cho môi trường văn phòng, trung tâm nghiên cứu và doanh nghiệp, đồng thời tăng cường khả năng bảo mật dữ liệu và tối ưu hiệu quả xử lý.</p>
 
                     <div class="features-list">
                         <div class="feature-item">
@@ -79,23 +79,44 @@
                     </div>
 
                     <div class="hero-buttons">
-                        <a href="https://www.asus.com/vn/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/"
-                            class="btn btn-primary">Tìm hiểu ASUS GX10 <i class="ph ph-arrow-right"></i></a>
-                        <a href="#" class="btn btn-outline">Nhận tư vấn giải pháp</a>
+                        <!-- <a href="https://www.asus.com/vn/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/"
+                            class="btn btn-primary">Tìm hiểu ASUS GX10 <i class="ph ph-arrow-right"></i></a> -->
+                        <a href="#" class="btn btn-primary">Nhận tư vấn giải pháp</a>
                     </div>
                 </div>
                 <div class="hero-right">
-                    <div class="logos-top">
+                    <!-- <div class="logos-top">
                         <img src="images/ASUS_Corporate_Logo.svg.webp" alt="ASUS" class="brand-logo asus-logo">
                         <div class="logo-divider"></div>
                         <img src="images/NVIDIA_logo_white.svg.webp" alt="NVIDIA" class="brand-logo nvidia-logo">
                     </div>
 
                     <h2 class="product-title">ASUS Ascent GX10</h2>
-                    <p class="product-sub">Powered by NVIDIA® DGX Spark</p>
+                    <p class="product-sub">Powered by NVIDIA® DGX Spark</p> -->
 
-                    <div class="product-image-container">
-                        <img src="images/banner.png" alt="ASUS Ascent GX10" class="product-image">
+                    <div class="product-carousel">
+                        <div class="carousel-viewport">
+                            <div class="carousel-slide active" data-index="0">
+                                <img src="images/ROSA-AI-Platform.png" alt="ROSA AI Platform" class="carousel-image">
+                            </div>
+                            <div class="carousel-slide" data-index="1">
+                                <img src="images/banner.png" alt="ASUS Ascent GX10" class="carousel-image">
+                            </div>
+                            <div class="carousel-slide" data-index="2">
+                                <img src="images/page4.png" alt="Sản phẩm ROSA AI" class="carousel-image">
+                            </div>
+                        </div>
+                        <button type="button" class="carousel-arrow carousel-prev" aria-label="Ảnh trước">
+                            <i class="ph ph-caret-left"></i>
+                        </button>
+                        <button type="button" class="carousel-arrow carousel-next" aria-label="Ảnh sau">
+                            <i class="ph ph-caret-right"></i>
+                        </button>
+                        <div class="carousel-dots">
+                            <button type="button" class="carousel-dot active" data-index="0" aria-label="Xem ảnh 1"></button>
+                            <button type="button" class="carousel-dot" data-index="1" aria-label="Xem ảnh 2"></button>
+                            <button type="button" class="carousel-dot" data-index="2" aria-label="Xem ảnh 3"></button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -105,6 +126,8 @@
                 <div class="badge-label">
                     <span class="number">2</span> ROSA AI Platform - Kết nối & Tự động hóa
                 </div>
+
+
                 <h2 class="section-title text-center">Kết nối AI Local với các ứng dụng hàng đầu</h2>
                 <p class="section-desc text-center">Thay vì tốn tiền thuê cloud, doanh nghiệp dùng chính AI chạy trên máy
                     trạm<br>để vận hành các công cụ AI nổi tiếng và tự động hóa quy trình.</p>
@@ -146,7 +169,7 @@
                                     </defs>
 
                                     <!-- connecting lines -->
-                                    <g stroke="url(#lineGrad)" stroke-width="1.6" fill="none">
+                                    <g stroke="#52d6c6" stroke-opacity=".55" stroke-width="1.6" fill="none">
                                         <path d="M280,220 L90,85" stroke-dasharray="4 5">
                                             <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.6s" repeatCount="indefinite" />
                                         </path>
@@ -199,10 +222,8 @@
 
                                         <!-- MR: Photoshop -->
                                         <circle cx="520" cy="220" r="40" fill="#1d222d" stroke="#52d6c6" stroke-width="1.2" />
-                                        <rect x="486" y="186" width="68" height="68" rx="10" fill="#31A8FF"
-                                            clip-path="url(#clip-mr)" />
-                                        <text x="520" y="228" text-anchor="middle" fill="white"
-                                            font-family="'Montserrat', Arial, sans-serif" font-size="22" font-weight="800">Ps</text>
+                                        <image href="https://img.icons8.com/color/48/adobe-photoshop--v1.png" x="486" y="186" width="68" height="68"
+                                            clip-path="url(#clip-mr)" preserveAspectRatio="xMidYMid slice" />
                                         <text x="520" y="276" text-anchor="middle">Photoshop</text>
 
                                         <!-- BL: Hermes -->
@@ -224,18 +245,67 @@
                     </div>
 
 
-                    <div class="card n8n-card">
-                        <h3>Tích hợp n8n – Tự động hóa quy trình</h3>
-                        <p>Tự động hóa các quy trình doanh nghiệp với n8n</p>
-                        <div class="logos-top">
-                            <img src="images/logo-white.svg" alt="ASUS" class="brand-logo asus-logo">
+                    <div class="card n8n-card n8n-card-wide">
+                        <div class="n8n-card-col n8n-card-left">
+                            <h3>Tích hợp n8n – Tự động hóa quy trình</h3>
+                            <p>Tự động hóa các quy trình doanh nghiệp với n8n</p>
+                            <div class="logos-top">
+                                <img src="images/logo-white.svg" alt="ASUS" class="brand-logo asus-logo">
+                            </div>
+                            <ul class="n8n-features">
+                                <li><i class="ph-fill ph-check-circle"></i> Chăm sóc khách hàng tự động trên mạng xã hội</li>
+                                <li><i class="ph-fill ph-check-circle"></i> Tự động gửi tin nhắn quảng cáo</li>
+                                <li><i class="ph-fill ph-check-circle"></i> Lọc / phân loại email</li>
+                                <li><i class="ph-fill ph-check-circle"></i> Đồng bộ dữ liệu giữa các hệ thống </li>
+                                <li><i class="ph-fill ph-check-circle"></i> Tạo báo cáo tự động theo lịch</li>
+                                <li><i class="ph-fill ph-check-circle"></i> Kích hoạt quy trình theo sự kiện </li>
+                                <li><i class="ph-fill ph-check-circle"></i> Và nhiều ứng dụng khác của N8n</li>
+                            </ul>
                         </div>
-                        <ul class="n8n-features">
-                            <li><i class="ph-fill ph-check-circle"></i> Chăm sóc khách hàng tự động trên mạng xã hội</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Tự động gửi tin nhắn quảng cáo</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Lọc / phân loại email</li>
-                            <li><i class="ph-fill ph-check-circle"></i> Và nhiều ứng dụng khác của n8n</li>
-                        </ul>
+                        <div class="n8n-card-col n8n-card-right">
+                            <div class="n8n-flow-title">Ví dụ quy trình tự động</div>
+                            <div class="n8n-flow">
+                                <div class="n8n-flow-step">
+                                    <div class="n8n-flow-icon icon-green"><i class="ph-fill ph-chat-teardrop-text"></i></div>
+                                    <div class="n8n-flow-text">
+                                        <strong>1. Nhận tin nhắn</strong>
+                                        <span>Từ Zalo / Facebook / Website</span>
+                                    </div>
+                                </div>
+                                <div class="n8n-flow-connector"><i class="ph-fill ph-plus-circle"></i></div>
+                                <div class="n8n-flow-step">
+                                    <div class="n8n-flow-icon icon-purple"><i class="ph-fill ph-funnel"></i></div>
+                                    <div class="n8n-flow-text">
+                                        <strong>2. Phân loại &amp; xử lý</strong>
+                                        <span>AI phân loại &amp; trích xuất thông tin</span>
+                                    </div>
+                                </div>
+                                <div class="n8n-flow-connector"><i class="ph-fill ph-plus-circle"></i></div>
+                                <div class="n8n-flow-step">
+                                    <div class="n8n-flow-icon icon-teal"><i class="ph-fill ph-database"></i></div>
+                                    <div class="n8n-flow-text">
+                                        <strong>3. Lưu dữ liệu</strong>
+                                        <span>Lưu vào Google Sheet / CRM</span>
+                                    </div>
+                                </div>
+                                <div class="n8n-flow-connector"><i class="ph-fill ph-plus-circle"></i></div>
+                                <div class="n8n-flow-step">
+                                    <div class="n8n-flow-icon icon-orange"><i class="ph-fill ph-envelope-simple"></i></div>
+                                    <div class="n8n-flow-text">
+                                        <strong>4. Gửi phản hồi</strong>
+                                        <span>Tự động gửi email / tin nhắn</span>
+                                    </div>
+                                </div>
+                                <div class="n8n-flow-connector"><i class="ph-fill ph-plus-circle"></i></div>
+                                <div class="n8n-flow-step">
+                                    <div class="n8n-flow-icon icon-blue"><i class="ph-fill ph-chart-bar"></i></div>
+                                    <div class="n8n-flow-text">
+                                        <strong>5. Báo cáo &amp; theo dõi</strong>
+                                        <span>Tổng hợp &amp; gửi báo cáo định kỳ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -255,15 +325,10 @@
                             giải pháp hỗ trợ doanh nghiệp quản lý tập trung, khai thác hiệu quả kho tài liệu
                             và tối ưu hiệu suất làm việc.
                         </p>
-                        
+
                         <!-- CTA -->
                         <div class="chatbot-actions">
-                            <a href="#" class="btn-primary">
-                                <i class="ph ph-rocket-launch"></i>
-                                Dùng thử ngay
-                            </a>
-
-                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-WORKSPACE.php" class="btn-outline">
+                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-WORKSPACE.php" class="btn-primary">
                                 <i class="ph ph-arrow-square-out"></i>
                                 Xem chi tiết giải pháp
                             </a>
@@ -484,14 +549,9 @@
                                     style="font-size: 24px; color: var(--primary);"></i><span>và nhiều<br>hơn nữa...</span>
                             </div>
                         </div>
-                           <!-- CTA -->
+                        <!-- CTA -->
                         <div class="chatbot-actions">
-                            <a href="#" class="btn-primary">
-                                <i class="ph ph-rocket-launch"></i>
-                                Dùng thử ngay
-                            </a>
-
-                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-CONNECT.php" class="btn-outline">
+                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-CONNECT.php" class="btn-primary">
                                 <i class="ph ph-arrow-square-out"></i>
                                 Xem chi tiết giải pháp
                             </a>
@@ -521,7 +581,7 @@
             <!-- Modal Liên Hệ -->
             <div id="contactModal" class="modal">
                 <div class="modal-overlay"></div>
-                <div class="modal-content">
+                <div class="modal-content modal-content-consult">
                     <button class="close-modal">&times;</button>
                     <div class="modal-header">
                         <h2>Đăng ký tư vấn giải pháp AI</h2>
@@ -529,15 +589,15 @@
                     </div>
                     <form id="consultationForm" class="modal-form">
                         <div class="form-group">
-                            <label for="fullname">Họ và tên *</label>
+                            <label for="fullname">Họ và tên</label>
                             <input type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Số điện thoại *</label>
+                            <label for="phone">Số điện thoại</label>
                             <input type="tel" id="phone" name="phone" placeholder="0901 234 567" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email công việc *</label>
+                            <label for="email">Email công việc</label>
                             <input type="email" id="email" name="email" placeholder="name@company.com" required>
                         </div>
                         <div class="form-group">
@@ -548,8 +608,15 @@
                             <label for="message">Nhu cầu của bạn</label>
                             <textarea id="message" name="message" rows="3" placeholder="Ví dụ: Tôi muốn tư vấn về Chatbot nội bộ..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu tư vấn</button>
+                        <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu tư vấn <i class="ph ph-arrow-right"></i></button>
+                        <button type="submit" class="btn btn-primary w-full">Liên hệ zalo <i class="ph ph-arrow-right"></i></button>
                     </form>
+                    <div class="form-success" id="formSuccess">
+                        <div class="form-success-icon"><i class="ph-fill ph-check-circle"></i></div>
+                        <h3>Cảm ơn bạn!</h3>
+                        <p>ROSA đã nhận được thông tin và sẽ liên hệ sớm.</p>
+                        <button type="button" class="btn btn-primary form-success-close">Đóng</button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -572,9 +639,9 @@
                     <span><i class="ph ph-globe"></i> https://rosacomputer.vn/</span>
                 </div>
                 <div class="f-social">
-                    <a href="#"><i class="ph ph-facebook-logo"></i></a>
-                    <a href="#"><i class="ph ph-linkedin-logo"></i></a>
-                    <a href="#"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="https://www.facebook.com/rosaaicomputer/"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="https://www.linkedin.com/in/rosa-ai-computer-20980b352/"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="https://www.youtube.com/@rosaaicomputer"><i class="ph ph-youtube-logo"></i></a>
                 </div>
             </div>
         </footer>

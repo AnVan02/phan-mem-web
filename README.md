@@ -41,8 +41,19 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 ├── tin-tuc-moi.php / chi-tiet-tin-tuc.php  Tin tức
 ├── bao-hanh.php / cam-ket-khach-hang.php   Trang chính sách/cam kết
 ├── thuong-hieu.php / danh-muc.php          Trang thương hiệu / danh mục
-└── mailer.php                              Gửi email (đơn hàng, liên hệ...)
+├── mailer.php                               Gửi email (đơn hàng, liên hệ...)
+├── robots.txt                               Chỉ dẫn crawl cho search engine
+└── sitemap.php                              Sitemap XML tự sinh từ database (xem mục SEO bên dưới)
 ```
+
+## Quy ước link nội bộ
+
+Toàn bộ link/href/src nội bộ trong site dùng đường dẫn **tương đối, không có `/` ở đầu** (vd: `san-pham.php`, `assets/image/logo.png`), không dùng đường dẫn tuyệt đối từ gốc domain (`/san-pham.php`). Lý do: site có thể chạy ở domain gốc (production) hoặc trong thư mục con của `htdocs` (XAMPP local, vd `http://localhost/VietSon-Achieva/`) — link tương đối luôn đúng ở cả hai trường hợp, còn link tuyệt đối `/...` sẽ vỡ khi chạy trong thư mục con.
+
+## SEO: robots.txt & sitemap.php
+
+- [robots.txt](robots.txt) — chặn crawl `/admin/`, trang riêng tư (`tai-khoan.php`, `gio-hang.php`, `don-hang-chi-tiet.php`), các file include không phải trang thật (`head.php`, `header.php`, `footer.php`...), script AJAX/xử lý/migrate/debug, thư mục `database/`, `scratch/`, `_shot/`. Dòng `Sitemap:` ở cuối file cần điền domain thật khi lên production (đang để placeholder `<domain-cua-ban>`).
+- [sitemap.php](sitemap.php) — sinh sitemap XML động: liệt kê sẵn các trang tĩnh chính (`index.php`, `san-pham.php`, `mo-ta-linh-kien.php`, `tin-tuc-moi.php`, `bao-hanh.php`), đồng thời tự truy vấn bảng `san_pham` và `article` để thêm URL từng sản phẩm/bài viết đang active — có dữ liệu mới là sitemap tự cập nhật, không cần sửa code. URL gốc (domain + thư mục con nếu có) được tự nhận diện qua `$_SERVER['HTTP_HOST']`/`SCRIPT_NAME`, không hard-code domain.
 
 ## Quy ước dùng head.php
 

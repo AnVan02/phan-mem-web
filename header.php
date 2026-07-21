@@ -12,11 +12,11 @@
 
         <nav class="main-nav">
             <ul>
-                <li><a href="/uu-dai.php">Ưu đãi</a></li>
+                <li><a href="uu-dai.php">Ưu đãi</a></li>
 
                 <!-- Mega menu -->
                 <li class="has-megamenu">
-                    <a href="/may-tinh-lap-san.php">
+                    <a href="may-tinh-lap-san.php">
                         Máy tính lắp sẵn
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
@@ -30,13 +30,13 @@
                                         <ul>
                                             <li><a href="san-pham.php">Sản phẩm</a></li>
                                             <li><a href="san-pham.php?loai=rosa">Máy bộ PC</a></li>
-                                            <li><a href="/san-pham.php?loai=amd">Người chơi thứ ba</a></li>
-                                            <li><a href="/may-tinh-lap-san.php?so-sanh=1">So sánh các máy tính chơi game lắp sẵn</a></li>
+                                            <li><a href="san-pham.php?loai=amd">Người chơi thứ ba</a></li>
+                                            <li><a href="may-tinh-lap-san.php?so-sanh=1">So sánh các máy tính chơi game lắp sẵn</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="megamenu-promo">
-                                    <a href="/uu-dai.php?bo-suu-tap=007">
+                                    <a href="uu-dai.php?bo-suu-tap=007">
                                         <img src="assets/image/pc.webp" alt="Máy tính chơi game lắp sẵn">
                                     </a>
                                 </div>
@@ -63,7 +63,7 @@
                                             <li><a href="san-pham.php?loai=mainboard">Mainboard</a></li>
                                             <li><a href="san-pham.php?loai=vga">VGA - Card màn hình</a></li>
                                             <li><a href="san-pham.php?loai=ram">RAM</a></li>
-                                            <li><a href="san-pham.php?loai=ssq">SSD</a></li>
+                                            <li><a href="san-pham.php?loai=ssd">SSD</a></li>
                                             <li><a href="san-pham.php?loai=manhinh">Màn hình</a></li>
                                             <li><a href="san-pham.php?loai=asus">ASUS</a></li>
                                         </ul>
@@ -71,7 +71,7 @@
                                     <div class="megamenu-col">
                                         <h4>Lưu trữ &amp; Tản nhiệt</h4>
                                         <ul>
-                                            <li><a href="sanpham.php?loai=ssd">Ổ cứng SSD/HDD</a></li>
+                                            <li><a href="san-pham.php?loai=hdd">Ổ cứng SSD/HDD</a></li>
                                             <li><a href="san-pham.php?loai=nguon">Nguồn máy tính</a></li>
                                             <li><a href="san-pham.php?loai=tan-nhiet">Tản nhiệt</a></li>
                                             <li><a href="san-pham.php?loai=vo-case">Vỏ case</a></li>
@@ -95,19 +95,35 @@
 
                 <!-- Dropdown nhỏ -->
                 <li class="has-submenu">
-                    <a href="/cong-dong.php">
+                    <a href="cong-dong.php">
                         Cộng đồng
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="/cong-dong.php?trang=cau-lac-bo">Câu lạc bộ Viết Sơn</a></li>
+                        <li><a href="cong-dong.php?trang=cau-lac-bo">Về công ty </a></li>
                         <li><a href="tin-tuc-moi.php">Tin tức</a></li>
-                        <li><a href="/cong-dong.php?trang=podcast">Podcast</a></li>
-                        <li><a href="/cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
+                        <li><a href="cong-dong.php?trang=podcast">Podcast</a></li>
+                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
                     </ul>
                 </li>
 
-                <li><a href="/ung-ho.php">Ủng hộ</a></li>
+                <!-- Dropdown nhỏ -->
+                <li class="has-submenu">
+                    <a href="cong-dong.php">
+                        Về công ty
+                        <span class="submenu-arrow" aria-hidden="true"></span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="cong-dong.php?trang=cau-lac-bo">Chính sách đại lý</a></li>
+                        <li><a href="tin-tuc-moi.php">Chính sách bảo hành </a></li>
+                        <li><a href="cong-dong.php?trang=podcast">Chính sách bảo mật</a></li>
+                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Chính sách công ty </a></li>
+                    </ul>
+                </li>
+
+
+
+                <li><a href="ung-ho.php">Ủng hộ</a></li>
             </ul>
 
             <a href="tai-khoan.php" class="main-nav-account">

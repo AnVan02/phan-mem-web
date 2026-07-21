@@ -246,6 +246,50 @@ a {
     border-color: #e60012;
 }
 
+/* Form Success State */
+.form-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0 4px;
+}
+
+.form-success.active {
+    display: flex;
+    animation: slideUp 0.3s ease-out;
+}
+
+.form-success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(118, 185, 0, 0.12);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    margin-bottom: 18px;
+}
+
+.form-success h3 {
+    font-size: 22px;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.form-success p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 26px;
+}
+
+.form-success .btn {
+    min-width: 140px;
+}
+
 .w-full {
     width: 100%;
     margin-top: 10px;
@@ -999,6 +1043,8 @@ a {
 .value-icon img {
     width: 60px;
     height: 60px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
 }
 
@@ -1160,6 +1206,7 @@ a {
 
 .faq-visual img {
     width: 90%;
+    width: 100%;
     border-radius: 16px;
     display: block;
 }

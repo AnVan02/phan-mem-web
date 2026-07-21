@@ -356,12 +356,11 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                 <div class="kh-cta-icon">
                     <img width="90" height="80" src="https://img.icons8.com/external-soft-fill-juicy-fish/60/external-ai-contact-us-soft-fill-soft-fill-juicy-fish.png">
                 </div>
-        
                 <div class="cta-left">
-                    <h2>Đưa AI về doanh nghiệp của bạn.</h2>
-                    <p>Đặt lịch demo 20 phút để trải nghiệm AI chạy ngay trên dữ liệu và quy trình làm việc của bạn.</p>
+                    <h2>Ngừng thuê AI. Bắt đầu sở hữu nó.</h2>
+                    <p>Đặt lịch demo 20 phút — chúng tôi sẽ chạy thử ngay trên chính công cụ và bài toán của bạn.</p>
                 </div>
-        
+
                 <div class="cta-right">
                     <a href="#" class="btn btn-primary">
                         Đặt lịch demo miễn phí
@@ -403,6 +402,12 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     </div>
                     <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu</button>
                 </form>
+                <div class="form-success" id="formSuccess">
+                    <div class="form-success-icon"><i class="ph-fill ph-check-circle"></i></div>
+                    <h3>Cảm ơn bạn!</h3>
+                    <p>ROSA đã nhận được thông tin và sẽ liên hệ sớm.</p>
+                    <button type="button" class="btn btn-primary form-success-close">Đóng</button>
+                </div>
             </div>
         </div>
     </main>
@@ -425,9 +430,9 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                 <span><i class="ph ph-globe"></i> https://rosacomputer.vn/</span>
             </div>
             <div class="f-social">
-                <a href="#"><i class="ph ph-facebook-logo"></i></a>
-                <a href="#"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="#"><i class="ph ph-youtube-logo"></i></a>
+                <a href="https://www.facebook.com/rosaaicomputer/"><i class="ph ph-facebook-logo"></i></a>
+                <a href="https://www.linkedin.com/in/rosa-ai-computer-20980b352/"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="https://www.youtube.com/@rosaaicomputer"><i class="ph ph-youtube-logo"></i></a>
             </div>
         </div>
     </footer>
