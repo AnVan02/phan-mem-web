@@ -144,7 +144,7 @@
                                             <stop offset="100%" stop-color="#52d6c6" stop-opacity=".15" />
                                         </linearGradient>
                                         <clipPath id="clip-center">
-                                            <circle cx="280" cy="220" r="44" />
+                                            <circle cx="280" cy="220" r="66" />
                                         </clipPath>
                                         <clipPath id="clip-tl">
                                             <circle cx="90" cy="85" r="34" />
@@ -189,11 +189,11 @@
                                     </g>
 
                                     <!-- center node: AI Local -->
-                                    <circle cx="280" cy="220" r="44" fill="#1d222d" stroke="#d89b4a" stroke-width="1.6" />
-                                    <image href="images/ROSA-AI-Platform.png" x="236" y="176" width="88" height="88"
-                                        clip-path="url(#clip-center)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="280" y="282" text-anchor="middle" fill="#edeff3"
-                                        font-family="'Montserrat', Arial, sans-serif" font-size="13" font-weight="600">ROSA AI READY
+                                    <circle cx="280" cy="220" r="66" fill="#1d222d" stroke="#d89b4a" stroke-width="1.6" />
+                                    <image href="images/ROSA-AI-Platform.png" x="214" y="154" width="132" height="132"
+                                        clip-path="url(#clip-center)" preserveAspectRatio="xMidYMid meet" />
+                                    <text x="280" y="306" text-anchor="middle" fill="#edeff3"
+                                        font-family="'Montserrat', Arial, sans-serif" font-size="14" font-weight="600">ROSA AI READY
                                     </text>
                                    
                                     <!-- outer nodes -->
@@ -328,7 +328,7 @@
                             <!--    Dùng thử ngay-->
                             <!--</a>-->
 
-                            <a href="https://rosacomputer.vn/rosa-ai-platform/rosa-ai-workspace.php" class="btn-outline">
+                            <a href="https://rosacomputer.vn/rosa-ai-platform/rosa-ai-workspace.php" class="btn btn-primary">
                                 <i class="ph ph-arrow-square-out"></i>
                                 Xem chi tiết giải pháp
                             </a>
@@ -388,9 +388,9 @@
                         </ul>
                     </div>
 
-                    <div class="n8n-card-col n8n-card-right n8n-card-right-image">
+                    <div class="n8n-card-col n8n-card-right">
                         <div class="chatbot-mockup chatbot-mockup-image">
-                            <img src="images/aa.png "
+                            <img src="images/N8N-AUTOMATION.png"
                                 alt="ROSA AI Workspace - n8n Automation"
                                 class="chatbot-screenshot">
                         </div>
@@ -492,7 +492,7 @@
 
             <section class="strategy container">
                 <div class="strategy-content">
-                    <div class="s-left">
+                    <div class="s-left strategy-left-content">
                         <div class="badge-label">
                             <span class="number">5</span> PHÂN TÍCH HIỂU QUẢ ĐẦU TƯ
                         </div>
@@ -512,152 +512,126 @@
                     </div>
                     <div class="s-right">
                         <div class="ai-hub">
-                            <svg viewBox="0 0 560 460" width="100%" role="img"
-                                aria-label="Sơ đồ AI kết nối với các nền tảng ChatGPT, Gemini, Claude, Microsoft, Meta, Mistral">
-                                <defs>
-                                    <linearGradient id="aiCoreGrad" x1="0" y1="0" x2="1" y2="1">
-                                        <stop offset="0%" stop-color="#b6f22c" />
-                                        <stop offset="100%" stop-color="#5c8c00" />
-                                    </linearGradient>
-                                    <clipPath id="hub-tl">
-                                        <circle cx="90" cy="85" r="34" />
-                                    </clipPath>
-                                    <clipPath id="hub-tr">
-                                        <circle cx="470" cy="85" r="34" />
-                                    </clipPath>
-                                    <clipPath id="hub-ml">
-                                        <circle cx="40" cy="220" r="34" />
-                                    </clipPath>
-                                    <clipPath id="hub-mr">
-                                        <circle cx="520" cy="220" r="34" />
-                                    </clipPath>
-                                    <clipPath id="hub-bl">
-                                        <circle cx="90" cy="355" r="34" />
-                                    </clipPath>
-                                    <clipPath id="hub-br">
-                                        <circle cx="470" cy="355" r="34" />
-                                    </clipPath>
-                                </defs>
-
-                                <!-- connecting lines -->
-                                <g stroke="#76b900" stroke-opacity=".55" stroke-width="1.6" fill="none">
-                                    <path d="M280,220 L90,85" stroke-dasharray="4 5">
-                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.6s" repeatCount="indefinite" />
-                                    </path>
-                                    <path d="M280,220 L470,85" stroke-dasharray="4 5">
-                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite" />
-                                    </path>
-                                    <path d="M280,220 L40,220" stroke-dasharray="4 5">
-                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="2.1s" repeatCount="indefinite" />
-                                    </path>
-                                    <path d="M280,220 L520,220" stroke-dasharray="4 5">
-                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.9s" repeatCount="indefinite" />
-                                    </path>
-                                    <path d="M280,220 L90,355" stroke-dasharray="4 5">
-                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="2s" repeatCount="indefinite" />
-                                    </path>
-                                    <path d="M280,220 L470,355" stroke-dasharray="4 5">
-                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.7s" repeatCount="indefinite" />
-                                    </path>
-                                </g>
-
-                                <!-- center node: AI -->
-                                <!-- Ảnh AI -->
-                                 
-                               <image
-                                x="220"
-                                y="140"
-                                width="160"
-                                height="160"
-                                href="images/11.png"
-                                preserveAspectRatio="xMidYMid slice"
-                            />
-
-                                <!-- outer nodes -->
-                                <g font-family="'Montserrat', Arial, sans-serif" font-size="11" fill="#edeff3">
-
-                                    <!-- TL: ChatGPT -->
-                                    <circle cx="90" cy="85" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
-                                    <image href="images/hermes.png" x="56" y="51" width="68" height="68"
-                                        clip-path="url(#hub-tl)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="90" y="141" text-anchor="middle">Hermes Agent</text>
-
-                                    <!-- TR: Gemini -->
-                                    <circle cx="470" cy="85" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
-                                    <image href="images/comfy.webp" x="436" y="51" width="68" height="68"
-                                        clip-path="url(#hub-tr)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="470" y="141" text-anchor="middle">ComfyUI</text>
-
-                                    <!-- ML: Claude -->
-                                    <circle cx="40" cy="220" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
-                                    <image href="images/claude.png" x="6" y="186" width="68" height="68"
-                                        clip-path="url(#hub-ml)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="40" y="276" text-anchor="middle">Claude</text>
-
-                                    <!-- MR: Microsoft -->
-                                    <circle cx="520" cy="220" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
-                                    <image href="images/Cursor_logo.png" x="486" y="186" width="68" height="68"
-                                        clip-path="url(#hub-mr)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="520" y="276" text-anchor="middle">Cursor</text>
-
-                                    <!-- BL: Meta -->
-                                    <circle cx="90" cy="355" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
-                                    <image href="images/n8n.png" x="56" y="321" width="68" height="68"
-                                        clip-path="url(#hub-bl)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="90" y="411" text-anchor="middle">N8n</text>
-
-                                    <!-- BR: Mistral AI -->
-                                    <circle cx="470" cy="355" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
-                                    <image href="images/photoshop.jpg" x="446" y="331" width="48" height="48"
-                                        clip-path="url(#hub-br)" preserveAspectRatio="xMidYMid slice" />
-                                    <text x="470" y="411" text-anchor="middle">Photoshop</text>
-
-                                </g>
-                            </svg>
+                            <img src="images/hieu-qua-dau-tu.png" alt="AI Cloud Platform" class="strategy-img">
                         </div>
                     </div>
                 </div>
 
-                <div class="investment-table-wrap">
-                    <div class="table-scroll">
-                        <table class="investment-table">
-                            <thead>
-                                <tr>
-                                    <th>Nhóm người dùng</th>
-                                    <th>Gói AI Cloud điển hình / Nhân sự</th>
-                                    <th>Quy mô</th>
-                                    <th>Chi phí AI Cloud<span>(Phát sinh theo từng tháng, năm phụ thuộc vào số lượng AI và giá của từng đơn vị phần mềm)</span></th>
-                                    <th>Phần cứng + ROSA AI Platform (180 triệu)</th>
-                                    <th>Thời gian thu hồi vốn</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="row-label"><i class="ph-fill ph-user-circle icon-blue"></i> Lập trình viên</td>
-                                    <td>Claude Max / Codex Pro / Cursor Pro</td>
-                                    <td>5 - 10 người</td>
-                                    <td class="highlight">15 - 50 Triệu VNĐ/ tháng</td>
-                                    <td>Đầu tư một lần ~180 triệu, không phát sinh chi phí token.</td>
-                                    <td class="roi">~12 tháng</td>
-                                </tr>
-                                <tr>
-                                    <td class="row-label"><i class="ph-fill ph-megaphone icon-green"></i> Marketing &amp; Thiết kế</td>
-                                    <td>GPT Image, Photoshop, ComfyUI API, Video AI (King AI, VEO, SORA)</td>
-                                    <td>3 - 5 người</td>
-                                    <td class="highlight">10 – 20 triệu VNĐ/tháng</td>
-                                    <td>Tạo ảnh, video AI không giới hạn trên hạ tầng nội bộ.</td>
-                                    <td class="roi">~18 tháng</td>
-                                </tr>
-                                <tr>
-                                    <td class="row-label"><i class="ph-fill ph-buildings icon-orange"></i> Doanh nghiệp</td>
-                                    <td>Chatbot, RAG, Automation đa phòng ban hoặc 1 - 2 nhân sự CSKH trực 24/7, nhân viên nhân sự tổng hợp báo cáo...</td>
-                                    <td>10 - 50 người</td>
-                                    <td class="highlight">20 – 30 triệu VNĐ/tháng</td>
-                                    <td>AI dùng chung toàn doanh nghiệp giúp tư vấn CSKH 24/7, ghi âm và tóm tắt cuộc gọi, không phát sinh chi phí theo người dùng hoặc token.</td>
-                                    <td class="roi">~9 tháng</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="ai-pricing-section">
+                    <div class="ai-pricing-header">
+                        <div class="line"></div>
+                        <div class="dot"></div>
+                        <h2>GIẢI PHÁP AI CLOUD TRIỂN KHAI</h2>
+                        <div class="dot"></div>
+                        <div class="line"></div>
+                    </div>
+                    
+                    <div class="ai-pricing-grid">
+                        <!-- Sidebar -->
+                        <div class="pricing-sidebar">
+                            <div class="sidebar-item">
+                                <i class="ph ph-squares-four"></i> Nhóm ngành
+                            </div>
+                            <div class="sidebar-item">
+                                <i class="ph ph-users"></i> Quy mô
+                            </div>
+                            <div class="sidebar-item">
+                                <i class="ph ph-currency-circle-dollar"></i> Chi phí AI Cloud
+                            </div>
+                            <div class="sidebar-item">
+                                <i class="ph ph-chart-line-up"></i> Hiệu quả kỳ vọng
+                            </div>
+                            <div class="sidebar-item">
+                                <i class="ph ph-clock"></i> Thời gian thu hồi vốn
+                            </div>
+                        </div>
+
+                        <!-- Cards -->
+                        <!-- Card 1 -->
+                        <div class="pricing-card card-green">
+                            <div class="card-cell header-cell">
+                                <div class="icon-wrap"><i class="ph-fill ph-shopping-cart"></i></div>
+                                <div class="title-wrap">
+                                    <h3>BÁN LẺ (B2C)</h3>
+                                    <p>Bán hàng thông minh - Trải nghiệm cá nhân hóa</p>
+                                </div>
+                            </div>
+                            <div class="card-cell">
+                                <i class="ph-fill ph-users"></i> 5 – 10 người
+                            </div>
+                            <div class="card-cell price-cell">
+                                <div class="price-info">
+                                    <div class="price">99.000.000 VNĐ</div>
+                                    <div class="period">(vĩnh viễn)</div>
+                                </div>
+                                <i class="ph-fill ph-wallet"></i>
+                            </div>
+                            <div class="card-cell">
+                                <p>Giảm 4-6 nhân sự CSKH, tăng chuyển đổi 30-50%,<br>doanh số tăng 15-25%</p>
+                                <i class="ph-fill ph-chart-line-up"></i>
+                            </div>
+                            <div class="card-cell">
+                                <i class="ph ph-clock"></i> &lt; 6 tháng
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="pricing-card card-purple">
+                            <div class="card-cell header-cell">
+                                <div class="icon-wrap"><i class="ph-fill ph-storefront"></i></div>
+                                <div class="title-wrap">
+                                    <h3>SẢN XUẤT & THƯƠNG MẠI</h3>
+                                    <p>Vận hành tối ưu - Kiểm soát hiệu quả</p>
+                                </div>
+                            </div>
+                            <div class="card-cell">
+                                <i class="ph-fill ph-users"></i> 10 – 20 người
+                            </div>
+                            <div class="card-cell price-cell">
+                                <div class="price-info">
+                                    <div class="price">199.000.000 VNĐ</div>
+                                    <div class="period">(vĩnh viễn)</div>
+                                </div>
+                                <i class="ph-fill ph-wallet"></i>
+                            </div>
+                            <div class="card-cell">
+                                <p>Tiết kiệm 20-30% thời gian vận hành, giảm 10-15% chi phí, tăng hiệu suất làm việc</p>
+                                <i class="ph-fill ph-chart-bar"></i>
+                            </div>
+                            <div class="card-cell">
+                                <i class="ph ph-clock"></i> &lt; 12 tháng
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="pricing-card card-orange">
+                            <div class="card-cell header-cell">
+                                <div class="icon-wrap"><i class="ph-fill ph-buildings"></i></div>
+                                <div class="title-wrap">
+                                    <h3>DOANH NGHIỆP LỚN (B2B)</h3>
+                                    <p>Tối ưu toàn bộ quy trình - Nâng tầm cạnh tranh</p>
+                                </div>
+                            </div>
+                            <div class="card-cell">
+                                <i class="ph-fill ph-users"></i> 20 – 50+ người
+                            </div>
+                            <div class="card-cell price-cell">
+                                <div class="price-info">
+                                    <div class="price">299.000.000 VNĐ</div>
+                                    <div class="period">(vĩnh viễn)</div>
+                                </div>
+                                <i class="ph-fill ph-wallet"></i>
+                            </div>
+                            <div class="card-cell">
+                                <p>Tối ưu toàn bộ quy trình, giảm 30-50% chi phí vận hành, ra quyết định nhanh hơn, nâng cao năng lực cạnh tranh</p>
+                                <i class="ph-fill ph-target"></i>
+                            </div>
+                            <div class="card-cell">
+                                <i class="ph ph-clock"></i> &lt; 24 tháng
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     </div>
                 </div>
             </section>
