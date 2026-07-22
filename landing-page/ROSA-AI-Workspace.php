@@ -28,9 +28,7 @@
                 <a href="landing.php">GIẢI PHÁP</a>
                 <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
                 <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
-                <a href="#">ỨNG DỤNG </a>
-                <a href="#">SẢN PHẨM</a>
-                <a href="#" class="btn btn-primary nav-cta js-open-modal">Liên hệ tư vấn</a>
+                <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
             </nav>
             <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn <i class="ph ph-arrow-right"></i></a>
             <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false">
@@ -93,42 +91,61 @@
         <section class="section-padding">
             <div class="container">
                 <div class="text-center" style="text-align: left;">
-                    <div class="eyebrow">VẤN ĐỀ</div>
+                    <div class="eyebrow">VẤN ĐỀ CỦA BẠN </div>
                     <h2 class="section-title">Đội ngũ của bạn đang mất quá nhiều thời gian vào những việc lặp lại.</h2>
                 </div>
 
-                <div class="grid problem-grid">
-                    <div class="problem-card">
-                        <div class="problem">
-                            <img width="64" height="64" src="https://img.icons8.com/dusk/64/find-user-male.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
-
+                <div class="problem-showcase">
+                    <div class="problem-row">
+                        <div class="problem-media">
+                            <div class="problem-media-inner">
+                                <img width="100" height="100" src="images/image1.png" alt="Tra cứu thông tin mất thời gian"/>
+                            </div>
                         </div>
-                        <h4 class="problem-title">   thông tin mất thời gian</h4>
-                        <p>Nhân viên muốn tra chính sách, mức chiết khấu hoặc chương trình khuyến mãi phải lục file hoặc hỏi quản lý rồi ngồi chờ.</p>
+                        <div class="problem-content">
+                            <div class="problem-number">01</div>
+                            <h4 class="problem-title">Tra thông tin mất thời gian</h4>
+                            <p>Nhân viên muốn tra chính sách, mức chiết khấu hoặc chương trình khuyến mãi phải lục file hoặc hỏi quản lý rồi ngồi chờ.</p>
+                        </div>
                     </div>
 
-                    <div class="problem-card">
-                        <div class="problem">
-                            <img width="64" height="64" src="https://img.icons8.com/color/48/people-working-together.png" alt="people-working-together"/>
+                    <div class="problem-row reverse">
+                        <div class="problem-media">
+                            <div class="problem-media-inner">
+                                <img width="150" height="150" src="images/image1.png" alt="Nhân viên mới onboarding chậm"/>
+                            </div>
                         </div>
-                        <h4 class="problem-title">Nhân viên mới onboarding chậm</h4>
-                        <p>Nhân viên mới mất hàng tuần để nắm bảng giá, quy trình và chính sách của công ty.</p>
+                        <div class="problem-content">
+                            <div class="problem-number">02</div>
+                            <h4 class="problem-title">Nhân viên mới onboarding chậm</h4>
+                            <p>Nhân viên mới mất hàng tuần để nắm bảng giá, quy trình và chính sách của công ty.</p>
+                        </div>
                     </div>
 
-                    <div class="problem-card">
-                        <div class="problem">
-                            <img width="64" height="64" src="https://img.icons8.com/hands/100/repeat.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
+                    <div class="problem-row">
+                        <div class="problem-media">
+                            <div class="problem-media-inner">
+                                <img width="100" height="100" src="images/image1.png" alt="Trả lời khách lặp đi lặp lại"/>
+                            </div>
                         </div>
-                        <h4 class="problem-title">Trả lời khách lặp đi lặp lại</h4>
-                        <p>Cùng một câu hỏi của khách, nhân viên phải trả lời hàng trăm lần mỗi ngày.</p>
+                        <div class="problem-content">
+                            <div class="problem-number">03</div>
+                            <h4 class="problem-title">Trả lời khách lặp đi lặp lại</h4>
+                            <p>Cùng một câu hỏi của khách, nhân viên phải trả lời hàng trăm lần mỗi ngày.</p>
+                        </div>
                     </div>
 
-                    <div class="problem-card">
-                        <div class="problem">
-                            <img width="64" height="64" src="https://img.icons8.com/badges/48/business-time.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
+                    <div class="problem-row reverse">
+                        <div class="problem-media">
+                            <div class="problem-media-inner">
+                                <img width="96" height="96" src="https://img.icons8.com/badges/48/business-time.png" alt="Mất cơ hội ngoài giờ làm việc"/>
+                            </div>
                         </div>
-                        <h4 class="problem-title">Mất cơ hội ngoài giờ làm việc</h4>
-                        <p>Khách nhắn tin ngoài giờ không được phản hồi kịp thời, đồng thời các đầu việc sau cuộc họp cũng dễ bị bỏ quên và không được theo dõi.</p>
+                        <div class="problem-content">
+                            <div class="problem-number">04</div>
+                            <h4 class="problem-title">Mất cơ hội ngoài giờ làm việc</h4>
+                            <p>Khách nhắn tin ngoài giờ không được phản hồi kịp thời, đồng thời các đầu việc sau cuộc họp cũng dễ bị bỏ quên và không được theo dõi.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,98 +180,99 @@
         </section>
 
         <!-- 4. Phần 1 - Trợ lý AI nội bộ (bộ não) -->
-        <section class="section-padding">
+        <section class="section-padding num-section">
             <div class="container">
                 <div class="text-center" style="text-align: left; margin-bottom: 48px;">
                     <div class="eyebrow">PHẦN 1 · Trợ lý AI nội bộ</div>
                     <h2 class="section-title" style="margin-bottom: 0;">Một trợ lý hiểu công ty bạn.</h2>
                 </div>
-                <div class="grid value-grid value-grid-4">
+
+                <div class="num-list">
 
                     <!-- 1 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="64" height="64" src="https://img.icons8.com/external-ddara-lineal-color-ddara/64/external-check-business-elements-ddara-lineal-color-ddara.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/01</span>
+                            <h3 class="num-heading">Tra cứu thông tin nội bộ tức thì</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Tra cứu thông tin nội bộ tức thì</h3>
+                        <div class="num-row-right">
                             <p>Hỏi bảng giá, mức chiết khấu, chính sách, chương trình khuyến mãi hay quy trình bảo hành và nhận câu trả lời ngay, kèm nguồn trong tài liệu gốc.</p>
                         </div>
                     </div>
 
                     <!-- 2 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="60" height="60" src="https://img.icons8.com/color/48/people-working-together.png" alt="people-working-together"/>
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/02</span>
+                            <h3 class="num-heading">Nhân viên mới hòa nhập nhanh hơn</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Nhân viên mới hòa nhập nhanh hơn</h3>
+                        <div class="num-row-right">
                             <p>Không cần lục file hay hỏi quản lý. AI giúp nhân viên mới nắm bảng giá, quy trình và chính sách chỉ trong thời gian ngắn.</p>
                         </div>
                     </div>
 
                     <!-- 3 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/3d-blue-ai-chatbot-assistant-icon.png" alt="3d-blue-ai-chatbot-assistant-icon"/>
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/03</span>
+                            <h3 class="num-heading">Tạo nhiều chatbot, mỗi bot một nhiệm vụ</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Tạo nhiều chatbot, mỗi bot một nhiệm vụ</h3>
+                        <div class="num-row-right">
                             <p>Bot chăm sóc khách hàng, bot nội bộ, bot HR... Mỗi bot có kho kiến thức và nhiệm vụ riêng.</p>
                         </div>
                     </div>
 
                     <!-- 4 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="64" height="64" src="https://img.icons8.com/dusk/64/download--v1.png" alt="download--v1"/>
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/04</span>
+                            <h3 class="num-heading">Tải tài liệu lên là bot biết</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Tải tài liệu lên là bot biết</h3>
+                        <div class="num-row-right">
                             <p>Hỗ trợ PDF, Word, Excel, ảnh chụp và PDF scan. Chỉ cần tải lên, AI sẽ đọc và hiểu nội dung.</p>
                         </div>
                     </div>
 
                     <!-- 5 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="84" height="84" src="images/2.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/05</span>
+                            <h3 class="num-heading">Phân quyền theo phòng ban</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Phân quyền theo phòng ban</h3>
+                        <div class="num-row-right">
                             <p>Quản lý ai được sử dụng bot nào và được truy cập kho kiến thức nào theo từng vai trò.</p>
                         </div>
                     </div>
 
                     <!-- 6 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="85" height="80" src="images/1.png" alt="external-check-business-elements-ddara-lineal-color-ddara"/>
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/06</span>
+                            <h3 class="num-heading">AI trả lời có nguồn tham chiếu</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>AI trả lời có nguồn tham chiếu</h3>
+                        <div class="num-row-right">
                             <p>Mỗi câu trả lời đều dẫn nguồn từ tài liệu gốc, giúp kiểm chứng thông tin và hạn chế AI "bịa".</p>
                         </div>
                     </div>
 
                     <!-- 7 -->
-                    <div class="a-card">
-                        <div class="icon-square">
-                            <img width="60" height="60" src="https://img.icons8.com/color/48/microsoft-excel-2025.png" alt="microsoft-excel-2025"/>                       
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/07</span>
+                            <h3 class="num-heading">Hỏi Excel như hỏi kế toán</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Hỏi Excel như hỏi kế toán</h3>
+                        <div class="num-row-right">
                             <p>Đặt câu hỏi về file số liệu và nhận đúng từng con số theo đúng định dạng tiếng Việt.</p>
                         </div>
                     </div>
 
                     <!-- 8 -->
-                    <div class="a-card">
-                        <div class="icon-square icon-sq-red">
-                             <img width="85" height="85"  src="images/3.png" alt="Trả lời khách">
+                    <div class="num-row">
+                        <div class="num-row-left">
+                            <span class="num-index">/08</span>
+                            <h3 class="num-heading">Biên bản họp và giao việc tự động</h3>
                         </div>
-                        <div class="a-content">
-                            <h3>Biên bản họp và giao việc tự động</h3>
+                        <div class="num-row-right">
                             <p>AI gỡ băng cuộc họp, tóm tắt quyết định, giao việc đúng người kèm hạn chót và xuất biên bản PDF/Word.</p>
                         </div>
                     </div>
@@ -411,7 +429,7 @@
                         </ul>
                     </div>
                     <div class="app-right">
-                        <img src="images/page3.png" alt="Bằng chứng ROSA AI Workspace" style="width:100%; height:auto; border-radius:16px; display:block;">
+                        <img src="images/rosa-ai-page.png" alt="Bằng chứng ROSA AI Workspace" style="width:100%; height:auto; border-radius:16px; display:block;">
                     </div>
                 </div>
             </div>
@@ -510,9 +528,9 @@
                     <span><i class="ph ph-globe"></i> https://rosacomputer.vn/</span>
                 </div>
                 <div class="f-social">
-                    <a href="https://www.facebook.com/rosaaicomputer/"><i class="ph ph-facebook-logo"></i></a>
-                    <a href="https://www.linkedin.com/in/rosa-ai-computer-20980b352/"><i class="ph ph-linkedin-logo"></i></a>
-                    <a href="https://www.youtube.com/@rosaaicomputer"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="#"><i class="ph ph-youtube-logo"></i></a>
                 </div>
             </div>
         </footer>
@@ -550,12 +568,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu</button>
             </form>
-            <div class="form-success" id="formSuccess">
-                <div class="form-success-icon"><i class="ph-fill ph-check-circle"></i></div>
-                <h3>Cảm ơn bạn!</h3>
-                <p>ROSA đã nhận được thông tin và sẽ liên hệ sớm.</p>
-                <button type="button" class="btn btn-primary form-success-close">Đóng</button>
-            </div>
         </div>
     </div>
 
@@ -602,66 +614,24 @@
             });
         });
 
-        var demoModal = document.getElementById('contactModal');
-        var demoModalHeader = demoModal.querySelector('.modal-header');
-        var demoForm = document.getElementById('demoForm');
-        var demoFormSuccess = document.getElementById('formSuccess');
-
-        function resetDemoModal() {
-            demoModal.classList.remove('active');
-            document.body.style.overflow = '';
-            demoModalHeader.style.display = '';
-            demoForm.style.display = '';
-            demoFormSuccess.classList.remove('active');
-        }
-
         // Đóng modal khi bấm nút &times;
-        document.querySelector('.close-modal').addEventListener('click', resetDemoModal);
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
 
         // Đóng modal khi bấm vào overlay
-        document.querySelector('.modal-overlay').addEventListener('click', resetDemoModal);
+        document.querySelector('.modal-overlay').addEventListener('click', function() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
 
         // Đóng modal khi nhấn Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                resetDemoModal();
+                document.getElementById('contactModal').classList.remove('active');
+                document.body.style.overflow = '';
             }
-        });
-
-        // Đóng modal khi bấm nút Đóng ở trạng thái thành công
-        document.querySelector('.form-success-close').addEventListener('click', resetDemoModal);
-
-        // Xử lý gửi Form
-        demoForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var form = this;
-            var submitBtn = form.querySelector('button[type="submit"]');
-            var originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Đang gửi...';
-
-            fetch('luu-lien-he.php', {
-                method: 'POST',
-                body: new FormData(form)
-            })
-                .then(function(res) { return res.json(); })
-                .then(function(data) {
-                    if (data.success) {
-                        form.reset();
-                        demoModalHeader.style.display = 'none';
-                        demoForm.style.display = 'none';
-                        demoFormSuccess.classList.add('active');
-                    } else {
-                        alert(data.message || 'Có lỗi xảy ra, vui lòng thử lại.');
-                    }
-                })
-                .catch(function() {
-                    alert('Không thể gửi yêu cầu, vui lòng kiểm tra kết nối và thử lại.');
-                })
-                .finally(function() {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                });
         });
 
         // Chọn gói giá: bấm vào thẻ nào thì thẻ đó nổi bật
@@ -686,6 +656,56 @@
                 }
             });
         });
+
+        // Sticky stack "Phần 1": glow sáng dần theo tiến độ scroll qua từng dòng
+        (function () {
+            var list = document.querySelector('.num-list');
+            if (!list) return;
+            var rows = Array.prototype.slice.call(list.querySelectorAll('.num-row'));
+            if (!rows.length) return;
+
+            var stickyTop = parseFloat(getComputedStyle(rows[0]).top) || 0;
+            var metrics = [];
+
+            function measure() {
+                var listTop = list.getBoundingClientRect().top + window.scrollY;
+                metrics = rows.map(function (row) {
+                    var rowTop = listTop + row.offsetTop;
+                    var start = rowTop - stickyTop;
+                    return { el: row, start: start, end: start + row.offsetHeight };
+                });
+            }
+
+            function update() {
+                var y = window.scrollY;
+                metrics.forEach(function (m) {
+                    var span = m.end - m.start;
+                    var progress = span > 0 ? (y - m.start) / span : 0;
+                    progress = Math.max(0, Math.min(1, progress));
+                    // ramps to full brightness quickly, then stays lit until covered
+                    var eased = Math.min(1, progress / 0.35);
+                    m.el.style.setProperty('--glow', eased.toFixed(3));
+                });
+            }
+
+            var ticking = false;
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(function () {
+                    update();
+                    ticking = false;
+                });
+            }
+
+            measure();
+            update();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () {
+                measure();
+                update();
+            });
+        })();
     </script>
 
 </body>

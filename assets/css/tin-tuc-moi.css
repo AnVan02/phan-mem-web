@@ -36,7 +36,7 @@
 }
 
 .news-filter .news-tab {
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #9b9ba1;
@@ -140,7 +140,7 @@
 }
 
 .news-pagination button {
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     background: none;
     border: none;
     cursor: pointer;

@@ -48,7 +48,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 14px;
     font-weight: 700;
     border: none;
@@ -88,7 +88,7 @@
 
 .admin-filter-bar select,
 .admin-filter-bar input[type="text"] {
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 13.5px;
     padding: 9px 14px;
     border: 1px solid #e0e0e4;
@@ -211,7 +211,7 @@
 
 .admin-actions a,
 .admin-actions button {
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 13px;
     font-weight: 700;
     border: none;

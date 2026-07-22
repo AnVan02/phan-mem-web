@@ -25,14 +25,14 @@
         <header class="navbar">
             <div class="container nav-content">
                 <div class="logo">
-                    <img src="images/rosa.png" alt="ROSA Logo" class="logo-icon">
+                    <a href="https://rosacomputer.vn/">
+                        <img src="images/rosa.png" alt="ROSA Logo" class="logo-icon">
+                    </a>
                 </div>
                 <nav class="nav-links">
                     <a href="landing.php">GIẢI PHÁP</a>
-                    <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
-                    <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
-                    <a href="#">ỨNG DỤNG </a>
-                    <a href="#">SẢN PHẨM</a>
+                    <a href="rosa-ai-connect.php">ROSA AI CONNECT</a>
+                    <a href="rosa-ai-workspace.php">ROSA AI WORKSPACE</a>
                     <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
                 </nav>
                 <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn</a>
@@ -100,7 +100,7 @@
                                 <img src="images/ROSA-AI-Platform.png" alt="ROSA AI Platform" class="carousel-image">
                             </div>
                             <div class="carousel-slide" data-index="1">
-                                <img src="images/banner.png" alt="ASUS Ascent GX10" class="carousel-image">
+                                <img src="images/w692.png" alt="ASUS Ascent GX10" class="carousel-image">
                             </div>
                             <div class="carousel-slide" data-index="2">
                                 <img src="images/page4.png" alt="Sản phẩm ROSA AI" class="carousel-image">
@@ -124,17 +124,15 @@
             <!-- Section 2: Platform AI -->
             <section class="platform container">
                 <div class="badge-label">
-                    <span class="number">2</span> ROSA AI Platform - Kết nối & Tự động hóa
+                    <span class="number">2</span> ROSA AI PLATFORM - Kết nối & Tự động hóa
                 </div>
-
-
                 <h2 class="section-title text-center">Kết nối AI Local với các ứng dụng hàng đầu</h2>
                 <p class="section-desc text-center">Thay vì tốn tiền thuê cloud, doanh nghiệp dùng chính AI chạy trên máy
                     trạm<br>để vận hành các công cụ AI nổi tiếng và tự động hóa quy trình.</p>
 
                 <div class="platform-cards">
                     <div class="card app-card">
-                        <h3>Kết nối với các ứng dụng AI phổ biến</h3>
+                        <h3>ROSA AI CONNECT</h3>
                         <p>Sử dụng AI Local để vận hành các công cụ bạn yêu thích</p>
                         <div class="platform-grid reveal">
                             <div class="diagram-wrap">
@@ -192,13 +190,12 @@
 
                                     <!-- center node: AI Local -->
                                     <circle cx="280" cy="220" r="44" fill="#1d222d" stroke="#d89b4a" stroke-width="1.6" />
-                                    <image href="images/pc.jpg" x="236" y="176" width="88" height="88"
+                                    <image href="images/ROSA-AI-Platform.png" x="236" y="176" width="88" height="88"
                                         clip-path="url(#clip-center)" preserveAspectRatio="xMidYMid slice" />
                                     <text x="280" y="282" text-anchor="middle" fill="#edeff3"
-                                        font-family="'Montserrat', Arial, sans-serif" font-size="13" font-weight="600">ASUS Ascent</text>
-                                    <text x="280" y="296" text-anchor="middle" fill="#9aa3b2"
-                                        font-family="'Montserrat', Arial, sans-serif" font-size="9">GX10</text>
-
+                                        font-family="'Montserrat', Arial, sans-serif" font-size="13" font-weight="600">ROSA AI READY
+                                    </text>
+                                   
                                     <!-- outer nodes -->
                                     <g font-family="'Montserrat', Arial, sans-serif" font-size="11" fill="#edeff3">
 
@@ -247,9 +244,10 @@
 
                     <div class="card n8n-card n8n-card-wide">
                         <div class="n8n-card-col n8n-card-left">
-                            <h3>Tích hợp n8n – Tự động hóa quy trình</h3>
-                            <p>Tự động hóa các quy trình doanh nghiệp với n8n</p>
+                            <h3>ROSA AI WORKSPACE</h3>
+                            <p>Trợ lý ảo AI truy vấn thông tin & tự động hóa quy trình</p>
                             <div class="logos-top">
+                                <img src="images/ROSA-AI-ASSISTANT.png" alt="ROSA AI ASSISTANT" class="brand-logo rosa-logo">
                                 <img src="images/logo-white.svg" alt="ASUS" class="brand-logo asus-logo">
                             </div>
                             <ul class="n8n-features">
@@ -307,15 +305,12 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </section>
-
             <!-- Section 3: Chatbot -->
             <section class="chatbot container">
                 <div class="badge-label">
-                    <span class="number">3</span> Tặng kèm: Giải pháp riêng của ROSA
+                    <span class="number">3</span> ROSA AI WORKSPACE
                 </div>
                 <div class="chatbot-content">
                     <div class="chatbot-left">
@@ -328,7 +323,12 @@
 
                         <!-- CTA -->
                         <div class="chatbot-actions">
-                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-WORKSPACE.php" class="btn-primary">
+                            <!--<a href="#" class="btn-primary">-->
+                            <!--    <i class="ph ph-rocket-launch"></i>-->
+                            <!--    Dùng thử ngay-->
+                            <!--</a>-->
+
+                            <a href="https://rosacomputer.vn/rosa-ai-platform/rosa-ai-workspace.php" class="btn-outline">
                                 <i class="ph ph-arrow-square-out"></i>
                                 Xem chi tiết giải pháp
                             </a>
@@ -371,157 +371,74 @@
                 </div>
             </section>
 
-            <!-- Section 4: Target Audience -->
-            <section class="audience container">
-                <h2 class="section-title text-center">Đối tượng khách hàng phù hợp</h2>
-                <p class="section-desc text-center">
-                    Giải pháp phù hợp với các tổ chức, doanh nghiệp có khối lượng tài liệu lớn và thường xuyên cần tra cứu
-                    thông tin.
-                </p>
-                <div class="audience-cards">
+            <section class="platform container">
+                <div class="card n8n-card n8n-card-wide">
+                    <div class="n8n-card-col n8n-card-left">
+                        <h3>N8N AUTOMATION</h3>
+                        <p>"Tay và chân" của ROSA AI Workspace - tự động hóa quy trình và đưa AI đến mọi kênh làm việc.</p>
 
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-blue"><i class="fa-solid fa-landmark"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2942/2942076.png" alt="Cơ quan hành chính">
-                        </div>
-                        <div class="a-content">
-                            <h3>Cơ quan hành chính</h3>
-                            <span class="underline underline-blue"></span>
-                            <p>Quản lý và tra cứu nhanh các văn bản, quy định, hồ sơ hành chính.</p>
-                        </div>
-                        <div class="check-badge check-blue"><i class="fa-solid fa-check"></i></div>
+                        <ul class="n8n-features">
+                            <li><i class="ph-fill ph-check-circle"></i> Đưa trợ lý AI lên Website, Facebook, Zalo, Telegram và nhiều nền tảng khác</li>
+                            <li><i class="ph-fill ph-check-circle"></i> Tự động chăm sóc và phản hồi khách hàng 24/7</li>
+                            <li><i class="ph-fill ph-check-circle"></i> Kết nối CRM, Google Sheets, Email, ERP và hàng trăm ứng dụng khác</li>
+                            <li><i class="ph-fill ph-check-circle"></i> Đồng bộ dữ liệu giữa các hệ thống mà không cần thao tác thủ công</li>
+                            <li><i class="ph-fill ph-check-circle"></i> Tự động xử lý quy trình: duyệt yêu cầu, gửi thông báo, tạo báo cáo theo lịch</li>
+                            <li><i class="ph-fill ph-check-circle"></i> Kích hoạt quy trình theo sự kiện và giảm tối đa công việc lặp lại</li>
+                            <li><i class="ph-fill ph-check-circle"></i> Hoạt động cùng Trợ lý AI nội bộ để doanh nghiệp vận hành nhanh hơn và hiệu quả hơn</li>
+                        </ul>
                     </div>
 
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-green"><i class="fa-solid fa-scale-balanced"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/3068/3068757.png" alt="Công ty luật">
-                        </div>
-                        <div class="a-content">
-                            <h3>Công ty luật</h3>
-                            <span class="underline underline-green"></span>
-                            <p>Tìm kiếm nhanh hồ sơ vụ việc, hợp đồng và tài liệu pháp lý.</p>
-                        </div>
-                        <div class="check-badge check-green"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-lightblue"><i class="fa-solid fa-hospital"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Bệnh viện">
-                        </div>
-                        <div class="a-content">
-                            <h3>Bệnh viện</h3>
-                            <span class="underline underline-lightblue"></span>
-                            <p>Quản lý hồ sơ bệnh án, quy trình chuyên môn và tài liệu nội bộ.</p>
-                        </div>
-                        <div class="check-badge check-lightblue"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-purple"><i class="fa-solid fa-building-columns"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" alt="Ngân hàng">
-                        </div>
-                        <div class="a-content">
-                            <h3>Ngân hàng</h3>
-                            <span class="underline underline-purple"></span>
-                            <p>Quản lý hồ sơ khách hàng, hợp đồng, tài liệu nghiệp vụ và tuân thủ.</p>
-                        </div>
-                        <div class="check-badge check-purple"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-orange"><i class="fa-solid fa-truck"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830289.png" alt="Doanh nghiệp Logistics">
-                        </div>
-                        <div class="a-content">
-                            <h3>Doanh nghiệp Logistics</h3>
-                            <span class="underline underline-orange"></span>
-                            <p>Quản lý chứng từ, quy trình vận hành và tài liệu nội bộ hiệu quả.</p>
-                        </div>
-                        <div class="check-badge check-orange"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-teal"><i class="fa-solid fa-industry"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1584/1584892.png" alt="Doanh nghiệp sản xuất">
-                        </div>
-                        <div class="a-content">
-                            <h3>Doanh nghiệp sản xuất</h3>
-                            <span class="underline underline-teal"></span>
-                            <p>Quản lý tài liệu kỹ thuật, quy trình sản xuất và hồ sơ chất lượng.</p>
-                        </div>
-                        <div class="check-badge check-teal"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-blue2"><i class="fa-solid fa-city"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/1670/1670080.png" alt="Doanh nghiệp bất động sản">
-                        </div>
-                        <div class="a-content">
-                            <h3>Doanh nghiệp bất động sản</h3>
-                            <span class="underline underline-blue2"></span>
-                            <p>Quản lý hồ sơ dự án, hợp đồng, pháp lý và tài liệu liên quan bất động sản.</p>
-                        </div>
-                        <div class="check-badge check-blue2"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                    <div class="a-card">
-                        <div class="a-top">
-                            <div class="icon-circle icon-yellow"><i class="fa-solid fa-chart-line"></i></div>
-                            <img class="a-illustration" src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" alt="Chứng khoán">
-                        </div>
-                        <div class="a-content">
-                            <h3>Chứng khoán</h3>
-                            <span class="underline underline-yellow"></span>
-                            <p>Quản lý hồ sơ khách hàng, báo cáo, tài liệu phân tích và giao dịch.</p>
-                        </div>
-                        <div class="check-badge check-yellow"><i class="fa-solid fa-check"></i></div>
-                    </div>
-
-                </div>
-
-                <!-- Bottom feature strip -->
-                <div class="audience-features">
-                    <div class="af-item">
-                        <div class="af-icon af-icon-blue"><img width="38" height="38" src="https://img.icons8.com/color/48/search--v1.png" alt="search--v1" /></div>
-                        <div class="af-text">
-                            <h4>Tìm kiếm nhanh chóng</h4>
-                            <p>Tiết kiệm thời gian tra cứu, nâng cao hiệu quả công việc.</p>
-                        </div>
-                    </div>
-                    <div class="af-item">
-                        <div class="af-icon af-icon-green"><i class="fa-solid fa-shield-halved"></i></div>
-                        <div class="af-text">
-                            <h4>Bảo mật an toàn</h4>
-                            <p>Kiểm soát quyền truy cập, đảm bảo an toàn dữ liệu.</p>
-                        </div>
-                    </div>
-                    <div class="af-item">
-                        <div class="af-icon af-icon-purple"><i class="fa-solid fa-layer-group"></i></div>
-                        <div class="af-text">
-                            <h4>Quản lý tập trung</h4>
-                            <p>Lưu trữ tập trung, dễ dàng quản lý và khai thác.</p>
-                        </div>
-                    </div>
-                    <div class="af-item">
-                        <div class="af-icon af-icon-orange"><i class="fa-solid fa-chart-pie"></i></div>
-                        <div class="af-text">
-                            <h4>Tối ưu chi phí</h4>
-                            <p>Giảm chi phí lưu trữ, in ấn và quản lý tài liệu.</p>
+                    <div class="n8n-card-col n8n-card-right n8n-card-right-image">
+                        <div class="chatbot-mockup chatbot-mockup-image">
+                            <img src="images/aa.png "
+                                alt="ROSA AI Workspace - n8n Automation"
+                                class="chatbot-screenshot">
                         </div>
                     </div>
                 </div>
             </section>
+
+
+            <!-- Bottom feature strip -->
+            <div class="audience-features">
+                <div class="af-item">
+                    <div class="af-icon af-icon-blue"><img width="38" height="38" src="https://img.icons8.com/color/48/search--v1.png" alt="search--v1" /></div>
+                    <div class="af-text">
+                        <h4>Tìm kiếm nhanh chóng</h4>
+                        <p>Tiết kiệm thời gian tra cứu, nâng cao hiệu quả công việc.</p>
+                    </div>
+                </div>
+                <div class="af-item">
+                    <div class="af-icon af-icon-green"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="af-text">
+                        <h4>Bảo mật an toàn</h4>
+                        <p>Kiểm soát quyền truy cập, đảm bảo an toàn dữ liệu.</p>
+                    </div>
+                </div>
+                <div class="af-item">
+                    <div class="af-icon af-icon-purple"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="af-text">
+                        <h4>Quản lý tập trung</h4>
+                        <p>Lưu trữ tập trung, dễ dàng quản lý và khai thác.</p>
+                    </div>
+                </div>
+                <div class="af-item">
+                    <div class="af-icon af-icon-orange"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div class="af-text">
+                        <h4>Tối ưu chi phí</h4>
+                        <p>Giảm chi phí lưu trữ, in ấn và quản lý tài liệu.</p>
+                    </div>
+                </div>
+            </div>
+            </section>
             <!-- Section 5: Strategy -->
+
             <section class="strategy container">
                 <div class="strategy-content">
                     <div class="s-left">
+                        <div class="badge-label">
+                            <span class="number">4</span> ROSA AI CONNECT
+                        </div>
                         <h2 class="section-title">Sẵn sàng đưa <span
                                 style="color:#e60012;font-weight:700;">AI</span><br><span class="text-green">về doanh nghiệp
                                 bạn?</span></h2>
@@ -551,7 +468,12 @@
                         </div>
                         <!-- CTA -->
                         <div class="chatbot-actions">
-                            <a href="https://rosacomputer.vn/landing-page/ROSA-AI-CONNECT.php" class="btn-primary">
+                            <!--<a href="#" class="btn-primary">-->
+                            <!--    <i class="ph ph-rocket-launch"></i>-->
+                            <!--    Dùng thử ngay-->
+                            <!--</a>-->
+
+                            <a href="https://rosacomputer.vn/rosa-ai-platform/rosa-ai-connect.php" class="btn-outline">
                                 <i class="ph ph-arrow-square-out"></i>
                                 Xem chi tiết giải pháp
                             </a>
@@ -564,6 +486,182 @@
                     </div>
                 </div>
             </section>
+
+
+            <!-- Section 5: Strategy -->
+
+            <section class="strategy container">
+                <div class="strategy-content">
+                    <div class="s-left">
+                        <div class="badge-label">
+                            <span class="number">5</span> PHÂN TÍCH HIỂU QUẢ ĐẦU TƯ
+                        </div>
+                            <h2 class="section-title">Đầu tư AI một lần <br><span class="text-green">– Sở hữu AI vĩnh viễn</span></h2>
+                       <p>
+                            Một doanh nghiệp sử dụng <span style="color:#e60012;font-weight:700;">AI Cloud</span>
+                            cho các bộ phận phát triển, marketing và vận hành thường tốn khoảng
+                            <span style="color:#e60012;font-weight:700;">10–15 triệu đồng/tháng</span>
+                            chỉ riêng chi phí token.
+                            <br><br>
+                            Thay vì tiếp tục trả phí theo mức sử dụng, doanh nghiệp có thể đầu tư
+                            <span style="color:#e60012;font-weight:700;">ROSA AI Platform</span>
+                            kết hợp hạ tầng AI nội bộ với tổng chi phí khoảng
+                            <span style="color:#00d4ff;font-weight:700;">180 triệu đồng</span>,
+                            chỉ đầu tư một lần và sử dụng lâu dài.
+                        </p>
+                    </div>
+                    <div class="s-right">
+                        <div class="ai-hub">
+                            <svg viewBox="0 0 560 460" width="100%" role="img"
+                                aria-label="Sơ đồ AI kết nối với các nền tảng ChatGPT, Gemini, Claude, Microsoft, Meta, Mistral">
+                                <defs>
+                                    <linearGradient id="aiCoreGrad" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#b6f22c" />
+                                        <stop offset="100%" stop-color="#5c8c00" />
+                                    </linearGradient>
+                                    <clipPath id="hub-tl">
+                                        <circle cx="90" cy="85" r="34" />
+                                    </clipPath>
+                                    <clipPath id="hub-tr">
+                                        <circle cx="470" cy="85" r="34" />
+                                    </clipPath>
+                                    <clipPath id="hub-ml">
+                                        <circle cx="40" cy="220" r="34" />
+                                    </clipPath>
+                                    <clipPath id="hub-mr">
+                                        <circle cx="520" cy="220" r="34" />
+                                    </clipPath>
+                                    <clipPath id="hub-bl">
+                                        <circle cx="90" cy="355" r="34" />
+                                    </clipPath>
+                                    <clipPath id="hub-br">
+                                        <circle cx="470" cy="355" r="34" />
+                                    </clipPath>
+                                </defs>
+
+                                <!-- connecting lines -->
+                                <g stroke="#76b900" stroke-opacity=".55" stroke-width="1.6" fill="none">
+                                    <path d="M280,220 L90,85" stroke-dasharray="4 5">
+                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.6s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M280,220 L470,85" stroke-dasharray="4 5">
+                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M280,220 L40,220" stroke-dasharray="4 5">
+                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="2.1s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M280,220 L520,220" stroke-dasharray="4 5">
+                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.9s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M280,220 L90,355" stroke-dasharray="4 5">
+                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="2s" repeatCount="indefinite" />
+                                    </path>
+                                    <path d="M280,220 L470,355" stroke-dasharray="4 5">
+                                        <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.7s" repeatCount="indefinite" />
+                                    </path>
+                                </g>
+
+                                <!-- center node: AI -->
+                                <!-- Ảnh AI -->
+                                 
+                               <image
+                                x="220"
+                                y="140"
+                                width="160"
+                                height="160"
+                                href="images/11.png"
+                                preserveAspectRatio="xMidYMid slice"
+                            />
+
+                                <!-- outer nodes -->
+                                <g font-family="'Montserrat', Arial, sans-serif" font-size="11" fill="#edeff3">
+
+                                    <!-- TL: ChatGPT -->
+                                    <circle cx="90" cy="85" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
+                                    <image href="images/hermes.png" x="56" y="51" width="68" height="68"
+                                        clip-path="url(#hub-tl)" preserveAspectRatio="xMidYMid slice" />
+                                    <text x="90" y="141" text-anchor="middle">Hermes Agent</text>
+
+                                    <!-- TR: Gemini -->
+                                    <circle cx="470" cy="85" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
+                                    <image href="images/comfy.webp" x="436" y="51" width="68" height="68"
+                                        clip-path="url(#hub-tr)" preserveAspectRatio="xMidYMid slice" />
+                                    <text x="470" y="141" text-anchor="middle">ComfyUI</text>
+
+                                    <!-- ML: Claude -->
+                                    <circle cx="40" cy="220" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
+                                    <image href="images/claude.png" x="6" y="186" width="68" height="68"
+                                        clip-path="url(#hub-ml)" preserveAspectRatio="xMidYMid slice" />
+                                    <text x="40" y="276" text-anchor="middle">Claude</text>
+
+                                    <!-- MR: Microsoft -->
+                                    <circle cx="520" cy="220" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
+                                    <image href="images/Cursor_logo.png" x="486" y="186" width="68" height="68"
+                                        clip-path="url(#hub-mr)" preserveAspectRatio="xMidYMid slice" />
+                                    <text x="520" y="276" text-anchor="middle">Cursor</text>
+
+                                    <!-- BL: Meta -->
+                                    <circle cx="90" cy="355" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
+                                    <image href="images/n8n.png" x="56" y="321" width="68" height="68"
+                                        clip-path="url(#hub-bl)" preserveAspectRatio="xMidYMid slice" />
+                                    <text x="90" y="411" text-anchor="middle">N8n</text>
+
+                                    <!-- BR: Mistral AI -->
+                                    <circle cx="470" cy="355" r="40" fill="#1d222d" stroke="#76b900" stroke-width="1.2" />
+                                    <image href="images/photoshop.jpg" x="446" y="331" width="48" height="48"
+                                        clip-path="url(#hub-br)" preserveAspectRatio="xMidYMid slice" />
+                                    <text x="470" y="411" text-anchor="middle">Photoshop</text>
+
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="investment-table-wrap">
+                    <div class="table-scroll">
+                        <table class="investment-table">
+                            <thead>
+                                <tr>
+                                    <th>Nhóm người dùng</th>
+                                    <th>Gói AI Cloud điển hình / Nhân sự</th>
+                                    <th>Quy mô</th>
+                                    <th>Chi phí AI Cloud<span>(Phát sinh theo từng tháng, năm phụ thuộc vào số lượng AI và giá của từng đơn vị phần mềm)</span></th>
+                                    <th>Phần cứng + ROSA AI Platform (180 triệu)</th>
+                                    <th>Thời gian thu hồi vốn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="row-label"><i class="ph-fill ph-user-circle icon-blue"></i> Lập trình viên</td>
+                                    <td>Claude Max / Codex Pro / Cursor Pro</td>
+                                    <td>5 - 10 người</td>
+                                    <td class="highlight">15 - 50 Triệu VNĐ/ tháng</td>
+                                    <td>Đầu tư một lần ~180 triệu, không phát sinh chi phí token.</td>
+                                    <td class="roi">~12 tháng</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-label"><i class="ph-fill ph-megaphone icon-green"></i> Marketing &amp; Thiết kế</td>
+                                    <td>GPT Image, Photoshop, ComfyUI API, Video AI (King AI, VEO, SORA)</td>
+                                    <td>3 - 5 người</td>
+                                    <td class="highlight">10 – 20 triệu VNĐ/tháng</td>
+                                    <td>Tạo ảnh, video AI không giới hạn trên hạ tầng nội bộ.</td>
+                                    <td class="roi">~18 tháng</td>
+                                </tr>
+                                <tr>
+                                    <td class="row-label"><i class="ph-fill ph-buildings icon-orange"></i> Doanh nghiệp</td>
+                                    <td>Chatbot, RAG, Automation đa phòng ban hoặc 1 - 2 nhân sự CSKH trực 24/7, nhân viên nhân sự tổng hợp báo cáo...</td>
+                                    <td>10 - 50 người</td>
+                                    <td class="highlight">20 – 30 triệu VNĐ/tháng</td>
+                                    <td>AI dùng chung toàn doanh nghiệp giúp tư vấn CSKH 24/7, ghi âm và tóm tắt cuộc gọi, không phát sinh chi phí theo người dùng hoặc token.</td>
+                                    <td class="roi">~9 tháng</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- CTA Banner -->
             <section class="cta-banner container">
@@ -581,7 +679,7 @@
             <!-- Modal Liên Hệ -->
             <div id="contactModal" class="modal">
                 <div class="modal-overlay"></div>
-                <div class="modal-content modal-content-consult">
+                <div class="modal-content">
                     <button class="close-modal">&times;</button>
                     <div class="modal-header">
                         <h2>Đăng ký tư vấn giải pháp AI</h2>
@@ -589,15 +687,15 @@
                     </div>
                     <form id="consultationForm" class="modal-form">
                         <div class="form-group">
-                            <label for="fullname">Họ và tên</label>
+                            <label for="fullname">Họ và tên *</label>
                             <input type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Số điện thoại</label>
+                            <label for="phone">Số điện thoại *</label>
                             <input type="tel" id="phone" name="phone" placeholder="0901 234 567" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email công việc</label>
+                            <label for="email">Email công việc *</label>
                             <input type="email" id="email" name="email" placeholder="name@company.com" required>
                         </div>
                         <div class="form-group">
@@ -608,15 +706,8 @@
                             <label for="message">Nhu cầu của bạn</label>
                             <textarea id="message" name="message" rows="3" placeholder="Ví dụ: Tôi muốn tư vấn về Chatbot nội bộ..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu tư vấn <i class="ph ph-arrow-right"></i></button>
-                        <button type="submit" class="btn btn-primary w-full">Liên hệ zalo <i class="ph ph-arrow-right"></i></button>
+                        <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu tư vấn</button>
                     </form>
-                    <div class="form-success" id="formSuccess">
-                        <div class="form-success-icon"><i class="ph-fill ph-check-circle"></i></div>
-                        <h3>Cảm ơn bạn!</h3>
-                        <p>ROSA đã nhận được thông tin và sẽ liên hệ sớm.</p>
-                        <button type="button" class="btn btn-primary form-success-close">Đóng</button>
-                    </div>
                 </div>
             </div>
         </main>
@@ -639,9 +730,9 @@
                     <span><i class="ph ph-globe"></i> https://rosacomputer.vn/</span>
                 </div>
                 <div class="f-social">
-                    <a href="https://www.facebook.com/rosaaicomputer/"><i class="ph ph-facebook-logo"></i></a>
-                    <a href="https://www.linkedin.com/in/rosa-ai-computer-20980b352/"><i class="ph ph-linkedin-logo"></i></a>
-                    <a href="https://www.youtube.com/@rosaaicomputer"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="#"><i class="ph ph-youtube-logo"></i></a>
                 </div>
             </div>
         </footer>

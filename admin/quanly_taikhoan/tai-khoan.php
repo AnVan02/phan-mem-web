@@ -79,6 +79,8 @@
                             <input type="email" name="account_email" placeholder="admin@vietsontdc.com"
                                 value="<?php echo $dang_sua ? htmlspecialchars($dang_sua['account_email']) : ''; ?>" required>
                         </div>
+                                
+                        <!-- /** @var array<int,string> $DS_VAI_TRO */ -->
                         <div>
                             <label class="field-label">Vai trò</label>
                             <select name="account_type" required>
@@ -90,6 +92,7 @@
                             </select>
                         </div>
                     </div>
+
 
                     <label class="field-label">Mật khẩu<?php echo $dang_sua ? ' (bỏ trống nếu không đổi)' : ''; ?></label>
                     <input type="password" name="account_password" placeholder="Ít nhất 6 ký tự" <?php echo $dang_sua ? '' : 'required'; ?>>
@@ -105,7 +108,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="admin-panel">
                 <h2>Danh sách tài khoản (<?php echo count($danh_sach); ?>)</h2>
 

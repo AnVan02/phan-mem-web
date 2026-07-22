@@ -484,7 +484,7 @@ require 'head.php';
                     <div class="form-group">
                         <label for="support_subject">Chủ đề</label>
                         <select name="chu_de" id="support_subject"
-                            style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-family: inherit;">
+                            style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px;   font-family: 'Montserrat', Arial, sans-serif;">
                             <option value="Bảo hành sản phẩm">Bảo hành sản phẩm</option>
                             <option value="Đổi trả">Đổi trả</option>
                             <option value="Hỗ trợ kỹ thuật">Hỗ trợ kỹ thuật</option>

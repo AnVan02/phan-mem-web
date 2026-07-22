@@ -31,8 +31,6 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                 <a href="landing.php">GIẢI PHÁP</a>
                 <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
                 <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
-                <a href="#">ỨNG DỤNG </a>
-                <a href="#">SẢN PHẨM</a>
                 <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
             </nav>
             <a href="#" class="btn btn-primary nav-cta-desktop">Liên hệ tư vấn <i class="ph ph-arrow-right"></i></a>
@@ -92,42 +90,170 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
             </div>
         </section>
 
-        <section class="kh-section problem container">
+        <!-- 2. Hệ sinh thái sản phẩm ROSA -->
+          <section class="kh-section problem container">
             <div class="eyebrow">01 / Vấn đề</div>
 
-            <div class="problem-head">
-                <h2 class="kh-title">
-                    Bạn đang thuê AI theo từng token<br>
-                    — và <span class="grad-text-sm">trả tiền mãi mãi.</span>
-                </h2>
+        <div class="problem-head">
+            <h2 class="kh-title">
+                Bạn đang thuê AI theo từng token<br>
+                — và <span class="grad-text-sm">trả tiền mãi mãi.</span>
+            </h2>
 
-                <div class="problem-grid">
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-trend-up"></i></div>
-                        <h4>Chi phí AI tăng theo mỗi lần sử dụng.</h4>
-                        <p>Càng nhiều người dùng, càng nhiều yêu cầu xử lý, hóa đơn càng phình to mỗi tháng.</p>
-                    </div>
-
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-shield-warning"></i></div>
-                        <h4>Dữ liệu quan trọng phải gửi lên hạ tầng bên thứ ba.</h4>
-                        <p>Mã nguồn, tài liệu nội bộ và dữ liệu khách hàng luôn tiềm ẩn rủi ro về quyền riêng tư.</p>
-                    </div>
-
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-hourglass-medium"></i></div>
-                        <h4>Hết quota giữa lúc đang làm việc.</h4>
-                        <p>Công việc bị gián đoạn, phải chờ nâng hạn mức hoặc mua thêm lượt sử dụng.</p>
-                    </div>
-
-                    <div class="problem-card">
-                        <div class="problem-icon"><i class="ph-fill ph-lock-key"></i></div>
-                        <h4>Phụ thuộc vào một nền tảng duy nhất.</h4>
-                        <p>Khó chuyển đổi, chi phí khó kiểm soát và luôn bị ràng buộc vào chính sách của nhà cung cấp.</p>
-                    </div>
+        <section class="prod-showcase" id="san-pham">
+            <div class="prod-tabs-sticky">
+                <div class="container prod-tabs" role="tablist">
+                    <button type="button" class="prod-tab is-active" data-target="prod-1" data-color="green" role="tab" aria-selected="true">
+                        <span class="prod-tab-index">01-SẢN PHẨM</span>
+                        <span class="prod-tab-name">Chi phí AI tăng theo mỗi lần sử dụng.</span>
+                    </button>
+                    <button type="button" class="prod-tab" data-target="prod-2" data-color="purple" role="tab" aria-selected="false">
+                        <span class="prod-tab-index">02-SẢN PHẨM</span>
+                        <span class="prod-tab-name">ROSA AI Platform</span>
+                    </button>
+                    <button type="button" class="prod-tab" data-target="prod-3" data-color="blue" role="tab" aria-selected="false">
+                        <span class="prod-tab-index">03-SẢN PHẨM</span>
+                        <span class="prod-tab-name">ROSA AI Connect</span>
+                    </button>
+                    <button type="button" class="prod-tab" data-target="prod-4" data-color="orange" role="tab" aria-selected="false">
+                        <span class="prod-tab-index">04-SẢN PHẨM</span>
+                        <span class="prod-tab-name">ROSA AI Workspace</span>
+                    </button>
                 </div>
             </div>
+
+            <div class="container prod-panels">
+                <article class="prod-panel is-active" id="prod-1" data-color="green">
+                    <div class="prod-panel-left">
+                        <div class="prod-eyebrow">01 - VẤN ĐỀ DOANH NGHIỆP</div>
+
+                        <h3 class="prod-title">
+                            Chi phí AI tăng theo mỗi lần sử dụng.
+                        </h3>
+
+                        <p class="prod-sub">
+                            Mỗi truy vấn AI đều phát sinh Token, khiến chi phí vận hành tăng liên tục và khó kiểm soát khi quy mô sử dụng ngày càng lớn.
+                        </p>
+
+                        <a href="landing.php" class="btn btn-primary">
+                            Khám phá giải pháp <i class="ph ph-arrow-up-right"></i>
+                        </a>
+
+                        <ul class="prod-stats">
+                            <li>
+                                <i class="ph-fill ph-shield-check"></i>
+                                Dữ liệu doanh nghiệp phải gửi lên Cloud để xử lý.
+                            </li>
+
+                            <li>
+                                <i class="ph-fill ph-lightning"></i>
+                                Chi phí Token tăng theo số lượng người dùng và lượt truy vấn.
+                            </li>
+
+                            <li>
+                                <i class="ph ph-cloud-slash"></i>
+                                ROSA AI Platform giúp triển khai AI On-Premises, không phát sinh chi phí theo Token.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="prod-panel-right">
+                        <img src="images/" alt="ROSA AI Platform">
+                    </div>
+                </article>
+
+                <article class="prod-panel" id="prod-2" data-color="purple">
+                    <div class="prod-panel-left">
+                        <div class="prod-eyebrow">02 - BẢO MẬT DỮ LIỆU</div>
+
+                        <h3 class="prod-title">
+                            Dữ liệu quan trọng phải gửi lên hạ tầng bên thứ ba.
+                        </h3>
+
+                        <p class="prod-sub">
+                            Khi sử dụng AI Cloud, mã nguồn, tài liệu nội bộ và dữ liệu khách hàng có thể được truyền đến hạ tầng của nhà cung cấp dịch vụ để xử lý, khiến nhiều doanh nghiệp quan tâm đến vấn đề quyền riêng tư và tuân thủ.
+                        </p>
+
+                        <a href="landing.php" class="btn btn-primary">
+                            Khám phá giải pháp <i class="ph ph-arrow-up-right"></i>
+                        </a>
+
+                        <ul class="prod-stats">
+                            <li><i class="ph-fill ph-lock-key"></i> Mã nguồn và tài liệu nội bộ cần được bảo vệ trong môi trường doanh nghiệp.</li>
+
+                            <li><i class="ph-fill ph-users"></i> Dữ liệu khách hàng và thông tin kinh doanh cần đáp ứng các yêu cầu về quyền riêng tư và tuân thủ.</li>
+
+                            <li><i class="ph-fill ph-shield-check"></i> ROSA AI Platform xử lý AI ngay tại doanh nghiệp (On-Premises), dữ liệu không rời khỏi hạ tầng nội bộ.</li>
+                        </ul>
+                    </div>
+
+                    <div class="prod-panel-right">
+                        <img src="images/" alt="ROSA AI Platform bảo mật dữ liệu doanh nghiệp">
+                    </div>
+                </article>
+
+                <article class="prod-panel" id="prod-3" data-color="blue">
+                    <div class="prod-panel-left">
+                        <div class="prod-eyebrow">03 - GIỚI HẠN SỬ DỤNG</div>
+
+                        <h3 class="prod-title">
+                            Hết quota giữa lúc đang làm việc.
+                        </h3>
+
+                        <p class="prod-sub">
+                            Công việc bị gián đoạn khi hết hạn mức sử dụng AI. Người dùng phải chờ đến chu kỳ tiếp theo hoặc mua thêm lượt sử dụng để tiếp tục làm việc.
+                        </p>
+
+                        <a href="#cach-hoat-dong" class="btn btn-primary">
+                            Khám phá giải pháp <i class="ph ph-arrow-up-right"></i>
+                        </a>
+
+                        <ul class="prod-stats">
+                            <li><i class="ph-fill ph-check-circle"></i> Không giới hạn số lượng truy vấn AI trong hệ thống nội bộ.</li>
+
+                            <li><i class="ph-fill ph-check-circle"></i> Không phát sinh chi phí theo Token hoặc lượt sử dụng.</li>
+
+                            <li><i class="ph-fill ph-check-circle"></i> ROSA AI Platform hoạt động liên tục 24/7, không phụ thuộc hạn mức Cloud.</li>
+                        </ul>
+                    </div>
+
+                    <div class="prod-panel-right">
+                        <img src="images/" alt="ROSA AI Platform hoạt động liên tục không giới hạn quota">
+                    </div>
+                </article>
+
+                <article class="prod-panel" id="prod-4" data-color="orange">
+                    <div class="prod-panel-left">
+                        <div class="prod-eyebrow">04 - PHỤ THUỘC NỀN TẢNG</div>
+
+                        <h3 class="prod-title">
+                            Phụ thuộc vào một nền tảng duy nhất.
+                        </h3>
+
+                        <p class="prod-sub">
+                            Khi toàn bộ dữ liệu, quy trình và AI đều phụ thuộc vào một nhà cung cấp, doanh nghiệp sẽ gặp khó khăn khi chuyển đổi, mở rộng hệ thống hoặc tối ưu chi phí theo nhu cầu thực tế.
+                        </p>
+
+                        <a href="ROSA-AI-WORKSPACE.php" class="btn btn-primary">
+                            Khám phá giải pháp <i class="ph ph-arrow-up-right"></i>
+                        </a>
+
+                        <ul class="prod-stats">
+                            <li><i class="ph-fill ph-check-circle"></i> Chủ động lựa chọn và thay đổi mô hình AI theo nhu cầu.</li>
+
+                            <li><i class="ph-fill ph-check-circle"></i> Dễ dàng tích hợp với ERP, CRM, API và các hệ thống hiện có.</li>
+
+                            <li><i class="ph-fill ph-check-circle"></i> ROSA AI Platform vận hành trên hạ tầng doanh nghiệp, giảm phụ thuộc vào nhà cung cấp Cloud.</li>
+                        </ul>
+                    </div>
+
+                    <div class="prod-panel-right">
+                        <img src="images/" alt="ROSA AI Platform - Hệ sinh thái AI mở cho doanh nghiệp">
+                    </div>
+                </article>
+            </div>
         </section>
+
 
         <!-- 3. Giải pháp -->
         <section class="kh-section solution container">
@@ -277,6 +403,13 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     <h4>N8N</h4>
                     <p>Kết nối n8n với máy chủ AI nội bộ, tự động hoá quy trình không giới hạn request.</p>
                 </a>
+                <a href="" target="_blank" rel="noopener noreferrer" class="value-card">
+                    <div class="value-icon value">
+                        <img width="60" height="60" src="https://img.icons8.com/fluency/48/ellipsis.png" alt="n8n" />
+                    </div>
+                    <h4>Kết nối với các ứng dụng khác</h4>
+                    <p>Dễ dàng kết nối AI với các ứng dụng như n8n và nhiều nền tảng khác để tự động hóa quy trình làm việc.</p>
+                </a>
             </div>
         </section>
 
@@ -346,6 +479,16 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                         <summary>Có cần đội IT lớn để vận hành không?</summary>
                         <p>Không. Cài đặt một lần; thêm một máy tính mới chỉ mất một thao tác.</p>
                     </details>
+                     <details class="faq-item">
+                        <summary>Phân tích hiệu quả đầu tư</summary>
+                        <p> Một doanh nghiệp đang sử dụng AI Cloud cho đội ngũ phát triển, marketing và vận hành với chi phí
+                            token trung bình 10 - 15 triệu đồng/tháng. Thay vì tiếp tục chi trả theo mức sử dụng, doanh nghiệp
+                            đầu tư ROSA AI Platform kết hợp hạ tầng phần cứng AI nội bộ với tổng chi phí khoảng 180 triệu
+                            đồng đầu tư một lần dùng vĩnh viễn
+                        </p>
+                    
+                    </details>
+
                 </div>
             </div>
         </section>
@@ -402,10 +545,10 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                     </div>
                     <button type="submit" class="btn btn-primary w-full">Gửi yêu cầu</button>
                 </form>
-                <div class="form-success" id="formSuccess">
+                <div id="formSuccess" class="form-success">
                     <div class="form-success-icon"><i class="ph-fill ph-check-circle"></i></div>
-                    <h3>Cảm ơn bạn!</h3>
-                    <p>ROSA đã nhận được thông tin và sẽ liên hệ sớm.</p>
+                    <h3>Gửi yêu cầu thành công!</h3>
+                    <p>Đội ngũ ROSA sẽ liên hệ lại với bạn trong vòng 24h.</p>
                     <button type="button" class="btn btn-primary form-success-close">Đóng</button>
                 </div>
             </div>
@@ -430,9 +573,9 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                 <span><i class="ph ph-globe"></i> https://rosacomputer.vn/</span>
             </div>
             <div class="f-social">
-                <a href="https://www.facebook.com/rosaaicomputer/"><i class="ph ph-facebook-logo"></i></a>
-                <a href="https://www.linkedin.com/in/rosa-ai-computer-20980b352/"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="https://www.youtube.com/@rosaaicomputer"><i class="ph ph-youtube-logo"></i></a>
+                <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="#"><i class="ph ph-youtube-logo"></i></a>
             </div>
         </div>
     </footer>
@@ -445,6 +588,76 @@ $jsVersion = filemtime(__DIR__ . '/landing.js');
                 document.body.style.overflow = 'hidden';
             });
         });
+
+        // Hệ sinh thái sản phẩm: đồng bộ tab sticky với panel đang cuộn tới
+        (function() {
+            var navbar = document.querySelector('.navbar');
+            var tabsBar = document.querySelector('.prod-tabs-sticky');
+            var setHeights = function() {
+                if (navbar) {
+                    document.documentElement.style.setProperty('--navbar-h', navbar.offsetHeight + 'px');
+                }
+                if (tabsBar) {
+                    document.documentElement.style.setProperty('--tabs-h', tabsBar.offsetHeight + 'px');
+                }
+            };
+            setHeights();
+            window.addEventListener('resize', setHeights);
+
+            var tabs = Array.from(document.querySelectorAll('.prod-tab'));
+            var panels = Array.from(document.querySelectorAll('.prod-panel'));
+            if (!tabs.length || !panels.length) return;
+
+            var setActive = function(id) {
+                tabs.forEach(function(tab) {
+                    var isActive = tab.dataset.target === id;
+                    tab.classList.toggle('is-active', isActive);
+                    tab.setAttribute('aria-selected', isActive);
+                });
+                panels.forEach(function(panel) {
+                    panel.classList.toggle('is-active', panel.id === id);
+                });
+            };
+
+            tabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var target = document.getElementById(tab.dataset.target);
+                    if (target) target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+
+            // Mỗi panel dính (sticky) ở một mốc "top" riêng (tạo hiệu ứng xếp lớp) nên
+            // phải so mỗi panel với chính mốc top của nó, không dùng một đường kích hoạt chung.
+            var updateActivePanel = function() {
+                var current = panels[0];
+                panels.forEach(function(panel) {
+                    var panelTop = parseFloat(getComputedStyle(panel).top) || 0;
+                    if (panel.getBoundingClientRect().top <= panelTop + 1) {
+                        current = panel;
+                    }
+                });
+                setActive(current.id);
+            };
+
+            var ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        updateActivePanel();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, {
+                passive: true
+            });
+
+            window.addEventListener('resize', updateActivePanel);
+            updateActivePanel();
+        })();
     </script>
 </body>
 

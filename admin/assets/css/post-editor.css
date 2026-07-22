@@ -34,7 +34,7 @@
 .post-title-input {
     width: 100%;
     border: none;
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 22px;
     font-weight: 800;
     color: #111;
@@ -58,7 +58,7 @@
 .post-box input[type="password"],
 .post-box select,
 .post-box textarea {
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 14px;
     padding: 10px 12px;
     border: 1px solid #e0e0e3;

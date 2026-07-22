@@ -53,11 +53,10 @@
         </a>
     <?php endif; ?>
 </div>
-
 <aside class="admin-sidebar">
     <div class="admin-sidebar-logo">
-        <img src="<?php echo $ADMIN_ROOT; ?>../assets/images/icon/logo VS_icon.jpg" alt="Logo">
-        <span>Viết Sơn Achieva</span>
+        <img src="<?php echo $ADMIN_ROOT; ?>../assets/image/Logo ACVS/ACVS.png" alt="Logo">
+        <!-- <span>Viết Sơn Achieva</span> -->
     </div>
 
     <nav class="admin-nav">
@@ -92,6 +91,17 @@
         <a href="<?php echo $ADMIN_ROOT; ?>quanly/banner.php" class="admin-nav-item <?php echo $active_page === 'banner' ? 'active' : ''; ?>">
             <img width="25" height="25" src="https://img.icons8.com/fluency/48/old-shop.png" alt="guarantee--v1"/>Banner Sản Phẩm
         </a>
+
+        <div class="admin-nav-group">
+            <button type="button" class="admin-nav-item admin-nav-toggle <?php echo $active_page === 'chinh-sach' ? 'active open' : ''; ?>">
+               <img width="30" height="30" src="https://img.icons8.com/fluency/48/rules.png" alt="rules"/> Chính sách
+                <i class="fa-solid fa-chevron-down submenu-caret"></i>
+            </button>
+            <div class="admin-submenu" <?php echo $active_page === 'chinh-sach' ? '' : 'style="display:none;"'; ?>>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_chinhsach/danh-sach.php" class="admin-subnav-item <?php echo $active_sub === 'danh-sach' ? 'active' : ''; ?>">Danh sách trang</a>
+                <a href="<?php echo $ADMIN_ROOT; ?>quanly_chinhsach/them.php" class="admin-subnav-item <?php echo $active_sub === 'them' ? 'active' : ''; ?>">Thêm trang mới</a>
+            </div>
+        </div>
         <?php endif; ?>
 
         <?php if ($duoc_xem_don_hang): ?>

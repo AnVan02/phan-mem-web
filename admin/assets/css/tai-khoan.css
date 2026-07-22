@@ -49,6 +49,11 @@
     justify-content: center;
 }
 
+/* ---- Hàng trong bảng: hiệu ứng hover ---- */
+.admin-table tbody tr:hover td {
+    background: #f7f8fb;
+}
+
 .account-name-cell .admin-badge {
     margin-left: 4px;
 }

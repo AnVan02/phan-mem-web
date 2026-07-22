@@ -299,8 +299,8 @@ a {
      align-items: center;
      gap: 12px;
      color: var(--primary);
-     font-weight: 500;
-     font-size: 18px;
+     font-weight: 700;
+     font-size: 28px;
      margin-bottom: 24px;
 }
 
@@ -308,8 +308,8 @@ a {
      display: flex;
      align-items: center;
      justify-content: center;
-     width: 24px;
-     height: 24px;
+     width: 30px;
+     height: 30px;
      background: var(--primary);
      color: #000;
      border-radius: 4px;
@@ -448,6 +448,10 @@ a {
 
 .asus-logo {
      height: 48px;
+}
+
+.rosa-logo {
+     height: 190px;
 }
 
 .nvidia-logo {
@@ -771,6 +775,14 @@ a {
      border: 1px solid var(--border);
      border-radius: 14px;
      padding: 24px;
+}
+
+.n8n-card-right-image {
+     background: none;
+     border: none;
+     padding: 0;
+     display: flex;
+     align-items: center;
 }
 
 .n8n-flow-title {
@@ -2052,6 +2064,19 @@ a {
      font-size: 15px;
 }
 
+.modal-form-actions {
+     display: flex;
+     gap: 12px;
+     margin-top: 8px;
+}
+
+.modal-form-actions .btn {
+     flex: 1;
+     padding: 15px 20px;
+     border-radius: 10px;
+     font-size: 15px;
+}
+
 /* Form Success State */
 .form-success {
      display: none;
@@ -2570,6 +2595,10 @@ a {
           font-size: 20px;
      }
 
+     .modal-form-actions {
+          flex-direction: column;
+     }
+
      .modal-header p {
           font-size: 13px;
      }
@@ -2667,4 +2696,101 @@ a {
           flex-wrap: wrap;
           justify-content: center;
      }
+}
+
+/* Investment comparison table (Strategy section) */
+.investment-table-wrap {
+     margin-top: 48px;
+}
+
+.investment-table-wrap .table-scroll {
+     overflow-x: auto;
+     border-radius: 16px;
+     border: 1px solid var(--border);
+}
+
+.investment-table {
+     width: 100%;
+     min-width: 960px;
+     border-collapse: collapse;
+     background: var(--bg-card);
+}
+
+.investment-table thead th {
+     background: #e60012;
+     color: #fff;
+     text-align: left;
+     font-size: 14px;
+     font-weight: 700;
+     padding: 18px 20px;
+     vertical-align: top;
+}
+
+.investment-table thead th span {
+     display: block;
+     margin-top: 6px;
+     font-size: 12px;
+     font-weight: 400;
+     opacity: 0.85;
+}
+
+.investment-table tbody td {
+     padding: 18px 20px;
+     font-size: 14px;
+     line-height: 1.5;
+     color: var(--text-muted);
+     border-bottom: 1px solid var(--border);
+     vertical-align: top;
+}
+
+.investment-table tbody tr:last-child td {
+     border-bottom: none;
+}
+
+.investment-table tbody tr:nth-child(even) {
+     background: rgba(255, 255, 255, 0.03);
+}
+
+.investment-table .row-label {
+     color: var(--text-main);
+     font-weight: 700;
+}
+
+.investment-table .highlight {
+     color: var(--primary);
+     font-weight: 700;
+     white-space: nowrap;
+}
+
+.investment-table .roi {
+     color: var(--primary);
+     font-weight: 700;
+     text-align: center;
+     white-space: nowrap;
+}
+
+.investment-table .row-label i {
+     margin-right: 8px;
+     font-size: 18px;
+     vertical-align: -3px;
+}
+
+.investment-table .row-label i.icon-blue {
+     color: #2f6fed;
+}
+
+.investment-table .row-label i.icon-green {
+     color: var(--primary);
+}
+
+.investment-table .row-label i.icon-orange {
+     color: #f97316;
+}
+
+/* AI hub diagram (Strategy investment section) */
+.ai-hub {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
 }

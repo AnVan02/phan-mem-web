@@ -103,7 +103,7 @@ body {
     border: none;
     outline: none;
     background: none;
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
     font-size: 13.5px;
     color: #1a1a1a;
 }
@@ -121,7 +121,7 @@ body {
     color: #fff;
     text-decoration: none;
     cursor: pointer;
-    font-family: inherit;
+      font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .admin-topbar-account:hover {
@@ -181,7 +181,6 @@ body {
 }
 
 .admin-sidebar-logo img {
-    width: 36px;
     height: 36px;
     border-radius: 8px;
     object-fit: cover;
@@ -190,7 +189,7 @@ body {
 
 .admin-sidebar-logo span {
     font-weight: 800;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.3;
 }
 
@@ -209,7 +208,7 @@ body {
     border-radius: 10px;
     color: #6b6b70;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     transition: background 0.15s ease, color 0.15s ease;
 }
@@ -236,7 +235,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-family: inherit;
+    font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .admin-nav-toggle:focus:not(:focus-visible) {
@@ -269,19 +268,14 @@ body {
 .admin-subnav-item {
     padding: 15px 10px;
     border-radius: 8px;
-    color: #9b9ba1;
+    color: #1e3c72;
     text-decoration: none;
-    font-size: 13.5px;
+    font-size: 15px;
     font-weight: 600;
     transition: background 0.15s ease, color 0.15s ease;
     display: inline-block;  
     min-width: 150px; /* Độ rộng tối thiểu bạn muốn */
     text-align: center; /* Căn giữa chữ nếu cần */
-}
-
-.admin-subnav-item:hover {
-    background: #f4f4f6;
-    color: #111;
 }
 
 .admin-subnav-item.active {

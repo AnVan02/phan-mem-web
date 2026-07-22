@@ -2,7 +2,7 @@
     <div class="container header-main-inner">
         <div class="site-logo">
             <a href="index.php" title="Trang chủ Viết Sơn">
-                <img src="assets/image/logoVS_new.png" alt="">
+                <img src="assets/image/Logo ACVS/ACVS.png" alt="">
             </a>
         </div>
 
@@ -100,7 +100,7 @@
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="cong-dong.php?trang=cau-lac-bo">Về công ty </a></li>
+                        <li><a href="ve-chung-toi.php">Về công ty </a></li>
                         <li><a href="tin-tuc-moi.php">Tin tức</a></li>
                         <li><a href="cong-dong.php?trang=podcast">Podcast</a></li>
                         <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
@@ -115,7 +115,7 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="cong-dong.php?trang=cau-lac-bo">Chính sách đại lý</a></li>
-                        <li><a href="tin-tuc-moi.php">Chính sách bảo hành </a></li>
+                        <li><a href="chinh-sach-bao-hanh.php">Chính sách bảo hành </a></li>
                         <li><a href="cong-dong.php?trang=podcast">Chính sách bảo mật</a></li>
                         <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Chính sách công ty </a></li>
                     </ul>
