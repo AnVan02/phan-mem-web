@@ -53,6 +53,115 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Gợi ý tìm kiếm tự động (autocomplete) khi gõ vào ô tìm kiếm
+    var searchInput = document.getElementById('headerSearchInput');
+    var searchSuggest = document.getElementById('headerSearchSuggest');
+    if (searchInput && searchSuggest) {
+        var debounceTimer = null;
+        var activeIndex = -1;
+        var currentItems = [];
+
+        function dongGoiY() {
+            searchSuggest.classList.remove('is-open');
+            searchSuggest.innerHTML = '';
+            activeIndex = -1;
+            currentItems = [];
+        }
+
+        function taoHtmlItem(item) {
+            var a = document.createElement('a');
+            a.className = 'search-suggest-item';
+            a.href = item.url;
+            a.innerHTML =
+                '<img src="' + item.hinh_anh + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'assets/image/pc.webp\';">' +
+                '<span class="search-suggest-item-info">' +
+                '<span class="search-suggest-item-name"></span>' +
+                '<span class="search-suggest-item-meta"></span>' +
+                '</span>' +
+                '<span class="search-suggest-item-price"></span>';
+            a.querySelector('.search-suggest-item-name').textContent = item.ten_san_pham;
+            a.querySelector('.search-suggest-item-meta').textContent = item.ten_thuong_hieu || '';
+            a.querySelector('.search-suggest-item-price').textContent = item.gia_display;
+            return a;
+        }
+
+        function hienGoiY(items, tuKhoa) {
+            searchSuggest.innerHTML = '';
+            currentItems = items;
+            activeIndex = -1;
+
+            if (!items.length) {
+                var empty = document.createElement('div');
+                empty.className = 'search-suggest-empty';
+                empty.textContent = 'Không tìm thấy sản phẩm phù hợp';
+                searchSuggest.appendChild(empty);
+                searchSuggest.classList.add('is-open');
+                return;
+            }
+
+            items.forEach(function (item) {
+                searchSuggest.appendChild(taoHtmlItem(item));
+            });
+
+            var viewAll = document.createElement('a');
+            viewAll.className = 'search-suggest-viewall';
+            viewAll.href = 'tim-kiem.php?q=' + encodeURIComponent(tuKhoa);
+            viewAll.textContent = 'Xem tất cả kết quả cho "' + tuKhoa + '"';
+            searchSuggest.appendChild(viewAll);
+
+            searchSuggest.classList.add('is-open');
+        }
+
+        function capNhatActive() {
+            var items = searchSuggest.querySelectorAll('.search-suggest-item');
+            items.forEach(function (el, i) {
+                el.classList.toggle('is-active', i === activeIndex);
+            });
+            if (activeIndex >= 0 && items[activeIndex]) {
+                items[activeIndex].scrollIntoView({ block: 'nearest' });
+            }
+        }
+
+        searchInput.addEventListener('input', function () {
+            var tuKhoa = searchInput.value.trim();
+            clearTimeout(debounceTimer);
+
+            if (tuKhoa.length < 2) {
+                dongGoiY();
+                return;
+            }
+
+            debounceTimer = setTimeout(function () {
+                fetch('tim-kiem-ajax.php?action=suggest&q=' + encodeURIComponent(tuKhoa))
+                    .then(function (res) { return res.json(); })
+                    .then(function (items) { hienGoiY(items, tuKhoa); })
+                    .catch(function () { dongGoiY(); });
+            }, 250);
+        });
+
+        searchInput.addEventListener('keydown', function (e) {
+            var items = searchSuggest.querySelectorAll('.search-suggest-item');
+            if (!items.length) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeIndex = (activeIndex + 1) % items.length;
+                capNhatActive();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeIndex = (activeIndex - 1 + items.length) % items.length;
+                capNhatActive();
+            } else if (e.key === 'Enter' && activeIndex >= 0) {
+                e.preventDefault();
+                items[activeIndex].click();
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.search-box')) dongGoiY();
+        });
+    }
+
     var dropdownItems = document.querySelectorAll('.has-submenu, .has-megamenu');
 
     function closeAll(except) {

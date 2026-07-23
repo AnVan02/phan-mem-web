@@ -41,7 +41,7 @@
         <main class="admin-main">
         <div class="admin-main-header">
             <h1>Sửa bài viết</h1>
-            <a href="dah-sach-bai-viet.php" class="link-out">← Quay lại danh sách</a>
+            <a href="quanly_baiviet/danh-sach-bai-viet.php" class="link-out">← Quay lại danh sách</a>
         </div>
 
         <?php if ($msg): ?>
@@ -85,7 +85,7 @@
                         <button type="submit" class="btn-admin btn-admin-primary post-publish-btn">
                             <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi
                         </button>
-                        <a href="dah-sach-bai-viet.php" class="btn-admin btn-admin-secondary post-publish-btn" style="margin-top:8px;">Huỷ</a>
+                        <a href="quanly_baiviet/danh-sach-bai-viet.php" class="btn-admin btn-admin-secondary post-publish-btn" style="margin-top:8px;">Huỷ</a>
                     </div>
 
                     <div class="post-box">

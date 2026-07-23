@@ -32,8 +32,8 @@ if ($action === 'dang_ky') {
     }
 
     $mat_khau_ma_hoa = password_hash($mat_khau, PASSWORD_DEFAULT);
-    $ins = $pdo->prepare("INSERT INTO khach_hang_lien_he (customer_name, customer_email, customer_phone, customer_address, mat_khau, trang_thai)
-        VALUES (:ten, :email, :sdt, :dia_chi, :mk, 1)");
+    $ins = $pdo->prepare("INSERT INTO khach_hang_lien_he (customer_name, customer_email, customer_phone, customer_address, mat_khau)
+        VALUES (:ten, :email, :sdt, :dia_chi, :mk)");
     $ins->execute([
         ':ten'   => $ten,
         ':email' => $email,

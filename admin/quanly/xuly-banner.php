@@ -80,6 +80,7 @@
             ':banner'   => $banner,
             ':noi_dung' => $noi_dung !== '' ? $noi_dung : null,
         ]);
+        ghi_nhat_ky($pdo, 'them', 'banner', (int) $pdo->lastInsertId(), "Thêm thương hiệu/banner \"$ten\"");
 
         header('Location: banner.php?msg=da_them');
         exit;
@@ -122,6 +123,7 @@
             xoa_banner_cu($banner_cu);
         }
 
+        ghi_nhat_ky($pdo, 'sua', 'banner', $id, "Sửa thương hiệu/banner \"$ten\"");
         header('Location: banner.php?msg=da_sua');
         exit;
     }
@@ -129,14 +131,16 @@
     if ($action === 'xoa_banner') {
         $id = (int) ($_GET['id'] ?? 0);
         if ($id > 0) {
-            $stmt = $pdo->prepare("SELECT banner FROM thuong_hieu WHERE ma_thuong_hieu = :id");
+            $stmt = $pdo->prepare("SELECT banner, ten_thuong_hieu FROM thuong_hieu WHERE ma_thuong_hieu = :id");
             $stmt->execute([':id' => $id]);
-            $banner_cu = $stmt->fetchColumn();
+            $tk = $stmt->fetch(PDO::FETCH_ASSOC);
+            $banner_cu = $tk['banner'] ?? null;
 
             $stmt = $pdo->prepare("UPDATE thuong_hieu SET banner = NULL, noi_dung_banner = NULL WHERE ma_thuong_hieu = :id");
             $stmt->execute([':id' => $id]);
 
             xoa_banner_cu($banner_cu);
+            ghi_nhat_ky($pdo, 'sua', 'banner', $id, "Gỡ banner của thương hiệu \"" . ($tk['ten_thuong_hieu'] ?? '') . "\"");
         }
         header('Location: banner.php?msg=da_xoa_banner');
         exit;
@@ -154,14 +158,18 @@
                 exit;
             }
 
-            $stmt = $pdo->prepare("SELECT banner FROM thuong_hieu WHERE ma_thuong_hieu = :id");
+            $stmt = $pdo->prepare("SELECT banner, ten_thuong_hieu FROM thuong_hieu WHERE ma_thuong_hieu = :id");
             $stmt->execute([':id' => $id]);
-            $banner_cu = $stmt->fetchColumn();
+            $tk = $stmt->fetch(PDO::FETCH_ASSOC);
+            $banner_cu = $tk['banner'] ?? null;
 
             $stmt = $pdo->prepare("DELETE FROM thuong_hieu WHERE ma_thuong_hieu = :id");
             $stmt->execute([':id' => $id]);
 
             xoa_banner_cu($banner_cu);
+            if ($tk) {
+                ghi_nhat_ky($pdo, 'xoa', 'banner', $id, "Xoá thương hiệu \"{$tk['ten_thuong_hieu']}\"");
+            }
         }
         header('Location: banner.php?msg=da_xoa');
         exit;

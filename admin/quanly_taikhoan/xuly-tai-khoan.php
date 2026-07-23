@@ -38,6 +38,8 @@
             ':mk'    => password_hash($mk, PASSWORD_DEFAULT),
             ':vt'    => $vt,
         ]);
+        $id_moi = (int) $pdo->lastInsertId();
+        ghi_nhat_ky($pdo, 'them', 'tai_khoan', $id_moi, "Thêm tài khoản \"$ten\" ($email) - vai trò: " . ($DS_VAI_TRO[$vt] ?? $vt));
 
         header('Location: tai-khoan.php?msg=da_them');
         exit;
@@ -96,6 +98,8 @@
             ]);
         }
 
+        ghi_nhat_ky($pdo, 'sua', 'tai_khoan', $id, "Sửa tài khoản \"$ten\" ($email) - vai trò: " . ($DS_VAI_TRO[$vt] ?? $vt) . ($mk !== '' ? ' (đã đổi mật khẩu)' : ''));
+
         // Nếu vừa tự sửa tài khoản đang đăng nhập, cập nhật lại session cho khớp
         if (isset($_SESSION['account_id_admin']) && (int) $_SESSION['account_id_admin'] === $id) {
             $_SESSION['account_name'] = $ten;
@@ -115,9 +119,10 @@
                 exit;
             }
 
-            $stmt = $pdo->prepare("SELECT account_type FROM account WHERE account_id = :id");
+            $stmt = $pdo->prepare("SELECT account_name, account_email, account_type FROM account WHERE account_id = :id");
             $stmt->execute([':id' => $id]);
-            $vt_can_xoa = $stmt->fetchColumn();
+            $tk_can_xoa = $stmt->fetch(PDO::FETCH_ASSOC);
+            $vt_can_xoa = $tk_can_xoa['account_type'] ?? null;
 
             if ((int) $vt_can_xoa === VAI_TRO_QUAN_TRI) {
                 $stmt = $pdo->prepare("SELECT COUNT(*) FROM account WHERE account_type = :vt AND account_id != :id");
@@ -130,6 +135,10 @@
 
             $stmt = $pdo->prepare("DELETE FROM account WHERE account_id = :id");
             $stmt->execute([':id' => $id]);
+
+            if ($tk_can_xoa) {
+                ghi_nhat_ky($pdo, 'xoa', 'tai_khoan', $id, "Xoá tài khoản \"{$tk_can_xoa['account_name']}\" ({$tk_can_xoa['account_email']})");
+            }
         }
         header('Location: tai-khoan.php?msg=da_xoa');
         exit;

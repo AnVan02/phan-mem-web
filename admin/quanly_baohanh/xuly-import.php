@@ -249,5 +249,7 @@
         'thoi_gian'  => date('d/m/Y H:i'),
     ];
 
+    ghi_nhat_ky($pdo, 'them', 'bao_hanh', null, "Import file bảo hành \"{$file['name']}\": $thanh_cong/$tong dòng thành công");
+
     header('Location: bao-hanh.php?msg=da_import');
     exit;

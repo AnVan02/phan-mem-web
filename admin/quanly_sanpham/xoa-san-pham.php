@@ -5,8 +5,16 @@
     $ma_san_pham = isset($_GET['id']) ? (int) $_GET['id'] : 0;
     $tro_ve      = isset($_GET['tro_ve']) ? trim($_GET['tro_ve']) : '';
     if ($ma_san_pham > 0) {
+        $stmt = $pdo->prepare("SELECT ten_san_pham FROM san_pham WHERE ma_san_pham = :id");
+        $stmt->execute([':id' => $ma_san_pham]);
+        $ten_can_xoa = $stmt->fetchColumn();
+
         $stmt = $pdo->prepare("DELETE FROM san_pham WHERE ma_san_pham = :id");
         $stmt->execute([':id' => $ma_san_pham]);
+
+        if ($ten_can_xoa !== false) {
+            ghi_nhat_ky($pdo, 'xoa', 'san_pham', $ma_san_pham, "Xoá sản phẩm \"$ten_can_xoa\"");
+        }
     }
 
     header('Location: danh-sach-san-pham.php?' . ($tro_ve !== '' ? $tro_ve . '&' : '') . 'msg=da_xoa');

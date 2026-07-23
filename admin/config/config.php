@@ -87,6 +87,39 @@ $DS_VAI_TRO = [
     VAI_TRO_DON_HANG => 'Quản lý đơn hàng',
 ];
 
+if (!function_exists('ghi_nhat_ky')) {
+    /**
+     * Ghi lại một hành động của tài khoản quản trị vào bảng nhat_ky_hoat_dong (audit log).
+     * Gọi ngay sau khi INSERT/UPDATE/DELETE thành công, trước khi header('Location: ...').
+     *
+     * @param PDO    $pdo         Kết nối PDO hiện tại.
+     * @param string $hanh_dong   'them' | 'sua' | 'xoa' | 'dang_nhap' | 'dang_nhap_that_bai' | 'dang_xuat'
+     * @param string $doi_tuong   Tên đối tượng/module tác động, vd 'tai_khoan', 'san_pham', 'bai_viet'...
+     * @param int|null $doi_tuong_id ID bản ghi bị tác động (nếu có).
+     * @param string $mo_ta       Mô tả ngắn gọn, dễ hiểu cho người xem log.
+     */
+    function ghi_nhat_ky($pdo, $hanh_dong, $doi_tuong, $doi_tuong_id, $mo_ta = '')
+    {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO nhat_ky_hoat_dong
+                (account_id, account_name, account_type, hanh_dong, doi_tuong, doi_tuong_id, mo_ta, dia_chi_ip)
+                VALUES (:account_id, :account_name, :account_type, :hanh_dong, :doi_tuong, :doi_tuong_id, :mo_ta, :ip)");
+            $stmt->execute([
+                ':account_id'   => $_SESSION['account_id_admin'] ?? null,
+                ':account_name' => $_SESSION['account_name'] ?? ($_SESSION['login'] ?? 'Không xác định'),
+                ':account_type' => $_SESSION['account_type'] ?? null,
+                ':hanh_dong'    => $hanh_dong,
+                ':doi_tuong'    => $doi_tuong,
+                ':doi_tuong_id' => $doi_tuong_id,
+                ':mo_ta'        => $mo_ta,
+                ':ip'           => $_SERVER['REMOTE_ADDR'] ?? null,
+            ]);
+        } catch (PDOException $e) {
+            // Không để lỗi ghi log làm gián đoạn thao tác chính của người dùng
+        }
+    }
+}
+
 if (!function_exists('yeu_cau_dang_nhap')) {
     /**
      * Bắt buộc đăng nhập, tuỳ chọn giới hạn theo vai trò (account_type).

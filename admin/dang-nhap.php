@@ -20,9 +20,11 @@
             $_SESSION['account_id_admin'] = $row['account_id'];
             $_SESSION['account_name'] = $row['account_name'];
             $_SESSION['account_type'] = (int) $row['account_type'];
+            ghi_nhat_ky($pdo, 'dang_nhap', 'tai_khoan', (int) $row['account_id'], 'Đăng nhập thành công.');
             header('Location: dashboad.php');
             exit;
         } else {
+            ghi_nhat_ky($pdo, 'dang_nhap_that_bai', 'tai_khoan', $row['account_id'] ?? null, 'Đăng nhập thất bại với email: ' . $account_email);
             echo '<script>alert("Tài khoản hoặc mật khẩu không chính xác, vui lòng nhập lại");</script>';
         }
     }

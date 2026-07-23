@@ -1,8 +1,92 @@
 /* ===== Trang Tài khoản quản trị (Admin) ===== */
 /* Layout khung dùng chung nằm trong admin-layout.css, form/table dùng chung nằm trong post-editor.css & article.css */
+/* File này chỉ chỉnh những phần riêng của trang Tài khoản: form thêm/sửa, cột Họ tên, badge Vai trò */
+
+/* ---- Khối form + panel "Lưu ý" nằm cạnh nhau, lấp hết chiều ngang ---- */
+.account-form-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+}
 
 #form-tai-khoan {
+    flex: 1 1 560px;
     max-width: 640px;
+}
+
+/* ---- Panel "Lưu ý": lấp khoảng trống bên phải form ---- */
+.account-tips {
+    flex: 1 1 260px;
+    max-width: 360px;
+    align-self: stretch;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #edeef2;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+    padding: 22px 24px;
+}
+
+.account-tips h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    font-size: 14px;
+    color: #4b6cb7;
+}
+
+.account-tips h3 i {
+    font-size: 14px;
+}
+
+.account-tips ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.account-tips li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #5b6272;
+}
+
+.account-tips li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 10px;
+    color: #4b6cb7;
+}
+
+@media (max-width: 900px) {
+    .account-tips {
+        max-width: none;
+        flex-basis: 100%;
+    }
+}
+
+#form-tai-khoan h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#form-tai-khoan h3::before {
+    content: "";
+    width: 4px;
+    height: 18px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #1e3c72, #4b6cb7);
 }
 
 #form-tai-khoan .banner-form {
@@ -19,6 +103,32 @@
 #form-tai-khoan .field-row > div {
     flex: 1;
     min-width: 0;
+}
+
+/* Ô nhập trong form tài khoản: viền + focus rõ ràng */
+#form-tai-khoan input[type="text"],
+#form-tai-khoan input[type="email"],
+#form-tai-khoan input[type="password"],
+#form-tai-khoan select {
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+#form-tai-khoan input[type="text"]:focus,
+#form-tai-khoan input[type="email"]:focus,
+#form-tai-khoan input[type="password"]:focus,
+#form-tai-khoan select:focus {
+    outline: none;
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 3px rgba(75, 108, 183, .18);
+}
+
+#form-tai-khoan input::placeholder {
+    color: #9aa2b1;
+}
+
+/* Gợi ý nhỏ "(bỏ trống nếu không đổi)" trong label mật khẩu */
+#form-tai-khoan .field-label {
+    display: block;
 }
 
 #form-tai-khoan .banner-form-actions {
@@ -47,20 +157,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* ---- Hàng trong bảng: hiệu ứng hover ---- */
-.admin-table tbody tr:hover td {
-    background: #f7f8fb;
+    box-shadow: 0 2px 6px rgba(30, 60, 114, .25);
 }
 
 .account-name-cell .admin-badge {
     margin-left: 4px;
 }
 
+/* ---- Hàng trong bảng: hiệu ứng hover ---- */
+.admin-table tbody tr {
+    transition: background-color .12s ease;
+}
+
+.admin-table tbody tr:hover td {
+    background: #f7f8fb;
+}
+
 /* ---- Badge vai trò ---- */
 .role-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     padding: 4px 12px;
     border-radius: 999px;
     font-size: 12px;
@@ -68,24 +185,104 @@
     white-space: nowrap;
 }
 
+.role-badge::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: .7;
+}
+
+/* Quản trị viên (toàn quyền) */
 .role-badge.role-0 {
     background: #fef3c7;
     color: #92400e;
 }
 
+/* Biên tập viên */
 .role-badge.role-1 {
     background: #dbeafe;
     color: #1d4ed8;
 }
 
+/* Cộng tác viên / vai trò còn lại */
 .role-badge.role-2 {
     background: #dcfce7;
     color: #166534;
+}
+
+/* Vai trò chưa có màu riêng: dùng tông trung tính an toàn */
+.role-badge:not(.role-0):not(.role-1):not(.role-2) {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+/* ---- Nút hành động Sửa / Xoá trong bảng ---- */
+.admin-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.admin-actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color .15s ease, transform .1s ease;
+}
+
+.admin-actions a i {
+    font-size: 11px;
+}
+
+.admin-actions a.edit {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.admin-actions a.edit:hover {
+    background: #bfdbfe;
+}
+
+.admin-actions a.delete {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.admin-actions a.delete:hover {
+    background: #fecaca;
+}
+
+.admin-actions a:active {
+    transform: scale(.96);
+}
+
+/* ---- Trạng thái không có tài khoản nào (nếu bảng để trống) ---- */
+.admin-table-wrap .admin-table-empty {
+    text-align: center;
+    padding: 40px 16px;
+    color: #8b93a3;
+    font-size: 14px;
 }
 
 @media (max-width: 600px) {
     #form-tai-khoan .field-row {
         flex-direction: column;
         gap: 0;
+    }
+
+    .account-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+
+    .admin-table-wrap {
+        overflow-x: auto;
     }
 }

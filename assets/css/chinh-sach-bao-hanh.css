@@ -136,6 +136,7 @@
     position: relative;
     z-index: 5;
     margin-top: -96px;
+    
 }
 
 .policy-hero-features {
@@ -200,7 +201,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 800;
     color: #14295c;
     margin: 0 0 24px;
@@ -215,8 +216,8 @@
     align-items: center;
     justify-content: center;
     background: #1B4EF6;
-    color: #ffffff;
-    font-size: 14px;
+    color: #ffd700;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -501,9 +502,9 @@
 }
 
 .policy-brand-card ul li {
-    display: flex;
+    /* display: flex; */
     align-items: flex-start;
-    gap: 9px;
+    gap: 10px;
     font-size: 13px;
     font-weight: 500;
     color: #3c4657;

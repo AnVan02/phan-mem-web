@@ -38,7 +38,7 @@
         <main class="admin-main">
         <div class="admin-main-header">
             <h1>Thêm bài viết mới</h1>
-            <a href="dah-sach-bai-viet.php" class="link-out">← Danh sách bài viết</a>
+            <a href="quanly_baiviet/danh-sach-bai-viet.php" class="link-out">← Danh sách bài viết</a>
         </div>
 
         <?php if ($msg): ?>

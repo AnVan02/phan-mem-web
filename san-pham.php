@@ -44,7 +44,8 @@ require 'head.php';
         });
         return !empty($params) ? '?' . http_build_query($params) : '';
     }
-
+    
+    
     // Danh sách thương hiệu để làm bộ lọc, kèm số lượng sản phẩm đang active của mỗi thương hiệu
     $thuong_hieu_stmt = $pdo->query("SELECT th.ma_thuong_hieu, th.ten_thuong_hieu, COUNT(*) AS so_luong
         FROM san_pham sp
@@ -342,7 +343,7 @@ require 'head.php';
                         <ul class="sidebar-category-list">
                             <li>
                                 <a class="sidebar-category-link <?php echo !$dang_loc ? 'active' : ''; ?>"
-                                    href="san-pham.php<?php echo $keyword !== '' ? '?q=' . urlencode($keyword) : ''; ?>">
+                                    href="san-pham.php<?php echo $keyword !== '' ? '?san-pham' . urlencode($keyword) : ''; ?>">
                                     Tất cả sản phẩm
                                 </a>
                             </li>
@@ -453,14 +454,14 @@ require 'head.php';
 
                     <?php if ($dang_loc): ?>
                     <a class="sidebar-clear-filter"
-                        href="san-pham.php<?php echo $keyword !== '' ? '?q=' . urlencode($keyword) : ''; ?>">
+                        href="san-pham.php<?php echo $keyword !== '' ? 'san-pham' . urlencode($keyword) : ''; ?>">
                         <i class="fa-solid fa-xmark"></i> Xóa bộ lọc
                     </a>
                     <?php endif; ?>
 
                     <div class="sidebar-block sidebar-support">
                         <h3 class="sidebar-title">Hỗ trợ khách hàng</h3>
-                        <p><strong>Tư vấn bán hàng</strong><br><a href="tel:0283929377    0">(028) 3929 3770</a></p>
+                        <p><strong>Tư vấn bán hàng</strong><br><a href="tel:0283929377">(028) 3929 3770</a></p>
                         <p><strong>Kỹ thuật - Bảo hành</strong><br><a href="tel:02839260996">(028) 3926 0996</a></p>
                         <p><strong>Thời gian làm việc</strong><br><a href="">8:00 - 17:30 (T2 - T7)</a></p>
                     </div>

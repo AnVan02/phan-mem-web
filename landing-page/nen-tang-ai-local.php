@@ -1,25 +1,42 @@
-    <?php
+<?php
+    $GLOBALS['page_specific_title'] = 'ROSA - AI Local cho doanh nghiệp | Máy trạm AI On-Premises';
+    $GLOBALS['page_specific_description'] = 'Giải pháp AI Local toàn diện cho doanh nghiệp Việt: máy trạm AI on-premises, ROSA AI Workspace (chatbot nội bộ), ROSA AI Connect kết nối Claude Code, n8n, tự động hóa quy trình. Bảo mật dữ liệu tuyệt đối, không phụ thuộc cloud.';
+    $GLOBALS['page_specific_keywords'] = 'AI local, máy trạm AI, AI on-premises, chatbot nội bộ doanh nghiệp, tự động hóa AI, n8n automation, ROSA AI, AI cho doanh nghiệp Việt Nam';
+
     $cssVersion = filemtime(__DIR__ . '/landing.css');
     $jsVersion = filemtime(__DIR__ . '/landing.js');
-    ?>
-    <!DOCTYPE html>
-    <html lang="vi">
+?>
+<!DOCTYPE html>
+<html lang="vi">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ROSA - AI Local cho doanh nghiệp</title>
-        <link rel="stylesheet" href="landing.css?v=<?php echo $cssVersion; ?>">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <script src="https://unpkg.com/@phosphor-icons/web"></script>
-        <link rel="icon" href="images/rosa-icon.png" type="image/png">
-        <script src="landing.js?v=<?php echo $jsVersion; ?>" defer></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    </head>
+    <title><?php echo htmlspecialchars($GLOBALS['page_specific_title']); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($GLOBALS['page_specific_description']); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($GLOBALS['page_specific_keywords']); ?>">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://rosacomputer.vn/rosa-ai-platform/nen-tang-ai-local.php">
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?php echo htmlspecialchars($GLOBALS['page_specific_title']); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($GLOBALS['page_specific_description']); ?>">
+    <meta property="og:image" content="https://rosacomputer.vn/images/rosa.png">
+    <meta property="og:url" content="https://rosacomputer.vn/rosa-ai-platform/nen-tang-ai-local.php">
+    <meta property="og:locale" content="vi_VN">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="nen-tang-ai-local.css?v=<?php echo $cssVersion; ?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="icon" href="images/rosa-icon.png" type="image/png">
+    <script src="nen-tang-ai-local.js?v=<?php echo $jsVersion; ?>" defer></script>
+</head>
     <body>
         <!-- Navbar -->
         <header class="navbar">
@@ -30,7 +47,7 @@
                     </a>
                 </div>
                 <nav class="nav-links">
-                    <a href="landing.php">GIẢI PHÁP</a>
+                    <a href="nen-tang-ai-local.php">GIẢI PHÁP</a>
                     <a href="rosa-ai-connect.php">ROSA AI CONNECT</a>
                     <a href="rosa-ai-workspace.php">ROSA AI WORKSPACE</a>
                     <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>
@@ -190,12 +207,12 @@
 
                                     <!-- center node: AI Local -->
                                     <circle cx="280" cy="220" r="66" fill="#1d222d" stroke="#d89b4a" stroke-width="1.6" />
-                                    <image href="images/ROSA-AI-Platform.png" x="214" y="154" width="132" height="132"
+                                    <image href="images/ROSA-AI-Platform.png" x="214" y="154" width="130" height="130"
                                         clip-path="url(#clip-center)" preserveAspectRatio="xMidYMid meet" />
                                     <text x="280" y="306" text-anchor="middle" fill="#edeff3"
                                         font-family="'Montserrat', Arial, sans-serif" font-size="14" font-weight="600">ROSA AI READY
                                     </text>
-                                   
+
                                     <!-- outer nodes -->
                                     <g font-family="'Montserrat', Arial, sans-serif" font-size="11" fill="#edeff3">
 
@@ -430,7 +447,6 @@
                     </div>
                 </div>
             </div>
-            </section>
             <!-- Section 5: Strategy -->
 
             <section class="strategy container">
@@ -496,24 +512,19 @@
                         <div class="badge-label">
                             <span class="number">5</span> PHÂN TÍCH HIỂU QUẢ ĐẦU TƯ
                         </div>
-                            <h2 class="section-title">Đầu tư AI một lần <br><span class="text-green">– Sở hữu AI vĩnh viễn</span></h2>
-                       <p>
+                        <h2 class="section-title">Đầu tư AI một lần <br><span class="text-green">– Sở hữu AI vĩnh viễn</span></h2>
+                        <p>
                             Một doanh nghiệp sử dụng <span style="color:#e60012;font-weight:700;">AI Cloud</span>
-                            cho các bộ phận phát triển, marketing và vận hành thường tốn khoảng
+                            d cho đội ngũ phát triển, marketing và vận hành với chi phí token
                             <span style="color:#e60012;font-weight:700;">10–15 triệu đồng/tháng</span>
                             chỉ riêng chi phí token.
                             <br><br>
                             Thay vì tiếp tục trả phí theo mức sử dụng, doanh nghiệp có thể đầu tư
                             <span style="color:#e60012;font-weight:700;">ROSA AI Platform</span>
-                            kết hợp hạ tầng AI nội bộ với tổng chi phí khoảng
+                            kết hợp hạ tầng phần cứng AI nội bộ với tổng chi phí khoảng
                             <span style="color:#00d4ff;font-weight:700;">180 triệu đồng</span>,
-                            chỉ đầu tư một lần và sử dụng lâu dài.
+                            đầu tư một lần dùng vĩnh viễn.
                         </p>
-                    </div>
-                    <div class="s-right">
-                        <div class="ai-hub">
-                            <img src="images/hieu-qua-dau-tu.png" alt="AI Cloud Platform" class="strategy-img">
-                        </div>
                     </div>
                 </div>
 
@@ -525,7 +536,7 @@
                         <div class="dot"></div>
                         <div class="line"></div>
                     </div>
-                    
+
                     <div class="ai-pricing-grid">
                         <!-- Sidebar -->
                         <div class="pricing-sidebar">
@@ -534,6 +545,9 @@
                             </div>
                             <div class="sidebar-item">
                                 <i class="ph ph-users"></i> Quy mô
+                            </div>
+                            <div class="sidebar-item">
+                                <i class="ph ph-package"></i>Gói AI
                             </div>
                             <div class="sidebar-item">
                                 <i class="ph ph-currency-circle-dollar"></i> Chi phí AI Cloud
@@ -550,88 +564,96 @@
                         <!-- Card 1 -->
                         <div class="pricing-card card-green">
                             <div class="card-cell header-cell">
-                                <div class="icon-wrap"><i class="ph-fill ph-shopping-cart"></i></div>
+                                <div class="icon-wrap"><img src="https://img.icons8.com/color/40/developer--v1.png"></div>
                                 <div class="title-wrap">
-                                    <h3>BÁN LẺ (B2C)</h3>
-                                    <p>Bán hàng thông minh - Trải nghiệm cá nhân hóa</p>
+                                    <h3>Lập trình viên</h3>
+                                    <p>Xây dựng giải pháp bán hàng thông minh với trải nghiệm cá nhân hóa</p>
                                 </div>
                             </div>
-                            <div class="card-cell">
+                            <div class="card-cell" data-label="Quy mô">
                                 <i class="ph-fill ph-users"></i> 5 – 10 người
                             </div>
-                            <div class="card-cell price-cell">
+
+                            <div class="card-cell" data-label="Gói AI ">
+                                <i class="ph-fill ph-users"></i>Claude Max / Codex Pro / Cursor Pro
+                            </div>
+
+                            <div class="card-cell price-cell" data-label="Chi phí AI Cloud">
                                 <div class="price-info">
-                                    <div class="price">99.000.000 VNĐ</div>
-                                    <div class="period">(vĩnh viễn)</div>
+                                    <div class="price">15 - 50 Triệu VNĐ/ tháng</div>
                                 </div>
-                                <i class="ph-fill ph-wallet"></i>
                             </div>
-                            <div class="card-cell">
-                                <p>Giảm 4-6 nhân sự CSKH, tăng chuyển đổi 30-50%,<br>doanh số tăng 15-25%</p>
-                                <i class="ph-fill ph-chart-line-up"></i>
+
+                            <div class="card-cell" data-label="Hiệu quả kỳ vọng">
+                                  <i class="ph-fill ph-chart-line-up"></i>Đầu tư một lần ~180 triệu, không phát sinh chi phí token
                             </div>
-                            <div class="card-cell">
-                                <i class="ph ph-clock"></i> &lt; 6 tháng
+
+                            <div class="price-time "  data-label="Thời gian thu hồi vốn">
+                                <i class="ph ph-clock"></i> &lt; 12 tháng
                             </div>
                         </div>
 
                         <!-- Card 2 -->
                         <div class="pricing-card card-purple">
                             <div class="card-cell header-cell">
-                                <div class="icon-wrap"><i class="ph-fill ph-storefront"></i></div>
+                                <div class="icon-wrap"><img src="https://img.icons8.com/external-smashingstocks-outline-color-smashing-stocks/40/external-digital-marketing-seo-and-development-smashingstocks-outline-color-smashing-stocks.png"></div>
                                 <div class="title-wrap">
-                                    <h3>SẢN XUẤT & THƯƠNG MẠI</h3>
-                                    <p>Vận hành tối ưu - Kiểm soát hiệu quả</p>
+                                    <h3>Marketing & Thiết kế</h3>
+                                    <p>Sáng tạo chiến lược truyền thông và thiết kế, tối ưu vận hành, nâng cao hiệu quả kinh doanh</p>
                                 </div>
                             </div>
-                            <div class="card-cell">
+                            <div class="card-cell" data-label="Quy mô">
                                 <i class="ph-fill ph-users"></i> 10 – 20 người
                             </div>
-                            <div class="card-cell price-cell">
+
+                            <div class="card-cell" data-label="Gói AI ">
+                                <i class="ph-fill ph-users"></i> GPT Image, Photoshop, ComfyUI API, Video AI (King AI, VEO, SORA)
+                            </div>
+
+                            <div class="card-cell price-cell" data-label="Chi phí AI Cloud">
                                 <div class="price-info">
-                                    <div class="price">199.000.000 VNĐ</div>
-                                    <div class="period">(vĩnh viễn)</div>
+                                    <div class="price">10 - 20 Triệu VNĐ/ tháng</div>
+                                    
                                 </div>
-                                <i class="ph-fill ph-wallet"></i>
+                                
                             </div>
-                            <div class="card-cell">
-                                <p>Tiết kiệm 20-30% thời gian vận hành, giảm 10-15% chi phí, tăng hiệu suất làm việc</p>
-                                <i class="ph-fill ph-chart-bar"></i>
+
+                            <div class="card-cell" data-label="Hiệu quả kỳ vọng">
+                                <i class="ph-fill ph-chart-bar"></i>Tạo ảnh, video AI không giới hạn trên hạ tầng nội bộ
                             </div>
-                            <div class="card-cell">
-                                <i class="ph ph-clock"></i> &lt; 12 tháng
+
+                            <div class="price-time "  data-label="Thời gian thu hồi vốn">
+                                <i class="ph ph-clock"></i> &lt; 18 tháng
                             </div>
                         </div>
 
                         <!-- Card 3 -->
                         <div class="pricing-card card-orange">
                             <div class="card-cell header-cell">
-                                <div class="icon-wrap"><i class="ph-fill ph-buildings"></i></div>
+                                <div class="icon-wrap"><img src="https://img.icons8.com/color/30/city-buildings.png"></div>
                                 <div class="title-wrap">
-                                    <h3>DOANH NGHIỆP LỚN (B2B)</h3>
-                                    <p>Tối ưu toàn bộ quy trình - Nâng tầm cạnh tranh</p>
+                                    <h3>Doanh nghiệp</h3>
+                                    <p>Tối ưu hóa quy trình vận hành, nâng cao năng lực cạnh tranh và thúc đẩy tăng trưởng bền vững.</p>
                                 </div>
                             </div>
-                            <div class="card-cell">
+                            <div class="card-cell" data-label="Quy mô">
                                 <i class="ph-fill ph-users"></i> 20 – 50+ người
                             </div>
-                            <div class="card-cell price-cell">
+                            <div class="card-cell" data-label="Gói AI ">
+                                <i class="ph-fill ph-users"></i> Chatbot, RAG, Automation đa phòng ban hoặc 1 hoặc 2 nhân sự CSKH trực 24/7, nhân viên nhân sự tổng hợp báo cáo...
+                            </div>
+                            <div class="card-cell price-cell" data-label="Chi phí AI Cloud">
                                 <div class="price-info">
-                                    <div class="price">299.000.000 VNĐ</div>
-                                    <div class="period">(vĩnh viễn)</div>
+                                    <div class="price">20 - 30 Triệu VNĐ/ tháng</div>
                                 </div>
-                                <i class="ph-fill ph-wallet"></i>
                             </div>
-                            <div class="card-cell">
-                                <p>Tối ưu toàn bộ quy trình, giảm 30-50% chi phí vận hành, ra quyết định nhanh hơn, nâng cao năng lực cạnh tranh</p>
-                                <i class="ph-fill ph-target"></i>
+                            <div class="card-cell" data-label="Hiệu quả kỳ vọng">
+                                <i class="ph-fill ph-target"></i>AI dùng chung toàn doanh nghiệp giúp tư vấn CSKH 24/7, Ghi âm và tóm tắt cuộc, không phát sinh chi phí theo ngườidùng hoặc token.
                             </div>
-                            <div class="card-cell">
-                                <i class="ph ph-clock"></i> &lt; 24 tháng
+                            <div class="price-time "  data-label="Thời gian thu hồi vốn">
+                                <i class="ph ph-clock"></i> &lt; 9 tháng
                             </div>
                         </div>
-                    </div>
-                </div>
                     </div>
                 </div>
             </section>

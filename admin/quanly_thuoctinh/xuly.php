@@ -92,6 +92,7 @@
             $stmt = $pdo->prepare("INSERT INTO `$bang` (`$cot_ten`) VALUES (:ten)");
             $stmt->execute([':ten' => $ten]);
         }
+        ghi_nhat_ky($pdo, 'them', $loai, (int) $pdo->lastInsertId(), "Thêm \"$ten\" vào $loai");
 
         header('Location: danh-sach.php?msg=da_them#' . $loai);
         exit;
@@ -134,6 +135,7 @@
             $stmt = $pdo->prepare("UPDATE `$bang` SET `$cot_ten` = :ten WHERE `$khoa` = :id");
             $stmt->execute([':ten' => $ten, ':id' => $id]);
         }
+        ghi_nhat_ky($pdo, 'sua', $loai, $id, "Sửa \"$ten\" trong $loai");
 
         header('Location: danh-sach.php?msg=da_sua#' . $loai);
         exit;
@@ -143,17 +145,20 @@
         $id = (int) ($_GET['id'] ?? 0);
         if ($id > 0) {
             try {
-                if ($co_anh) {
-                    $stmt = $pdo->prepare("SELECT hinh_anh FROM `$bang` WHERE `$khoa` = :id");
-                    $stmt->execute([':id' => $id]);
-                    $anh_cu = $stmt->fetchColumn();
-                }
+                $stmt = $pdo->prepare("SELECT `$cot_ten`" . ($co_anh ? ", hinh_anh" : "") . " FROM `$bang` WHERE `$khoa` = :id");
+                $stmt->execute([':id' => $id]);
+                $ban_ghi_cu = $stmt->fetch(PDO::FETCH_ASSOC);
+                $anh_cu = $co_anh ? ($ban_ghi_cu['hinh_anh'] ?? null) : null;
 
                 $stmt = $pdo->prepare("DELETE FROM `$bang` WHERE `$khoa` = :id");
                 $stmt->execute([':id' => $id]);
 
                 if ($co_anh && !empty($anh_cu)) {
                     xoa_anh_cu($anh_cu);
+                }
+
+                if ($ban_ghi_cu) {
+                    ghi_nhat_ky($pdo, 'xoa', $loai, $id, "Xoá \"{$ban_ghi_cu[$cot_ten]}\" trong $loai");
                 }
 
                 header('Location: danh-sach.php?msg=da_xoa#' . $loai);

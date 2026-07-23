@@ -275,7 +275,7 @@ body {
     transition: background 0.15s ease, color 0.15s ease;
     display: inline-block;  
     min-width: 150px; /* Độ rộng tối thiểu bạn muốn */
-    text-align: center; /* Căn giữa chữ nếu cần */
+    /* text-align: center; Căn giữa chữ nếu cần */
 }
 
 .admin-subnav-item.active {
@@ -339,7 +339,7 @@ body {
 .admin-main {
     grid-area: main;
     min-width: 0;
-    padding: 28px 32px 60px;
+    padding: 28px 32px 60px;    
 }
 
 .admin-main-header {

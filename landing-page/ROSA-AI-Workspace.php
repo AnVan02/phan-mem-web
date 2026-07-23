@@ -1,23 +1,41 @@
+<?php
+// ==== SEO cho trang này ====
+$GLOBALS['page_specific_title']       = 'ROSA AI Workspace - Trợ lý AI nội bộ cho đội ngũ doanh nghiệp';
+$GLOBALS['page_specific_description'] = 'ROSA AI Workspace: trợ lý AI hiểu tài liệu công ty, trả lời có nguồn, tự động chăm sóc khách hàng trên Zalo/Facebook 24/7, ghi biên bản họp và giao việc tự động. Dữ liệu lưu trong mạng nội bộ, an toàn tuyệt đối.';
+$GLOBALS['page_specific_keywords']    = 'ROSA AI Workspace, trợ lý AI nội bộ, chatbot doanh nghiệp, AI tra cứu tài liệu, chăm sóc khách hàng tự động Zalo, biên bản họp tự động, AI local doanh nghiệp Việt Nam';
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROSA AI Workspace - Trợ lý AI cho đội ngũ doanh nghiệp</title>
+
+    <title><?php echo htmlspecialchars($GLOBALS['page_specific_title']); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($GLOBALS['page_specific_description']); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($GLOBALS['page_specific_keywords']); ?>">
+    <link rel="canonical" href="https://rosacomputer.vn/rosa-ai-platform/rosa-ai-workspace.php">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?php echo htmlspecialchars($GLOBALS['page_specific_title']); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($GLOBALS['page_specific_description']); ?>">
+    <meta property="og:image" content="https://rosacomputer.vn/images/rosa.png">
+    <meta property="og:url" content="https://rosacomputer.vn/rosa-ai-platform/rosa-ai-workspace.php">
+    <meta property="og:locale" content="vi_VN">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="icon" href="images/rosa-icon.png" type="image/png">
     <?php
-    $emsCssVersion = filemtime(__DIR__ . '/ROSA-AI-Workspace.css');
+    $emsCssVersion = filemtime(__DIR__ . '/rosa-ai-workspace.css');
     ?>
-    <link rel="stylesheet" href="ROSA-AI-Workspace.css?v=<?php echo $emsCssVersion; ?>">
+    <link rel="stylesheet" href="rosa-ai-workspace.css?v=<?php echo $emsCssVersion; ?>">
 </head>
-
 <body>
-
     <!-- Navbar -->
     <header class="navbar">
         <div class="container nav-content">
@@ -25,7 +43,7 @@
                 <img src="images/rosa.png" alt="ROSA Logo" class="logo-icon">
             </div>
             <nav class="nav-links">
-                <a href="landing.php">GIẢI PHÁP</a>
+                <a href="nen-tang-ai-local.php">GIẢI PHÁP</a>
                 <a href="ROSA-AI-CONNECT.php">AI CONNECT</a>
                 <a href="ROSA-AI-WORKSPACE.php">AI WORKSPACE</a>
                 <a href="#" class="btn btn-primary nav-cta">Liên hệ tư vấn</a>

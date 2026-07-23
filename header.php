@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/admin/config/config.php';
+$da_dang_nhap_kh = isset($_SESSION['khach_hang_id']);
+$ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
+?>
 <header class="site-header">
     <div class="container header-main-inner">
         <div class="site-logo">
@@ -133,19 +138,26 @@
 
         <div class="header-icons">
             <button type="button" class="icon-btn search-toggle" aria-label="Tìm kiếm"><img width="30" height="30" src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/external-search-user-interface-tanah-basah-detailed-outline-tanah-basah.png" alt="external-search-user-interface-tanah-basah-detailed-outline-tanah-basah"/></button>
-            <a href="tai-khoan.php" class="icon-btn" aria-label="Tài khoản"><img width="30" height="30" src="https://img.icons8.com/ios/50/user-male-circle--v1.png" alt="user"/></a>
+            <a href="tai-khoan.php" class="icon-btn" aria-label="Tài khoản">
+                <?php if ($da_dang_nhap_kh): ?>
+                    <span class="header-account-avatar"><?php echo htmlspecialchars(mb_strtoupper(mb_substr($ten_khach_hang_header, 0, 1, 'UTF-8'), 'UTF-8')); ?></span>
+                <?php else: ?>
+                    <img width="30" height="30" src="https://img.icons8.com/ios/50/user-male-circle--v1.png" alt="user"/>
+                <?php endif; ?>
+            </a>
             <a href="gio-hang.php" class="icon-btn cart-icon-btn" aria-label="Giỏ hàng">
                 <img width="30" height="30" src="https://img.icons8.com/badges/48/add-shopping-cart.png" alt="shopping-cart-loaded"/>
                 <span class="cart-count-badge" id="cartCountBadge" style="display:none;">0</span>
             </a>
         </div>
 
-        <form class="search-box" action="san-pham.php" method="get">
-            <input type="text" name="q" placeholder="Tìm theo tên hoặc mã sản phẩm..." aria-label="Tìm kiếm"
-                value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
+        <form class="search-box" action="tim-kiem.php" method="get" autocomplete="off">
+            <input type="text" name="q" id="headerSearchInput" placeholder="Tìm theo tên, mô tả hoặc mã sản phẩm..."
+                aria-label="Tìm kiếm" value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
             <button type="submit" aria-label="Tìm kiếm">
                 <i class="fas fa-search"></i>
             </button>
+            <div class="search-suggest" id="headerSearchSuggest"></div>
         </form>
     </div>
 </header>

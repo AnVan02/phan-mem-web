@@ -149,15 +149,15 @@
 
 .admin-badge {
     display: inline-block;
-    padding: 3px 10px;
+    padding: 10px 14px;
     border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .admin-badge.on {
-    background: #dcfce7;
-    color: #166534;
+    background: #DBEAFE;
+    color: #1D4ED8;
 }
 
 .admin-badge.off {
@@ -252,8 +252,8 @@
 }
 
 .admin-actions a.edit {
-    background: #eef4ff;
-    color: #2563eb;
+    background: #ffd700;
+    color: #1e3c72;
 }
 .admin-actions a.delete {
     background: #fee2e2;

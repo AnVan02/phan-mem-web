@@ -19,10 +19,7 @@
     const modal = document.getElementById('contactModal');
     const closeBtn = document.querySelector('.close-modal');
     const overlay = document.querySelector('.modal-overlay');
-    const modalHeader = modal.querySelector('.modal-header');
-    const formSuccess = document.getElementById('formSuccess');
-    const formSuccessCloseBtn = document.querySelector('.form-success-close');
-
+    
     // Lấy tất cả các nút có nội dung Liên hệ hoặc Nhận tư vấn
     const contactButtons = document.querySelectorAll('a[href="#"], .btn-primary, .btn-outline');
 
@@ -41,14 +38,10 @@
     const closeModal = () => {
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
-        modalHeader.style.display = '';
-        document.getElementById('consultationForm').style.display = '';
-        formSuccess.classList.remove('active');
     };
 
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', closeModal);
-    formSuccessCloseBtn.addEventListener('click', closeModal);
 
     // Xử lý gửi Form
     document.getElementById('consultationForm').addEventListener('submit', function(e) {
@@ -66,10 +59,9 @@
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
+                    alert('Cảm ơn bạn! ROSA đã nhận được thông tin và sẽ liên hệ sớm.');
                     form.reset();
-                    modalHeader.style.display = 'none';
-                    form.style.display = 'none';
-                    formSuccess.classList.add('active');
+                    closeModal();
                 } else {
                     alert(data.message || 'Có lỗi xảy ra, vui lòng thử lại.');
                 }

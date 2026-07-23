@@ -56,7 +56,7 @@ require 'head.php';
                 </div>
             </div>
         </div>
-
+        
     <div class="policy-body container">
 
         <?php if ($trang): ?>

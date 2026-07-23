@@ -109,6 +109,7 @@
                 ':hinh_anh'     => $anh,
                 ':trang_thai'   => isset($_POST['trang_thai']) ? 1 : 0,
             ]);
+            ghi_nhat_ky($pdo, 'them', 'san_pham', (int) $pdo->lastInsertId(), "Thêm sản phẩm \"$ten_san_pham\"");
             header('Location: danh-sach-san-pham.php?msg=da_them');
             exit;
         }
@@ -160,6 +161,7 @@
             ':trang_thai'   => isset($_POST['trang_thai']) ? 1 : 0,
             ':id'           => $ma_san_pham,
         ]);
+        ghi_nhat_ky($pdo, 'sua', 'san_pham', $ma_san_pham, "Sửa sản phẩm \"$ten_san_pham\"");
         header('Location: danh-sach-san-pham.php?' . ($tro_ve !== '' ? $tro_ve . '&' : '') . 'msg=da_sua');
         exit;
     }

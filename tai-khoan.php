@@ -6,6 +6,7 @@ $khach_hang   = null;
 $don_hang_toi = [];
 $san_pham_yeu_thich = [];
 $lich_su_danh_gia = [];
+$lich_su_ho_tro = [];
 
 if ($da_dang_nhap) {
     $stmt = $pdo->prepare("SELECT * FROM khach_hang_lien_he WHERE ma_lien_he = :id LIMIT 1");
@@ -28,6 +29,10 @@ if ($da_dang_nhap) {
         $dg_stmt = $pdo->prepare("SELECT dg.*, sp.ten_san_pham FROM danh_gia_san_pham dg JOIN san_pham sp ON dg.ma_san_pham = sp.ma_san_pham WHERE dg.ma_khach_hang = :id ORDER BY dg.ngay_danh_gia DESC");
         $dg_stmt->execute([':id' => $_SESSION['khach_hang_id']]);
         $lich_su_danh_gia = $dg_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $ht_stmt = $pdo->prepare("SELECT * FROM ho_tro_khach_hang WHERE ma_khach_hang = :id ORDER BY ngay_gui DESC");
+        $ht_stmt->execute([':id' => $_SESSION['khach_hang_id']]);
+        $lich_su_ho_tro = $ht_stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
@@ -275,7 +280,7 @@ require 'head.php';
                         <input type="password" name="mat_khau_moi_nhac_lai" id="new_password_confirm"
                             placeholder="Nhập lại mật khẩu mới">
                     </div>
-                    <button type="submit" class="btn-submit" style="background-color: #4b5563;"><i
+                    <button type="submit" class="btn-submit"><i
                             class="fa-solid fa-lock"></i> Cập nhật mật khẩu</button>
                 </form>
 
@@ -542,6 +547,48 @@ require 'head.php';
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
+        </div>
+
+        <!-- Hàng 5: Lịch sử yêu cầu hỗ trợ -->
+        <div class="contact-card form-card" id="lich-su-ho-tro" style="margin-bottom:20px;">
+            <div class="card-title" style="color:#0ea5e9;">
+                <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử yêu cầu hỗ trợ
+            </div>
+            <p class="page-subtitle" style="margin:0 0 16px;">Các yêu cầu bạn đã gửi và phản hồi từ đội ngũ hỗ trợ</p>
+
+            <?php if (empty($lich_su_ho_tro)): ?>
+            <p class="page-subtitle" style="margin:0;">Bạn chưa gửi yêu cầu hỗ trợ nào.</p>
+            <?php else: ?>
+            <div class="support-history-list">
+                <?php foreach ($lich_su_ho_tro as $ht): ?>
+                <div style="border:1px solid #e5e7eb; border-radius:8px; padding:15px; margin-bottom:15px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+                        <strong style="font-size:15px;"><?php echo htmlspecialchars($ht['chu_de']); ?></strong>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <?php if ((int) $ht['trang_thai'] === 1): ?>
+                                <span style="background:#dcfce7; color:#16a34a; font-size:12px; font-weight:600; border-radius:999px; padding:2px 10px;">Đã xử lý</span>
+                            <?php else: ?>
+                                <span style="background:#fef3c7; color:#b45309; font-size:12px; font-weight:600; border-radius:999px; padding:2px 10px;">Chờ xử lý</span>
+                            <?php endif; ?>
+                            <span style="color:#6b7280; font-size:13px;"><?php echo date('d/m/Y H:i', strtotime($ht['ngay_gui'])); ?></span>
+                        </div>
+                    </div>
+                    <p style="margin:0 0 10px; font-size:14px; color:#374151; line-height:1.5;"><?php echo nl2br(htmlspecialchars($ht['noi_dung'])); ?></p>
+                    <?php if (!empty($ht['phan_hoi'])): ?>
+                    <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; padding:10px 12px;">
+                        <div style="font-size:12px; font-weight:600; color:#0369a1; margin-bottom:4px;">
+                            <i class="fa-solid fa-reply"></i> Phản hồi từ Viết Sơn Achieva
+                            <?php if (!empty($ht['ngay_phan_hoi'])): ?>
+                                <span style="font-weight:400; color:#6b7280;"> · <?php echo date('d/m/Y H:i', strtotime($ht['ngay_phan_hoi'])); ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <p style="margin:0; font-size:14px; color:#374151; line-height:1.5;"><?php echo nl2br(htmlspecialchars($ht['phan_hoi'])); ?></p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Dải icon uy tín -->

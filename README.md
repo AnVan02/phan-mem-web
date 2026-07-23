@@ -5,7 +5,7 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 ## Yêu cầu môi trường
 
 - XAMPP (Apache + MySQL/MariaDB), PHP 7.4+
-- Import database: `database/vietson-achieva.sql` (bảng chính) và các file bổ sung `database/tai-khoan-khach-hang.sql`, `database/gio-hang-don-hang.sql`
+- Import database: `database/vietson-achieva.sql` (bảng chính) và các file bổ sung `database/tai-khoan-khach-hang.sql`, `database/gio-hang-don-hang.sql`, `database/nhat-ky-hoat-dong.sql` (bảng audit log thao tác quản trị)
 - Cấu hình kết nối DB tại [admin/config/config.php](admin/config/config.php) (mặc định `host=localhost`, `dbname=vietson-achieva`, `user=root`, không mật khẩu)
 
 ## Cấu trúc thư mục
@@ -19,7 +19,8 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 │   ├── quanly_baiviet/     Quản lý bài viết/tin tức
 │   ├── quanly_baohanh/     Quản lý bảo hành (kể cả nhập hàng loạt số serial từ file Excel/CSV)
 │   ├── quanly_thuoctinh/   Quản lý thuộc tính sản phẩm
-│   ├── quanly_taikhoan/    Quản lý tài khoản quản trị (danh sách, thêm/sửa/xoá, phân quyền)
+│   ├── quanly_taikhoan/    Quản lý tài khoản quản trị (tai-khoan.php, phân quyền) và tài khoản/hỗ trợ khách hàng (danh-sach.php, ho-tro.php)
+│   ├── quanly_nhatky/      Nhật ký hoạt động (audit log thao tác quản trị) và quản lý đánh giá sản phẩm
 │   ├── dang-nhap.php       Đăng nhập quản trị
 │   ├── dang-xuat.php       Đăng xuất quản trị
 │   ├── dashboad.php        Trang tổng quan
@@ -31,6 +32,8 @@ Website bán linh kiện máy tính, xây dựng bằng PHP thuần + MySQL (XAM
 ├── header.php / footer.php  Layout dùng chung cho trang người dùng
 ├── index.php                 Trang chủ
 ├── san-pham.php               Danh sách sản phẩm
+├── tim-kiem.php                Trang kết quả tìm kiếm sản phẩm
+├── tim-kiem-ajax.php           API AJAX gợi ý tìm kiếm (autocomplete ô search trên header)
 ├── chi-tiet-san-pham.php      Chi tiết sản phẩm (giá, số lượng, thêm giỏ hàng)
 ├── mo-ta-linh-kien.php        Mô tả/so sánh linh kiện
 ├── gio-hang.php                Trang giỏ hàng (sửa số lượng, xoá, đặt hàng)
@@ -71,21 +74,25 @@ Biến tuỳ chọn khác: `$canonical_url`, `$html_lang` (mặc định `vi`), 
 
 Thư mục [landing-page/](landing-page/) là một microsite marketing riêng (sản phẩm "ROSA AI"), không dùng chung DB/config với site bán hàng — mỗi trang tự chứa HTML/CSS/JS của nó.
 
-- `landing.php` + `landing.css` / `landing.js` — trang landing chính
+- `nen-tang-ai-local.php` + `nen-tang-ai-local.css` / `nen-tang-ai-local.js` — trang landing chính (đổi tên từ `landing.php`/`landing.css`/`landing.js` cũ, đã xoá)
 - `ROSA-AI-CONNECT.php` + `ROSA-AI-CONNECT.css` — landing sản phẩm "ROSA AI Connect" (AI local không giới hạn cho doanh nghiệp), có link từ menu trang landing chính
 - `ROSA-AI-Workspace.php` + `ROSA-AI-Workspace.css` — landing sản phẩm "ROSA AI Workspace" (trợ lý AI cho đội ngũ doanh nghiệp)
 - `test.php` — bản nháp/thử nghiệm một hướng thiết kế khác, chưa gắn vào luồng chính
-- `luu-lien-he.php` — endpoint AJAX nhận form đăng ký demo, ghi vào `data/lien-he.txt`
+- `luu-lien-he.php` — endpoint AJAX nhận form đăng ký demo, ghi vào `lien-he.txt`
 - `images/` — hình ảnh minh hoạ (kể cả các ảnh sơ đồ AI-generated dùng cho hero/step section)
+
+> Lưu ý: `nen-tang-ai-local.php` còn gọi `filemtime(__DIR__ . '/landing.css')` / `landing.js` (dòng 6-7) để tạo cache-busting version cho các thẻ `<link>`/`<script>` trỏ tới `nen-tang-ai-local.css`/`.js` — sót lại từ lúc đổi tên file, hai file `landing.css`/`landing.js` đó không còn tồn tại nên sẽ gây lỗi `filemtime(): stat failed`. Cần sửa lại tên file trong `filemtime()` cho khớp.
 
 ## Chức năng đã hoàn thành
 
 **Người dùng**
 - Xem trang chủ, danh mục, thương hiệu, tin tức
+- Tìm kiếm sản phẩm (trang kết quả `tim-kiem.php` + gợi ý autocomplete AJAX qua `tim-kiem-ajax.php`)
 - Xem chi tiết sản phẩm, chọn số lượng, thêm vào giỏ hàng (AJAX)
 - So sánh sản phẩm (AJAX)
 - Quản lý giỏ hàng: sửa số lượng, xoá sản phẩm, đặt hàng
 - Đăng ký/đăng nhập tài khoản, xem chi tiết đơn hàng đã đặt
+- Gửi yêu cầu hỗ trợ, xem phản hồi từ quản trị
 - Xem chính sách bảo hành, cam kết khách hàng
 
 **Quản trị**
@@ -96,6 +103,10 @@ Thư mục [landing-page/](landing-page/) là một microsite marketing riêng (
 - Quản lý đơn hàng (danh sách, chi tiết, cập nhật trạng thái)
 - Quản lý bảo hành, kể cả nhập hàng loạt số serial từ file Excel/CSV (tải file mẫu, đọc `.xlsx` bằng `ZipArchive`/`SimpleXMLElement` không cần thư viện ngoài)
 - Quản lý tài khoản quản trị (danh sách, thêm/sửa/xoá, phân quyền); mật khẩu được mã hoá bcrypt (script [migrate-phan-quyen-admin.php](migrate-phan-quyen-admin.php) dùng để chuyển các mật khẩu cũ dạng plain text sang bcrypt, an toàn khi chạy lại nhiều lần)
+- Quản lý tài khoản khách hàng đã đăng ký (danh sách, tìm kiếm, xoá) — [admin/quanly_taikhoan/danh-sach.php](admin/quanly_taikhoan/danh-sach.php)
+- Quản lý yêu cầu hỗ trợ khách hàng: lọc theo trạng thái, phản hồi, đánh dấu đã/chưa xử lý, xoá — [admin/quanly_taikhoan/ho-tro.php](admin/quanly_taikhoan/ho-tro.php) (cột `phan_hoi`/`ngay_phan_hoi` thêm vào bảng `ho_tro_khach_hang` qua script [migrate-ho-tro-phan-hoi.php](migrate-ho-tro-phan-hoi.php), an toàn khi chạy lại nhiều lần)
+- Quản lý đánh giá sản phẩm: lọc theo sao/sản phẩm/từ khoá, trả lời đánh giá, xoá — [admin/quanly_nhatky/danh-gia-san-pham.php](admin/quanly_nhatky/danh-gia-san-pham.php)
+- Nhật ký hoạt động (audit log): ghi lại thao tác thêm/sửa/xoá/đăng nhập của tài khoản quản trị vào bảng `nhat_ky_hoat_dong` (hàm `ghi_nhat_ky()` trong [admin/config/config.php](admin/config/config.php)), xem/lọc theo tài khoản, hành động, đối tượng, khoảng thời gian, từ khoá — [admin/quanly_nhatky/nhat-ky.php](admin/quanly_nhatky/nhat-ky.php)
 
 ## Ghi chú tiến độ
 

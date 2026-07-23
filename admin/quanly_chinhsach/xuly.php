@@ -70,6 +70,7 @@
                     ':image'    => $anh,
                     ':status'   => $trang_thai,
                 ]);
+                ghi_nhat_ky($pdo, 'them', 'chinh_sach', (int) $pdo->lastInsertId(), "Thêm trang chính sách \"$tieu_de\"");
                 header('Location: danh-sach.php?msg=da_them');
                 exit;
             }
@@ -91,6 +92,7 @@
                 ':status'   => $trang_thai,
                 ':id'       => $ma_chinh_sach,
             ]);
+            ghi_nhat_ky($pdo, 'sua', 'chinh_sach', $ma_chinh_sach, "Sửa trang chính sách \"$tieu_de\"");
             header('Location: danh-sach.php?msg=da_sua');
             exit;
         } catch (PDOException $e) {
@@ -105,13 +107,15 @@
     if ($action === 'xoa') {
         $ma_chinh_sach = (int) ($_GET['id'] ?? 0);
         if ($ma_chinh_sach > 0) {
-            $stmt = $pdo->prepare("SELECT policy_slug FROM policy_page WHERE policy_id = :id");
+            $stmt = $pdo->prepare("SELECT policy_slug, policy_title FROM policy_page WHERE policy_id = :id");
             $stmt->execute([':id' => $ma_chinh_sach]);
-            $slug_can_xoa = $stmt->fetchColumn();
+            $trang_can_xoa = $stmt->fetch(PDO::FETCH_ASSOC);
+            $slug_can_xoa = $trang_can_xoa['policy_slug'] ?? false;
 
             if ($slug_can_xoa !== false && !in_array($slug_can_xoa, $slug_co_san, true)) {
                 $stmt = $pdo->prepare("DELETE FROM policy_page WHERE policy_id = :id");
                 $stmt->execute([':id' => $ma_chinh_sach]);
+                ghi_nhat_ky($pdo, 'xoa', 'chinh_sach', $ma_chinh_sach, "Xoá trang chính sách \"{$trang_can_xoa['policy_title']}\"");
             }
         }
         header('Location: danh-sach.php?msg=da_xoa');

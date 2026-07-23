@@ -117,6 +117,25 @@ require 'head.php';
 
     $related_articles_stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC LIMIT 6");
     $related_articles = $related_articles_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $reviews_stmt = $pdo->prepare("SELECT dg.*, kh.customer_name
+            FROM danh_gia_san_pham dg
+            JOIN khach_hang_lien_he kh ON dg.ma_khach_hang = kh.ma_lien_he
+            WHERE dg.ma_san_pham = :id
+            ORDER BY dg.ngay_danh_gia DESC");
+    $reviews_stmt->execute([':id' => $sp['ma_san_pham']]);
+    $reviews = $reviews_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $so_luong_danh_gia = count($reviews);
+    $diem_trung_binh = $so_luong_danh_gia > 0 ? array_sum(array_column($reviews, 'so_sao')) / $so_luong_danh_gia : 0;
+
+    $review_msg = $_GET['msg'] ?? '';
+    $review_msg_map = [
+        'danh_gia_thanh_cong' => ['success', 'Cảm ơn bạn đã gửi đánh giá cho sản phẩm này!'],
+        'loi_dang_nhap' => ['error', 'Vui lòng đăng nhập để gửi đánh giá.'],
+        'loi_chua_mua' => ['error', 'Bạn cần mua và nhận sản phẩm này trước khi có thể đánh giá.'],
+        'loi_thieu_thong_tin' => ['error', 'Vui lòng chọn số sao và nhập nội dung đánh giá.'],
+        'loi_he_thong' => ['error', 'Có lỗi xảy ra, vui lòng thử lại sau.'],
+    ];
 ?>
     <section class="product-detail">
         <div class="container">
@@ -213,6 +232,8 @@ require 'head.php';
                         </div>
                     <?php endif; ?>
 
+
+
                     <?php if (!empty(trim($sp['mo_ta'] ?? ''))): ?>
                         <div class="product-detail-desc-wrapper">
                             <div class="desc-tab-header">
@@ -254,10 +275,13 @@ require 'head.php';
                         </div>
                         <h1 class="product-detail-name"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></h1>
                         <div class="product-rating-row">
-                            <span class="stars"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
-                                    class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i
-                                    class="fa-regular fa-star"></i></span>
-                            <span class="rating-count">(0 đánh giá)</span>
+                            <span class="stars">
+                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                    <i
+                                        class="fa-<?php echo $i <= round($diem_trung_binh) ? 'solid' : 'regular'; ?> fa-star"></i>
+                                <?php endfor; ?>
+                            </span>
+                            <a href="#danhGia" class="rating-count"><?php echo $so_luong_danh_gia; ?> đánh giá</a>
                             <span class="rating-sep">|</span>
                             <span class="qa-count">Hỏi &amp; đáp (0)</span>
                             <span class="compare-btn" id="btnOpenCompareModal"><i class="fa-solid fa-plus"></i> So
@@ -311,6 +335,7 @@ require 'head.php';
                         <?php endif; ?>
                     </div>
 
+
                     <div class="product-detail-actions-vertical">
                         <?php if ($so_luong <= 0 || $gia_ban <= 0): ?>
                             <a href="tel:0886853007" class="btn-buy-now btn-contact">
@@ -350,7 +375,7 @@ require 'head.php';
                                 <span>Tư vấn nhanh</span>
                             </div>
                         </a>
-                        <a href="ho-tro-khach-hang.php" class="contact-item">
+                        <a href="tai-khoan.php" class="contact-item">
                             <i class="fa-solid fa-envelope"></i>
                             <div>
                                 <strong>Gửi yêu cầu</strong>
@@ -436,8 +461,7 @@ require 'head.php';
                     <?php endif; ?>
 
                     <!-- Compare Modal -->
-                    <div id="compareModal" class="compare-modal"
-                        data-current-id="<?php echo (int) $sp['ma_san_pham']; ?>"
+                    <div id="compareModal" class="compare-modal" data-current-id="<?php echo (int) $sp['ma_san_pham']; ?>"
                         data-danh-muc="<?php echo (int) $sp['ma_danh_muc']; ?>">
                         <div class="compare-modal-dialog">
                             <div class="compare-modal-header">
@@ -496,6 +520,91 @@ require 'head.php';
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="product-reviews-section" id="danhGia">
+                <div class="reviews-header">
+                    <h2>Đánh giá &amp; bình luận</h2>
+                    <div class="reviews-summary">
+                        <span class="reviews-avg"><?php echo number_format($diem_trung_binh, 1); ?></span>
+                        <span class="reviews-avg-stars">
+                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                <i class="fa-<?php echo $i <= round($diem_trung_binh) ? 'solid' : 'regular'; ?> fa-star"></i>
+                            <?php endfor; ?>
+                        </span>
+                        <span class="reviews-count"><?php echo $so_luong_danh_gia; ?> đánh giá</span>
+                    </div>
+                </div>
+
+                <?php if ($review_msg !== '' && isset($review_msg_map[$review_msg])):
+                    [$review_msg_type, $review_msg_text] = $review_msg_map[$review_msg];
+                ?>
+                    <div class="review-alert review-alert-<?php echo $review_msg_type; ?>">
+                        <i
+                            class="fa-solid fa-<?php echo $review_msg_type === 'success' ? 'circle-check' : 'circle-exclamation'; ?>"></i>
+                        <?php echo htmlspecialchars($review_msg_text); ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['khach_hang_id'])): ?>
+                    <form action="xuly-danh-gia.php" method="POST" class="review-form">
+                        <input type="hidden" name="ma_san_pham" value="<?php echo (int) $sp['ma_san_pham']; ?>">
+                        <div class="review-form-row">
+                            <span class="review-form-label">Chọn số sao:</span>
+                            <div class="star-input">
+                                <?php for ($i = 5; $i >= 1; $i--): ?>
+                                    <input type="radio" name="so_sao" id="star<?php echo $i; ?>" value="<?php echo $i; ?>"
+                                        <?php echo $i === 5 ? 'checked' : ''; ?>>
+                                    <label for="star<?php echo $i; ?>"><i class="fa-solid fa-star"></i></label>
+                                <?php endfor; ?>
+                            </div>
+                        </div>
+                        <textarea name="noi_dung" class="review-form-textarea" rows="3"
+                            placeholder="Chia sẻ cảm nhận của bạn về sản phẩm này..." required></textarea>
+                        <button type="submit" class="btn-submit-review">Gửi đánh giá</button>
+                    </form>
+                <?php else: ?>
+                    <div class="review-login-prompt">
+                        <p><a href="tai-khoan.php">Đăng nhập</a> để gửi bình luận, đánh giá cho sản phẩm này.</p>
+                    </div>
+                <?php endif; ?>
+
+                <div class="review-list">
+                    <?php if (empty($reviews)): ?>
+                        <p class="review-empty">Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên!</p>
+                    <?php else: ?>
+                        <?php foreach ($reviews as $rv): ?>
+                            <div class="review-item">
+                                <div class="review-item-header">
+                                    <span class="review-author"><i class="fa-solid fa-circle-user"></i>
+                                        <?php echo htmlspecialchars($rv['customer_name']); ?></span>
+                                    <span class="review-stars">
+                                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                                            <i class="fa-<?php echo $i <= (int) $rv['so_sao'] ? 'solid' : 'regular'; ?> fa-star"></i>
+                                        <?php endfor; ?>
+                                    </span>
+                                    <span class="review-date"><?php echo date('d/m/Y', strtotime($rv['ngay_danh_gia'])); ?></span>
+                                </div>
+                                <p class="review-content"><?php echo nl2br(htmlspecialchars($rv['noi_dung'])); ?></p>
+
+                                <!-- PHẦN HIỂN THỊ PHẢN HỒI CỦA ADMIN (THÊM MỚI TẠI ĐÂY) -->
+                                <?php if (!empty($rv['noi_dung_tra_loi'])): ?>
+                                    <div class="review-admin-reply">
+                                        <div class="admin-reply-header">
+                                            <i class="fa-solid fa-reply fa-rotate-180"></i>
+                                            <strong>Phản hồi từ Admin</strong>
+                                            <span class="reply-date"><?php echo date('d/m/Y', strtotime($rv['ngay_tra_loi'])); ?></span>
+                                        </div>
+                                        <div class="reply-content">
+                                            <?php echo nl2br(htmlspecialchars($rv['noi_dung_tra_loi'])); ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <!-- KẾT THÚC PHẦN PHẢN HỒI -->
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
 

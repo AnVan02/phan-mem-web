@@ -77,7 +77,8 @@
                 ':date'    => $ngay,
                 ':status'  => $trang_thai,
             ]);
-            header('Location: dah-sach-bai-viet.php?msg=da_them');
+            ghi_nhat_ky($pdo, 'them', 'bai_viet', (int) $pdo->lastInsertId(), "Thêm bài viết \"$tieu_de\"");
+            header('Location: quanly_baiviet/quanly_baiviet/danh-sach-bai-viet.php?msg=da_them');
             exit;
         }
 
@@ -104,19 +105,28 @@
             ':status'  => $trang_thai,
             ':id'      => $ma_bai_viet,
         ]);
-        header('Location: dah-sach-bai-viet.php?msg=da_sua');
+        ghi_nhat_ky($pdo, 'sua', 'bai_viet', $ma_bai_viet, "Sửa bài viết \"$tieu_de\"");
+        header('Location: quanly_baiviet/quanly_baiviet/danh-sach-bai-viet.php?msg=da_sua');
         exit;
     }
 
     if ($action === 'xoa') {
         $ma_bai_viet = (int) ($_GET['id'] ?? 0);
         if ($ma_bai_viet > 0) {
+            $stmt = $pdo->prepare("SELECT article_title FROM article WHERE article_id = :id");
+            $stmt->execute([':id' => $ma_bai_viet]);
+            $tieu_de_can_xoa = $stmt->fetchColumn();
+
             $stmt = $pdo->prepare("DELETE FROM article WHERE article_id = :id");
             $stmt->execute([':id' => $ma_bai_viet]);
+
+            if ($tieu_de_can_xoa !== false) {
+                ghi_nhat_ky($pdo, 'xoa', 'bai_viet', $ma_bai_viet, "Xoá bài viết \"$tieu_de_can_xoa\"");
+            }
         }
-        header('Location: dah-sach-bai-viet.php?msg=da_xoa');
+        header('Location: quanly_baiviet/danh-sach-bai-viet.php?msg=da_xoa');
         exit;
     }
 
-    header('Location: dah-sach-bai-viet.php');
+    header('Location: quanly_baiviet/danh-sach-bai-viet.php');
     exit;
