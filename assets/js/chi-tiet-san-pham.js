@@ -268,3 +268,68 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// ================== ZOOM ẢNH SẢN PHẨM ==================
+(function () {
+    const galleryMain = document.querySelector('.product-gallery-main');
+    const mainImg = document.getElementById('mainProductImage');
+    if (!galleryMain || !mainImg) return;
+
+    // Tạo khung preview phóng to
+    let zoomPreview = galleryMain.querySelector('.zoom-preview');
+    if (!zoomPreview) {
+        zoomPreview = document.createElement('div');
+        zoomPreview.className = 'zoom-preview';
+        galleryMain.appendChild(zoomPreview);
+    }
+
+    const ZOOM_SCALE = 2; // hệ số phóng to (desktop preview)
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+    function updateZoomPreviewImage(src) {
+        zoomPreview.style.backgroundImage = `url('${src}')`;
+    }
+
+    function initZoom() {
+        if (isTouchDevice) return; // không bật hiệu ứng hover trên mobile
+
+        galleryMain.addEventListener('mouseenter', () => {
+            galleryMain.classList.add('zooming');
+            updateZoomPreviewImage(mainImg.src);
+            zoomPreview.style.backgroundSize =
+                (mainImg.naturalWidth * ZOOM_SCALE) + 'px ' +
+                (mainImg.naturalHeight * ZOOM_SCALE) + 'px';
+        });
+
+        galleryMain.addEventListener('mousemove', (e) => {
+            const rect = mainImg.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+
+            // Phóng nhẹ ảnh chính tại vị trí trỏ chuột
+            mainImg.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+            mainImg.style.transform = 'scale(1.4)';
+
+            // Cập nhật vị trí khung xem phóng to bên cạnh
+            const bgX = x * (mainImg.naturalWidth * ZOOM_SCALE - zoomPreview.offsetWidth);
+            const bgY = y * (mainImg.naturalHeight * ZOOM_SCALE - zoomPreview.offsetHeight);
+            zoomPreview.style.backgroundPosition = `-${bgX}px -${bgY}px`;
+        });
+
+        galleryMain.addEventListener('mouseleave', () => {
+            galleryMain.classList.remove('zooming');
+            mainImg.style.transform = 'scale(1)';
+        });
+    }
+
+    initZoom();
+
+    // Khi đổi ảnh qua thumbnail hoặc nút prev/next, cập nhật lại ảnh preview
+    const observer = new MutationObserver(() => {
+        if (galleryMain.classList.contains('zooming')) {
+            updateZoomPreviewImage(mainImg.src);
+        }
+    });
+    observer.observe(mainImg, { attributes: true, attributeFilter: ['src'] });
+
+})();

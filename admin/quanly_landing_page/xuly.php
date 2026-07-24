@@ -31,6 +31,7 @@
 
     $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
     $slug_co_san = ['bao-hanh', 've-chung-toi'];
+    $nhom_menu_hop_le = ['ve-cong-ty', 'cong-dong', 'mo-ta-san-pham'];
 
     if ($action === 'them' || $action === 'sua') {
         $ma_chinh_sach = (int) ($_POST['policy_id'] ?? 0);
@@ -42,6 +43,11 @@
         $mo_ta = trim($_POST['policy_subtitle'] ?? '');
         $noi_dung = $_POST['policy_content'] ?? '';
         $trang_thai = isset($_POST['policy_status']) ? 1 : 0;
+        $hien_menu = isset($_POST['policy_show_menu']) ? 1 : 0;
+        $nhom_menu = in_array($_POST['policy_menu_group'] ?? '', $nhom_menu_hop_le, true) ? $_POST['policy_menu_group'] : '';
+        if ($hien_menu && $nhom_menu === '') {
+            $nhom_menu = $nhom_menu_hop_le[0];
+        }
         $anh_cu = trim($_POST['anh_hien_tai'] ?? '');
 
         if ($tieu_de === '' || $slug === '' || ($action === 'sua' && $ma_chinh_sach <= 0)) {
@@ -60,18 +66,20 @@
         try {
             if ($action === 'them') {
                 $stmt = $pdo->prepare("INSERT INTO policy_page
-                    (policy_slug, policy_title, policy_subtitle, policy_content, policy_image, policy_status)
-                    VALUES (:slug, :title, :subtitle, :content, :image, :status)");
+                    (policy_slug, policy_title, policy_subtitle, policy_content, policy_image, policy_status, policy_show_menu, policy_menu_group)
+                    VALUES (:slug, :title, :subtitle, :content, :image, :status, :show_menu, :menu_group)");
                 $stmt->execute([
-                    ':slug'     => $slug,
-                    ':title'    => $tieu_de,
-                    ':subtitle' => $mo_ta,
-                    ':content'  => $noi_dung,
-                    ':image'    => $anh,
-                    ':status'   => $trang_thai,
+                    ':slug'       => $slug,
+                    ':title'      => $tieu_de,
+                    ':subtitle'   => $mo_ta,
+                    ':content'    => $noi_dung,
+                    ':image'      => $anh,
+                    ':status'     => $trang_thai,
+                    ':show_menu'  => $hien_menu,
+                    ':menu_group' => $nhom_menu,
                 ]);
                 ghi_nhat_ky($pdo, 'them', 'chinh_sach', (int) $pdo->lastInsertId(), "Thêm trang chính sách \"$tieu_de\"");
-                header('Location: danh-sach.php?msg=da_them');
+                header('Location: landing-page.php?msg=da_them');
                 exit;
             }
 
@@ -81,19 +89,23 @@
                     policy_subtitle = :subtitle,
                     policy_content = :content,
                     policy_image = :image,
-                    policy_status = :status
+                    policy_status = :status,
+                    policy_show_menu = :show_menu,
+                    policy_menu_group = :menu_group
                 WHERE policy_id = :id");
             $stmt->execute([
-                ':slug'     => $slug,
-                ':title'    => $tieu_de,
-                ':subtitle' => $mo_ta,
-                ':content'  => $noi_dung,
-                ':image'    => $anh,
-                ':status'   => $trang_thai,
-                ':id'       => $ma_chinh_sach,
+                ':slug'       => $slug,
+                ':title'      => $tieu_de,
+                ':subtitle'   => $mo_ta,
+                ':content'    => $noi_dung,
+                ':image'      => $anh,
+                ':status'     => $trang_thai,
+                ':show_menu'  => $hien_menu,
+                ':menu_group' => $nhom_menu,
+                ':id'         => $ma_chinh_sach,
             ]);
             ghi_nhat_ky($pdo, 'sua', 'chinh_sach', $ma_chinh_sach, "Sửa trang chính sách \"$tieu_de\"");
-            header('Location: danh-sach.php?msg=da_sua');
+            header('Location: landing-page.php?msg=da_sua');
             exit;
         } catch (PDOException $e) {
             if ($e->getCode() === '23000') {
@@ -118,9 +130,9 @@
                 ghi_nhat_ky($pdo, 'xoa', 'chinh_sach', $ma_chinh_sach, "Xoá trang chính sách \"{$trang_can_xoa['policy_title']}\"");
             }
         }
-        header('Location: danh-sach.php?msg=da_xoa');
+        header('Location: landing-page.php?msg=da_xoa');
         exit;
     }
 
-    header('Location: danh-sach.php');
+    header('Location: landing-page.php');
     exit;

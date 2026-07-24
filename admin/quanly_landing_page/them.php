@@ -36,7 +36,7 @@
         <main class="admin-main">
         <div class="admin-main-header">
             <h1>Thêm trang chính sách mới</h1>
-            <a href="danh-sach.php" class="link-out">← Danh sách chính sách</a>
+            <a href="landing-page.php" class="link-out">← Danh sách chính sách</a>
         </div>
 
         <?php if ($msg): ?>
@@ -72,6 +72,20 @@
                     <button type="submit" class="btn-admin btn-admin-primary post-publish-btn">
                         <i class="fa-solid fa-plus"></i> Tạo trang chính sách
                     </button>
+                </div>
+
+                <div class="post-box">
+                    <h3>Menu header</h3>
+                    <label class="admin-checkbox">
+                        <input type="checkbox" name="policy_show_menu" value="1">
+                        Hiển thị trang này trên menu header
+                    </label>
+                    <select name="policy_menu_group">
+                        <option value="ve-cong-ty">Về công ty</option>
+                        <option value="cong-dong">Cộng đồng</option>
+                        <option value="mo-ta-san-pham">Mô tả sản phẩm</option>
+                    </select>
+                    <span class="hint">Chọn menu con sẽ hiển thị link tới trang này.</span>
                 </div>
 
                 <div class="post-box">

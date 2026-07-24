@@ -1,465 +1,716 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROSA AI — Trợ lý AI làm việc thay bạn, 24/7</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Lora:ital@1&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #F5EFE2;
-    --bg-card: #FDFBF5;
-    --bg-card-alt: #EFE7D4;
-    --ink: #2B2620;
-    --ink-soft: #5B5346;
-    --ink-faint: #8B826F;
-    --line: #E0D5BC;
-    --forest: #2E6B57;
-    --forest-dim: #C7D9CE;
-    --clay: #C1592E;
-    --clay-soft: #E8DCC9;
-    --gold: #C99A3B;
-    --radius-sm: 10px;
-    --radius: 18px;
-    --radius-lg: 26px;
-    --maxw: 1120px;
-    --shadow: 0 6px 24px rgba(43,38,32,0.07);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background: var(--bg);
-    color: var(--ink);
-    font-family:'Be Vietnam Pro', sans-serif;
-    font-size:16px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  .display{ font-family:'Be Vietnam Pro', sans-serif; font-weight:800; letter-spacing:-0.01em; }
-  .quote-serif{ font-family:'Lora', serif; font-style:italic; }
-  a{ color:inherit; text-decoration:none; }
-  .wrap{ max-width: var(--maxw); margin:0 auto; padding:0 28px; }
-  img,svg{ display:block; max-width:100%; }
-  ::selection{ background: var(--forest); color:#FDFBF5; }
-  :focus-visible{ outline:2px solid var(--forest); outline-offset:3px; }
+  <meta charset="UTF-8">
+  <title>Phân tích hiệu quả đầu tư — ROSA AI Platform</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
-  .eyebrow{
-    font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
-    color: var(--forest);
-    display:flex; align-items:center; gap:10px; margin-bottom:16px;
-  }
-  .eyebrow::before{ content:""; width:9px; height:9px; border-radius:50%; background: var(--clay); flex-shrink:0; }
+    :root {
+      --bg: #0A0D10;
+      --panel: #12161B;
+      --panel-2: #171C22;
+      --line: #262D35;
+      --lime: #9FE81E;
+      --lime-dim: #6C9E17;
+      --blue: #4FA6FF;
+      --orange: #FFA23C;
+      --red: #FF5C5C;
+      --ink: #F2F4F6;
+      --ink-dim: #9AA4AE;
+      --ink-faint: #5C6670;
+    }
 
-  header.nav{
-    position: sticky; top:0; z-index:50;
-    background: rgba(245,239,226,0.9);
-    backdrop-filter: blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
-  .logo{ display:flex; align-items:center; gap:9px; font-family:'Be Vietnam Pro'; font-weight:800; font-size:19px; }
-  .logo .mark{ width:26px; height:26px; border-radius:8px; background: var(--forest); display:flex; align-items:center; justify-content:center; color:#FDFBF5; font-size:13px; font-weight:800;}
-  .nav-cta{
-    font-size:14px; font-weight:600; color: var(--bg-card);
-    background: var(--clay);
-    padding:10px 20px; border-radius: 999px;
-    transition: all .15s ease;
-  }
-  .nav-cta:hover{ background:#A64A25; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .btn{
-    display:inline-flex; align-items:center; gap:9px;
-    font-size:15.5px; font-weight:600;
-    padding:15px 26px; border-radius:999px;
-    transition: all .15s ease; cursor:pointer; border:1px solid transparent;
-  }
-  .btn-primary{ background: var(--clay); color:#FDFBF5; box-shadow: 0 6px 18px rgba(193,89,46,0.28); }
-  .btn-primary:hover{ background:#A64A25; transform: translateY(-1px); }
-  .btn-ghost{ border-color: var(--line); color: var(--ink); background: var(--bg-card); }
-  .btn-ghost:hover{ border-color: var(--forest); color: var(--forest); }
-  .btn-arrow{ transition: transform .15s ease; }
-  .btn:hover .btn-arrow{ transform: translateX(3px); }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      padding: 48px 20px 80px;
+    }
 
-  /* HERO */
-  .hero{ padding:90px 0 76px; }
-  .hero-grid{ display:grid; grid-template-columns: 1.05fr 0.95fr; gap:56px; align-items:center; }
-  .hero h1{ font-size:46px; line-height:1.12; margin-bottom:20px; }
-  .hero .lede{ font-size:17.5px; color: var(--ink-soft); max-width:48ch; margin-bottom:30px; }
-  .hero-ctas{ margin-bottom:26px; }
-  .trust-line{ font-size:13.5px; color: var(--ink-faint); display:flex; flex-wrap:wrap; gap:6px 12px; }
-  .trust-line span:not(:last-child)::after{ content:"·"; margin-left:12px; color: var(--gold); }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
 
-  .hub-frame{
-    background: var(--bg-card); border:1px solid var(--line); border-radius: var(--radius-lg);
-    padding:22px; box-shadow: var(--shadow);
-  }
-  .hub-caption{ font-size:12.5px; color: var(--ink-faint); text-align:center; margin-top:10px; }
+    /* ---------- Header ---------- */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
 
-  section{ padding:82px 0; border-top:1px solid var(--line); }
-  .section-head{ max-width:640px; margin-bottom:44px; }
-  .section-head h2{ font-size:32px; line-height:1.18; }
-  .section-head p.desc{ color: var(--ink-soft); margin-top:14px; font-size:16px; }
+    .num-badge {
+      width: 40px;
+      height: 40px;
+      background: var(--lime);
+      color: #0A0D10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk';
+      font-weight: 700;
+      font-size: 20px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
 
-  /* PROBLEM */
-  .problem-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:16px; }
-  .problem-card{
-    background: var(--bg-card); border:1px solid var(--line); border-radius: var(--radius);
-    padding:26px; display:flex; gap:16px; align-items:flex-start;
-  }
-  .problem-card .ic{ width:30px; height:30px; flex-shrink:0; color: var(--clay); }
-  .problem-card p{ font-size:15.5px; color: var(--ink); }
+    .eyebrow h1 {
+      font-family: 'Space Grotesk';
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #fff;
+    }
 
-  /* SOLUTION */
-  .solution-wrap{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:52px; align-items:center; }
-  .solution-wrap h2{ font-size:32px; margin-bottom:18px; line-height:1.2; }
-  .solution-wrap p{ color: var(--ink-soft); font-size:16.5px; margin-bottom:16px; }
-  .callout-line{
-    font-family:'Lora', serif; font-style:italic; font-size:21px; color: var(--forest);
-    border-left:3px solid var(--forest); padding-left:18px; margin-top:22px;
-  }
-  .brain-visual{
-    background: var(--forest); border-radius: var(--radius-lg); padding:40px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
-    color:#F5EFE2; text-align:center; min-height:280px;
-  }
-  .brain-visual .core{
-    width:84px; height:84px; border-radius:50%; background:#F5EFE2; color: var(--forest);
-    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;
-  }
-  .brain-visual .tag{ font-size:13.5px; opacity:0.85; max-width:26ch; }
+    .rule {
+      height: 2px;
+      background: linear-gradient(90deg, var(--lime), transparent);
+      margin-bottom: 32px;
+    }
 
-  /* VALUE */
-  .value-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
-  .value-card{
-    background: var(--bg-card); border:1px solid var(--line); border-radius: var(--radius);
-    padding:26px; min-height:190px; display:flex; flex-direction:column;
-  }
-  .value-card .ic{ width:28px; height:28px; color: var(--forest); margin-bottom:16px; }
-  .value-card h4{ font-size:16.5px; font-weight:700; margin-bottom:8px; }
-  .value-card p{ color: var(--ink-soft); font-size:14px; line-height:1.55; }
+    .thesis {
+      font-family: 'Space Grotesk';
+      font-weight: 700;
+      font-size: 38px;
+      line-height: 1.25;
+      max-width: 880px;
+      margin-bottom: 14px;
+    }
 
-  /* DIFFERENTIATION */
-  .diff-row{ display:grid; grid-template-columns: repeat(4,1fr); gap:0; border:1px solid var(--line); border-radius: var(--radius); overflow:hidden; background: var(--line);}
-  .diff-item{ background: var(--bg-card); padding:28px 22px; }
-  .diff-item .num{ font-family:'Lora'; font-style:italic; color: var(--gold); font-size:20px; margin-bottom:12px; display:block;}
-  .diff-item h4{ font-size:15.5px; font-weight:700; margin-bottom:8px; }
-  .diff-item p{ font-size:13.5px; color: var(--ink-soft); }
+    .thesis .hi {
+      color: var(--lime);
+    }
 
-  /* USE CASES */
-  .usecase-list{ display:flex; flex-direction:column; gap:1px; background: var(--line); border:1px solid var(--line); border-radius: var(--radius); overflow:hidden; }
-  .usecase-item{ background: var(--bg-card); padding:22px 26px; display:flex; align-items:center; gap:18px; }
-  .usecase-item .dot{ width:8px; height:8px; border-radius:50%; background: var(--clay); flex-shrink:0; }
-  .usecase-item p{ font-size:15.5px; }
+    .subtext {
+      color: var(--ink-dim);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 820px;
+      margin-bottom: 44px;
+    }
 
-  /* PROOF */
-  .proof-card{
-    background: var(--bg-card-alt); border-radius: var(--radius-lg); padding:48px;
-    text-align:center; max-width:720px; margin:0 auto; border:1px dashed var(--gold);
-  }
-  .proof-card q{ font-family:'Lora'; font-style:italic; font-size:22px; color: var(--ink-soft); display:block; margin-bottom:14px; }
-  .proof-card .who{ font-size:13px; color: var(--ink-faint); }
+    .subtext b {
+      color: var(--ink);
+      font-weight: 600;
+    }
 
-  /* FAQ */
-  .faq-list{ max-width:760px; }
-  details{ border-bottom:1px solid var(--line); padding:22px 0; }
-  details:first-child{ border-top:1px solid var(--line); }
-  summary{ cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; font-size:17.5px; font-weight:700; }
-  summary::-webkit-details-marker{ display:none; }
-  summary::after{ content:"+"; color: var(--clay); font-size:22px; font-weight:400; flex-shrink:0; margin-left:20px; }
-  details[open] summary::after{ content:"−"; }
-  details p{ color: var(--ink-soft); margin-top:14px; font-size:15px; max-width:62ch; }
+    .subtext .redtag {
+      color: var(--red);
+      font-weight: 700;
+    }
 
-  .final-cta{ text-align:center; padding:96px 0 110px; border-top:1px solid var(--line); }
-  .final-cta h2{ font-size:36px; margin-bottom:14px; max-width:22ch; margin-left:auto; margin-right:auto;}
-  .final-cta p{ color: var(--ink-soft); font-size:16px; margin-bottom:32px; max-width:52ch; margin-left:auto; margin-right:auto;}
+    .subtext .bluetag {
+      color: var(--lime);
+      font-weight: 700;
+    }
 
-  footer{ border-top:1px solid var(--line); padding:30px 0; }
-  .footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12.5px; color: var(--ink-faint); }
+    .subtext .term {
+      border-bottom: 1px dashed var(--ink-faint);
+      cursor: help;
+    }
 
-  @media (max-width:900px){
-    .hero-grid, .solution-wrap{ grid-template-columns:1fr; }
-    .hero h1{ font-size:34px; }
-    .problem-grid, .value-grid{ grid-template-columns:1fr; }
-    .diff-row{ grid-template-columns: repeat(2,1fr); }
-    section{ padding:60px 0; }
-  }
-  @media (max-width:560px){
-    .diff-row{ grid-template-columns: 1fr; }
-    .hero h1{ font-size:28px; }
-  }
-  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
-</style>
+    /* ---------- Quick-read strip ---------- */
+    .quickread {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .qr-step {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px 20px 22px;
+      position: relative;
+    }
+
+    .qr-step .qr-num {
+      font-family: 'Space Grotesk';
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .qr-step .qr-icon {
+      font-size: 26px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .qr-step .qr-title {
+      font-family: 'Space Grotesk';
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .qr-step .qr-desc {
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    .qr-step.qr-red .qr-title {
+      color: var(--red);
+    }
+
+    .qr-step.qr-lime .qr-title {
+      color: var(--lime);
+    }
+
+    @media (max-width: 760px) {
+      .quickread {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- Term glossary ---------- */
+    .glossary {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+
+    .glos-item {
+      flex: 1;
+      min-width: 260px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .glos-item .glos-label {
+      font-family: 'Space Grotesk';
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lime);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .glos-item p {
+      font-size: 13.5px;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    /* ---------- Chart section ---------- */
+    .chart-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 36px 24px;
+      margin-bottom: 56px;
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .chart-head h2 {
+      font-family: 'Space Grotesk';
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--ink-dim);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 12px;
+    }
+
+    .breakeven-callout {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(159, 232, 30, 0.08);
+      border: 1px solid rgba(159, 232, 30, 0.35);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 18px;
+    }
+
+    .breakeven-callout .icon {
+      font-size: 20px;
+    }
+
+    .breakeven-callout p {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .breakeven-callout b {
+      color: var(--lime);
+    }
+
+    /* ---------- Section label ---------- */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .section-divider span {
+      font-family: 'Space Grotesk';
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ---------- Table ---------- */
+    .table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: var(--panel-2);
+      text-align: left;
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    thead th:first-child {
+      width: 190px;
+      background: var(--panel);
+    }
+
+    thead th .col-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    thead th.col-dev .col-icon {
+      background: rgba(159, 232, 30, 0.15);
+      color: var(--lime);
+    }
+
+    thead th.col-mkt .col-icon {
+      background: rgba(79, 166, 255, 0.15);
+      color: var(--blue);
+    }
+
+    thead th.col-ent .col-icon {
+      background: rgba(255, 162, 60, 0.15);
+      color: var(--orange);
+    }
+
+    thead th .col-title {
+      font-family: 'Space Grotesk';
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    thead th .col-desc {
+      font-size: 12.5px;
+      color: var(--ink-dim);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    tbody td,
+    tbody th {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    tbody th {
+      text-align: left;
+      background: var(--panel-2);
+      color: var(--ink-dim);
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    tbody th .row-icon {
+      margin-right: 8px;
+    }
+
+    tbody tr:last-child td,
+    tbody tr:last-child th {
+      border-bottom: none;
+    }
+
+    tbody td.strong {
+      font-family: 'Space Grotesk';
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .col-dev-cell.strong {
+      color: var(--lime);
+    }
+
+    .col-mkt-cell.strong {
+      color: var(--blue);
+    }
+
+    .col-ent-cell.strong {
+      color: var(--orange);
+    }
+
+    tbody td .time-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk';
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--red);
+    }
+
+    tbody tr:nth-child(odd) td,
+    tbody tr:nth-child(odd) th {
+      background: rgba(255, 255, 255, 0.012);
+    }
+
+    /* ---------- Closing banner ---------- */
+    .closer {
+      background: linear-gradient(135deg, rgba(159, 232, 30, 0.12), rgba(159, 232, 30, 0.02));
+      border: 1px solid rgba(159, 232, 30, 0.3);
+      border-radius: 16px;
+      padding: 30px 34px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .closer .mark {
+      font-family: 'Space Grotesk';
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--lime);
+      line-height: 1;
+    }
+
+    .closer p {
+      font-size: 16px;
+      color: var(--ink);
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .closer b {
+      color: var(--lime);
+    }
+
+    @media (max-width: 760px) {
+      .thesis {
+        font-size: 26px;
+      }
+
+      thead th:first-child {
+        display: none;
+      }
+
+      tbody th {
+        white-space: normal;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="wrap">
 
-<header class="nav">
-  <div class="wrap nav-inner">
-    <div class="logo"><span class="mark">R</span>ROSA AI</div>
-    <a href="#cta" class="nav-cta">Đặt lịch demo</a>
-  </div>
-</header>
+    <!-- HEADER -->
+    <div class="eyebrow">
+      <div class="num-badge">5</div>
+      <h1>Phân tích hiệu quả đầu tư</h1>
+    </div>
+    <div class="rule"></div>
 
-<!-- HERO -->
-<section class="hero" style="border-top:none;">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Trợ lý AI cho doanh nghiệp</div>
-      <h1 class="display">Trợ lý AI làm việc thay bạn — 24/7, ngay tại công ty.</h1>
-      <p class="lede">ROSA AI trả lời khách hàng trên Zalo, Telegram, Facebook Messenger; ghi biên bản và giao việc sau mỗi cuộc họp; tự động hoá quy trình cùng n8n. Tất cả chạy trên AI của riêng công ty bạn — dữ liệu an toàn, không tốn phí theo từng tin nhắn.</p>
-      <div class="hero-ctas">
-        <a href="#cta" class="btn btn-primary">Đặt lịch demo miễn phí <span class="btn-arrow">→</span></a>
+    <div class="thesis">Trả phí AI Cloud <span class="hi">mãi mãi</span>, hay đầu tư một lần để <span class="hi">sở
+        hữu AI vĩnh viễn</span>?</div>
+    <p class="subtext">
+      Một doanh nghiệp dùng <b>AI Cloud</b> cho đội ngũ phát triển, marketing và vận hành đang trả
+      <span class="redtag">10–15 triệu đồng/tháng</span> — chỉ riêng chi phí token, và khoản này lặp lại vô thời
+      hạn.
+      Nếu thay bằng <b>ROSA AI Platform</b> kết hợp hạ tầng phần cứng AI nội bộ, tổng chi phí khoảng
+      <span class="bluetag">180 triệu đồng</span> — trả một lần duy nhất, dùng vĩnh viễn, không phát sinh phí theo
+      tháng.
+    </p>
+
+    <!-- QUICK READ: 3 bước hiểu ngay -->
+    <div class="quickread">
+      <div class="qr-step qr-red">
+        <span class="qr-num">BƯỚC 1</span>
+        <span class="qr-icon">🧾</span>
+        <div class="qr-title">Đang thuê AI theo tháng</div>
+        <div class="qr-desc">Doanh nghiệp trả 10–15 triệu/tháng để dùng AI Cloud. Không dùng nữa thì thôi, còn
+          dùng là còn trả — không có điểm dừng.</div>
       </div>
-      <div class="trust-line">
-        <span>AI hiểu tiếng Việt</span>
-        <span>Mỗi câu trả lời đều kiểm chứng được nguồn</span>
-        <span>Dữ liệu trong mạng nội bộ</span>
+      <div class="qr-step">
+        <span class="qr-num">BƯỚC 2</span>
+        <span class="qr-icon">⚖️</span>
+        <div class="qr-title">Cộng dồn theo thời gian</div>
+        <div class="qr-desc">Càng dùng lâu, tổng tiền thuê càng phình to. Đến một thời điểm, số tiền đã trả sẽ
+          bằng đúng 180 triệu.</div>
+      </div>
+      <div class="qr-step qr-lime">
+        <span class="qr-num">BƯỚC 3</span>
+        <span class="qr-icon">🏆</span>
+        <div class="qr-title">Mua đứt 1 lần, dùng mãi</div>
+        <div class="qr-desc">Trả 180 triệu một lần cho ROSA AI Platform, sở hữu luôn — từ đó về sau không tốn
+          thêm đồng nào nữa.</div>
       </div>
     </div>
 
-    <div class="hub-frame">
-      <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg">
-        <!-- spokes -->
-        <g stroke="#D8CBAA" stroke-width="1.5" fill="none">
-          <path d="M260,210 C200,170 150,120 110,70"/>
-          <path d="M260,210 C320,170 380,110 430,60"/>
-          <path d="M260,210 C190,240 120,260 70,300"/>
-          <path d="M260,210 C330,240 400,270 450,320"/>
-          <path d="M260,210 C260,270 260,320 260,370"/>
+    <!-- GLOSSARY: giải nghĩa thuật ngữ cho người không rành kỹ thuật -->
+    <div class="glossary">
+      <div class="glos-item">
+        <div class="glos-label">AI Cloud là gì?</div>
+        <p>Là hình thức <b style="color:var(--ink)">"thuê AI online theo tháng"</b> — giống như trả tiền mạng,
+          tiền điện. Nhà cung cấp tính phí dựa trên lượng dùng (gọi là "token"), dùng càng nhiều trả càng
+          nhiều, dùng vô thời hạn thì trả vô thời hạn.</p>
+      </div>
+      <div class="glos-item">
+        <div class="glos-label">ROSA AI Platform là gì?</div>
+        <p>Là <b style="color:var(--ink)">hệ thống AI cài đặt riêng tại doanh nghiệp</b> (giống mua đứt một cái
+          máy). Trả tiền phần cứng + phần mềm một lần, sau đó doanh nghiệp toàn quyền sử dụng, không phải trả
+          phí theo tháng nữa.</p>
+      </div>
+    </div>
+
+    <!-- CHART -->
+    <div class="chart-card">
+      <div class="chart-head">
+        <h2>Đường hòa vốn: thuê theo tháng vs. đầu tư một lần</h2>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span>Chi phí AI
+            Cloud (cộng dồn theo tháng)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--lime)"></span>Đầu tư ROSA
+            AI Platform (một lần)</div>
+        </div>
+      </div>
+
+      <svg class="chart-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- gridlines -->
+        <g stroke="#262D35" stroke-width="1">
+          <line x1="80" y1="340" x2="720" y2="340" />
+          <line x1="80" y1="280" x2="720" y2="280" />
+          <line x1="80" y1="220" x2="720" y2="220" />
+          <line x1="80" y1="160" x2="720" y2="160" />
+          <line x1="80" y1="100" x2="720" y2="100" />
+          <line x1="80" y1="40" x2="720" y2="40" />
         </g>
-        <!-- core -->
-        <g transform="translate(260,210)">
-          <circle r="56" fill="#2E6B57"/>
-          <circle r="56" fill="none" stroke="#C99A3B" stroke-width="2" stroke-dasharray="2 6"/>
-          <text y="-4" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="15" fill="#F5EFE2">ROSA</text>
-          <text y="14" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="500" font-size="10.5" fill="#F5EFE2" opacity="0.85">bộ não AI</text>
+        <!-- y axis labels (triệu đồng) -->
+        <g fill="#5C6670" font-family="Inter" font-size="12">
+          <text x="66" y="344" text-anchor="end">0</text>
+          <text x="66" y="284" text-anchor="end">50</text>
+          <text x="66" y="224" text-anchor="end">100</text>
+          <text x="66" y="164" text-anchor="end">150</text>
+          <text x="66" y="104" text-anchor="end">200</text>
+          <text x="66" y="44" text-anchor="end">250tr</text>
         </g>
-        <!-- channel badges -->
-        <g font-family="Be Vietnam Pro" font-weight="600" font-size="12" fill="#2B2620">
-          <g transform="translate(48,44)">
-            <rect width="128" height="40" rx="20" fill="#FDFBF5" stroke="#E0D5BC"/>
-            <circle cx="22" cy="20" r="6" fill="#2E6B57"/>
-            <text x="38" y="24">Zalo</text>
-          </g>
-          <g transform="translate(368,32)">
-            <rect width="128" height="40" rx="20" fill="#FDFBF5" stroke="#E0D5BC"/>
-            <circle cx="22" cy="20" r="6" fill="#2E6B57"/>
-            <text x="38" y="24">Telegram</text>
-          </g>
-          <g transform="translate(10,278)">
-            <rect width="150" height="40" rx="20" fill="#FDFBF5" stroke="#E0D5BC"/>
-            <circle cx="22" cy="20" r="6" fill="#2E6B57"/>
-            <text x="38" y="24">Messenger</text>
-          </g>
-          <g transform="translate(374,296)">
-            <rect width="128" height="40" rx="20" fill="#FDFBF5" stroke="#E0D5BC"/>
-            <circle cx="22" cy="20" r="6" fill="#2E6B57"/>
-            <text x="38" y="24">Website</text>
-          </g>
-          <g transform="translate(196,362)">
-            <rect width="128" height="40" rx="20" fill="#FDFBF5" stroke="#C1592E"/>
-            <circle cx="22" cy="20" r="6" fill="#C1592E"/>
-            <text x="38" y="24">24/7</text>
-          </g>
+        <!-- x axis labels (months) -->
+        <g fill="#5C6670" font-family="Inter" font-size="12" text-anchor="middle">
+          <text x="80" y="362">T0</text>
+          <text x="187" y="362">T3</text>
+          <text x="293" y="362">T6</text>
+          <text x="400" y="362">T9</text>
+          <text x="507" y="362">T12</text>
+          <text x="613" y="362">T15</text>
+          <text x="720" y="362">T18</text>
         </g>
+
+        <!-- savings zone after breakeven -->
+        <polygon points="592,124 720,70 720,124" fill="#9FE81E" opacity="0.12" />
+
+        <!-- one-time investment flat line -->
+        <line x1="80" y1="124" x2="720" y2="124" stroke="#9FE81E" stroke-width="3" />
+        <text x="88" y="114" fill="#9FE81E" font-family="Space Grotesk" font-size="13" font-weight="700">180
+          triệu — trả 1 lần</text>
+
+        <!-- recurring cost line -->
+        <polyline points="80,340 151,310 222,280 293,250 364,220 436,190 507,160 578,130 720,70" fill="none"
+          stroke="#FF5C5C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+        <!-- breakeven point -->
+        <circle cx="592" cy="124" r="6" fill="#0A0D10" stroke="#FFFFFF" stroke-width="2" />
+        <line x1="592" y1="124" x2="592" y2="340" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="4 4"
+          opacity="0.4" />
+        <text x="592" y="356" fill="#FFFFFF" font-family="Space Grotesk" font-size="12" font-weight="700"
+          text-anchor="middle">Hòa vốn ≈ T14</text>
+
+        <!-- plain-language zone labels -->
+        <text x="200" y="270" fill="#FF5C5C" font-family="Inter" font-size="12.5" font-weight="600">↓ Vùng đang
+          trả tiền thuê hàng tháng</text>
+        <text x="608" y="90" fill="#9FE81E" font-family="Space Grotesk" font-size="12.5" font-weight="700">Vùng
+          đã hòa vốn — bắt đầu tiết kiệm →</text>
       </svg>
-      <div class="hub-caption">một trợ lý — trả lời ở mọi kênh khách hàng của bạn</div>
-    </div>
-  </div>
-</section>
 
-<!-- PROBLEM -->
-<section id="problem">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Vấn đề</div>
-      <h2 class="display">Nhân viên của bạn đang lãng phí hàng giờ mỗi ngày.</h2>
-    </div>
-    <div class="problem-grid">
-      <div class="problem-card">
-        <svg class="ic" viewBox="0 0 30 30" fill="none"><path d="M6 10h18v12H12l-6 5V10z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 15h10M10 19h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <p>Trả lời cùng một câu hỏi của khách hàng, hàng trăm lần mỗi ngày.</p>
-      </div>
-      <div class="problem-card">
-        <svg class="ic" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="11" stroke="currentColor" stroke-width="1.6"/><path d="M15 9v6l4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <p>Khách nhắn tin lúc 11 giờ đêm — không ai trả lời cho đến sáng hôm sau.</p>
-      </div>
-      <div class="problem-card">
-        <svg class="ic" viewBox="0 0 30 30" fill="none"><rect x="6" y="6" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M11 24h8M15 20v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <p>Họp xong, quyết định trôi vào quên lãng, việc giao ra không ai theo dõi.</p>
-      </div>
-      <div class="problem-card">
-        <svg class="ic" viewBox="0 0 30 30" fill="none"><rect x="7" y="5" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M11 11h8M11 15h8M11 19h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <p>Tra cứu số liệu, soạn tài liệu, nhập liệu thủ công… ngày qua ngày.</p>
+      <div class="breakeven-callout">
+        <span class="icon">⏱</span>
+        <p>Sau khoảng <b>14 tháng</b>, tổng tiền đã trả cho AI Cloud vượt qua khoản đầu tư một lần 180 triệu.
+          Từ mốc đó trở đi, mỗi tháng dùng AI Cloud là một tháng <b>trả thêm tiền cho thứ lẽ ra đã miễn
+            phí</b> nếu đầu tư ROSA từ đầu.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- SOLUTION -->
-<section id="solution">
-  <div class="wrap solution-wrap">
-    <div>
-      <div class="eyebrow">Giải pháp</div>
-      <h2 class="display">ROSA AI — bộ não AI cho cả doanh nghiệp của bạn.</h2>
-      <p>ROSA AI là trợ lý AI đặt ngay tại công ty bạn. Nó hiểu tài liệu của bạn, trả lời khách hàng trên mọi kênh, tóm tắt cuộc họp và giao việc — rồi kết nối với n8n để tự động hoá bất cứ quy trình nào.</p>
-      <div class="callout-line">"Một bộ não duy nhất, làm việc ở khắp nơi trong doanh nghiệp bạn."</div>
-    </div>
-    <div class="brain-visual">
-      <div class="core">ROSA</div>
-      <div class="tag">Trả lời khách · Tóm tắt họp · Giao việc · Tự động hoá quy trình</div>
-    </div>
-  </div>
-</section>
+    <!-- TABLE -->
+    <div class="section-divider"><span>Chi tiết theo từng nhóm triển khai</span></div>
 
-<!-- CORE VALUE -->
-<section id="value">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Giá trị cốt lõi</div>
-      <h2 class="display">Mọi thứ bạn cần để AI thực sự làm việc</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-dev">
+              <div class="col-icon">💻</div>
+              <div class="col-title">Lập trình viên</div>
+              <div class="col-desc">Xây dựng giải pháp bán hàng thông minh với trải nghiệm cá nhân hóa
+              </div>
+            </th>
+            <th class="col-mkt">
+              <div class="col-icon">🎨</div>
+              <div class="col-title">Marketing &amp; Thiết kế</div>
+              <div class="col-desc">Sáng tạo chiến lược truyền thông và thiết kế, tối ưu vận hành</div>
+            </th>
+            <th class="col-ent">
+              <div class="col-icon">🏢</div>
+              <div class="col-title">Doanh nghiệp</div>
+              <div class="col-desc">Tối ưu quy trình vận hành, nâng cao năng lực cạnh tranh</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><span class="row-icon">👥</span>Quy mô</th>
+            <td>5 – 10 người</td>
+            <td>10 – 20 người</td>
+            <td>20 – 50+ người</td>
+          </tr>
+          <tr>
+            <th><span class="row-icon">📦</span>Gói AI</th>
+            <td>Claude Max / Codex Pro / Cursor Pro</td>
+            <td>GPT Image, Photoshop, ComfyUI API, Video AI (King AI, VEO, SORA)</td>
+            <td>Chatbot, RAG, Automation đa phòng ban hoặc 1–2 nhân sự CSKH trực 24/7, nhân sự tổng hợp báo
+              cáo</td>
+          </tr>
+          <tr>
+            <th><span class="row-icon">💰</span>Chi phí AI Cloud</th>
+            <td class="col-dev-cell strong">15 – 50 tr/tháng</td>
+            <td class="col-mkt-cell strong">10 – 20 tr/tháng</td>
+            <td class="col-ent-cell strong">20 – 30 tr/tháng</td>
+          </tr>
+          <tr>
+            <th><span class="row-icon">📈</span>Hiệu quả kỳ vọng</th>
+            <td>Đầu tư một lần ~180tr, không phát sinh chi phí token</td>
+            <td>Tạo ảnh, video AI không giới hạn trên hạ tầng nội bộ</td>
+            <td>AI dùng chung toàn doanh nghiệp, tư vấn CSKH 24/7, ghi âm &amp; tóm tắt cuộc gọi, không phát
+              sinh phí theo người dùng hoặc token</td>
+          </tr>
+          <tr>
+            <th><span class="row-icon">⏱</span>Thời gian thu hồi vốn</th>
+            <td><span class="time-tag">&lt; 12 tháng</span></td>
+            <td><span class="time-tag">&lt; 18 tháng</span></td>
+            <td><span class="time-tag">&lt; 9 tháng</span></td>
+          </tr>
+          <tr>
+            <th><span class="row-icon">🙋</span>Phù hợp với ai?</th>
+            <td>Team dev cần công cụ code AI riêng, không muốn phụ thuộc gói thuê ngoài</td>
+            <td>Team content/thiết kế cần tạo ảnh, video số lượng lớn, không lo giới hạn dung lượng</td>
+            <td>Công ty muốn 1 hệ thống AI dùng chung toàn công ty, thu hồi vốn nhanh nhất</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="value-grid">
-      <div class="value-card">
-        <svg class="ic" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="5" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="23" cy="5" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="23" r="2.4" stroke="currentColor" stroke-width="1.6"/><circle cx="23" cy="23" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M11.5 11.5 L7 7 M16.5 11.5 L21 7 M11.5 16.5 L7 21 M16.5 16.5 L21 21" stroke="currentColor" stroke-width="1.4"/></svg>
-        <h4>Một chatbot, mọi kênh</h4>
-        <p>Xây một con bot trong ROSA AI rồi đưa lên Zalo, Telegram, Facebook Messenger và website — cùng một trợ lý thông minh trả lời khách ở khắp nơi.</p>
-      </div>
-      <div class="value-card">
-        <svg class="ic" viewBox="0 0 28 28" fill="none"><path d="M6 8h16v10H12l-4 4V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10.5 13l2 2 4-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h4>AI cho bạn thấy bằng chứng</h4>
-        <p>Mỗi câu trả lời đều chỉ rõ nguồn trong tài liệu gốc — bạn không phải lo AI "bịa".</p>
-      </div>
-      <div class="value-card">
-        <svg class="ic" viewBox="0 0 28 28" fill="none"><rect x="5" y="5" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M5 12h18M11 5v18" stroke="currentColor" stroke-width="1.6"/></svg>
-        <h4>Hỏi Excel như hỏi kế toán</h4>
-        <p>Đặt câu hỏi về file số liệu và nhận đúng từng con số, đúng định dạng tiếng Việt.</p>
-      </div>
-      <div class="value-card">
-        <svg class="ic" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M10 14l2.5 2.5L18 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h4>Họp xong là có biên bản + giao việc</h4>
-        <p>Ghi âm hoặc tải lên cuộc họp — AI tóm tắt, rút ra quyết định, và giao việc đúng người kèm hạn chót.</p>
-      </div>
-      <div class="value-card">
-        <svg class="ic" viewBox="0 0 28 28" fill="none"><path d="M14 4 L22 8 L22 16 L14 24 L6 16 L6 8 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 12v6M11 15h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <h4>Tự động hoá cùng n8n</h4>
-        <p>Nhắc lịch hẹn, theo dõi giá đối thủ, xử lý tài liệu, đồng bộ dữ liệu — để hệ thống tự chạy.</p>
-      </div>
-      <div class="value-card">
-        <svg class="ic" viewBox="0 0 28 28" fill="none"><rect x="4" y="9" width="8" height="15" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="16" y="4" width="8" height="20" rx="1.6" stroke="currentColor" stroke-width="1.6"/></svg>
-        <h4>Mỗi phòng ban một AI riêng</h4>
-        <p>Phân quyền theo phòng ban: bot chăm sóc khách, bot nội bộ, bot HR — mỗi bot một nhiệm vụ.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- DIFFERENTIATION -->
-<section id="diff">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Điểm khác biệt</div>
-      <h2 class="display">Không chỉ là một chatbot.</h2>
+    <!-- CLOSER -->
+    <div class="closer">
+      <div class="mark">→</div>
+      <p>Dù triển khai theo nhóm nào, khoản đầu tư ~180 triệu đồng đều được thu hồi trong
+        <b>dưới 18 tháng</b>. Sau mốc đó, doanh nghiệp <b>sở hữu AI vĩnh viễn</b> — không còn hóa đơn token
+        hàng tháng, trong khi mô hình thuê AI Cloud tiếp tục tính phí không giới hạn thời gian.
+      </p>
     </div>
-    <div class="diff-row">
-      <div class="diff-item">
-        <span class="num">01</span>
-        <h4>Đặt tại công ty bạn</h4>
-        <p>Dữ liệu không rời khỏi mạng nội bộ.</p>
-      </div>
-      <div class="diff-item">
-        <span class="num">02</span>
-        <h4>Hiểu tiếng Việt sâu sắc</h4>
-        <p>Trả lời chuẩn tiếng Việt — kể cả khi khách gõ không dấu.</p>
-      </div>
-      <div class="diff-item">
-        <span class="num">03</span>
-        <h4>Trả lời có nguồn</h4>
-        <p>AI đáng tin, luôn kiểm chứng được — không bịa đặt.</p>
-      </div>
-      <div class="diff-item">
-        <span class="num">04</span>
-        <h4>Chi phí cố định</h4>
-        <p>Tự động hoá bao nhiêu tuỳ thích, không tính phí theo từng tin nhắn.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- USE CASES -->
-<section id="usecases">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Ứng dụng thực tế</div>
-      <h2 class="display">ROSA AI có thể làm gì cho bạn?</h2>
-    </div>
-    <div class="usecase-list">
-      <div class="usecase-item"><span class="dot"></span><p>Chăm sóc khách hàng tự động trên Zalo &amp; Facebook, 24/7.</p></div>
-      <div class="usecase-item"><span class="dot"></span><p>Tổng đài hỏi–đáp nội bộ: nhân viên hỏi quy trình, chính sách, tài liệu — trả lời tức thì.</p></div>
-      <div class="usecase-item"><span class="dot"></span><p>Biên bản họp và giao việc tự động.</p></div>
-      <div class="usecase-item"><span class="dot"></span><p>Nhắc lịch hẹn khách hàng qua Zalo ZNS / SMS.</p></div>
-      <div class="usecase-item"><span class="dot"></span><p>Theo dõi giá đối thủ, tổng hợp báo cáo tự động.</p></div>
-    </div>
   </div>
-</section>
-
-<!-- PROOF -->
-<section id="proof">
-  <div class="wrap">
-    <div class="section-head" style="margin:0 auto 44px; text-align:center;">
-      <div class="eyebrow" style="justify-content:center;">Bằng chứng</div>
-    </div>
-    <div class="proof-card">
-      <q>"Khu vực chèn câu chuyện khách hàng thật, cùng ảnh chụp màn hình bot đang chạy trên Zalo hoặc biên bản họp được tạo tự động."</q>
-      <div class="who">— [ TÊN DOANH NGHIỆP ] · chờ nội dung thật</div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Câu hỏi thường gặp</div>
-    </div>
-    <div class="faq-list">
-      <details open>
-        <summary>AI làm việc bằng tiếng Việt có tốt không?</summary>
-        <p>Có. ROSA AI được tối ưu cho tiếng Việt, cả văn bản lẫn giọng nói.</p>
-      </details>
-      <details>
-        <summary>Dữ liệu của tôi có an toàn không?</summary>
-        <p>Dữ liệu công ty không rời khỏi mạng nội bộ của bạn.</p>
-      </details>
-      <details>
-        <summary>AI có trả lời sai hay bịa không?</summary>
-        <p>Nhiều lớp chống bịa, và mọi câu trả lời đều kiểm chứng được nguồn trong tài liệu gốc.</p>
-      </details>
-      <details>
-        <summary>Chúng tôi không rành kỹ thuật, có dùng được không?</summary>
-        <p>Được. Đội ROSA sẽ cài đặt và cấu hình sẵn các quy trình cho bạn.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section id="cta" class="final-cta">
-  <div class="wrap">
-    <div class="eyebrow" style="justify-content:center;">Kêu gọi hành động</div>
-    <h2 class="display">Để AI làm việc. Bạn tập trung phát triển doanh nghiệp.</h2>
-    <p>Đặt lịch demo miễn phí — xem ROSA AI chạy thử ngay trên tài liệu và quy trình của chính bạn.</p>
-    <a href="#" class="btn btn-primary">Đặt lịch demo miễn phí <span class="btn-arrow">→</span></a>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap footer-inner">
-    <div class="logo" style="font-size:15px;"><span class="mark" style="width:20px;height:20px;font-size:11px;">R</span>ROSA AI</div>
-    <span>© 2026 · Trang dành cho nhóm Người vận hành / SME</span>
-  </div>
-</footer>
-
 </body>
+
 </html>

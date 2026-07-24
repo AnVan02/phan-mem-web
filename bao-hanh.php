@@ -1,13 +1,14 @@
-
 <?php
 $page_title       = 'Sản phẩm - Viết Sơn Achieva';
 $extra_css        = ['assets/css/bao-hanh.css'];
 $post_css_scripts = ['assets/js/bao-hanh.js'];
 require 'head.php';
 ?>
-    <?php
-    require_once 'admin/config/config.php';
-    include 'header.php';
+
+<?php
+require_once 'admin/config/config.php';
+include 'header.php';
+
 
 
 
@@ -35,17 +36,26 @@ function getWarrantyFromDb($serial)
         return null;
 
     try {
-        $stmt = $pdo->prepare("SELECT * FROM bao_hanh WHERE SOSERIAL = ?");
+        $stmt = $pdo->prepare("
+            SELECT bh.*, sp.hinh_anh AS SP_HINHANH
+            FROM bao_hanh bh
+            LEFT JOIN san_pham sp ON sp.sku = bh.MAHANG
+            WHERE bh.SOSERIAL = ?
+        ");
         $stmt->execute([$serial]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
+            // Ưu tiên ảnh từ bảng san_pham, fallback về hinh_anh trong bao_hanh
+            $hinhAnh = !empty($row['SP_HINHANH']) ? $row['SP_HINHANH'] : ($row['hinh_anh'] ?? null);
+
             return [
                 'serial' => $row['SOSERIAL'],
                 'maHang' => $row['MAHANG'],
                 'tenHang' => $row['TENHANG'],
                 'ngayNhapKho' => $row['NGAYXUAT'],
                 'soThangBH' => $row['THOIHANBH'],
+                'hinhAnh' => $hinhAnh,
                 'isSpecial' => true
             ];
         }
@@ -64,16 +74,38 @@ function parseVnDate($str)
     foreach (['Y-m-d H:i:s', 'Y-m-d', 'd/m/Y H:i:s', 'd/m/Y'] as $format) {
         $date = DateTime::createFromFormat($format, $str);
         if ($date !== false) {
+            $date->setTime(0, 0, 0); // ép về 00:00:00 để tính "ngày" chính xác
             return $date;
         }
     }
 
     $ts = strtotime($str);
-    return $ts !== false ? (new DateTime())->setTimestamp($ts) : null;
+    if ($ts !== false) {
+        $date = (new DateTime())->setTimestamp($ts);
+        $date->setTime(0, 0, 0); // đồng bộ, tránh lệch giờ
+        return $date;
+    }
+    return null;
 }
 ?>
 
 <div class="warranty-page-wrapper">
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="container about-hero-inner">
+            <span class="about-hero-eyebrow">Bảo hành </span>
+            <h1 class="about-hero-title">Tra cứu bảo hành ACHIVA </h1>
+            <p class="about-hero-subtitle">Nhập số serial linh kiện để tra cứu tình trạng bảo hành chỉ trong vài giây.
+                Được xây dựng từ nền tảng gần 40 năm kinh nghiệm, ACHIVA tự hào là thương hiệu công nghệ hàng đầu Việt Nam.</p>
+            <div class="about-hero-arrows">
+                <i class="fa-solid fa-play"></i>
+                <i class="fa-solid fa-play"></i>
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+        <span class="about-hero-year">1990</span>
+    </section>
 
     <!-- Main Content Section -->
     <div class="warranty-content-section">
@@ -152,7 +184,13 @@ function parseVnDate($str)
                                     <div class="result-card-item">
                                         <div class="result-media">
                                             <div class="result-media-box">
-                                                <i class="fa-solid fa-hard-drive"></i>
+                                                <?php if (!empty($data['hinhAnh'])): ?>
+                                                    <img src="image-proxy.php?src=<?php echo urlencode($data['hinhAnh']); ?>"
+                                                        alt="<?php echo htmlspecialchars($data['tenHang'] ?? 'Sản phẩm'); ?>"
+                                                        class="product-img">
+                                                <?php else: ?>
+                                                    <i class="fa-solid fa-hard-drive"></i>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="result-media-caption">
                                                 <i class="fa-solid fa-circle-check"></i>
@@ -164,38 +202,38 @@ function parseVnDate($str)
                                         </div>
                                         <div class="result-details">
                                             <div class="detail-line">
-                                                <span class="detail-icon"><i class="fa-solid fa-barcode"></i></span>
+                                                <span class="detail-"><img src= "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/40/external-serial-number-gaming-ecommerce-flaticons-lineal-color-flat-icons-2.png"></span>
                                                 <span class="label">Số Serial</span>
                                                 <span
                                                     class="value serial-number"><?php echo htmlspecialchars($data['serial']); ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="detail-icon"><i class="fa-solid fa-tag"></i></span>
+                                                <span class="detail-"><img src= "https://img.icons8.com/color/40/qr-code--v1.png"></span>
                                                 <span class="label">Mã Hãng</span>
                                                 <span
                                                     class="value"><?php echo htmlspecialchars($data['maHang'] ?? '—'); ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="detail-icon"><i class="fa-solid fa-cube"></i></span>
+                                                <span class="detail"><img src= "https://img.icons8.com/fluency/40/product.png"></span>
                                                 <span class="label">Tên sản phẩm</span>
                                                 <span
                                                     class="value"><?php echo htmlspecialchars($data['tenHang'] ?? '—'); ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="detail-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                                                <span class="detail"><img src= "https://img.icons8.com/color/40/overtime.png"></span>
                                                 <span class="label">Ngày Xuất</span>
                                                 <span class="value"><?php echo $ngayXuatLabel; ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="detail-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                                                <span class="detail"><img src= "https://img.icons8.com/fluency/40/warranty--v1.png"></span>
                                                 <span class="label">Thời hạn bảo hành</span>
                                                 <span
                                                     class="value warranty-value"><?php
-                                                        echo $isLifetime ? 'Bảo hành trọn đời' : htmlspecialchars($soThang) . ' tháng';
-                                                    ?></span>
+                                                                                    echo $isLifetime ? 'Bảo hành trọn đời' : htmlspecialchars($soThang) . ' tháng';
+                                                                                    ?></span>
                                             </div>
                                             <div class="detail-line">
-                                                <span class="detail-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                                                <span class="detail"><img src= "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/40/external-expiration-date-medical-ecommerce-flaticons-lineal-color-flat-icons.png"></span>
                                                 <span class="label">Ngày hết hạn</span>
                                                 <span class="value expiry-value <?php echo $expiryStateClass; ?>">
                                                     <?php echo htmlspecialchars($ngayHetHanLabel); ?>
@@ -243,7 +281,8 @@ function parseVnDate($str)
                     <div class="feature-icon"><i class="fa-solid fa-phone"></i></div>
                     <div class="feature-text">
                         <h4>Hotline</h4>
-                        <p class="feature-highlight">1900 1234</p>
+                        <p class="feature-highlight"> 0936699336 </p>
+                        <p class="feature-highlight">(028)39260996 </p>
                         <p class="feature-sub">(8:00 - 17:30, T2 - T7)</p>
                     </div>
                 </div>

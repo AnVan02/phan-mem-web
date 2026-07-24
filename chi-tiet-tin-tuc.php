@@ -31,6 +31,38 @@ if ($bai_viet) {
 
     $ten_tac_gia = trim($bai_viet['article_author']);
     $chu_cai_dau = $ten_tac_gia !== '' ? mb_strtoupper(mb_substr($ten_tac_gia, 0, 1, 'UTF-8'), 'UTF-8') : '?';
+
+    // Xây mục lục từ các thẻ h2-h4 trong nội dung bài viết + gắn id để nhảy neo
+    $muc_luc = [];
+    $noi_dung_bai_viet = $bai_viet['article_content'] ?? '';
+    if (trim($noi_dung_bai_viet) !== '') {
+        $slug_da_dung = [];
+        $noi_dung_bai_viet = preg_replace_callback(
+            '/<(h[234])([^>]*)>(.*?)<\/\1>/is',
+            function ($m) use (&$muc_luc, &$slug_da_dung) {
+                $tag   = $m[1];
+                $attrs = $m[2];
+                $inner = $m[3];
+                $text  = trim(html_entity_decode(strip_tags($inner), ENT_QUOTES, 'UTF-8'));
+                if ($text === '') {
+                    return $m[0];
+                }
+                $slug = tao_slug($text);
+                $goc  = $slug;
+                $i    = 2;
+                while (in_array($slug, $slug_da_dung, true)) {
+                    $slug = $goc . '-' . $i;
+                    $i++;
+                }
+                $slug_da_dung[] = $slug;
+                $attrs = preg_replace('/\sid=("|\')[^"\']*\1/i', '', $attrs);
+                $muc_luc[] = ['text' => $text, 'slug' => $slug, 'level' => (int) substr($tag, 1)];
+                return '<' . $tag . $attrs . ' id="' . $slug . '">' . $inner . '</' . $tag . '>';
+            },
+            $noi_dung_bai_viet
+        );
+        $bai_viet['article_content'] = $noi_dung_bai_viet;
+    }
 }
 
 $extra_css = ['assets/css/tin-tuc-moi.css', 'assets/css/chi-tiet-tin-tuc.css'];
@@ -85,6 +117,22 @@ require 'head.php';
                     <span class="news-date"><i class="fa-solid fa-calendar-days"></i> Ngày cập nhật: <?php echo $ngay; ?></span>
                 </div>
 
+                <?php if (!empty($muc_luc)): ?>
+                    <nav class="news-toc" aria-label="Mục lục bài viết">
+                        <button type="button" class="news-toc-toggle" aria-expanded="true">
+                            <span><i class="fa-solid fa-list-ul"></i> Mục lục</span>
+                            <i class="fa-solid fa-chevron-down news-toc-caret"></i>
+                        </button>
+                        <ol class="news-toc-list">
+                            <?php foreach ($muc_luc as $item): ?>
+                                <li class="news-toc-level-<?php echo (int) $item['level']; ?>">
+                                    <a href="#<?php echo htmlspecialchars($item['slug']); ?>"><?php echo htmlspecialchars($item['text']); ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </nav>
+                <?php endif; ?>
+
                 <div class="news-detail-content">
                     <?php echo $bai_viet['article_content']; ?>
                 </div>
@@ -135,7 +183,7 @@ require 'head.php';
                                 </div>
                                 <div class="news-meta">
                                     <?php if (!empty($a['article_linh'])): ?>
-                                        <span class="news-tag"><?php echo htmlspecialchars(trim($a['article_linh'])); ?></span> •
+                                        <span class="news-tag"><?php echo htmlspecialchars(trim($a['article_linh'])); ?></span> 
                                     <?php endif; ?>
                                     <?php echo $art_ngay; ?>
                                 </div>
@@ -152,6 +200,16 @@ require 'head.php';
         </div>
     </section>
 <?php endif; ?>
+
+<script>
+    document.querySelectorAll('.news-toc-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var toc = btn.closest('.news-toc');
+            toc.classList.toggle('collapsed');
+            btn.setAttribute('aria-expanded', toc.classList.contains('collapsed') ? 'false' : 'true');
+        });
+    });
+</script>
 
 <?php include 'footer.php'; ?>
 </body>

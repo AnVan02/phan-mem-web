@@ -1,22 +1,28 @@
 <?php
 require_once 'admin/config/config.php';
 
-$ma_san_pham = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+$ten_san_pham_slug = isset($_GET['ten-san-pham']) ? trim($_GET['ten-san-pham']) : '';
 
-$stmt = $pdo->prepare("SELECT sp.*, dm.ten_danh_muc, th.ten_thuong_hieu, dl.ten_dung_luong
-        FROM san_pham sp
-        LEFT JOIN danh_muc dm ON sp.ma_danh_muc = dm.ma_danh_muc
-        LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
-        LEFT JOIN dung_luong dl ON sp.ma_dung_luong = dl.ma_dung_luong
-        WHERE sp.ma_san_pham = :id AND sp.trang_thai = 1
-        LIMIT 1");
-$stmt->execute([':id' => $ma_san_pham]);
-$sp = $stmt->fetch(PDO::FETCH_ASSOC);
+$sp = null;
+if ($ten_san_pham_slug !== '') {
+    $all_stmt = $pdo->query("SELECT sp.*, dm.ten_danh_muc, th.ten_thuong_hieu, dl.ten_dung_luong
+            FROM san_pham sp
+            LEFT JOIN danh_muc dm ON sp.ma_danh_muc = dm.ma_danh_muc
+            LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
+            LEFT JOIN dung_luong dl ON sp.ma_dung_luong = dl.ma_dung_luong
+            WHERE sp.trang_thai = 1");
+    while ($row = $all_stmt->fetch(PDO::FETCH_ASSOC)) {
+        if (tao_slug($row['ten_san_pham']) === $ten_san_pham_slug) {
+            $sp = $row;
+            break;
+        }
+    }
+}
 
 $is_wishlisted = false;
 if ($sp && isset($_SESSION['khach_hang_id'])) {
     $w_stmt = $pdo->prepare("SELECT 1 FROM san_pham_yeu_thich WHERE ma_khach_hang = :kh AND ma_san_pham = :sp LIMIT 1");
-    $w_stmt->execute([':kh' => $_SESSION['khach_hang_id'], ':sp' => $ma_san_pham]);
+    $w_stmt->execute([':kh' => $_SESSION['khach_hang_id'], ':sp' => $sp['ma_san_pham']]);
     $is_wishlisted = (bool) $w_stmt->fetchColumn();
 }
 
@@ -211,6 +217,7 @@ require 'head.php';
                                                     class="product-brand"><?php echo htmlspecialchars($rp['ten_thuong_hieu']); ?></span>
                                             <?php endif; ?>
                                             <h3 class="product-name"><?php echo htmlspecialchars($rp['ten_san_pham']); ?></h3>
+                                            
                                             <div class="product-price-row">
                                                 <?php if ($r_gia_ban <= 0): ?>
                                                     <span class="product-price">Liên hệ</span>

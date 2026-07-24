@@ -75,6 +75,83 @@ if ($action === 'dang_xuat') {
     exit;
 }
 
+if ($action === 'quen_mat_khau') {
+    $email = trim($_POST['customer_email'] ?? '');
+
+    if ($email === '') {
+        header('Location: quen-mat-khau.php?msg=loi_thieu_email');
+        exit;
+    }
+
+    $stmt = $pdo->prepare("SELECT ma_lien_he, customer_name FROM khach_hang_lien_he WHERE customer_email = :email AND mat_khau IS NOT NULL LIMIT 1");
+    $stmt->execute([':email' => $email]);
+    $kh = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Luôn phản hồi cùng một thông báo dù email có tồn tại hay không, tránh lộ thông tin tài khoản nào đã đăng ký.
+    if ($kh) {
+        // Huỷ các liên kết đặt lại mật khẩu cũ chưa dùng, chỉ liên kết mới nhất còn hiệu lực.
+        $pdo->prepare("UPDATE khach_hang_reset_mat_khau SET da_su_dung = 1 WHERE ma_khach_hang = :id AND da_su_dung = 0")
+            ->execute([':id' => $kh['ma_lien_he']]);
+
+        $token      = bin2hex(random_bytes(32));
+        $token_hash = hash('sha256', $token);
+        $het_han    = date('Y-m-d H:i:s', time() + 30 * 60);
+
+        $ins = $pdo->prepare("INSERT INTO khach_hang_reset_mat_khau (ma_khach_hang, token_hash, het_han) VALUES (:kh, :th, :hh)");
+        $ins->execute([':kh' => $kh['ma_lien_he'], ':th' => $token_hash, ':hh' => $het_han]);
+
+        $goc_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+        $link    = $goc_url . '/dat-lai-mat-khau.php?token=' . $token;
+
+        require_once 'mailer.php';
+        gui_email_dat_lai_mat_khau($email, $kh['customer_name'], $link);
+    }
+
+    header('Location: quen-mat-khau.php?msg=da_gui_email');
+    exit;
+}
+
+if ($action === 'dat_lai_mat_khau') {
+    $token           = (string) ($_POST['token'] ?? '');
+    $mk_moi          = (string) ($_POST['mat_khau_moi'] ?? '');
+    $mk_moi_nhac_lai = (string) ($_POST['mat_khau_moi_nhac_lai'] ?? '');
+
+    if ($token === '') {
+        header('Location: quen-mat-khau.php?msg=loi_thieu_email');
+        exit;
+    }
+    if ($mk_moi === '' || mb_strlen($mk_moi) < 6) {
+        header('Location: dat-lai-mat-khau.php?token=' . urlencode($token) . '&msg=loi_mat_khau_ngan');
+        exit;
+    }
+    if ($mk_moi !== $mk_moi_nhac_lai) {
+        header('Location: dat-lai-mat-khau.php?token=' . urlencode($token) . '&msg=loi_mat_khau_khong_khop');
+        exit;
+    }
+
+    $token_hash = hash('sha256', $token);
+    $stmt = $pdo->prepare("SELECT id, ma_khach_hang FROM khach_hang_reset_mat_khau
+        WHERE token_hash = :th AND da_su_dung = 0 AND het_han >= NOW() LIMIT 1");
+    $stmt->execute([':th' => $token_hash]);
+    $rt = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$rt) {
+        header('Location: quen-mat-khau.php?msg=loi_token_het_han');
+        exit;
+    }
+
+    $mk_ma_hoa = password_hash($mk_moi, PASSWORD_DEFAULT);
+    $pdo->prepare("UPDATE khach_hang_lien_he SET mat_khau = :mk WHERE ma_lien_he = :id")
+        ->execute([':mk' => $mk_ma_hoa, ':id' => $rt['ma_khach_hang']]);
+
+    // Huỷ toàn bộ liên kết đặt lại mật khẩu còn hiệu lực của khách hàng này (kể cả liên kết vừa dùng).
+    $pdo->prepare("UPDATE khach_hang_reset_mat_khau SET da_su_dung = 1 WHERE ma_khach_hang = :id AND da_su_dung = 0")
+        ->execute([':id' => $rt['ma_khach_hang']]);
+
+    header('Location: tai-khoan.php?msg=dat_lai_mk_thanh_cong&tab=dang-nhap');
+    exit;
+}
+
 if ($action === 'cap_nhat_thong_tin') {
     if (!isset($_SESSION['khach_hang_id'])) {
         header('Location: tai-khoan.php');

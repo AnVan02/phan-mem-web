@@ -2,6 +2,19 @@
 require_once __DIR__ . '/admin/config/config.php';
 $da_dang_nhap_kh = isset($_SESSION['khach_hang_id']);
 $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
+
+// Các trang chính sách được admin bật "Hiển thị trên menu header", gom theo vị trí menu con.
+$menu_chinh_sach = ['ve-cong-ty' => [], 'cong-dong' => [], 'mo-ta-san-pham' => []];
+try {
+    $stmt_menu_header = $pdo->query("SELECT policy_slug, policy_title, policy_menu_group FROM policy_page WHERE policy_status = 1 AND policy_show_menu = 1 ORDER BY policy_title ASC");
+    foreach ($stmt_menu_header->fetchAll(PDO::FETCH_ASSOC) as $trang_menu) {
+        if (isset($menu_chinh_sach[$trang_menu['policy_menu_group']])) {
+            $menu_chinh_sach[$trang_menu['policy_menu_group']][] = $trang_menu;
+        }
+    }
+} catch (PDOException $e) {
+    // Chưa chạy migrate-menu-chinh-sach.php nên cột chưa tồn tại — bỏ qua, menu tĩnh vẫn hoạt động bình thường.
+}
 ?>
 <header class="site-header">
     <div class="container header-main-inner">
@@ -17,7 +30,22 @@ $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
 
         <nav class="main-nav">
             <ul>
-                <li><a href="uu-dai.php">Ưu đãi</a></li>
+                    <!-- Dropdown nhỏ -->
+                <li class="has-submenu">
+                    <a href="cong-dong.php">
+                        Về công ty
+                        <span class="submenu-arrow" aria-hidden="true"></span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="ve-chung-toi.php">Thông tin công ty</a></li>
+                        <li><a href="chinh-sach-bao-hanh.php">Chính sách bảo hành </a></li>
+                        <li><a href="cong-dong.php?trang=podcast">Chính sách sản phẩm</a></li>
+                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Chính sách công ty </a></li>
+                        <?php foreach ($menu_chinh_sach['ve-cong-ty'] as $tr_menu): ?>
+                            <li><a href="chinh-sach.php?slug=<?php echo urlencode($tr_menu['policy_slug']); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
 
                 <!-- Mega menu -->
                 <li class="has-megamenu">
@@ -49,7 +77,6 @@ $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
                         </div>
                     </div>
                 </li>
-                <li><a href="bao-hanh.php">Bảo hành </a></li>
                 <!-- Mega menu -->
                 <li class="has-megamenu">
                     <a href="san-pham.php">
@@ -96,6 +123,7 @@ $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
                             </div>
                         </div>
                     </div>
+                    <li><a href="bao-hanh.php">Bảo hành </a></li>
                 </li>
 
                 <!-- Dropdown nhỏ -->
@@ -107,29 +135,33 @@ $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
                     <ul class="submenu">
                         <li><a href="ve-chung-toi.php">Về công ty </a></li>
                         <li><a href="tin-tuc-moi.php">Tin tức</a></li>
-                        <li><a href="cong-dong.php?trang=podcast">Podcast</a></li>
+                        <li><a href="cong-dong.php?trang=podcast">Mô tả sản phầm</a></li>
                         <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
+                        <?php foreach ($menu_chinh_sach['cong-dong'] as $tr_menu): ?>
+                            <li><a href="chinh-sach.php?slug=<?php echo urlencode($tr_menu['policy_slug']); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
+
 
                 <!-- Dropdown nhỏ -->
                 <li class="has-submenu">
                     <a href="cong-dong.php">
-                        Về công ty
+                        Mô tả sản phẩm
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="cong-dong.php?trang=cau-lac-bo">Chính sách đại lý</a></li>
-                        <li><a href="chinh-sach-bao-hanh.php">Chính sách bảo hành </a></li>
-                        <li><a href="cong-dong.php?trang=podcast">Chính sách bảo mật</a></li>
-                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Chính sách công ty </a></li>
+                        <li><a href="landing-page/chương-trinh-intel.php">INTEL</a></li>
+                        <li><a href="landing-page/nen-tang-ai-local.php">KINGSTON</a></li>
+                        <li><a href="cong-dong.php?trang=podcast">PALIT</a></li>
+                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
+                        
+                        <?php foreach ($menu_chinh_sach['mo-ta-san-pham'] as $tr_menu): ?>
+                            <li><a href="chinh-sach.php?slug=<?php echo urlencode($tr_menu['policy_slug']); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
 
-
-
-                <li><a href="ung-ho.php">Ủng hộ</a></li>
-            </ul>
 
             <a href="tai-khoan.php" class="main-nav-account">
                 <i class="fa-solid fa-circle-user"></i> Tài khoản

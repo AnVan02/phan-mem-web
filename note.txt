@@ -54,3 +54,8 @@ Slot id_ct=1 (Đang gán Máy 1) -> Nhận được Serial: S1
 Slot id_ct=2 (Đang gán Máy 2) -> Nhận được Serial: S2
 ✅ Kết luận: Thuật toán đã hoạt động chính xác! Dù kế toán nhập ngược vị trí hay chèn thêm dòng mới vào danh sách, hệ thống vẫn "nhận diện" được S1 là của Slot 1 (Máy 1) và S2 là của Slot 2 (Máy 2) để gán lại cho đúng, chặn đứng
 hiện tượng "nhảy Serial qua máy khác". Bạn hoàn toàn yên tâm thông báo cho team kiểm tra trên ứng dụng nhé!
+
+
+Xanh dương: #31367D (xấp xỉ)
+Vàng: #F3B31C (xấp xỉ)
+Trắng: #FFFFFF

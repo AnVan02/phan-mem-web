@@ -44,7 +44,7 @@
         <main class="admin-main">
         <div class="admin-main-header">
             <h1>Sửa trang chính sách</h1>
-            <a href="danh-sach.php" class="link-out">← Quay lại danh sách</a>
+            <a href="landing-page.php" class="link-out">← Quay lại danh sách</a>
         </div>
 
         <?php if ($msg): ?>
@@ -87,7 +87,21 @@
                         <button type="submit" class="btn-admin btn-admin-primary post-publish-btn">
                             <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi
                         </button>
-                        <a href="danh-sach.php" class="btn-admin btn-admin-secondary post-publish-btn" style="margin-top:8px;">Huỷ</a>
+                        <a href="landing-page.php" class="btn-admin btn-admin-secondary post-publish-btn" style="margin-top:8px;">Huỷ</a>
+                    </div>
+
+                    <div class="post-box">
+                        <h3>Menu header</h3>
+                        <label class="admin-checkbox">
+                            <input type="checkbox" name="policy_show_menu" value="1" <?php echo (int) ($trang['policy_show_menu'] ?? 0) === 1 ? 'checked' : ''; ?>>
+                            Hiển thị trang này trên menu header
+                        </label>
+                        <select name="policy_menu_group">
+                            <option value="ve-cong-ty" <?php echo ($trang['policy_menu_group'] ?? '') === 've-cong-ty' ? 'selected' : ''; ?>>Về công ty</option>
+                            <option value="cong-dong" <?php echo ($trang['policy_menu_group'] ?? '') === 'cong-dong' ? 'selected' : ''; ?>>Cộng đồng</option>
+                            <option value="mo-ta-san-pham" <?php echo ($trang['policy_menu_group'] ?? '') === 'mo-ta-san-pham' ? 'selected' : ''; ?>>Mô tả sản phẩm</option>
+                        </select>
+                        <span class="hint">Chọn menu con sẽ hiển thị link tới trang này.</span>
                     </div>
 
                     <div class="post-box">

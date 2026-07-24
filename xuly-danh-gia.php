@@ -1,6 +1,13 @@
 <?php
 require_once 'admin/config/config.php';
 
+function url_san_pham_theo_id($pdo, $ma_sp) {
+    $stmt = $pdo->prepare("SELECT ten_san_pham FROM san_pham WHERE ma_san_pham = :id LIMIT 1");
+    $stmt->execute([':id' => $ma_sp]);
+    $ten = $stmt->fetchColumn();
+    return $ten !== false ? tao_url_san_pham($ma_sp, $ten) : 'san-pham.php';
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
     exit;
@@ -10,7 +17,7 @@ if (!isset($_SESSION['khach_hang_id'])) {
     // If not logged in, just redirect back
     $ma_sp = (int) ($_POST['ma_san_pham'] ?? 0);
     if ($ma_sp > 0) {
-        header("Location: chi-tiet-san-pham.php?id=$ma_sp&msg=loi_dang_nhap");
+        header("Location: " . url_san_pham_theo_id($pdo, $ma_sp) . "?msg=loi_dang_nhap");
     } else {
         header("Location: index.php");
     }
@@ -23,7 +30,7 @@ $so_sao = (int) ($_POST['so_sao'] ?? 5);
 $noi_dung = trim($_POST['noi_dung'] ?? '');
 
 if ($ma_sp <= 0 || $so_sao < 1 || $so_sao > 5 || $noi_dung === '') {
-    header("Location: chi-tiet-san-pham.php?id=$ma_sp&msg=loi_thieu_thong_tin");
+    header("Location: " . url_san_pham_theo_id($pdo, $ma_sp) . "?msg=loi_thieu_thong_tin");
     exit;
 }
 
@@ -38,7 +45,7 @@ $dhct_stmt->execute([':kh' => $ma_kh, ':sp' => $ma_sp]);
 $da_mua = $dhct_stmt->fetch();
 
 if (!$da_mua) {
-    header("Location: chi-tiet-san-pham.php?id=$ma_sp&msg=loi_chua_mua");
+    header("Location: " . url_san_pham_theo_id($pdo, $ma_sp) . "?msg=loi_chua_mua");
     exit;
 }
 
@@ -50,8 +57,8 @@ try {
         ':sao' => $so_sao,
         ':nd' => $noi_dung
     ]);
-    header("Location: chi-tiet-san-pham.php?id=$ma_sp&msg=danh_gia_thanh_cong");
+    header("Location: " . url_san_pham_theo_id($pdo, $ma_sp) . "?msg=danh_gia_thanh_cong");
 } catch (PDOException $e) {
-    header("Location: chi-tiet-san-pham.php?id=$ma_sp&msg=loi_he_thong");
+    header("Location: " . url_san_pham_theo_id($pdo, $ma_sp) . "?msg=loi_he_thong");
 }
 exit;

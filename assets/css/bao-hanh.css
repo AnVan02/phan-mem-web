@@ -13,6 +13,89 @@
     padding: 0 15px;
 }
 
+/* ===== Hero ===== */
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0c1f4d 0%, #1e3c72 55%, #14295c 100%);
+    padding: 90px 0 110px;
+}
+
+.about-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 58%, var(--brand-blue-light) 60%, #14295c 100%);
+    clip-path: polygon(62% 0, 100% 0, 100% 100%, 38% 100%);
+}
+
+.about-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 215, 0, 0.4) 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+    clip-path: polygon(78% 0, 100% 0, 100% 55%, 66% 100%, 55% 100%);
+    opacity: 0.5;
+}
+
+.about-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+}
+
+.about-hero-eyebrow {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--brand-gold);
+    margin-bottom: 18px;
+}
+
+.about-hero-title {
+    color: #ffffff;
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+    margin: 0 0 20px;
+}
+
+.about-hero-subtitle {
+    color: #cdd7ef;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 480px;
+}
+
+.about-hero-arrows {
+    display: flex;
+    gap: 6px;
+    margin-top: 40px;
+}
+
+.about-hero-arrows i {
+    color: var(--brand-gold);
+    font-size: 13px;
+}
+
+.about-hero-year {
+    position: absolute;
+    right: 4%;
+    bottom: -6%;
+    z-index: 1;
+    font-size: 150px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.08);
+    line-height: 1;
+    user-select: none;
+}
+
+
 /* Card Content Area */
 .warranty-content-section {
     padding: 60px 0 80px;
@@ -334,8 +417,8 @@
     margin-top: 24px;
     background:  #1e3c72;
     color: #ffd700;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
 
 }
 
@@ -401,7 +484,7 @@
 
 .feature-text p {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     color: #64748b;
     font-weight: 500;
     line-height: 1.5;
@@ -409,8 +492,8 @@
 
 .feature-highlight {
     font-size: 16px !important;
-    font-weight: 700 !important;
-    color: #1B4EF6 !important;
+    font-weight: 600 !important;
+    color: #1e3c72 !important;
 }
 
 .feature-highlight a {
@@ -419,7 +502,7 @@
 }
 
 .feature-sub {
-    color: #94a3b8 !important;
+    color: #64748b !important;
 }
 
 /* Responsive */

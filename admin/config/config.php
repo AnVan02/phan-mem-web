@@ -46,7 +46,7 @@ if (!function_exists('tao_slug')) {
 
 if (!function_exists('tao_url_san_pham')) {
     function tao_url_san_pham($id, $ten_san_pham) {
-        return tao_slug($ten_san_pham) . '-' . (int)$id;
+        return tao_slug($ten_san_pham);
     }
 }
 

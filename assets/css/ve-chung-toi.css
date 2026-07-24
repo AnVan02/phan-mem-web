@@ -53,8 +53,8 @@
 
 .about-hero-eyebrow {
     display: inline-block;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 15px;
+    font-weight: 700;
     letter-spacing: 2px;
     color: var(--brand-gold);
     margin-bottom: 18px;
@@ -177,10 +177,10 @@
 }
 
 .about-stat-label {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     letter-spacing: 0.5px;
-    color: #8891a3;
+    color: #4a5164;
 }
 
 /* Quote */
