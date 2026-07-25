@@ -55,7 +55,7 @@
             <div class="admin-main-header">
                 <h1><i class="fa-solid fa-headset"></i> Yêu cầu hỗ trợ khách hàng
                     <?php if ($so_chua_xu_ly > 0): ?>
-                        <span style="background:#dc2626; color:#fff; font-size:12px; font-weight:700; border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle;"><?php echo $so_chua_xu_ly; ?> chưa xử lý</span>
+                        <span style="background:#dc2626; color:#fff; font-size:14px; font-weight:700; border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle;"><?php echo $so_chua_xu_ly; ?> chưa xử lý</span>
                     <?php endif; ?>
                 </h1>
             </div>
@@ -98,8 +98,8 @@
                                             <span class="account-avatar"><?php echo htmlspecialchars(mb_substr($ht['customer_name'], 0, 1)); ?></span>
                                             <div>
                                                 <div><?php echo htmlspecialchars($ht['customer_name']); ?></div>
-                                                <div style="font-size:12px; color:#6b7280;"><?php echo htmlspecialchars($ht['customer_email']); ?> · <?php echo htmlspecialchars($ht['customer_phone']); ?></div>
-                                                <div style="font-size:12px; color:#6b7280;"><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($ht['customer_address'] ?? ''); ?></div>
+                                                <div style="font-size:14px; color:#6b7280;"><?php echo htmlspecialchars($ht['customer_email']); ?> · <?php echo htmlspecialchars($ht['customer_phone']); ?></div>
+                                                <div style="font-size:14px; color:#6b7280;"><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($ht['customer_address'] ?? ''); ?></div>
                                             </div>
                                         </div>
                                     </td>
@@ -115,19 +115,19 @@
                                     </td>
                                     <td style="min-width:260px;">
                                         <?php if (!empty($ht['phan_hoi'])): ?>
-                                            <div style="white-space:pre-wrap; font-size:13px; margin-bottom:4px;"><?php echo htmlspecialchars($ht['phan_hoi']); ?></div>
-                                            <div style="font-size:12px; color:#6b7280;">Phản hồi lúc <?php echo date('d/m/Y H:i', strtotime($ht['ngay_phan_hoi'])); ?></div>
+                                            <div style="white-space:pre-wrap; font-size:14px; margin-bottom:4px;"><?php echo htmlspecialchars($ht['phan_hoi']); ?></div>
+                                            <div style="font-size:14px; color:#6b7280;">Phản hồi lúc <?php echo date('d/m/Y H:i', strtotime($ht['ngay_phan_hoi'])); ?></div>
                                         <?php else: ?>
-                                            <span style="color:#9ca3af; font-style:italic; font-size:13px;">Chưa có phản hồi</span>
+                                            <span style="color:#9ca3af; font-style:italic; font-size:14px;">Chưa có phản hồi</span>
                                         <?php endif; ?>
                                         <details style="margin-top:6px;">
-                                            <summary style="cursor:pointer; font-size:12px; color:#2563eb;"><?php echo empty($ht['phan_hoi']) ? 'Viết phản hồi' : 'Sửa phản hồi'; ?></summary>
+                                            <summary style="cursor:pointer; font-size:14px; color:#2563eb;"><?php echo empty($ht['phan_hoi']) ? 'Viết phản hồi' : 'Sửa phản hồi'; ?></summary>
                                             <form method="POST" action="xuly-ho-tro.php" style="margin-top:8px; display:flex; flex-direction:column; gap:6px;">
                                                 <input type="hidden" name="action" value="xu_ly">
                                                 <input type="hidden" name="id" value="<?php echo (int) $ht['ma_ho_tro']; ?>">
                                                 <textarea name="phan_hoi" rows="3" placeholder="Nhập nội dung phản hồi cho khách hàng..."
-                                                    style="padding:8px; border:1px solid #d1d5db; border-radius:6px; font-family:inherit; font-size:13px; resize:vertical;"><?php echo htmlspecialchars($ht['phan_hoi'] ?? ''); ?></textarea>
-                                                <button type="submit" class="btn-admin btn-admin-primary" style="align-self:flex-start; font-size:12px; padding:6px 12px;">Gửi & đánh dấu đã xử lý</button>
+                                                    style="padding:8px; border:1px solid #d1d5db; border-radius:6px; font-family:inherit; font-size:14px; resize:vertical;"><?php echo htmlspecialchars($ht['phan_hoi'] ?? ''); ?></textarea>
+                                                <button type="submit" class="btn-admin btn-admin-primary" style="align-self:flex-start; font-size:14px; padding:6px 12px;">Gửi & đánh dấu đã xử lý</button>
                                             </form>
                                         </details>
                                     </td>

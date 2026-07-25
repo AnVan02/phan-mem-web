@@ -158,7 +158,7 @@ if ($duoc_xem_don_hang && isset($pdo)) {
                         Yêu cầu hỗ trợ
                         <?php if ($so_ho_tro_chua_xu_ly > 0): ?>
                             <span
-                                style="background:#dc2626; color:#fff; font-size:11px; font-weight:700; border-radius:999px; padding:1px 7px; margin-left:6px;"><?php echo $so_ho_tro_chua_xu_ly; ?></span>
+                                style="background:#dc2626; color:#fff; font-size:14px; font-weight:700; border-radius:999px; padding:1px 7px; margin-left:6px;"><?php echo $so_ho_tro_chua_xu_ly; ?></span>
                         <?php endif; ?>
                     </a>
                 </div>

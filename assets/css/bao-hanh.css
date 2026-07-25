@@ -47,7 +47,7 @@
 
 .about-hero-eyebrow {
     display: inline-block;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--brand-gold);
@@ -80,7 +80,7 @@
 
 .about-hero-arrows i {
     color: var(--brand-gold);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .about-hero-year {
@@ -193,7 +193,7 @@
     border-radius: 50%;
     background: #eef1f5;
     color: #64748b;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
     flex-shrink: 0;
     transition: background 0.2s;
@@ -230,7 +230,7 @@
     text-align: center;
     color: #16a34a;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 28px;
     animation: fadeIn 0.4s ease;
 }
@@ -303,14 +303,14 @@
 
 .result-media-caption strong {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     color: #1a1a1a;
     margin-bottom: 2px;
 }
 
 .result-media-caption span {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     color: #64748b;
     font-weight: 500;
 }
@@ -343,11 +343,11 @@
     border-radius: 10px;
     background: #fdf1f1;
     color: #1B4EF6;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .label {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: #64748b;
     width: 160px;
@@ -391,7 +391,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     padding: 4px 12px;
     border-radius: 100px;
@@ -417,7 +417,7 @@
     margin-top: 24px;
     background:  #1e3c72;
     color: #ffd700;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
 
 }
@@ -484,7 +484,7 @@
 
 .feature-text p {
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
     color: #64748b;
     font-weight: 500;
     line-height: 1.5;
@@ -561,7 +561,7 @@
     }
 
     .label {
-        font-size: 12px;
+        font-size: 14px;
         color: #94a3b8;
         font-weight: 600;
         text-transform: uppercase;
@@ -570,7 +570,7 @@
     }
 
     .value {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 700;
         flex-basis: 100%;
         padding-left: 54px;
@@ -581,7 +581,7 @@
     }
 
     .card-subtitle {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .warranty-features-row {

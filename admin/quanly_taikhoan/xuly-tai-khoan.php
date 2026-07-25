@@ -12,6 +12,35 @@
         return (int) $stmt->fetchColumn() > 0;
     }
 
+    // Xử lý ảnh đại diện thật tải lên khi tạo/sửa tài khoản quản trị
+    function upload_anh_dai_dien($file)
+    {
+        if (!isset($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            return false;
+        }
+
+        $duoi_hop_le = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+        $duoi = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($duoi, $duoi_hop_le, true)) {
+            return false;
+        }
+
+        $thu_muc = '../../assets/uploads/tai-khoan/';
+        if (!is_dir($thu_muc)) {
+            mkdir($thu_muc, 0755, true);
+        }
+
+        $ten_file = uniqid('tai-khoan-', true) . '.' . $duoi;
+        if (!move_uploaded_file($file['tmp_name'], $thu_muc . $ten_file)) {
+            return false;
+        }
+
+        return 'assets/uploads/tai-khoan/' . $ten_file;
+    }
+
     if ($action === 'them') {
         $ten   = trim($_POST['account_name'] ?? '');
         $email = trim($_POST['account_email'] ?? '');
@@ -31,12 +60,19 @@
             exit;
         }
 
-        $stmt = $pdo->prepare("INSERT INTO account (account_name, account_email, account_password, account_type) VALUES (:ten, :email, :mk, :vt)");
+        $avatar = upload_anh_dai_dien($_FILES['account_avatar_file'] ?? null);
+        if ($avatar === false) {
+            header('Location: tai-khoan.php?msg=loi_anh');
+            exit;
+        }
+
+        $stmt = $pdo->prepare("INSERT INTO account (account_name, account_email, account_password, account_type, account_avatar) VALUES (:ten, :email, :mk, :vt, :avatar)");
         $stmt->execute([
-            ':ten'   => $ten,
-            ':email' => $email,
-            ':mk'    => password_hash($mk, PASSWORD_DEFAULT),
-            ':vt'    => $vt,
+            ':ten'    => $ten,
+            ':email'  => $email,
+            ':mk'     => password_hash($mk, PASSWORD_DEFAULT),
+            ':vt'     => $vt,
+            ':avatar' => $avatar,
         ]);
         $id_moi = (int) $pdo->lastInsertId();
         ghi_nhat_ky($pdo, 'them', 'tai_khoan', $id_moi, "Thêm tài khoản \"$ten\" ($email) - vai trò: " . ($DS_VAI_TRO[$vt] ?? $vt));
@@ -79,24 +115,35 @@
             }
         }
 
+        $avatar = upload_anh_dai_dien($_FILES['account_avatar_file'] ?? null);
+        if ($avatar === false) {
+            header('Location: tai-khoan.php?sua=' . $id . '&msg=loi_anh');
+            exit;
+        }
+
+        $cot_avatar = $avatar !== null ? ', account_avatar = :avatar' : '';
         if ($mk !== '') {
-            $stmt = $pdo->prepare("UPDATE account SET account_name = :ten, account_email = :email, account_password = :mk, account_type = :vt WHERE account_id = :id");
-            $stmt->execute([
+            $stmt = $pdo->prepare("UPDATE account SET account_name = :ten, account_email = :email, account_password = :mk, account_type = :vt$cot_avatar WHERE account_id = :id");
+            $tham_so = [
                 ':ten'   => $ten,
                 ':email' => $email,
                 ':mk'    => password_hash($mk, PASSWORD_DEFAULT),
                 ':vt'    => $vt,
                 ':id'    => $id,
-            ]);
+            ];
         } else {
-            $stmt = $pdo->prepare("UPDATE account SET account_name = :ten, account_email = :email, account_type = :vt WHERE account_id = :id");
-            $stmt->execute([
+            $stmt = $pdo->prepare("UPDATE account SET account_name = :ten, account_email = :email, account_type = :vt$cot_avatar WHERE account_id = :id");
+            $tham_so = [
                 ':ten'   => $ten,
                 ':email' => $email,
                 ':vt'    => $vt,
                 ':id'    => $id,
-            ]);
+            ];
         }
+        if ($avatar !== null) {
+            $tham_so[':avatar'] = $avatar;
+        }
+        $stmt->execute($tham_so);
 
         ghi_nhat_ky($pdo, 'sua', 'tai_khoan', $id, "Sửa tài khoản \"$ten\" ($email) - vai trò: " . ($DS_VAI_TRO[$vt] ?? $vt) . ($mk !== '' ? ' (đã đổi mật khẩu)' : ''));
 

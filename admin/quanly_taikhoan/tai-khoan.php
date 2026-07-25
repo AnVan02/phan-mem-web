@@ -25,6 +25,7 @@
         'loi_mat_khau_ngan'=> ['error', 'Mật khẩu phải có ít nhất 6 ký tự.'],
         'loi_tu_xoa'       => ['error', 'Không thể xoá chính tài khoản đang đăng nhập.'],
         'loi_xoa_quan_tri_cuoi' => ['error', 'Không thể xoá — hệ thống cần ít nhất 1 tài khoản Quản trị viên.'],
+        'loi_anh'          => ['error', 'Ảnh đại diện không hợp lệ (chỉ nhận jpg, jpeg, png, webp, gif).'],
     ];
     $msg = isset($_GET['msg']) && isset($thong_bao[$_GET['msg']]) ? $thong_bao[$_GET['msg']] : null;
 
@@ -63,11 +64,20 @@
             <div class="post-box" id="form-tai-khoan">
                 <h3><?php echo $dang_sua ? 'Sửa tài khoản' : 'Thêm tài khoản quản trị mới'; ?></h3>
 
-                <form action="xuly-tai-khoan.php" method="POST" class="banner-form">
+                <form action="xuly-tai-khoan.php" method="POST" class="banner-form" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="<?php echo $dang_sua ? 'sua' : 'them'; ?>">
                     <?php if ($dang_sua): ?>
                         <input type="hidden" name="id" value="<?php echo (int) $dang_sua['account_id']; ?>">
                     <?php endif; ?>
+
+                    <label class="field-label">Ảnh đại diện</label>
+                    <?php if ($dang_sua && !empty($dang_sua['account_avatar'])): ?>
+                        <div class="account-avatar-preview">
+                            <img src="../../<?php echo htmlspecialchars($dang_sua['account_avatar']); ?>" alt="Ảnh đại diện hiện tại">
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" name="account_avatar_file" accept=".jpg,.jpeg,.png,.webp,.gif">
+                    <span class="hint">Ảnh thật sẽ hiển thị thay cho chữ cái viết tắt ở tác giả bài viết và danh sách tài khoản.</span>
 
                     <label class="field-label">Họ tên</label>
                     <input type="text" name="account_name" placeholder="Vd: Nguyễn Văn A"
@@ -129,7 +139,11 @@
                                 <tr>
                                     <td class="title-cell">
                                         <div class="account-name-cell">
-                                            <span class="account-avatar"><?php echo htmlspecialchars(mb_substr($tk['account_name'], 0, 1)); ?></span>
+                                            <?php if (!empty($tk['account_avatar'])): ?>
+                                                <span class="account-avatar account-avatar-img"><img src="../../<?php echo htmlspecialchars($tk['account_avatar']); ?>" alt=""></span>
+                                            <?php else: ?>
+                                                <span class="account-avatar"><?php echo htmlspecialchars(mb_substr($tk['account_name'], 0, 1)); ?></span>
+                                            <?php endif; ?>
                                             <span><?php echo htmlspecialchars($tk['account_name']); ?></span>
                                             <?php echo $la_chinh_minh ? '<span class="admin-badge on">Bạn</span>' : ''; ?>
                                         </div>

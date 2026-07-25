@@ -123,21 +123,21 @@ include('admin/config/config.php');
                     <img src="https://rosacomputer.vn/assets/images/Rosa%20Office%203logoINTEL.png" alt="Rosa AI"
                         class="laptop-img">
                     <div class="laptop-name">ROSA OFFICE PRO</div>
-                    <p style="font-size: 14px; color: var(--intel-gray);">CPU INTEL CORE I3 14100</p>
+                    <p style="font-size: 15px; color: var(--intel-gray);">CPU INTEL CORE I3 14100</p>
                     <div class="buy-now-btn">Chi Tiết Sản Phẩm</div>
                 </a>
                 <a href="index.php?page=san-pham" class="laptop-card">
                     <img src="https://rosacomputer.vn/assets/images/Rosa%20Gamer%202.jpg" alt="Rosa AI"
                         class="laptop-img">
                     <div class="laptop-name">ROSA GAMER II</div>
-                    <p style="font-size: 14px; color: var(--intel-gray);">CPU INTEL CORE I7 14700F </p>
+                    <p style="font-size: 15px; color: var(--intel-gray);">CPU INTEL CORE I7 14700F </p>
                     <div class="buy-now-btn">Chi Tiết Sản Phẩm</div>
                 </a>
                 <a href="index.php?page=san-pham" class="laptop-card">
                     <img src="https://rosacomputer.vn/assets/images/Rosa%20Gamer%202.jpg" alt="Rosa AI"
                         class="laptop-img">
                     <div class="laptop-name">ROSA GAMER III</div>
-                    <p style="font-size: 14px; color: var(--intel-gray);">Intel Core i9-14900K</p>
+                    <p style="font-size: 15px; color: var(--intel-gray);">Intel Core i9-14900K</p>
                     <div class="buy-now-btn">Chi Tiết Sản Phẩm</div>
                 </a>
             </div>
@@ -189,7 +189,7 @@ include('admin/config/config.php');
             </div>
 
             <!-- Copyright and Links -->
-            <div style="margin-bottom: 25px; color: #ffffff; font-size: 14px; font-weight: 400; text-align: center;">
+            <div style="margin-bottom: 25px; color: #ffffff; font-size: 15px; font-weight: 400; text-align: center;">
                 © Intel Corporation |
                 <a href="#" style="color: #ffffff; text-decoration: none; margin: 0 8px;">Điều khoản sử dụng</a> |
                 <a href="#" style="color: #ffffff; text-decoration: none; margin: 0 8px;">Độ minh bạch của chuỗi cung
@@ -204,7 +204,7 @@ include('admin/config/config.php');
 
             <!-- Legal Disclaimer -->
             <div class="legal-disclaimer"
-                style="max-width: 1000px; margin: 0 auto; color: #ffffff; font-size: 13px; text-align: center; line-height: 1.8; font-weight: 300; letter-spacing: 0.01em; opacity: 0.9;">
+                style="max-width: 1000px; margin: 0 auto; color: #ffffff; font-size: 14px; text-align: center; line-height: 1.8; font-weight: 300; letter-spacing: 0.01em; opacity: 0.9;">
                 <p style="margin: 0;">
                     Các công nghệ của Intel có thể yêu cầu phần cứng được hỗ trợ, phần mềm cụ thể hoặc kích hoạt dịch
                     vụ. Không có sản phẩm hoặc linh kiện nào có thể an toàn tuyệt đối. // Chi phí và kết quả của bạn có

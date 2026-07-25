@@ -14,7 +14,7 @@ function format_gia_tim_kiem($gia_ban, $giam_gia) {
 
 function first_image_tim_kiem($hinh_anh) {
     $images = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', (string) $hinh_anh))));
-    return !empty($images) ? $images[0] : 'assets/image/pc.webp';
+    return asset_url(!empty($images) ? $images[0] : 'assets/image/pc.webp');
 }
 
 $action = $_GET['action'] ?? '';
@@ -57,7 +57,7 @@ if ($action === 'suggest') {
             'hinh_anh'        => first_image_tim_kiem($r['hinh_anh']),
             'gia_display'     => format_gia_tim_kiem($r['gia_ban'], $r['giam_gia']),
             'ten_thuong_hieu' => $r['ten_thuong_hieu'],
-            'url'             => tao_url_san_pham($r['ma_san_pham'], $r['ten_san_pham']),
+            'url'             => asset_url(tao_url_san_pham($r['ma_san_pham'], $r['ten_san_pham'])),
         ];
     }, $rows);
 

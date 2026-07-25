@@ -5,7 +5,7 @@
 .admin-flash {
     padding: 12px 18px;
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     margin-bottom: 20px;
 }
@@ -40,7 +40,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -49,7 +49,7 @@
     align-items: center;
     gap: 8px;
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     border: none;
     border-radius: 999px;
@@ -89,7 +89,7 @@
 .admin-filter-bar select,
 .admin-filter-bar input[type="text"] {
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     padding: 9px 14px;
     border: 1px solid #e0e0e4;
     border-radius: 999px;
@@ -117,7 +117,7 @@
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13.5px;
+    font-size: 14px;
 }
 
 .admin-table th,
@@ -151,7 +151,7 @@
     display: inline-block;
     padding: 10px 14px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -182,7 +182,7 @@
     height: 34px;
     padding: 0 6px;
     border-radius: 8px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 700;
     text-decoration: none;
     color: #333;
@@ -212,7 +212,7 @@
 .admin-actions a,
 .admin-actions button {
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     border: none;
     background: none;
@@ -243,7 +243,7 @@
     display: inline-block;
     padding: 6px 14px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;

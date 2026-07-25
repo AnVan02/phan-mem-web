@@ -29,7 +29,7 @@ require 'head.php';
             </div>
         </section>
         <div class="policy-body container">
-            <a href="index.php" class="policy-cta-btn"><i class="fa-solid fa-house"></i> Về trang chủ</a>
+            <a href="<?php echo htmlspecialchars(asset_url('index.php')); ?>" class="policy-cta-btn"><i class="fa-solid fa-house"></i> Về trang chủ</a>
         </div>
     <?php else: ?>
         <section class="policy-hero">

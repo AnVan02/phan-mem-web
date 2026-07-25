@@ -3,7 +3,11 @@ require_once 'admin/config/config.php';
 
 $linh = isset($_GET['linh']) ? trim($_GET['linh']) : '';
 
-$stmt = $pdo->query("SELECT * FROM article WHERE article_status = 1 ORDER BY article_date DESC, article_id DESC");
+$stmt = $pdo->query("SELECT a.*, acc.account_avatar
+    FROM article a
+    LEFT JOIN account acc ON acc.account_id = a.article_account_id
+    WHERE a.article_status = 1
+    ORDER BY a.article_date DESC, a.article_id DESC");
 $article_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $linh_list = $article_categories;
@@ -43,12 +47,15 @@ require 'head.php';
                     if (mb_strlen($mo_ta_ngan) > 150) {
                         $mo_ta_ngan = mb_substr($mo_ta_ngan, 0, 150) . '...';
                     }
-                    $anh = trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp';
+                    $anh = asset_url(trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp');
                     $ngay = date('d/m/Y', strtotime($a['article_date']));
                     $slug = tao_slug($a['article_title']);
+                    $ten_tac_gia = trim($a['article_author']);
+                    $chu_cai_dau = $ten_tac_gia !== '' ? mb_strtoupper(mb_substr($ten_tac_gia, 0, 1, 'UTF-8'), 'UTF-8') : '?';
+                    $anh_tac_gia = !empty($a['account_avatar']) ? trim($a['account_avatar']) : null;
                 ?>
 
-                    <a class="news-card" data-linh="<?php echo htmlspecialchars($a['article_linh']); ?>" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $slug; ?>">
+                    <a class="news-card" data-linh="<?php echo htmlspecialchars($a['article_linh']); ?>" href="<?php echo htmlspecialchars(asset_url('chi-tiet-tin-tuc.php')); ?>?ten-bai-viet=<?php echo $slug; ?>">
                         <div class="news-media">
                             <img src="<?php echo htmlspecialchars($anh); ?>" alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy"
                                 onerror="this.onerror=null;this.src='assets/image/pc.webp';">
@@ -63,8 +70,24 @@ require 'head.php';
                         <?php if ($mo_ta_ngan !== ''): ?>
                             <p class="news-desc"><?php echo htmlspecialchars($mo_ta_ngan); ?></p>
                         <?php endif; ?>
-                        <span class="news-readmore">Xem thêm</span>
+                        <div class="news-detail-meta">
+                            <span class="news-author">
+                                <span class="news-author-avatar">
+                                    <?php if ($anh_tac_gia): ?>
+                                        <img src="<?php echo htmlspecialchars($anh_tac_gia); ?>" alt="">
+                                    <?php else: ?>
+                                        <?php echo htmlspecialchars($chu_cai_dau); ?>
+                                    <?php endif; ?>
+                                </span>
+                                <?php echo htmlspecialchars($ten_tac_gia); ?>
+                            </span>
+                            <span class="news-date"><i class="fa-solid fa-calendar-days"></i> Ngày cập nhật: <?php echo $ngay; ?></span>
+                        </div>
+                        <!-- <span class="news-readmore">Xem thêm</span> -->
                     </a>
+
+
+                    
                 <?php endforeach; ?>
             </div>
             <div class="news-empty news-empty-filtered" style="display:none;">

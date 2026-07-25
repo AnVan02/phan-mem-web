@@ -3,6 +3,22 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Thư mục gốc thật của site (không đổi theo URL ảo do .htaccess rewrite), dùng cho link/asset tuyệt đối.
+$site_root = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+if ($site_root === '' || $site_root === '.') {
+    $site_root = '';
+}
+
+if (!function_exists('asset_url')) {
+    function asset_url($path) {
+        global $site_root;
+        if (preg_match('#^https?://#i', $path)) {
+            return $path;
+        }
+        return rtrim($site_root, '/') . '/' . ltrim($path, '/');
+    }
+}
+
 // Fallback mbstring nếu server chưa bật extension
 if (!function_exists('mb_strtolower')) {
     function mb_strtolower($str, $encoding = 'UTF-8') {
@@ -46,7 +62,7 @@ if (!function_exists('tao_slug')) {
 
 if (!function_exists('tao_url_san_pham')) {
     function tao_url_san_pham($id, $ten_san_pham) {
-        return tao_slug($ten_san_pham);
+        return 'chi-tiet-san-pham/' . tao_slug($ten_san_pham);
     }
 }
 

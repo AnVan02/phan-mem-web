@@ -11,6 +11,8 @@
     ];
     $msg = isset($_GET['msg']) && isset($thong_bao[$_GET['msg']]) ? $thong_bao[$_GET['msg']] : null;
 
+    $ds_tai_khoan = $pdo->query("SELECT account_id, account_name, account_avatar FROM account ORDER BY account_name ASC")->fetchAll(PDO::FETCH_ASSOC);
+
     $ADMIN_ROOT = '../';
     $active_page = 'tin-tuc';
     $active_sub = 'them';
@@ -56,7 +58,7 @@
                 
                 <div class="post-box">
                     <h3>Tóm tắt bài viết</h3>
-                    <textarea name="article_summary" rows="3" placeholder="Mô tả ngắn hiển thị ở trang danh sách Tin tức & Blog..."></textarea>
+                    <textarea name="article_summary" id="article_summary" rows="3" placeholder="Mô tả ngắn hiển thị ở trang danh sách Tin tức & Blog..."></textarea>
                 </div>
 
                 <div class="post-box">
@@ -96,18 +98,19 @@
                 </div>
 
                 <div class="post-box">
-                    <h3>Tab bài viết </h3>
-                    <select name="article_linh">
-                        <option value="">— Bài viết không thuộc tab nào —</option>
-                        <?php foreach ($article_categories as $l): ?>
-                            <option value="<?php echo htmlspecialchars($l); ?>"><?php echo htmlspecialchars(trim($l)); ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <h3>Thẻ bài viết</h3>
+                    <input type="text" name="tab_baiviet" placeholder="Vd: Điện thoại, Xiaomi, POCO F9 Pro (cách nhau bởi dấu phẩy)">
+                    <span class="hint">Các thẻ này hiển thị ở cuối bài viết và dùng để gợi ý sản phẩm liên quan.</span>
                 </div>
 
                 <div class="post-box">
                     <h3>Tác giả</h3>
-                    <input type="text" name="article_author" placeholder="Tên tác giả" required>
+                    <select name="article_account_id" required>
+                        <option value="">— Chọn tài khoản —</option>
+                        <?php foreach ($ds_tai_khoan as $tk): ?>
+                            <option value="<?php echo (int) $tk['account_id']; ?>"><?php echo htmlspecialchars($tk['account_name']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class="post-box">
@@ -134,7 +137,7 @@
             toolbar: 'undo redo | blocks | bold italic underline | bullist numlist | link image media table | code',
             content_style: `
                 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
-                body { font-family: 'Montserrat', Arial, sans-serif; font-size: 15px; line-height: 1.8; color: #333; }
+                body { font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; line-height: 1.8; color: #333; }
                 h1, h2, h3, h4, h5, h6 { color: #1e3c72; font-weight: 700; line-height: 1.35; }
                 h2 { font-size: 22px; } h3 { font-size: 19px; } h4 { font-size: 17px; }
                 p { margin: 0 0 14px; }
@@ -145,6 +148,21 @@
                 blockquote { margin: 0 0 14px; padding: 10px 18px; border-left: 4px solid #1e3c72; background: #f4f4f6; color: #555; }
                 code { background: #f1f1f3; padding: 2px 6px; border-radius: 4px; }
                 pre { background: #1e1e1e; color: #eee; padding: 14px; border-radius: 8px; overflow-x: auto; }
+            `
+        });
+
+        tinymce.init({
+            selector: '#article_summary',
+            height: 220,
+            menubar: false,
+            plugins: 'link image lists',
+            toolbar: 'undo redo | bold italic underline | bullist numlist | link image',
+            content_style: `
+                @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+                body { font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; line-height: 1.8; color: #333; }
+                p { margin: 0 0 14px; }
+                a { color: #2563eb; font-weight: 600; }
+                img { max-width: 100%; height: auto; border-radius: 10px; }
             `
         });
     </script>

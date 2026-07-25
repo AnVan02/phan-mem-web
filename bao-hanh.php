@@ -29,6 +29,30 @@ function getWarrantyFromApi($serial)
     return null;
 }
 
+function getHinhAnhBySku($sku)
+{
+    global $pdo;
+    if (!$pdo || !$sku)
+        return null;
+
+    try {
+        $stmt = $pdo->prepare("SELECT hinh_anh FROM san_pham WHERE sku = ? LIMIT 1");
+        $stmt->execute([$sku]);
+        $hinhAnhRaw = $stmt->fetchColumn();
+
+        if (!empty($hinhAnhRaw)) {
+            $anhList = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $hinhAnhRaw))));
+            if (!empty($anhList)) {
+                return preg_match('#^https?://#i', $anhList[0]) ? $anhList[0] : asset_url($anhList[0]);
+            }
+        }
+    } catch (Exception $e) {
+        return null;
+    }
+
+    return null;
+}
+
 function getWarrantyFromDb($serial)
 {
     global $pdo;
@@ -47,7 +71,17 @@ function getWarrantyFromDb($serial)
 
         if ($row) {
             // Ưu tiên ảnh từ bảng san_pham, fallback về hinh_anh trong bao_hanh
-            $hinhAnh = !empty($row['SP_HINHANH']) ? $row['SP_HINHANH'] : ($row['hinh_anh'] ?? null);
+            $hinhAnhRaw = !empty($row['SP_HINHANH']) ? $row['SP_HINHANH'] : ($row['hinh_anh'] ?? null);
+
+            // hinh_anh có thể chứa nhiều ảnh cách nhau bởi , hoặc ; -> lấy ảnh đầu tiên
+            $hinhAnh = null;
+            if (!empty($hinhAnhRaw)) {
+                $anhList = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $hinhAnhRaw))));
+                if (!empty($anhList)) {
+                    // Ảnh nội bộ (path tương đối) không cần qua proxy, chỉ ảnh URL tuyệt đối mới cần
+                    $hinhAnh = preg_match('#^https?://#i', $anhList[0]) ? $anhList[0] : asset_url($anhList[0]);
+                }
+            }
 
             return [
                 'serial' => $row['SOSERIAL'],
@@ -112,7 +146,7 @@ function parseVnDate($str)
         <div class="container">
             <div class="warranty-card-container">
                 <div class="card-inner">
-                    <h1 class="card-title-main">TRA CỨU BẢO HÀNH ACHIVA</h1>
+                    <h2 class="card-title-main">TRA CỨU BẢO HÀNH ACHIVA</h2>
                     <div class="title-divider"></div>
                     <p class="card-subtitle">Nhập số Serial để kiểm tra thông tin bảo hành sản phẩm chính hãng</p>
 
@@ -142,6 +176,10 @@ function parseVnDate($str)
                             // 2. Nếu không tìm thấy, gọi API của S1
                             if (!$data) {
                                 $data = getWarrantyFromApi($search);
+                                // API không trả ảnh -> tra thêm ảnh theo mã hàng trong DB nội bộ
+                                if ($data && empty($data['hinhAnh'])) {
+                                    $data['hinhAnh'] = getHinhAnhBySku($data['maHang'] ?? null);
+                                }
                             }
 
                             if ($data) {
@@ -184,8 +222,13 @@ function parseVnDate($str)
                                     <div class="result-card-item">
                                         <div class="result-media">
                                             <div class="result-media-box">
-                                                <?php if (!empty($data['hinhAnh'])): ?>
-                                                    <img src="image-proxy.php?src=<?php echo urlencode($data['hinhAnh']); ?>"
+                                                <?php if (!empty($data['hinhAnh'])):
+                                                    $isAbsoluteUrl = preg_match('#^https?://#i', $data['hinhAnh']);
+                                                    $imgSrc = $isAbsoluteUrl
+                                                        ? 'image-proxy.php?src=' . urlencode($data['hinhAnh'])
+                                                        : $data['hinhAnh'];
+                                                ?>
+                                                    <img src="<?php echo htmlspecialchars($imgSrc); ?>"
                                                         alt="<?php echo htmlspecialchars($data['tenHang'] ?? 'Sản phẩm'); ?>"
                                                         class="product-img">
                                                 <?php else: ?>

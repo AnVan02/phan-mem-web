@@ -41,14 +41,14 @@
 }
 
 .footer__description {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.7;
     color: #FFF;
     margin: 0;
 }
 
 .footer__description strong {
-    color: #e8e8e8;
+    color: #FFF;
 }
 
 .footer__heading {
@@ -67,7 +67,7 @@
 
 .footer__list li {
     margin-bottom: 14px;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.5;
     color: #fff;
     font-weight: 500;
@@ -115,28 +115,86 @@
 }
 
 .footer__lang {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
 }
 
 .footer__lang i:first-child {
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .footer__lang i.fa-chevron-down {
-    font-size: 10px;
+    font-size: 13px;
     color: #8c8c8c;
+    transition: transform 0.2s ease;
+}
+
+.footer__lang.is-open i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.footer__lang-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    min-width: 160px;
+    background: #16305c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.footer__lang-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.footer__lang-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.footer__lang-option:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer__lang-option.is-active {
+    color: #ffd700;
 }
 
 .footer__copyright {
     margin: 0;
-    font-size: 13px;
-    color: #8c8c8c;
+    font-size: 16px;
+    color: #FFF;
 }
 
 /* ---- Bottom legal bar ---- */
@@ -153,7 +211,7 @@
 }
 
 .footer__legal a {
-    font-size: 14px;
+    font-size: 15px;
     color: #8c8c8c;
     text-decoration: none;
 }

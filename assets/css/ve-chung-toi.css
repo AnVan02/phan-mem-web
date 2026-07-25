@@ -53,7 +53,7 @@
 
 .about-hero-eyebrow {
     display: inline-block;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--brand-gold);
@@ -86,7 +86,7 @@
 
 .about-hero-arrows i {
     color: var(--brand-gold);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .about-hero-year {
@@ -130,7 +130,7 @@
 .about-story-text {
     max-width: 980px;
     margin: 0 auto;
-    font-size: 15.5px;
+    font-size: 16.5px;
     font-weight: 500;
     line-height: 1.9;
     color: #4a5164;
@@ -177,7 +177,7 @@
 }
 
 .about-stat-label {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
     color: #4a5164;
@@ -205,7 +205,7 @@
 
 .about-quote-text {
     margin: 0;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     line-height: 1.85;
     color: #333a4d;
@@ -317,7 +317,7 @@
 }
 
 .about-mission-text {
-    font-size: 14.5px;
+    font-size: 15.5px;
     font-weight: 500;
     line-height: 1.85;
     color: #545c70;

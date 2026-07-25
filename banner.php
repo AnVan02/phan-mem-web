@@ -10,7 +10,7 @@
             <div class="hero-slide active" style="background-image: url('assets/image/banner1.png');">
                 <div class="hero-overlay"></div>
                 <div class="hero-slide-content">
-                    <h2 class="hero-title">Chơi game ở phong độ đỉnh cao.<br>Sáng tạo không ngừng nghỉ.</h2>
+                    <h1 class="hero-title">Chơi game ở phong độ đỉnh cao.<br>Sáng tạo không ngừng nghỉ.</h1>
                     <p class="hero-desc">Dù bạn chơi game, phát trực tuyến hay sáng tạo,<br>hãy làm tất cả cùng một lúc.</p>
                     <div class="hero-actions">
                         <a href="#" class="btn btn-purple">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>

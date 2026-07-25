@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $page_title       = 'Sản phẩm - Viết Sơn Achieva';
 $extra_css        = ['assets/css/san-pham.css'];
 $post_css_scripts = ['assets/js/san-pham.js'];
@@ -32,8 +32,9 @@ require 'head.php';
     {
         $params = [
             'q'       => isset($_GET['q']) ? trim($_GET['q']) : '',
-            'th'      => isset($_GET['th']) ? trim($_GET['th']) : '',
+            'thuong-hieu' => isset($_GET['thuong-hieu']) ? trim($_GET['thuong-hieu']) : '',
             'dl'      => isset($_GET['dl']) ? trim($_GET['dl']) : '',
+            'danh-muc' => isset($_GET['danh-muc']) ? trim($_GET['danh-muc']) : '',
             'gia'     => isset($_GET['gia']) ? trim($_GET['gia']) : '',
             'gia_min' => isset($_GET['gia_min']) ? trim($_GET['gia_min']) : '',
             'gia_max' => isset($_GET['gia_max']) ? trim($_GET['gia_max']) : '',
@@ -55,8 +56,8 @@ require 'head.php';
         ORDER BY th.ten_thuong_hieu ASC");
     $thuong_hieu_options = $thuong_hieu_stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Nhận thương hiệu lọc qua tên (slug) thay vì mã số, vd: ?th=agi
-    $th_slug      = isset($_GET['th']) ? trim($_GET['th']) : '';
+    // Nhận thương hiệu lọc qua tên (slug) thay vì mã số, vd: ?thuong-hieu=agi
+    $th_slug      = isset($_GET['thuong-hieu']) ? trim($_GET['thuong-hieu']) : '';
     $ma_th_filter = 0;
     if ($th_slug !== '') {
         foreach ($thuong_hieu_options as $th_row) {
@@ -83,6 +84,26 @@ require 'head.php';
             if (tao_slug($dl_row['ten_dung_luong']) === $dl_slug) {
                 $ma_dl_filter = (int) $dl_row['ma_dung_luong'];
                 break;
+            }
+        }
+    }
+
+    // Danh sách danh mục để đối chiếu slug (vd: ?danh-muc=amd,intel để gộp nhiều hãng cùng loại linh kiện)
+    $danh_muc_stmt    = $pdo->query("SELECT ma_danh_muc, ten_danh_muc FROM danh_muc");
+    $danh_muc_options = $danh_muc_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $danh_muc_slug_to_id = [];
+    foreach ($danh_muc_options as $dm_row) {
+        $danh_muc_slug_to_id[tao_slug($dm_row['ten_danh_muc'])] = (int) $dm_row['ma_danh_muc'];
+    }
+
+    // Lọc theo danh mục qua tên (slug), vd: ?danh-muc=amd,intel để gộp nhiều hãng cùng loại linh kiện, như CPU = AMD + INTEL
+    $dm_param     = isset($_GET['danh-muc']) ? trim($_GET['danh-muc']) : '';
+    $ma_dm_filter = [];
+    if ($dm_param !== '') {
+        foreach (explode(',', $dm_param) as $dm_slug) {
+            $dm_slug = trim($dm_slug);
+            if ($dm_slug !== '' && isset($danh_muc_slug_to_id[$dm_slug])) {
+                $ma_dm_filter[] = $danh_muc_slug_to_id[$dm_slug];
             }
         }
     }
@@ -117,7 +138,7 @@ require 'head.php';
     $gia_max_custom = (isset($_GET['gia_max']) && $_GET['gia_max'] !== '') ? (int) $_GET['gia_max'] : null;
 
     // Có đang áp dụng bộ lọc nào không (dùng để tô sáng "Tất cả sản phẩm" / hiện nút Xóa bộ lọc)
-    $dang_loc = ($ma_th_filter > 0 || $ma_dl_filter > 0 || $gia_slug !== '' || $gia_min_custom !== null || $gia_max_custom !== null);
+    $dang_loc = ($ma_th_filter > 0 || $ma_dl_filter > 0 || !empty($ma_dm_filter) || $gia_slug !== '' || $gia_min_custom !== null || $gia_max_custom !== null);
 
     // Render 1 thẻ sản phẩm
     function render_the_card($sp)
@@ -128,23 +149,23 @@ require 'head.php';
         $giam_gia     = (int) $sp['giam_gia'];
         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
         $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
-        $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
-        $hinh_anh_hover = !empty($anh_list_sp[1]) ? $anh_list_sp[1] : '';
+        $hinh_anh     = asset_url(!empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp');
+        $hinh_anh_hover = !empty($anh_list_sp[1]) ? asset_url($anh_list_sp[1]) : '';
         $slug         = tao_slug($sp['ten_san_pham']);
         $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
         ?>
     <a class="product-card<?php echo $hinh_anh_hover !== '' ? ' has-hover-image' : ''; ?>"
-        href="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>">
+        href="<?php echo htmlspecialchars(asset_url(tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']))); ?>">
         <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
         <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
         <div class="product-media">
             <img class="product-media-img is-primary" src="<?php echo htmlspecialchars($hinh_anh); ?>"
                 alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
             <?php if ($hinh_anh_hover !== ''): ?>
             <img class="product-media-img is-secondary" src="<?php echo htmlspecialchars($hinh_anh_hover); ?>"
                 alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
             <?php endif; ?>
         </div>
         <div class="product-body">
@@ -184,7 +205,7 @@ require 'head.php';
                         <i class="fa-<?php echo $is_wishlisted ? 'solid' : 'regular'; ?> fa-heart"></i>
                     </button>
                     <button type="button" class="btn-share-product" data-share-product
-                        data-share-url="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>"
+                        data-share-url="<?php echo htmlspecialchars(asset_url(tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']))); ?>"
                         data-share-title="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" aria-label="Chia sẻ"
                         title="Chia sẻ">
                         <i class="fa-solid fa-share-nodes"></i>
@@ -235,6 +256,16 @@ require 'head.php';
     if ($ma_dl_filter > 0) {
         $sql .= " AND sp.ma_dung_luong = :ma_dl";
         $params[':ma_dl'] = $ma_dl_filter;
+    }
+
+    if (!empty($ma_dm_filter)) {
+        $marks = [];
+        foreach ($ma_dm_filter as $i => $ma_dm_id) {
+            $key = ":ma_dm_$i";
+            $marks[] = $key;
+            $params[$key] = $ma_dm_id;
+        }
+        $sql .= " AND sp.ma_danh_muc IN (" . implode(',', $marks) . ")";
     }
 
     if ($gia_slug !== '' && isset($gia_khoang[$gia_slug])) {
@@ -343,7 +374,7 @@ require 'head.php';
                         <ul class="sidebar-category-list">
                             <li>
                                 <a class="sidebar-category-link <?php echo !$dang_loc ? 'active' : ''; ?>"
-                                    href="san-pham.php<?php echo $keyword !== '' ? '?san-pham' . urlencode($keyword) : ''; ?>">
+                                    href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo $keyword !== '' ? '?san-pham' . urlencode($keyword) : ''; ?>">
                                     Tất cả sản phẩm
                                 </a>
                             </li>
@@ -367,7 +398,7 @@ require 'head.php';
                         <ul class="sidebar-filter-list" id="filter-dung-luong">
                             <li>
                                 <a class="sidebar-filter-link <?php echo $ma_dl_filter === 0 ? 'active' : ''; ?>"
-                                    href="san-pham.php<?php echo xay_qs(['dl' => '']); ?>">
+                                    href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(['dl' => '']); ?>">
                                     Tất cả
                                 </a>
                             </li>
@@ -386,7 +417,7 @@ require 'head.php';
                 ?>
                             <li class="filter-item <?php echo $hidden_class; ?>">
                                 <a class="sidebar-filter-link <?php echo $ma_dl_filter === (int) $dl['ma_dung_luong'] ? 'active' : ''; ?>"
-                                    href="san-pham.php<?php echo xay_qs(['dl' => tao_slug($dl['ten_dung_luong'])]); ?>">
+                                    href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(['dl' => tao_slug($dl['ten_dung_luong'])]); ?>">
                                     <?php echo htmlspecialchars($dl['ten_dung_luong']); ?>
                                     <span class="sidebar-count">(<?php echo (int) $dl['so_luong']; ?>)</span>
                                 </a>
@@ -406,7 +437,7 @@ require 'head.php';
                     <div class="sidebar-block">
                         <h3 class="sidebar-title">Chuẩn kết nối</h3>
                         <ul class="sidebar-filter-list">
-                            <li><a class="sidebar-filter-link active" href="san-pham.php<?php echo xay_qs(); ?>">Tất
+                            <li><a class="sidebar-filter-link active" href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(); ?>">Tất
                                     cả</a></li>
                         </ul>
                         <p class="sidebar-note">* Bảng sản phẩm hiện chưa có cột lưu "chuẩn kết nối" nên chưa lọc
@@ -419,26 +450,26 @@ require 'head.php';
                         <ul class="sidebar-filter-list">
                             <li>
                                 <a class="sidebar-filter-link <?php echo ($gia_slug === '' && $gia_min_custom === null && $gia_max_custom === null) ? 'active' : ''; ?>"
-                                    href="san-pham.php<?php echo xay_qs(['gia' => '', 'gia_min' => '', 'gia_max' => '']); ?>">
+                                    href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(['gia' => '', 'gia_min' => '', 'gia_max' => '']); ?>">
                                     Tất cả
                                 </a>
                             </li>
                             <?php foreach ($gia_khoang as $ma_khoang => $khoang): ?>
                             <li>
                                 <a class="sidebar-filter-link <?php echo $gia_slug === $ma_khoang ? 'active' : ''; ?>"
-                                    href="san-pham.php<?php echo xay_qs(['gia' => $ma_khoang, 'gia_min' => '', 'gia_max' => '']); ?>">
+                                    href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(['gia' => $ma_khoang, 'gia_min' => '', 'gia_max' => '']); ?>">
                                     <?php echo htmlspecialchars($khoang['nhan']); ?>
                                     <span class="sidebar-count">(<?php echo (int) $khoang['so_luong']; ?>)</span>
                                 </a>
                             </li>
                             <?php endforeach; ?>
                         </ul>
-                        <form class="sidebar-gia-tuy-chinh" method="get" action="san-pham.php">
+                        <form class="sidebar-gia-tuy-chinh" method="get" action="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">
                             <?php if ($keyword !== ''): ?>
                             <input type="hidden" name="q" value="<?php echo htmlspecialchars($keyword); ?>">
                             <?php endif; ?>
                             <?php if ($th_slug !== ''): ?>
-                            <input type="hidden" name="th" value="<?php echo htmlspecialchars($th_slug); ?>">
+                            <input type="hidden" name="thuong-hieu" value="<?php echo htmlspecialchars($th_slug); ?>">
                             <?php endif; ?>
                             <?php if ($dl_slug !== ''): ?>
                             <input type="hidden" name="dl" value="<?php echo htmlspecialchars($dl_slug); ?>">
@@ -454,7 +485,7 @@ require 'head.php';
 
                     <?php if ($dang_loc): ?>
                     <a class="sidebar-clear-filter"
-                        href="san-pham.php<?php echo $keyword !== '' ? 'san-pham' . urlencode($keyword) : ''; ?>">
+                        href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo $keyword !== '' ? 'san-pham' . urlencode($keyword) : ''; ?>">
                         <i class="fa-solid fa-xmark"></i> Xóa bộ lọc
                     </a>
                     <?php endif; ?>
@@ -478,12 +509,12 @@ require 'head.php';
                         <span class="brand-filter-label"><i class="fa-solid fa-filter"></i> Thương hiệu</span>
                         <div class="brand-filter-list">
                             <a class="brand-filter-pill <?php echo $ma_th_filter === 0 ? 'active' : ''; ?>"
-                                href="san-pham.php<?php echo xay_qs(['th' => '']); ?>">
+                                href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(['thuong-hieu' => '']); ?>">
                                 Tất cả
                             </a>
                             <?php foreach ($thuong_hieu_options as $th): ?>
                             <a class="brand-filter-pill <?php echo $ma_th_filter === (int) $th['ma_thuong_hieu'] ? 'active' : ''; ?>"
-                                href="san-pham.php<?php echo xay_qs(['th' => tao_slug($th['ten_thuong_hieu'])]); ?>">
+                                href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?><?php echo xay_qs(['thuong-hieu' => tao_slug($th['ten_thuong_hieu'])]); ?>">
                                 <?php echo htmlspecialchars(trim($th['ten_thuong_hieu'])); ?>
                             </a>
                             <?php endforeach; ?>
@@ -505,10 +536,10 @@ require 'head.php';
                         <div class="category-strip" id="strip-<?php echo $ma_dm; ?>">
                             <?php foreach ($nhom['dong_groups'] as $ma_dl => $dong): ?>
                             <a class="category-circle"
-                                href="mo-ta-linh-kien.php?dm=<?php echo tao_slug($nhom['ten']); ?>&dl=<?php echo tao_slug($dong['ten']) . $qs_giu_keyword; ?>">
+                                href="<?php echo htmlspecialchars(asset_url('mo-ta-linh-kien.php')); ?>?danh-muc=<?php echo tao_slug($nhom['ten']); ?>&dl=<?php echo tao_slug($dong['ten']) . $qs_giu_keyword; ?>">
                                 <span class="category-circle-img">
-                                    <img src="<?php echo !empty($dong['hinh_anh']) ? htmlspecialchars($dong['hinh_anh']) : 'assets/image/pc.webp'; ?>"
-                                        loading="lazy" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                                    <img src="<?php echo htmlspecialchars(asset_url(!empty($dong['hinh_anh']) ? $dong['hinh_anh'] : 'assets/image/pc.webp')); ?>"
+                                        loading="lazy" onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
                                 </span>
                                 <span class="category-circle-name">
                                     <?php echo htmlspecialchars($dong['ten']); ?>

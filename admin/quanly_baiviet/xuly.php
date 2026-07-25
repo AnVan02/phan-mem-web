@@ -36,14 +36,23 @@
         $trang_loi = $action === 'sua' ? 'sua.php?id=' . $ma_bai_viet . '&' : 'them.php?';
 
         $tieu_de = trim($_POST['article_title'] ?? '');
-        $tac_gia = trim($_POST['article_author'] ?? '');
+        $tac_gia_account_id = (int) ($_POST['article_account_id'] ?? 0);
+        $tac_gia_account_id = $tac_gia_account_id > 0 ? $tac_gia_account_id : null;
         $linh = trim($_POST['article_linh'] ?? '');
         $mo_ta = trim($_POST['article_summary'] ?? '');
         $noi_dung = $_POST['article_content'] ?? '';
+        $tab_baiviet = trim($_POST['tab_baiviet'] ?? '');
         $video = trim($_POST['article_video'] ?? '');
         $ngay = trim($_POST['article_date'] ?? '');
         $trang_thai = isset($_POST['article_status']) ? 1 : 0;
         $anh_cu = trim($_POST['anh_hien_tai'] ?? '');
+
+        $tac_gia = '';
+        if ($tac_gia_account_id !== null) {
+            $tk_stmt = $pdo->prepare("SELECT account_name FROM account WHERE account_id = :id LIMIT 1");
+            $tk_stmt->execute([':id' => $tac_gia_account_id]);
+            $tac_gia = trim((string) $tk_stmt->fetchColumn());
+        }
 
         if ($tieu_de === '' || $tac_gia === '' || ($action === 'sua' && $ma_bai_viet <= 0)) {
             header('Location: ' . $trang_loi . 'msg=loi_thieu_du_lieu');
@@ -64,49 +73,55 @@
 
         if ($action === 'them') {
             $stmt = $pdo->prepare("INSERT INTO article
-                (article_author, article_title, article_linh, article_summary, article_content, article_image, article_video, article_date, article_status)
-                VALUES (:author, :title, :linh, :summary, :content, :image, :video, :date, :status)");
+                (article_author, article_account_id, article_title, article_linh, article_summary, article_content, tab_baiviet, article_image, article_video, article_date, article_status)
+                VALUES (:author, :account_id, :title, :linh, :summary, :content, :tab_baiviet, :image, :video, :date, :status)");
             $stmt->execute([
-                ':author'  => $tac_gia,
-                ':title'   => $tieu_de,
-                ':linh'    => $linh,
-                ':summary' => $mo_ta,
-                ':content' => $noi_dung,
-                ':image'   => $anh,
-                ':video'   => $video,
-                ':date'    => $ngay,
-                ':status'  => $trang_thai,
+                ':author'      => $tac_gia,
+                ':account_id'  => $tac_gia_account_id,
+                ':title'       => $tieu_de,
+                ':linh'        => $linh,
+                ':summary'     => $mo_ta,
+                ':content'     => $noi_dung,
+                ':tab_baiviet' => $tab_baiviet,
+                ':image'       => $anh,
+                ':video'       => $video,
+                ':date'        => $ngay,
+                ':status'      => $trang_thai,
             ]);
             ghi_nhat_ky($pdo, 'them', 'bai_viet', (int) $pdo->lastInsertId(), "Thêm bài viết \"$tieu_de\"");
-            header('Location: quanly_baiviet/quanly_baiviet/danh-sach-bai-viet.php?msg=da_them');
+            header('Location: danh-sach-bai-viet.php?msg=da_them');
             exit;
         }
 
         $stmt = $pdo->prepare("UPDATE article SET
                 article_author = :author,
+                article_account_id = :account_id,
                 article_title = :title,
                 article_linh = :linh,
                 article_summary = :summary,
                 article_content = :content,
+                tab_baiviet = :tab_baiviet,
                 article_image = :image,
                 article_video = :video,
                 article_date = :date,
                 article_status = :status
             WHERE article_id = :id");
         $stmt->execute([
-            ':author'  => $tac_gia,
-            ':title'   => $tieu_de,
-            ':linh'    => $linh,
-            ':summary' => $mo_ta,
-            ':content' => $noi_dung,
-            ':image'   => $anh,
-            ':video'   => $video,
-            ':date'    => $ngay,
-            ':status'  => $trang_thai,
-            ':id'      => $ma_bai_viet,
+            ':author'      => $tac_gia,
+            ':account_id'  => $tac_gia_account_id,
+            ':title'       => $tieu_de,
+            ':linh'        => $linh,
+            ':summary'     => $mo_ta,
+            ':content'     => $noi_dung,
+            ':tab_baiviet' => $tab_baiviet,
+            ':image'       => $anh,
+            ':video'       => $video,
+            ':date'        => $ngay,
+            ':status'      => $trang_thai,
+            ':id'          => $ma_bai_viet,
         ]);
         ghi_nhat_ky($pdo, 'sua', 'bai_viet', $ma_bai_viet, "Sửa bài viết \"$tieu_de\"");
-        header('Location: quanly_baiviet/quanly_baiviet/danh-sach-bai-viet.php?msg=da_sua');
+        header('Location: danh-sach-bai-viet.php?msg=da_sua');
         exit;
     }
 
@@ -124,9 +139,9 @@
                 ghi_nhat_ky($pdo, 'xoa', 'bai_viet', $ma_bai_viet, "Xoá bài viết \"$tieu_de_can_xoa\"");
             }
         }
-        header('Location: quanly_baiviet/danh-sach-bai-viet.php?msg=da_xoa');
+        header('Location: danh-sach-bai-viet.php?msg=da_xoa');
         exit;
     }
 
-    header('Location: quanly_baiviet/danh-sach-bai-viet.php');
+    header('Location: danh-sach-bai-viet.php');
     exit;

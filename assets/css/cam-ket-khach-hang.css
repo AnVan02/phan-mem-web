@@ -22,7 +22,7 @@
 .commitment-eyebrow {
     display: inline-block;
     color: #1e3c72;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -43,7 +43,7 @@
 .commitment-subtitle {
     max-width: 260px;
     color: #6b6b70;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
     text-align: right;
     margin: 0;
@@ -84,7 +84,7 @@
 }
 
 .commitment-card-desc {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
     color: #6b6b70;
     margin: 0;

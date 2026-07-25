@@ -109,7 +109,7 @@
 
 .hero-desc {
     color: rgba(255, 255, 255, 0.85);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     margin: 0 0 26px;
 }
@@ -123,7 +123,7 @@
 .hero-credit {
     display: block;
     color: rgba(255, 255, 255, 0.55);
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 30px;
 }
 
@@ -134,7 +134,7 @@
     gap: 10px;
     padding: 13px 24px;
     border-radius: 999px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     transition: transform 0.15s ease, background 0.2s ease;
@@ -178,7 +178,7 @@
     z-index: 3;
     background: #7dffb0;
     color: #0a2e1a;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1px;
     padding: 8px 16px;
@@ -253,7 +253,7 @@
     }
 
     .hero-desc {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .hero-actions {

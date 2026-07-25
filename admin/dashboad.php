@@ -97,7 +97,7 @@
             background:#ffd700;
             color:#1e3c72;
         }
-        .db2-stat .db2-label{ font-size:12px; color:var(--db-sub); margin-bottom:8px; }
+        .db2-stat .db2-label{ font-size:14px; color:var(--db-sub); margin-bottom:8px; }
         .db2-stat.hi .db2-label{ color:#1e3c72; opacity:.75; }
         .db2-stat .db2-value{ font-size:28px; font-weight:700; }
 
@@ -106,18 +106,18 @@
             background:#fff; border-radius:var(--db-radius); padding:20px 22px;
             box-shadow:0 1px 2px rgba(20,30,25,.04);
         }
-        .db2-card h2{ font-size:14px; font-weight:700; margin:0 0 14px; }
+        .db2-card h2{ font-size:15px; font-weight:700; margin:0 0 14px; }
 
         .db2-list{ display:flex; flex-direction:column; gap:12px; }
         .db2-list-item{ display:flex; align-items:center; gap:12px; }
         .db2-list-icon{
             width:38px; height:38px; border-radius:10px;
             display:flex; align-items:center; justify-content:center;
-            background:#fff3b0; color:#1e3c72; font-size:15px; flex:none;
+            background:#fff3b0; color:#1e3c72; font-size:16px; flex:none;
         }
         .db2-list-text{ flex:1; }
-        .db2-list-text .t{ font-size:13px; font-weight:600; }
-        .db2-list-text .s{ font-size:11px; color:var(--db-sub); }
+        .db2-list-text .t{ font-size:14px; font-weight:600; }
+        .db2-list-text .s{ font-size:14px; color:var(--db-sub); }
         .db2-list-count{ font-size:16px; font-weight:700; color:var(--db-green-dark); }
 
         .db2-progress-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; }
@@ -131,14 +131,14 @@
             display:flex; align-items:center; justify-content:center;
         }
         .db2-progress-num{ font-size:26px; font-weight:800; color:var(--db-green-dark); }
-        .db2-progress-label{ font-size:12px; color:var(--db-sub); }
+        .db2-progress-label{ font-size:14px; color:var(--db-sub); }
 
         .db2-revenue{
             background:#ffd700;
             color:#1e3c72; border-radius:var(--db-radius); padding:20px 22px;
             display:flex; flex-direction:column; justify-content:center; gap:6px;
         }
-        .db2-revenue .l{ font-size:12px; color:#1e3c72; opacity:.75; }
+        .db2-revenue .l{ font-size:14px; color:#1e3c72; opacity:.75; }
         .db2-revenue .v{ font-size:24px; font-weight:800; }
 
         @media (max-width:900px){

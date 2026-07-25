@@ -1,0 +1,38 @@
+<?php
+
+return [
+    'footer' => [
+        'contact_heading'        => 'Liên hệ',
+        'contact_support'        => 'Hỗ trợ khách hàng',
+        'contact_sales'          => 'Phòng KD:',
+        'contact_warranty_hn'    => 'Bảo hành HN:',
+        'contact_warranty_hcm'   => 'Bảo hành HCM:',
+        'policy_heading'         => 'Chính sách',
+        'policy_about'           => 'Giới thiệu công ty',
+        'policy_return'          => 'Chính sách đổi trả',
+        'policy_shipping'        => 'Chính sách giao hàng',
+        'policy_warranty'        => 'Chính sách bảo hành',
+        'branch_heading'         => 'Chi nhánh',
+        'branch_hn_label'        => 'Hà Nội:',
+        'branch_hn_address'      => 'Tầng 4, Số 1 Thái Hà, Đống Đa',
+        'branch_hcm_label'       => 'TP.HCM:',
+        'branch_hcm_address'     => '150Ter Bùi Thị Xuân, P.Bến Thành',
+        'branch_warranty_return' => 'Chính sách bảo hành - đổi trả',
+        'branch_warranty_lookup' => 'Tra cứu bảo hành',
+        'shop_heading'           => 'Cửa hàng',
+        'shop_prebuilt'          => 'PC dựng sẵn',
+        'shop_components'        => 'Linh kiện máy tính',
+        'shop_gaming'            => 'Thiết bị chơi game',
+        'shop_accessories'       => 'Phụ kiện chính hãng',
+        'about_heading'          => 'Vì đam mê công nghệ',
+        'about_description_strong' => 'Linh kiện chính hãng – Dịch vụ tận tâm.',
+        'about_description'      => 'Viết Sơn mang đến đa dạng linh kiện máy tính, PC lắp sẵn và giải pháp build PC theo yêu cầu, giúp bạn sở hữu cấu hình tối ưu với mức chi phí hợp lý.',
+        'lang_label'             => 'Việt Nam',
+        'copyright'              => '© Copyright {year}, ACHIEVA VIETSON Co., Ltd',
+        'legal_terms'            => 'Điều khoản',
+        'legal_privacy'          => 'Chính sách bảo mật',
+        'legal_service_terms'    => 'Điều khoản dịch vụ',
+        'legal_do_not_sell'      => 'Không bán hoặc chia sẻ thông tin cá nhân của tôi',
+    ],
+];
+

@@ -131,7 +131,7 @@ $tong_tien_gio_hang = 0;
 foreach ($gio_hang_items as &$item) {
     $item['hinh_anh_dau']  = (function ($hinh_anh) {
         $images = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', (string) $hinh_anh))));
-        return !empty($images) ? $images[0] : 'assets/image/pc.webp';
+        return asset_url(!empty($images) ? $images[0] : 'assets/image/pc.webp');
     })($item['hinh_anh']);
     $gia_ban_i              = (int) $item['gia_ban'];
     $giam_gia_i             = (int) $item['giam_gia'];
@@ -163,7 +163,7 @@ require 'head.php';
                         <p>Mã đơn hàng <strong>#<?php echo (int) $don_hang_thanh_cong['ma_don_hang']; ?></strong> — Tổng tiền
                             <strong><?php echo number_format((int) $don_hang_thanh_cong['tong_tien'], 0, ',', '.'); ?>₫</strong>.
                             Chúng tôi sẽ liên hệ với bạn qua số điện thoại <strong><?php echo htmlspecialchars($don_hang_thanh_cong['so_dien_thoai']); ?></strong> để xác nhận đơn hàng.</p>
-                        <a href="san-pham.php" class="btn-continue-shopping">Tiếp tục mua sắm <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="btn-continue-shopping">Tiếp tục mua sắm <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             <?php elseif (!empty($loi)): ?>
@@ -180,7 +180,7 @@ require 'head.php';
                     <div class="cart-empty">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p>Giỏ hàng của bạn đang trống.</p>
-                        <a href="san-pham.php" class="btn-continue-shopping">Xem sản phẩm <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="btn-continue-shopping">Xem sản phẩm <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 <?php else: ?>
                     <div class="cart-layout">
@@ -189,7 +189,7 @@ require 'head.php';
                                 <?php foreach ($gio_hang_items as $item): ?>
                                     <div class="cart-item" data-ma-gio-hang="<?php echo (int) $item['ma_gio_hang']; ?>">
                                         <div class="cart-item-media">
-                                            <img src="<?php echo htmlspecialchars($item['hinh_anh_dau']); ?>" alt="<?php echo htmlspecialchars($item['ten_san_pham']); ?>" onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                                            <img src="<?php echo htmlspecialchars($item['hinh_anh_dau']); ?>" alt="<?php echo htmlspecialchars($item['ten_san_pham']); ?>" onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
                                         </div>
                                         <div class="cart-item-info">
                                             <h3 class="cart-item-name"><?php echo htmlspecialchars($item['ten_san_pham']); ?></h3>
@@ -223,20 +223,20 @@ require 'head.php';
 
                                 <?php if ($khach_hang_dang_nhap): ?>
                                     <div class="cart-account-hint">
-                                        <i class="fa-solid fa-circle-user"></i> Đặt hàng với tài khoản <strong><?php echo htmlspecialchars($khach_hang_dang_nhap['customer_name']); ?></strong> — đơn hàng sẽ được lưu vào <a href="tai-khoan.php">tài khoản của bạn</a>.
+                                        <i class="fa-solid fa-circle-user"></i> Đặt hàng với tài khoản <strong><?php echo htmlspecialchars($khach_hang_dang_nhap['customer_name']); ?></strong> — đơn hàng sẽ được lưu vào <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>">tài khoản của bạn</a>.
                                     </div>
                                 <?php else: ?>
                                     <div class="cart-account-hint">
-                                        <i class="fa-solid fa-circle-info"></i> <a href="tai-khoan.php">Đăng nhập</a> để lưu lại lịch sử đơn hàng và đặt nhanh hơn lần sau.
+                                        <i class="fa-solid fa-circle-info"></i> <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>">Đăng nhập</a> để lưu lại lịch sử đơn hàng và đặt nhanh hơn lần sau.
                                     </div>
                                 <?php endif; ?>
-                                <form class="cart-checkout-form" method="POST" action="gio-hang.php">
+                                <form class="cart-checkout-form" method="POST" action="<?php echo htmlspecialchars(asset_url('gio-hang.php')); ?>">
                                     <input type="hidden" name="action" value="dat_hang">
                                     <div class="form-group" style="position: relative; display: flex; gap: 10px;">
                                         <input type="text" name="ma_giam_gia" id="ma_giam_gia" placeholder="Nhập mã giảm giá (nếu có)" style="flex: 1; text-transform: uppercase;">
                                         <button type="button" id="btnApplyDiscount" style="padding: 10px 15px; background: #1f2937; color: white; border: none; border-radius: 6px; cursor: pointer;">Áp dụng</button>
                                     </div>
-                                    <div id="discountMessage" style="margin-bottom: 15px; font-size: 14px;"></div>
+                                    <div id="discountMessage" style="margin-bottom: 15px; font-size: 15px;"></div>
                                     <div class="form-group">
                                         <label for="ten_khach_hang">Họ và tên</label>
                                         <input type="text" name="ten_khach_hang" id="ten_khach_hang" placeholder="Nhập họ và tên" value="<?php echo $khach_hang_dang_nhap ? htmlspecialchars($khach_hang_dang_nhap['customer_name']) : ''; ?>" required>
@@ -270,7 +270,7 @@ require 'head.php';
     </section>
     <?php include 'footer.php'; ?>
 
-    <script src="assets/js/gio-hang.js"></script>
+    <script src="<?php echo htmlspecialchars(asset_url('assets/js/gio-hang.js')); ?>"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const btnApply = document.getElementById('btnApplyDiscount');

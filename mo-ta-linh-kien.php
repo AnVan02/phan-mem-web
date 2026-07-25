@@ -9,8 +9,8 @@ if (isset($_SESSION['khach_hang_id'])) {
     $wishlisted_ids = array_map('intval', $wl_stmt->fetchAll(PDO::FETCH_COLUMN));
 }
 
-// Nhận danh mục / dòng qua tên (slug) thay vì mã số, vd: ?dm=ram&dl=agi-ssd
-$dm_slug      = isset($_GET['dm']) ? trim($_GET['dm']) : '';
+// Nhận danh mục / dòng qua tên (slug) thay vì mã số, vd: ?danh-muc=ram&dl=agi-ssd
+$dm_slug      = isset($_GET['danh-muc']) ? trim($_GET['danh-muc']) : '';
 $ma_dm_filter = 0;
 if ($dm_slug !== '') {
     foreach ($pdo->query("SELECT ma_danh_muc, ten_danh_muc FROM danh_muc")->fetchAll(PDO::FETCH_ASSOC) as $dm_row) {
@@ -36,7 +36,7 @@ if ($dl_slug !== '') {
         }
     }
 }
-$ma_th_filter = isset($_GET['th']) ? (int) $_GET['th'] : 0;
+$ma_th_filter = isset($_GET['thuong-hieu']) ? (int) $_GET['thuong-hieu'] : 0;
 $gia_filter   = isset($_GET['gia']) ? trim($_GET['gia']) : '';
 $sort         = isset($_GET['sort']) ? trim($_GET['sort']) : '';
 $keyword      = isset($_GET['q']) ? trim($_GET['q']) : '';
@@ -75,7 +75,7 @@ function xay_dung_url_sp($overrides, $hien_tai)
     $params = array_merge($hien_tai, $overrides);
     foreach ($params as $k => $v) {
         $rong = $v === '' || $v === 0 || (is_array($v) && empty($v));
-        if ($k !== 'dm' && $rong) {
+        if ($k !== 'danh-muc' && $rong) {
             unset($params[$k]);
         }
     }
@@ -91,23 +91,23 @@ function render_the_card($sp)
     $giam_gia     = (int) $sp['giam_gia'];
     $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
     $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
-    $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
-    $hinh_anh_hover = !empty($anh_list_sp[1]) ? $anh_list_sp[1] : '';
+    $hinh_anh     = asset_url(!empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp');
+    $hinh_anh_hover = !empty($anh_list_sp[1]) ? asset_url($anh_list_sp[1]) : '';
     $slug         = tao_slug($sp['ten_san_pham']);
     $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
 ?>
     <a class="product-card<?php echo $hinh_anh_hover !== '' ? ' has-hover-image' : ''; ?>"
-        href="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>">
+        href="<?php echo htmlspecialchars(asset_url(tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']))); ?>">
         <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
         <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
         <div class="product-media">
             <img class="is-primary" src="<?php echo htmlspecialchars($hinh_anh); ?>"
                 alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
             <?php if ($hinh_anh_hover !== ''): ?>
                 <img class="is-secondary" src="<?php echo htmlspecialchars($hinh_anh_hover); ?>"
                     alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                    onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                    onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
             <?php endif; ?>
         </div>
         <div class="product-body">
@@ -263,11 +263,11 @@ $ten_dong_hien_tai = ($ma_dl_filter > 0 && isset($dong_groups[$ma_dl_filter]))
     : '';
 
 // Query string hiện tại, dùng để build lại link khi đổi 1 bộ lọc mà giữ các bộ lọc khác
-// dm/dl dùng tên (slug) thay vì mã số để URL hiển thị tên linh kiện
+// danh-muc/dl dùng tên (slug) thay vì mã số để URL hiển thị tên linh kiện
 $hien_tai = [
-    'dm'      => tao_slug($ten_danh_muc),
+    'danh-muc' => tao_slug($ten_danh_muc),
     'dl'      => $ten_dong_hien_tai !== '' ? tao_slug($ten_dong_hien_tai) : '',
-    'th'      => $ma_th_filter,
+    'thuong-hieu' => $ma_th_filter,
     'gia'     => $gia_filter,
     'gia_tu'  => $gia_tu_raw,
     'gia_den' => $gia_den_raw,
@@ -379,13 +379,13 @@ require 'head.php';
     <div class="container">
         <div class="category-hero">
             <div class="category-breadcrumb">
-                <a href="/index.php">Trang chủ</a>
+                <a href="<?php echo htmlspecialchars(asset_url('index.php')); ?>">Trang chủ</a>
                 <span class="crumb-sep">/</span>
-                <a href="san-pham.php">Sản phẩm</a>
+                <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">Sản phẩm</a>
                 <span class="crumb-sep">/</span>
                 <?php if ($nhan_loc_hien_tai !== ''): ?>
                     <a
-                        href="<?php echo xay_dung_url_sp(['dl' => '', 'th' => '', 'gia' => '', 'sort' => ''], $hien_tai); ?>"><?php echo htmlspecialchars($ten_danh_muc); ?></a>
+                        href="<?php echo xay_dung_url_sp(['dl' => '', 'thuong-hieu' => '', 'gia' => '', 'sort' => ''], $hien_tai); ?>"><?php echo htmlspecialchars($ten_danh_muc); ?></a>
                     <span class="crumb-sep">/</span>
                     <span class="crumb-current"><?php echo htmlspecialchars($nhan_loc_hien_tai); ?></span>
                 <?php else: ?>
@@ -393,10 +393,10 @@ require 'head.php';
                 <?php endif; ?>
             </div>
 
-            <!-- <span class="product-eyebrow">— Cửa hàng Viết Sơn</span>
-                <h1 class="product-title">
-                    <?php echo htmlspecialchars($ten_danh_muc); ?><?php echo $nhan_loc_hien_tai !== '' ? ' · ' . htmlspecialchars($nhan_loc_hien_tai) : ''; ?>
-                </h1> -->
+            <span class="product-eyebrow">— Cửa hàng Viết Sơn</span>
+            <h1 class="product-title">
+                <?php echo htmlspecialchars($ten_danh_muc); ?><?php echo $nhan_loc_hien_tai !== '' ? ' · ' . htmlspecialchars($nhan_loc_hien_tai) : ''; ?>
+            </h1>
             <!-- <p class="category-hero-count"><?php echo count($san_pham_list); ?> sản phẩm</p> -->
         </div>
 
@@ -505,8 +505,8 @@ require 'head.php';
                     </div>
                 <?php endif; ?>
 
-                <form class="sidebar-filter-form" method="get" action="mo-ta-linh-kien.php#chon-theo-nhu-cau">
-                    <input type="hidden" name="dm" value="<?php echo htmlspecialchars($hien_tai['dm']); ?>">
+                <form class="sidebar-filter-form" method="get" action="<?php echo htmlspecialchars(asset_url('mo-ta-linh-kien.php')); ?>#chon-theo-nhu-cau">
+                    <input type="hidden" name="danh-muc" value="<?php echo htmlspecialchars($hien_tai['danh-muc']); ?>">
                     <?php if ($hien_tai['dl'] !== ''): ?><input type="hidden" name="dl"
                             value="<?php echo htmlspecialchars($hien_tai['dl']); ?>"><?php endif; ?>
                     <?php if ($sort !== ''): ?><input type="hidden" name="sort"
@@ -726,10 +726,10 @@ require 'head.php';
                             Đừng lo,
                             chúng tôi luôn sẵn sàng hỗ trợ để bạn tìm đúng linh kiện mong muốn.</p>
                         <div class="empty-actions">
-                            <a href="index.php" class="empty-btn empty-btn-primary">
+                            <a href="<?php echo htmlspecialchars(asset_url('index.php')); ?>" class="empty-btn empty-btn-primary">
                                 <i class="fa-solid fa-house"></i> Quay về trang chủ
                             </a>
-                            <a href="san-pham.php" class="empty-btn empty-btn-secondary">
+                            <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="empty-btn empty-btn-secondary">
                                 <i class="fa-solid fa-th-large"></i> Xem tất cả sản phẩm
                             </a>
                             <a href="lien-he.php" class="empty-btn empty-btn-outline">
@@ -748,7 +748,7 @@ require 'head.php';
                         <h2>Bài viết liên quan</h2>
                         <div class="article-list">
                             <?php foreach ($related_articles as $a):
-                                $art_anh    = trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp';
+                                $art_anh    = asset_url(trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp');
                                 $art_ngay   = date('d/m/Y', strtotime($a['article_date']));
                                 $art_slug   = tao_slug($a['article_title']);
 
@@ -760,7 +760,7 @@ require 'head.php';
                                     $mo_ta_ngan = $mo_ta_goc;
                                 }
                             ?>
-                                <a class="article-item" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $art_slug; ?>">
+                                <a class="article-item" href="<?php echo htmlspecialchars(asset_url('chi-tiet-tin-tuc.php')); ?>?ten-bai-viet=<?php echo $art_slug; ?>">
                                     <div class="article-thumb">
                                         <img src="<?php echo htmlspecialchars($art_anh); ?>"
                                             alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy">

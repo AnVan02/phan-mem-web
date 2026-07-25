@@ -137,7 +137,7 @@
 
     .qr-step .qr-num {
       font-family: 'Space Grotesk';
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--lime);
       letter-spacing: 1px;
@@ -153,14 +153,14 @@
 
     .qr-step .qr-title {
       font-family: 'Space Grotesk';
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 6px;
     }
 
     .qr-step .qr-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--ink-dim);
       line-height: 1.6;
     }
@@ -198,7 +198,7 @@
 
     .glos-item .glos-label {
       font-family: 'Space Grotesk';
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--lime);
       text-transform: uppercase;
@@ -207,7 +207,7 @@
     }
 
     .glos-item p {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--ink-dim);
       line-height: 1.6;
     }
@@ -249,7 +249,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--ink-dim);
     }
 
@@ -282,7 +282,7 @@
     }
 
     .breakeven-callout p {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--ink);
       line-height: 1.6;
     }
@@ -309,7 +309,7 @@
 
     .section-divider span {
       font-family: 'Space Grotesk';
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: 1.5px;
       color: var(--ink-dim);
@@ -372,7 +372,7 @@
 
     thead th .col-title {
       font-family: 'Space Grotesk';
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 6px;
@@ -381,7 +381,7 @@
     }
 
     thead th .col-desc {
-      font-size: 12.5px;
+      font-size: 14px;
       color: var(--ink-dim);
       line-height: 1.6;
       font-weight: 400;
@@ -391,7 +391,7 @@
     tbody th {
       padding: 18px 20px;
       border-bottom: 1px solid var(--line);
-      font-size: 14px;
+      font-size: 15px;
       vertical-align: top;
       line-height: 1.6;
     }
@@ -401,7 +401,7 @@
       background: var(--panel-2);
       color: var(--ink-dim);
       font-weight: 600;
-      font-size: 13px;
+      font-size: 14px;
       white-space: nowrap;
     }
 

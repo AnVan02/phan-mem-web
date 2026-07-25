@@ -28,22 +28,22 @@ require 'head.php';
         $giam_gia     = (int) $sp['giam_gia'];
         $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
         $anh_list_sp  = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $sp['hinh_anh']))));
-        $hinh_anh     = !empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp';
-        $hinh_anh_hover = !empty($anh_list_sp[1]) ? $anh_list_sp[1] : '';
+        $hinh_anh     = asset_url(!empty($anh_list_sp) ? $anh_list_sp[0] : 'assets/image/pc.webp');
+        $hinh_anh_hover = !empty($anh_list_sp[1]) ? asset_url($anh_list_sp[1]) : '';
         $tra_truoc    = $gia_ban > 0 ? (int) round($gia_sau_giam * 0.3 / 100000) * 100000 : 0;
         ?>
     <a class="product-card<?php echo $hinh_anh_hover !== '' ? ' has-hover-image' : ''; ?>"
-        href="<?php echo tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']); ?>">
+        href="<?php echo htmlspecialchars(asset_url(tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']))); ?>">
         <?php if ($giam_gia > 0): ?><span class="product-badge">-<?php echo $giam_gia; ?>%</span><?php endif; ?>
         <span class="product-badge-official"><i class="fa-solid fa-circle-check"></i> Chính hãng</span>
         <div class="product-media">
             <img class="product-media-img is-primary" src="<?php echo htmlspecialchars($hinh_anh); ?>"
                 alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
             <?php if ($hinh_anh_hover !== ''): ?>
             <img class="product-media-img is-secondary" src="<?php echo htmlspecialchars($hinh_anh_hover); ?>"
                 alt="<?php echo htmlspecialchars($sp['ten_san_pham']); ?>" loading="lazy"
-                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
             <?php endif; ?>
         </div>
         <div class="product-body">
@@ -170,22 +170,23 @@ require 'head.php';
             <div class="product-page-header">
                 <a href="/index.php">Trang chủ</a>
                 <span class="product-eyebrow">— Kết quả tìm kiếm</span>
-                <h1 class="product-title">
-                    <?php echo $keyword !== '' ? 'Tìm kiếm: "' . htmlspecialchars($keyword) . '"' : 'Tìm kiếm sản phẩm'; ?>
-                </h1>
-                <?php if ($keyword !== ''): ?>
-                <p class="search-result-count"><?php echo $tong_ket_qua; ?> sản phẩm phù hợp</p>
-                <?php endif; ?>
+                <h1 class="product-title">Tìm kiếm sản phẩm</h1>
             </div>
 
             <?php if ($keyword === ''): ?>
             <p style="padding: 40px 0; text-align:center; color:#888;">
                 Vui lòng nhập từ khóa vào ô tìm kiếm ở trên để tìm sản phẩm.</p>
             <?php elseif (empty($san_pham_list)): ?>
-            <p style="padding: 40px 0; text-align:center; color:#888;">
-                Không tìm thấy sản phẩm nào phù hợp với "<?php echo htmlspecialchars($keyword); ?>".<br>
-                Vui lòng thử từ khóa khác hoặc xem <a href="san-pham.php">toàn bộ sản phẩm</a>.</p>
+            <p class="product-title" style="font-size:20px; margin-bottom:16px;">
+                Kết quả tìm kiếm: <span class="search-result-keyword"><?php echo htmlspecialchars($keyword); ?></span>
+            </p>
+            <div class="no-result-box">
+                Không tìm thấy dữ liệu
+            </div>
             <?php else: ?>
+            <p class="product-title" style="font-size:20px; margin-bottom:16px;">
+                Kết quả tìm kiếm: <span class="search-result-keyword"><?php echo htmlspecialchars($keyword); ?></span>
+            </p>
             <div class="product-grid">
                 <?php foreach ($san_pham_list as $sp): ?>
                 <?php render_the_card($sp); ?>

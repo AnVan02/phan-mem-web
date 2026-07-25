@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 14px;
     color: #9b9ba1;
     font-weight: 600;
     margin-bottom: 18px;
@@ -20,7 +20,7 @@
 }
 
 .import-bh-breadcrumb i {
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .import-bh-breadcrumb .current {
@@ -46,7 +46,7 @@
 }
 
 .import-bh-main .subtitle {
-    font-size: 14px;
+    font-size: 15px;
     color: #9b9ba1;
     font-weight: 500;
     margin: 0 0 30px;
@@ -85,7 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 /* ---- Dropzone ---- */
@@ -138,7 +138,7 @@
 }
 
 .import-bh-dropzone-sub {
-    font-size: 13.5px;
+    font-size: 14px;
     color: #9b9ba1;
     font-weight: 500;
     margin: 0 0 18px;
@@ -154,7 +154,7 @@
     border-radius: 999px;
     padding: 11px 26px;
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -164,7 +164,7 @@
 }
 
 .import-bh-dropzone-hint {
-    font-size: 12px;
+    font-size: 14px;
     color: #b3bac6;
     font-weight: 500;
     margin: 16px 0 0;
@@ -192,7 +192,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .import-bh-note-body {
@@ -202,7 +202,7 @@
 
 .import-bh-note-body h4 {
     margin: 0 0 10px;
-    font-size: 14.5px;
+    font-size: 15.5px;
     font-weight: 800;
     color: #1a1a1a;
 }
@@ -217,7 +217,7 @@
 }
 
 .import-bh-note-body li {
-    font-size: 13.5px;
+    font-size: 14px;
     color: #4b5568;
     font-weight: 500;
     padding-left: 16px;
@@ -246,7 +246,7 @@
     border: 1px solid #1B4EF6;
     border-radius: 999px;
     padding: 10px 18px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     text-decoration: none;
     white-space: nowrap;
@@ -271,7 +271,7 @@
     padding: 16px;
     margin-top: 26px;
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 15.5px;
+    font-size: 16.5px;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.2s ease;
@@ -295,7 +295,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 800;
     margin: 0 0 18px;
 }
@@ -323,7 +323,7 @@
     border-radius: 50%;
     background: #1B4EF6;
     color: #fff;
-    font-size: 12.5px;
+    font-size: 14px;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -332,14 +332,14 @@
 
 .import-bh-step-text strong {
     display: block;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 2px;
 }
 
 .import-bh-step-text span {
-    font-size: 12.5px;
+    font-size: 14px;
     color: #9b9ba1;
     font-weight: 500;
     line-height: 1.4;
@@ -349,7 +349,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 13.5px;
+    font-size: 14px;
     color: #9b9ba1;
     font-weight: 600;
     padding: 10px 0 18px;
@@ -361,7 +361,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #4b5568;
     padding: 8px 0;

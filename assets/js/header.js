@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var siteRoot = window.SITE_ROOT || '';
+    function siteUrl(path) { return siteRoot + '/' + path; }
+
     // Nút 3 gạch (mobile): mở/đóng menu chính
     var navToggle = document.querySelector('.nav-toggle');
     var mainNav = document.querySelector('.main-nav');
@@ -73,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             a.className = 'search-suggest-item';
             a.href = item.url;
             a.innerHTML =
-                '<img src="' + item.hinh_anh + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'assets/image/pc.webp\';">' +
+                '<img src="' + item.hinh_anh + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=\'' + siteUrl('assets/image/pc.webp') + '\';">' +
                 '<span class="search-suggest-item-info">' +
                 '<span class="search-suggest-item-name"></span>' +
                 '<span class="search-suggest-item-meta"></span>' +
@@ -105,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var viewAll = document.createElement('a');
             viewAll.className = 'search-suggest-viewall';
-            viewAll.href = 'tim-kiem.php?q=' + encodeURIComponent(tuKhoa);
+            viewAll.href = siteUrl('tim-kiem.php') + '?q=' + encodeURIComponent(tuKhoa);
             viewAll.textContent = 'Xem tất cả kết quả cho "' + tuKhoa + '"';
             searchSuggest.appendChild(viewAll);
 
@@ -132,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             debounceTimer = setTimeout(function () {
-                fetch('tim-kiem-ajax.php?action=suggest&q=' + encodeURIComponent(tuKhoa))
+                fetch(siteUrl('tim-kiem-ajax.php') + '?action=suggest&q=' + encodeURIComponent(tuKhoa))
                     .then(function (res) { return res.json(); })
                     .then(function (items) { hienGoiY(items, tuKhoa); })
                     .catch(function () { dongGoiY(); });
@@ -203,12 +206,46 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     if (cartBadge) {
-        fetch('gio-hang-ajax.php?action=dem')
+        fetch(siteUrl('gio-hang-ajax.php') + '?action=dem')
             .then(function (res) { return res.json(); })
             .then(function (data) {
                 if (data.success) window.capNhatBadgeGioHang(data.cart_count);
             })
             .catch(function () {});
+    }
+
+    // Popup mời đăng nhập khi bấm icon/tên "Tài khoản" lúc chưa đăng nhập
+    var accountModalOverlay = document.getElementById('accountModalOverlay');
+    if (accountModalOverlay) {
+        var accountModalClose = document.getElementById('accountModalClose');
+        var accountTriggers = document.querySelectorAll('[data-account-trigger]');
+
+        function moAccountModal(e) {
+            e.preventDefault();
+            accountModalOverlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function dongAccountModal() {
+            accountModalOverlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        accountTriggers.forEach(function (trigger) {
+            trigger.addEventListener('click', moAccountModal);
+        });
+
+        if (accountModalClose) {
+            accountModalClose.addEventListener('click', dongAccountModal);
+        }
+
+        accountModalOverlay.addEventListener('click', function (e) {
+            if (e.target === accountModalOverlay) dongAccountModal();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && accountModalOverlay.classList.contains('is-open')) dongAccountModal();
+        });
     }
 
     // Toast thông báo giỏ hàng

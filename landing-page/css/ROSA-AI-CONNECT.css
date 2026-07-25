@@ -57,7 +57,7 @@ a {
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
@@ -121,7 +121,7 @@ a {
 }
 
 .nav-links a {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-muted);
     transition: color 0.2s;
 }
@@ -213,7 +213,7 @@ a {
 
 .modal-header p {
     color: #666;
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 25px;
 }
 
@@ -224,7 +224,7 @@ a {
 
 .modal-form label {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     margin-bottom: 5px;
     color: #333;
@@ -237,7 +237,7 @@ a {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .modal-form input:focus,
@@ -281,7 +281,7 @@ a {
 
 .form-success p {
     color: #666;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 26px;
 }
@@ -317,7 +317,7 @@ a {
 }
 
 .f-slogan {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-main);
     border-left: 1px solid var(--border);
     padding-left: 32px;
@@ -326,13 +326,13 @@ a {
 
 .f-slogan span {
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .f-contact {
     display: flex;
     gap: 32px;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-muted);
 }
 
@@ -454,7 +454,7 @@ a {
     background: rgba(204, 255, 0, 0.08);
     border: 1px solid rgba(204, 255, 0, 0.25);
     color: var(--primary);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     padding: 8px 16px;
     border-radius: 20px;
@@ -493,7 +493,7 @@ a {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
 }
 
@@ -542,7 +542,7 @@ a {
 }
 
 .hf-item span {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: #f8fafc;
     line-height: 1.5;
@@ -595,7 +595,7 @@ a {
 }
 
 .prod-tab-index {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: .5px;
     text-transform: uppercase;
@@ -603,7 +603,7 @@ a {
 }
 
 .prod-tab-name {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -668,7 +668,7 @@ a {
 }
 
 .prod-eyebrow {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -686,7 +686,7 @@ a {
 
 .prod-sub {
     color: var(--text-muted);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     margin-bottom: 28px;
 }
@@ -704,7 +704,7 @@ a {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--text-main);
 }
@@ -764,7 +764,7 @@ a {
 }
 
 .problem-card h4 {
-    font-size: 14.5px;
+    font-size: 15.5px;
     font-weight: 600;
     margin-bottom: 8px;
     line-height: 1.4;
@@ -772,7 +772,7 @@ a {
 }
 
 .problem-card p {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.6;
 }
@@ -815,7 +815,7 @@ a {
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 8px 18px;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-main);
 }
 
@@ -909,14 +909,14 @@ a {
 }
 
 .hub-card h4 {
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: .04em;
     color: var(--text-main);
     margin-bottom: 8px;
 }
 
 .hub-card p {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.5;
 }
@@ -997,7 +997,7 @@ a {
     border-radius: 8px;
     padding: 10px 12px;
     margin-bottom: 10px;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-main);
     text-align: left;
 }
@@ -1042,14 +1042,14 @@ a {
 
 .hub-perk strong {
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: .03em;
     color: var(--text-main);
     margin-bottom: 4px;
 }
 
 .hub-perk span {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.5;
 }
@@ -1062,7 +1062,7 @@ a {
     border-radius: 40px;
     padding: 16px 24px;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .hub-tagline strong {
@@ -1072,7 +1072,7 @@ a {
 /* ===== 4. How it works ===== */
 .section-sub {
     color: var(--text-muted);
-    font-size: 15px;
+    font-size: 16px;
     margin-top: -8px;
     margin-bottom: 8px;
 }
@@ -1108,7 +1108,7 @@ a {
     border: 1.5px solid var(--primary);
     color: var(--primary);
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     box-shadow: 0 0 12px rgba(204, 255, 0, 0.35);
 }
 
@@ -1138,7 +1138,7 @@ a {
 }
 
 .step-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-muted);
     line-height: 1.5;
 }
@@ -1169,7 +1169,7 @@ a {
     align-items: center;
     gap: 10px;
     padding: 13px 72px;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-main);
     border-left: 1px solid var(--border);
 }
@@ -1285,7 +1285,7 @@ a {
 }
 
 .value-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-muted);
     line-height: 1.6;
 }
@@ -1330,7 +1330,7 @@ a {
 
 .cost-main p {
     color: var(--text-muted);
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 24px;
 }
 
@@ -1372,7 +1372,7 @@ a {
 }
 
 .stat-card span {
-    font-size: 12.5px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.4;
 }
@@ -1416,7 +1416,7 @@ a {
 }
 
 .proof-card span {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
 }
 
@@ -1474,7 +1474,7 @@ a {
 }
 
 .logo-note {
-    font-size: 12.5px;
+    font-size: 14px;
     color: var(--text-muted);
     font-style: italic;
 }
@@ -1495,7 +1495,7 @@ a {
 .faq-item summary {
     cursor: pointer;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-main);
     list-style: none;
     display: flex;
@@ -1520,7 +1520,7 @@ a {
 
 .faq-item p {
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 15px;
     margin-top: 12px;
     line-height: 1.6;
 }
@@ -1748,11 +1748,11 @@ a {
     }
 
     .prod-tab-index {
-        font-size: 10px;
+        font-size: 13px;
     }
 
     .prod-tab-name {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .prod-panel {
@@ -1817,7 +1817,7 @@ a {
     }
 
     .faq-item summary {
-        font-size: 13.5px;
+        font-size: 14px;
     }
 
     .f-contact {
@@ -1876,11 +1876,11 @@ a {
     }
 
     .value-card h4 {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .value-card p {
-        font-size: 12.5px;
+        font-size: 14px;
     }
 
     .cost-stats {

@@ -206,7 +206,7 @@ $active_page = 'danh_gia';
                                             <div class="dg-admin-reply">
                                                 <i class="fa-solid fa-reply fa-rotate-180"></i>
                                                 <strong>Admin:</strong> <?php echo htmlspecialchars($dg['noi_dung_tra_loi']); ?>
-                                                <div style="font-size:10px; color:#888; margin-top:5px;">
+                                                <div style="font-size:13px; color:#888; margin-top:5px;">
                                                     Đã gửi lúc: <?php echo date('d/m/Y H:i', strtotime($dg['ngay_tra_loi'])); ?>
                                                 </div>
                                             </div>
@@ -235,7 +235,7 @@ $active_page = 'danh_gia';
                                             </form>
                                         </div>
                                     </td>
-                                    <td style="font-size:12px; color:#888;">
+                                    <td style="font-size:14px; color:#888;">
                                         <?php echo date('d/m/Y', strtotime($dg['ngay_danh_gia'])); ?></td>
                                     <td>
                                         <form method="POST"

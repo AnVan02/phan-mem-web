@@ -106,7 +106,7 @@ body {
 .inputbox input:not(:placeholder-shown) ~ label {
     top: -8px;
     left: 0;
-    font-size: 12px;
+    font-size: 14px;
     color: #ffd700;
 }
 
@@ -114,7 +114,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 13px;
+    font-size: 14px;
     color: #eee;
     margin-bottom: 25px;
 }
@@ -163,7 +163,7 @@ button[type="submit"]:hover {
 .register {
     text-align: center;
     margin-top: 22px;
-    font-size: 14px;
+    font-size: 15px;
     color: #eee;
 }
 

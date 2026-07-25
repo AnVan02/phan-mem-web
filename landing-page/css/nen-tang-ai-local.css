@@ -176,7 +176,7 @@ a {
      padding: 12px 24px;
      border-radius: 8px;
      font-weight: 600;
-     font-size: 14px;
+     font-size: 15px;
      transition: all 0.3s ease;
      cursor: pointer;
 }
@@ -269,7 +269,7 @@ a {
 }
 
 .nav-links a {
-     font-size: 14px;
+     font-size: 15px;
      color: var(--text-muted);
      transition: color 0.2s;
 }
@@ -401,13 +401,13 @@ a {
 }
 
 .feature-item h4 {
-     font-size: 14px;
+     font-size: 15px;
      font-weight: 500;
      margin-bottom: 4px;
 }
 
 .feature-item p {
-     font-size: 12px;
+     font-size: 14px;
      color: var(--text-muted);
 }
 
@@ -485,7 +485,7 @@ a {
 }
 
 .product-sub {
-     font-size: 14px;
+     font-size: 15px;
      color: var(--text-muted);
      margin-bottom: 40px;
 }
@@ -700,7 +700,7 @@ a {
 }
 
 .app-item span {
-     font-size: 12px;
+     font-size: 14px;
      color: var(--text-muted);
 }
 
@@ -815,7 +815,7 @@ a {
 .n8n-flow-title {
      color: var(--primary);
      font-weight: 600;
-     font-size: 15px;
+     font-size: 16px;
      margin-bottom: 20px;
 }
 
@@ -874,13 +874,13 @@ a {
 }
 
 .n8n-flow-text strong {
-     font-size: 14px;
+     font-size: 15px;
      font-weight: 600;
      color: #edeff3;
 }
 
 .n8n-flow-text span {
-     font-size: 12px;
+     font-size: 14px;
      color: var(--text-muted);
 }
 
@@ -924,7 +924,7 @@ a {
      color: var(--primary);
      border: 1px solid rgba(148, 204, 68, 0.2);
      border-radius: 20px;
-     font-size: 12px;
+     font-size: 14px;
      font-weight: 600;
      margin-bottom: 32px;
 }
@@ -955,7 +955,7 @@ a {
 }
 
 .feature-item-chat p {
-     font-size: 14px;
+     font-size: 15px;
      color: var(--text-muted);
      line-height: 1.5;
 }
@@ -1013,7 +1013,7 @@ a {
 }
 
 .mockup-title {
-     font-size: 14px;
+     font-size: 15px;
      font-weight: 600;
      color: var(--text-main);
      display: flex;
@@ -1045,7 +1045,7 @@ a {
      display: flex;
      align-items: center;
      gap: 12px;
-     font-size: 13px;
+     font-size: 14px;
      font-weight: 500;
      color: var(--text-muted);
      border-radius: 8px;
@@ -1121,7 +1121,7 @@ a {
      border: 1px solid rgba(255, 255, 255, 0.05);
      padding: 14px 18px;
      border-radius: 2px 16px 16px 16px;
-     font-size: 14px;
+     font-size: 15px;
      color: #f1f5f9;
      max-width: 85%;
      line-height: 1.5;
@@ -1195,7 +1195,7 @@ a {
      display: inline-flex;
      align-items: center;
      gap: 6px;
-     font-size: 12px;
+     font-size: 14px;
      font-weight: 500;
      color: var(--text-muted);
      background: rgba(255, 255, 255, 0.03);
@@ -1241,7 +1241,7 @@ a {
 
 .input-text {
      flex: 1;
-     font-size: 14px;
+     font-size: 15px;
      color: #64748b;
 }
 
@@ -1321,7 +1321,7 @@ a {
 }
 
 .audio-wave .time {
-     font-size: 12px;
+     font-size: 14px;
      color: var(--primary);
      font-weight: 500;
 }
@@ -1387,7 +1387,7 @@ a {
 }
 
 .a-content p {
-     font-size: 14px;
+     font-size: 15px;
      color: #94a3b8;
      /* xám sáng, đủ tương phản trên nền tối */
      line-height: 1.6;
@@ -1552,7 +1552,7 @@ a {
 }
 
 .a-card p {
-     font-size: 13.5px;
+     font-size: 14px;
      color: var(--text-muted);
      line-height: 1.6;
      margin: 0;
@@ -1571,7 +1571,7 @@ a {
      display: flex;
      align-items: center;
      gap: 8px;
-     font-size: 13px;
+     font-size: 14px;
      color: var(--text-muted);
 }
 
@@ -1584,7 +1584,7 @@ a {
      display: flex;
      align-items: center;
      justify-content: center;
-     font-size: 9px;
+     font-size: 12px;
 }
 
 .checklist-blue li i {
@@ -1631,7 +1631,7 @@ a {
      display: flex;
      align-items: center;
      justify-content: center;
-     font-size: 12px;
+     font-size: 14px;
      border: 2px solid;
 }
 
@@ -1722,14 +1722,14 @@ a {
 }
 
 .af-text h4 {
-     font-size: 15px;
+     font-size: 16px;
      font-weight: 700;
      color: #fff;
      margin: 0 0 4px;
 }
 
 .af-text p {
-     font-size: 13px;
+     font-size: 14px;
      color: var(--text-muted);
      margin: 0;
      line-height: 1.5;
@@ -1796,7 +1796,7 @@ a {
 }
 
 .af-text h4 {
-     font-size: 15px;
+     font-size: 16px;
      font-weight: 700;
      color: #f1f5f9;
      /* fix: chữ sáng, không nền highlight */
@@ -1807,7 +1807,7 @@ a {
 }
 
 .af-text p {
-     font-size: 13px;
+     font-size: 14px;
      color: #94a3b8;
      margin: 0;
      line-height: 1.5;
@@ -1923,7 +1923,7 @@ a {
 }
 
 .s-logo span {
-     font-size: 11px;
+     font-size: 14px;
      color: var(--text-muted);
      font-weight: 500;
      line-height: 1.2;
@@ -1936,7 +1936,7 @@ a {
 
 .s-desc {
      color: var(--text-muted);
-     font-size: 15px;
+     font-size: 16px;
      line-height: 1.8;
 }
 
@@ -2037,7 +2037,7 @@ a {
 
 .modal-header p {
      color: var(--text-muted);
-     font-size: 14px;
+     font-size: 15px;
      margin-bottom: 28px;
 }
 
@@ -2049,7 +2049,7 @@ a {
 
 .modal-form label {
      display: block;
-     font-size: 14px;
+     font-size: 15px;
      font-weight: 600;
      margin-bottom: 8px;
      color: var(--text-main);
@@ -2064,7 +2064,7 @@ a {
      background: var(--bg-dark);
      color: var(--text-main);
      font-family: 'Inter', sans-serif;
-     font-size: 15px;
+     font-size: 16px;
      transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -2085,7 +2085,7 @@ a {
      margin-top: 8px;
      padding: 15px 24px;
      border-radius: 10px;
-     font-size: 15px;
+     font-size: 16px;
 }
 
 .modal-form-actions {
@@ -2098,7 +2098,7 @@ a {
      flex: 1;
      padding: 15px 20px;
      border-radius: 10px;
-     font-size: 15px;
+     font-size: 16px;
 }
 
 /* Form Success State */
@@ -2136,7 +2136,7 @@ a {
 
 .form-success p {
      color: var(--text-muted);
-     font-size: 14px;
+     font-size: 15px;
      line-height: 1.6;
      margin-bottom: 26px;
 }
@@ -2429,7 +2429,7 @@ a {
      .theme-toggle button {
           width: 32px;
           height: 32px;
-          font-size: 0.9rem;
+          font-size: 0.9625rem;
      }
 
      .main-chat {
@@ -2448,7 +2448,7 @@ a {
      }
 
      .chat-header h5 {
-          font-size: 0.75rem;
+          font-size: 0.875rem;
      }
 
      .icon_chatbot {
@@ -2460,7 +2460,7 @@ a {
      .btn-reload {
           width: 28px;
           height: 28px;
-          font-size: 0.85rem;
+          font-size: 0.875rem;
      }
 
      .chat-body {
@@ -2475,7 +2475,7 @@ a {
      .message {
           max-width: 85%;
           padding: 10px 14px;
-          font-size: 0.85rem;
+          font-size: 0.875rem;
           line-height: 1.4;
           border-radius: 12px;
           margin-bottom: 4px;
@@ -2497,18 +2497,18 @@ a {
      .chat-footer input {
           height: 36px;
           padding: 0 14px;
-          font-size: 0.85rem;
+          font-size: 0.875rem;
           border-radius: 18px;
      }
 
      .chat-footer input::placeholder {
-          font-size: 0.8rem;
+          font-size: 0.875rem;
      }
 
      .chat-footer button {
           width: 36px;
           height: 36px;
-          font-size: 0.85rem;
+          font-size: 0.875rem;
      }
 
      .transition-wrapper,
@@ -2525,7 +2525,7 @@ a {
      }
 
      .section-title {
-          font-size: 15px;
+          font-size: 16px;
 
      }
 
@@ -2551,7 +2551,7 @@ a {
      }
 
      .section-title {
-          font-size: 14px;
+          font-size: 15px;
      }
 
      #chatbot-popup {
@@ -2608,7 +2608,7 @@ a {
      padding: 10px 14px;
      border-radius: 8px;
      color: #9A9A9A;
-     font-size: 14px;
+     font-size: 15px;
      cursor: pointer;
 }
 
@@ -2666,7 +2666,7 @@ a {
      background: #fff;
      border-radius: 8px;
      width: fit-content;
-     font-size: 13px;
+     font-size: 14px;
      color: #1A1A1A;
      font-weight: 500;
 }
@@ -2681,7 +2681,7 @@ a {
      margin: 8px 0 0;
      padding-left: 4px;
      list-style: none;
-     font-size: 13px;
+     font-size: 14px;
      line-height: 1.8;
      color: #B5B5B5;
 }
@@ -2721,7 +2721,7 @@ a {
 }
 
 .audio-player .time {
-     font-size: 12px;
+     font-size: 14px;
      color: #9A9A9A;
 }
 
@@ -2758,7 +2758,7 @@ a {
      .carousel-arrow {
           width: 30px;
           height: 30px;
-          font-size: 14px;
+          font-size: 15px;
      }
 
      .features-list {
@@ -2974,7 +2974,7 @@ a {
      }
 
      .modal-header p {
-          font-size: 13px;
+          font-size: 14px;
      }
 
      .platform,
@@ -3025,7 +3025,7 @@ a {
      .badge-label .number {
           width: 20px;
           height: 20px;
-          font-size: 13px;
+          font-size: 14px;
      }
 
      .hero-buttons {
@@ -3083,7 +3083,7 @@ a {
      }
 
      .s-logo span {
-          font-size: 10px;
+          font-size: 13px;
      }
 
      .nav-content {
@@ -3093,7 +3093,7 @@ a {
      }
 
      .nav-content .btn {
-          font-size: 12px;
+          font-size: 14px;
           padding: 8px 16px;
      }
 
@@ -3126,7 +3126,7 @@ a {
      background: #e60012;
      color: #fff;
      text-align: left;
-     font-size: 14px;
+     font-size: 15px;
      font-weight: 700;
      padding: 18px 20px;
      vertical-align: top;
@@ -3135,14 +3135,14 @@ a {
 .investment-table thead th span {
      display: block;
      margin-top: 6px;
-     font-size: 12px;
+     font-size: 14px;
      font-weight: 400;
      opacity: 0.85;
 }
 
 .investment-table tbody td {
      padding: 18px 20px;
-     font-size: 14px;
+     font-size: 15px;
      line-height: 1.5;
      color: var(--text-muted);
      border-bottom: 1px solid var(--border);
@@ -3281,7 +3281,7 @@ a {
      gap: 12px;
      padding: 0 20px;
      color: #a1a1aa;
-     font-size: 14px;
+     font-size: 15px;
      font-weight: 500;
      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -3360,7 +3360,7 @@ a {
      display: flex;
      align-items: center;
      color: #e4e4e7;
-     font-size: 14px;
+     font-size: 15px;
 }
 
 .card-cell-time {
@@ -3369,7 +3369,7 @@ a {
      display: flex;
      align-items: center;
      color: #e4e4e7;
-     font-size: 14px;
+     font-size: 15px;
 }
 
 .card-cell:nth-child(1) {
@@ -3446,7 +3446,7 @@ a {
 }
 
 .header-cell p {
-     font-size: 13px;
+     font-size: 14px;
      color: #a1a1aa;
      margin: 0;
      line-height: 1.4;
@@ -3518,7 +3518,7 @@ a {
 }
 
 .period {
-     font-size: 13px;
+     font-size: 14px;
      color: #a1a1aa;
 }
 
@@ -3579,7 +3579,7 @@ a {
 
      .card-cell::before {
           content: attr(data-label);
-          font-size: 11px;
+          font-size: 14px;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: .5px;

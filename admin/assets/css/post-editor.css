@@ -59,7 +59,7 @@
 .post-box select,
 .post-box textarea {
     font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     padding: 15px 16px;
     border: 1px solid #e0e0e3;
     border-radius: 8px;
@@ -83,7 +83,7 @@
 
 .post-box .hint {
     display: block;
-    font-size: 12px;
+    font-size: 14px;
     color: #9b9ba1;
     margin: 8px 0 8px;
 }
@@ -111,7 +111,7 @@
 
 .post-box label.field-label {
     display: block;
-    font-size: 12.5px;
+    font-size: 14px;
     font-weight: 700;
     color: #6b6b70;
     margin-bottom: 6px;
@@ -128,7 +128,7 @@
 
 .price-stock-group-label {
     display: block;
-    font-size: 11px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #b9b9be;
@@ -151,14 +151,14 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: #9b9ba1;
     pointer-events: none;
 }
 
 .price-preview {
-    font-size: 13px;
+    font-size: 14px;
     color: #6b6b70;
     margin-top: 2px;
 }
@@ -203,7 +203,7 @@
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
 }
 

@@ -43,7 +43,7 @@ require 'head.php';
             <div class="product-empty">
                 <i class="fa-solid fa-box-open"></i>
                 <p>Không tìm thấy sản phẩm bạn yêu cầu.</p>
-                <a href="san-pham.php" class="btn-back">← Quay lại danh sách sản phẩm</a>
+                <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="btn-back">← Quay lại danh sách sản phẩm</a>
             </div>
         </div>
     </section>
@@ -57,6 +57,7 @@ require 'head.php';
     if (empty($images)) {
         $images = ['assets/image/pc.webp'];
     }
+    $images = array_map('asset_url', $images);
     $hinh_anh = $images[0];
 
     $info_rows = [];
@@ -146,13 +147,13 @@ require 'head.php';
     <section class="product-detail">
         <div class="container">
             <nav class="product-breadcrumb">
-                <a href="index.php">Trang chủ</a>
+                <a href="<?php echo htmlspecialchars(asset_url('index.php')); ?>">Trang chủ</a>
                 <span>/</span>
-                <a href="san-pham.php">Sản phẩm</a>
+                <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">Sản phẩm</a>
                 <?php if (!empty($sp['ten_danh_muc'])): ?>
                     <span>/</span>
                     <a
-                        href="san-pham.php?danh_muc=<?php echo (int) $sp['ma_danh_muc']; ?>"><?php echo htmlspecialchars($sp['ten_danh_muc']); ?></a>
+                        href="<?php echo htmlspecialchars(asset_url('san-pham.php?danh_muc=' . (int) $sp['ma_danh_muc'])); ?>"><?php echo htmlspecialchars($sp['ten_danh_muc']); ?></a>
                 <?php endif; ?>
                 <span>/</span>
                 <span class="current"><?php echo htmlspecialchars($sp['ten_san_pham']); ?></span>
@@ -200,16 +201,16 @@ require 'head.php';
                                     $r_giam_gia     = (int) $rp['giam_gia'];
                                     $r_gia_sau_giam = $r_giam_gia > 0 ? (int) round($r_gia_ban * (100 - $r_giam_gia) / 100) : $r_gia_ban;
                                     $r_anh_list     = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', $rp['hinh_anh']))));
-                                    $r_hinh_anh     = !empty($r_anh_list) ? $r_anh_list[0] : 'assets/image/pc.webp';
+                                    $r_hinh_anh     = asset_url(!empty($r_anh_list) ? $r_anh_list[0] : 'assets/image/pc.webp');
                                 ?>
                                     <a class="product-card-small"
-                                        href="<?php echo tao_url_san_pham($rp['ma_san_pham'], $rp['ten_san_pham']); ?>">
+                                        href="<?php echo htmlspecialchars(asset_url(tao_url_san_pham($rp['ma_san_pham'], $rp['ten_san_pham']))); ?>">
                                         <?php if ($r_giam_gia > 0): ?><span
                                                 class="product-badge">-<?php echo $r_giam_gia; ?>%</span><?php endif; ?>
                                         <div class="product-media">
                                             <img src="<?php echo htmlspecialchars($r_hinh_anh); ?>"
                                                 alt="<?php echo htmlspecialchars($rp['ten_san_pham']); ?>" loading="lazy"
-                                                onerror="this.onerror=null;this.src='assets/image/pc.webp';">
+                                                onerror="this.onerror=null;this.src='<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>';">
                                         </div>
                                         <div class="product-body">
                                             <?php if (!empty($rp['ten_thuong_hieu'])): ?>
@@ -217,7 +218,7 @@ require 'head.php';
                                                     class="product-brand"><?php echo htmlspecialchars($rp['ten_thuong_hieu']); ?></span>
                                             <?php endif; ?>
                                             <h3 class="product-name"><?php echo htmlspecialchars($rp['ten_san_pham']); ?></h3>
-                                            
+
                                             <div class="product-price-row">
                                                 <?php if ($r_gia_ban <= 0): ?>
                                                     <span class="product-price">Liên hệ</span>
@@ -382,7 +383,7 @@ require 'head.php';
                                 <span>Tư vấn nhanh</span>
                             </div>
                         </a>
-                        <a href="tai-khoan.php" class="contact-item">
+                        <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>" class="contact-item">
                             <i class="fa-solid fa-envelope"></i>
                             <div>
                                 <strong>Gửi yêu cầu</strong>
@@ -469,7 +470,8 @@ require 'head.php';
 
                     <!-- Compare Modal -->
                     <div id="compareModal" class="compare-modal" data-current-id="<?php echo (int) $sp['ma_san_pham']; ?>"
-                        data-danh-muc="<?php echo (int) $sp['ma_danh_muc']; ?>">
+                        data-danh-muc="<?php echo (int) $sp['ma_danh_muc']; ?>"
+                        data-thuong-hieu="<?php echo (int) ($sp['ma_thuong_hieu'] ?? 0); ?>">
                         <div class="compare-modal-dialog">
                             <div class="compare-modal-header">
                                 <h3>So Sánh Sản Phẩm</h3>
@@ -510,6 +512,8 @@ require 'head.php';
                                                 <td><?php echo htmlspecialchars($sp['ten_dung_luong'] ?? ''); ?></td>
                                                 <td id="compareOtherCapacity"></td>
                                             </tr>
+
+
                                             <tr>
                                                 <th>Giá</th>
                                                 <td><?php echo $gia_ban <= 0 ? 'Liên hệ' : number_format($gia_sau_giam, 0, ',', '.') . '₫'; ?>
@@ -555,7 +559,7 @@ require 'head.php';
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['khach_hang_id'])): ?>
-                    <form action="xuly-danh-gia.php" method="POST" class="review-form">
+                    <form action="<?php echo htmlspecialchars(asset_url('xuly-danh-gia.php')); ?>" method="POST" class="review-form">
                         <input type="hidden" name="ma_san_pham" value="<?php echo (int) $sp['ma_san_pham']; ?>">
                         <div class="review-form-row">
                             <span class="review-form-label">Chọn số sao:</span>
@@ -573,7 +577,7 @@ require 'head.php';
                     </form>
                 <?php else: ?>
                     <div class="review-login-prompt">
-                        <p><a href="tai-khoan.php">Đăng nhập</a> để gửi bình luận, đánh giá cho sản phẩm này.</p>
+                        <p><a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>">Đăng nhập</a> để gửi bình luận, đánh giá cho sản phẩm này.</p>
                     </div>
                 <?php endif; ?>
 
@@ -627,24 +631,30 @@ require 'head.php';
                     <h2>Bài viết liên quan</h2>
                     <div class="article-list">
                         <?php foreach ($related_articles as $a):
-                            $art_anh  = trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp';
+                            $art_anh  = asset_url(trim($a['article_image']) !== '' ? $a['article_image'] : 'assets/image/pc.webp');
                             $art_ngay = date('d/m/Y', strtotime($a['article_date']));
                             $art_slug = tao_slug($a['article_title']);
+                            $art_mo_ta = trim(strip_tags(html_entity_decode($a['article_summary'] ?? '', ENT_QUOTES, 'UTF-8')));
+                            if (mb_strlen($art_mo_ta) > 150) {
+                                $art_mo_ta = mb_substr($art_mo_ta, 0, 150) . '...';
+                            }
                         ?>
-                            <a class="article-item" href="chi-tiet-tin-tuc.php?ten-bai-viet=<?php echo $art_slug; ?>">
+                            <a class="article-item" href="<?php echo htmlspecialchars(asset_url('chi-tiet-tin-tuc.php?ten-bai-viet=' . $art_slug)); ?>">
                                 <div class="article-thumb">
                                     <img src="<?php echo htmlspecialchars($art_anh); ?>"
                                         alt="<?php echo htmlspecialchars($a['article_title']); ?>" loading="lazy">
                                 </div>
                                 <div class="article-body">
                                     <h3 class="article-title"><?php echo htmlspecialchars($a['article_title']); ?></h3>
-                                    <span class="article-author"><i class="fa-solid fa-circle-user"></i>
-                                        <?php echo htmlspecialchars($a['article_author']); ?></span>
-                                    <span class="article-date"><i class="fa-regular fa-clock"></i>
-                                        <?php echo $art_ngay; ?></span>
-                                    <!-- <span class="article-content"><i class=""></i><?php echo htmlspecialchars($a['article_content']); ?></span> -->
-                                    <span class="article-summary"><i
-                                            class=""></i><?php echo htmlspecialchars($a['article_summary']); ?>
+                                    <div class="article-meta">
+                                        <span class="article-author"><i class="fa-solid fa-circle-user"></i>
+                                            <?php echo htmlspecialchars($a['article_author']); ?></span>
+                                        <span class="article-date"><i class="fa-regular fa-clock"></i>
+                                            <?php echo $art_ngay; ?></span>
+                                    </div>
+                                    <?php if ($art_mo_ta !== ''): ?>
+                                        <span class="article-summary"><?php echo htmlspecialchars($art_mo_ta); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </a>
                         <?php endforeach; ?>
@@ -657,7 +667,7 @@ require 'head.php';
 
 <?php include 'footer.php'; ?>
 
-<script src="assets/js/chi-tiet-san-pham.js"></script>
+<script src="<?php echo htmlspecialchars(asset_url('assets/js/chi-tiet-san-pham.js')); ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const btnWishlist = document.querySelector('.btn-wishlist');

@@ -1,4 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
+﻿document.addEventListener('DOMContentLoaded', function () {
+    var siteRoot = window.SITE_ROOT || '';
+    function siteUrl(path) { return siteRoot + '/' + path; }
+
     var cartList = document.getElementById('cartItemsList');
     if (!cartList) return;
 
@@ -35,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
         params.append('ma_gio_hang', maGioHang);
         params.append('so_luong', soLuongMoi);
 
-        fetch('gio-hang-ajax.php', {
+        fetch(siteUrl('gio-hang-ajax.php'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
@@ -89,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 params.append('action', 'xoa');
                 params.append('ma_gio_hang', maGioHang);
 
-                fetch('gio-hang-ajax.php', {
+                fetch(siteUrl('gio-hang-ajax.php'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: params.toString()

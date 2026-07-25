@@ -1,6 +1,6 @@
 /* ===== Trang chi tiết sản phẩm ===== */
 .product-detail {
-    background: #f4f4f6;
+    background: #FFF;
     padding: 30px 0 70px;
     font-family: 'Montserrat', Arial, sans-serif;
     min-height: 60vh;
@@ -30,6 +30,29 @@
     /* Màu chủ đạo của bạn */
     position: relative;
 }
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap; /* để tự xuống dòng nếu màn hình quá nhỏ */
+    margin: 6px 0;
+}
+
+.article-author,
+.article-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #666; /* tùy chỉnh theo màu bạn đang dùng */
+}
+
+.article-author i,
+.article-date i {
+    color: #999; /* màu icon, tùy chỉnh */
+}
+
 
 /* Tạo mũi tên nhỏ trỏ lên bình luận khách */
 .review-admin-reply::before {
@@ -47,7 +70,7 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 8px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .admin-reply-header i {
@@ -61,14 +84,14 @@
 
 .admin-reply-header .reply-date {
     color: #888;
-    font-size: 12px;
+    font-size: 14px;
     margin-left: auto;
 }
 
 .review-admin-reply .reply-content {
     color: #555;
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
@@ -79,7 +102,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 14px;
     color: #6b6b70;
     margin-bottom: 24px;
 }
@@ -102,30 +125,10 @@
 .product-detail-layout {
     display: grid;
     grid-template-columns: 58% 42%;
-    grid-template-areas:
-        "gallery sidebar"
-        "related sidebar"
-        "desc sidebar";
     gap: 30px;
     align-items: start;
     margin-bottom: 40px;
     font-weight: 500;
-}
-
-.product-detail-layout .product-gallery {
-    grid-area: gallery;
-}
-
-.product-detail-layout .product-related-inline {
-    grid-area: related;
-}
-
-.product-detail-layout .product-detail-desc-wrapper {
-    grid-area: desc;
-}
-
-.product-detail-layout .product-detail-right {
-    grid-area: sidebar;
 }
 
 @media (max-width: 992px) {
@@ -283,7 +286,7 @@
 }
 
 .product-detail-desc-content {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     color: #444;
 }
@@ -324,14 +327,14 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .product-rating-row .stars {
     color: #fbbf24;
     display: flex;
     gap: 2px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .product-rating-row .rating-count {
@@ -379,7 +382,7 @@
     background: none;
     border: none;
     padding: 0;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #6b7280;
     cursor: pointer;
@@ -416,7 +419,7 @@
     gap: 12px;
     padding: 11px 0;
     border-bottom: 1px solid #f0f0f2;
-    font-size: 13.5px;
+    font-size: 14px;
 }
 
 .product-info-table li:last-child {
@@ -489,7 +492,7 @@ span.info-value {
 }
 
 .product-price-vat {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #9ca3af;
 }
@@ -497,7 +500,7 @@ span.info-value {
 .product-discount-badge {
     background: #ffd700;
     color: #1e3c72;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     padding: 2px 6px;
     border-radius: 4px;
@@ -510,7 +513,7 @@ span.info-value {
     gap: 10px;
     padding: 10px 16px;
     border-radius: 10px;
-    font-size: 12.5px;
+    font-size: 14px;
 }
 
 .stock-badge div {
@@ -563,7 +566,7 @@ span.info-value {
     background: #eaf1fb;
     color: #1e3c72;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
     padding: 12px 16px;
     display: flex;
     align-items: center;
@@ -576,7 +579,7 @@ span.info-value {
 }
 
 .promo-note {
-    font-size: 13px;
+    font-size: 14px;
     color: #6b7280;
     margin: 0 0 10px;
 }
@@ -591,7 +594,7 @@ span.info-value {
 }
 
 .promo-body li {
-    font-size: 14px;
+    font-size: 15px;
     color: #374151;
     display: flex;
     gap: 8px;
@@ -638,7 +641,7 @@ span.info-value {
 }
 
 .btn-buy-now span {
-    font-size: 12px;
+    font-size: 14px;
     opacity: 0.9;
     margin-top: 2px;
 }
@@ -706,12 +709,12 @@ span.info-value {
 }
 
 .contact-item strong {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .contact-item span {
-    font-size: 12px;
+    font-size: 14px;
     color: #6b7280;
     font-weight: 500;
     white-space: nowrap;
@@ -742,7 +745,7 @@ span.info-value {
     border: 1px solid #2563eb;
     color: #2563eb;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     flex-direction: row;
     gap: 8px;
 }
@@ -766,7 +769,7 @@ span.info-value {
 }
 
 .qty-label {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: #374151;
 }
@@ -801,7 +804,7 @@ span.info-value {
     border-left: 1px solid #e5e7eb;
     border-right: 1px solid #e5e7eb;
     text-align: center;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     -moz-appearance: textfield;
 }
@@ -813,7 +816,7 @@ span.info-value {
 }
 
 .qty-stock {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #6b7280;
 }
@@ -829,7 +832,7 @@ span.info-value {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-size: 15px;
+    font-size: 16px;
     transition: background 0.2s;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.35);
 }
@@ -849,12 +852,12 @@ span.info-value {
 }
 
 .btn-installment strong {
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
 }
 
 .btn-installment span {
-    font-size: 11px;
+    font-size: 14px;
     opacity: 0.9;
 }
 
@@ -894,13 +897,13 @@ span.info-value {
 }
 
 .product-policies-grid li strong {
-    font-size: 15px;
+    font-size: 16px;
     color: #111;
     font-weight: 600;
 }
 
 .product-policies-grid li span {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #6b7280;
     padding: 2px;
@@ -949,12 +952,12 @@ span.info-value {
 }
 
 .quickinfo-item span {
-    font-size: 11.5px;
+    font-size: 14.5px;
     color: #6b7280;
 }
 
 .quickinfo-item strong {
-    font-size: 13.5px;
+    font-size: 14px;
     color: #111;
     font-weight: 700;
 }
@@ -983,7 +986,7 @@ span.info-value {
 .specs-content table {
     width: 100% !important;
     border-collapse: collapse !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
 }
 
 /* Hàng tiêu đề nhóm (th colspan) - nền vàng nhạt */
@@ -994,7 +997,7 @@ span.info-value {
 
 .specs-content tr:has(> th[colspan]) th {
     padding: 10px 14px !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     font-weight: 700 !important;
     color: #333 !important;
     border-bottom: 1px solid #e8dfa0 !important;
@@ -1016,7 +1019,7 @@ span.info-value {
     padding: 12px 14px !important;
     border-bottom: 1px solid #f0f0f0 !important;
     color: #333 !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     vertical-align: middle !important;
 }
 
@@ -1040,7 +1043,7 @@ span.info-value {
 .desc-tab-active {
     display: inline-block;
     padding: 12px 24px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #1e3c72;
     border: 1px solid #e5e7eb;
@@ -1059,8 +1062,8 @@ span.info-value {
 }
 
 .product-detail-desc-content {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.4;
     color: #333;
     overflow: hidden;
     max-height: 800px;
@@ -1098,7 +1101,7 @@ span.info-value {
     border: 1px solid #1e3c72;
     color: #1e3c72;
     padding: 10px 32px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
@@ -1284,7 +1287,7 @@ span.info-value {
 
 .compare-placeholder p {
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .compare-search-box {
@@ -1306,7 +1309,7 @@ span.info-value {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .compare-search-results {
@@ -1354,22 +1357,29 @@ span.info-value {
 }
 
 .compare-result-name {
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #111;
 }
 
 .compare-result-price {
-    font-size: 13px;
+    font-size: 14px;
     color: #1e3c72;
     font-weight: 600;
 }
 
 .compare-no-result {
     padding: 14px;
-    font-size: 13.5px;
+    font-size: 14px;
     color: #6b7280;
     text-align: center;
+}
+
+.compare-result-heading {
+    padding: 10px 14px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
 }
 
 .compare-table {
@@ -1382,7 +1392,7 @@ span.info-value {
     border: 1px solid #e5e7eb;
     padding: 12px;
     vertical-align: top;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .compare-table th {
@@ -1406,7 +1416,7 @@ span.info-value {
     text-align: center;
     font-weight: 700;
     color: #111;
-    font-size: 13.5px;
+    font-size: 14px;
 }
 
 .compare-row-image a {
@@ -1457,7 +1467,7 @@ span.info-value {
 }
 
 .related-inline-count {
-    font-size: 12.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #6b7280;
     background: #f4f4f6;
@@ -1497,7 +1507,7 @@ span.info-value {
     left: 10px;
     background: linear-gradient(90deg, #1e3c72, #2a5298);
     color: #ffd700;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 999px;
@@ -1537,7 +1547,7 @@ span.info-value {
 .product-card-small .product-brand {
     display: inline-block;
     width: fit-content;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     color: #1e3c72;
     background: #eaf1fb;
@@ -1546,7 +1556,7 @@ span.info-value {
 }
 
 .product-card-small .product-name {
-    font-size: 14.5px;
+    font-size: 15.5px;
     font-weight: 600;
     color: #111;
     margin: 0;
@@ -1573,7 +1583,7 @@ span.info-value {
 }
 
 .product-card-small .product-price-old {
-    font-size: 12px;
+    font-size: 14px;
     color: #9ca3af;
     text-decoration: line-through;
 }
@@ -1582,7 +1592,7 @@ span.info-value {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #9ca3af;
     padding: 10px 14px 14px;
@@ -1673,10 +1683,10 @@ span.info-value {
 }
 
 .article-title {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 600;
     color: #333;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1693,7 +1703,7 @@ span.info-value {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .article-author {
@@ -1747,11 +1757,11 @@ span.info-value {
     color: #fbbf24;
     display: flex;
     gap: 2px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .reviews-count {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #6b7280;
     background: #f4f4f6;
@@ -1766,7 +1776,7 @@ span.info-value {
     gap: 10px;
     padding: 12px 16px;
     border-radius: 10px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 20px;
 }
@@ -1797,7 +1807,7 @@ span.info-value {
 }
 
 .review-form-label {
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #374151;
 }
@@ -1832,7 +1842,7 @@ span.info-value {
     border-radius: 10px;
     padding: 12px 14px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
     color: #111;
     margin-bottom: 12px;
 }
@@ -1848,7 +1858,7 @@ span.info-value {
     border: none;
     border-radius: 10px;
     padding: 10px 24px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.2s;
@@ -1864,7 +1874,7 @@ span.info-value {
     border-radius: 12px;
     padding: 16px;
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
     color: #6b7280;
     margin-bottom: 24px;
 }
@@ -1887,8 +1897,8 @@ span.info-value {
 
 .review-empty {
     text-align: center;
-    color: #9ca3af;
-    font-size: 14px;
+    color: #333;
+    font-size: 16px;
     padding: 20px 0;
 }
 
@@ -1914,7 +1924,7 @@ span.info-value {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #111;
 }
@@ -1927,17 +1937,17 @@ span.info-value {
     color: #fbbf24;
     display: flex;
     gap: 2px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .review-date {
-    font-size: 12.5px;
+    font-size: 14px;
     color: #9ca3af;
     margin-left: auto;
 }
 
 .review-content {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
     color: #444;
     margin: 0;

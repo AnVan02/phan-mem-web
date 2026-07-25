@@ -2,7 +2,7 @@
 require_once 'admin/config/config.php';
 
 if (isset($_SESSION['khach_hang_id'])) {
-    header('Location: tai-khoan.php');
+    header('Location: ' . asset_url('tai-khoan.php'));
     exit;
 }
 
@@ -33,7 +33,7 @@ require 'head.php';
         <?php endif; ?>
 
         <div class="contact-card form-card" style="max-width:480px; margin:0 auto;">
-            <form class="contact-form" action="xuly-tai-khoan.php" method="POST">
+            <form class="contact-form" action="<?php echo htmlspecialchars(asset_url('xuly-tai-khoan.php')); ?>" method="POST">
                 <input type="hidden" name="action" value="quen_mat_khau">
                 <div class="form-group">
                     <label for="forgot_email">Email</label>
@@ -41,7 +41,7 @@ require 'head.php';
                 </div>
                 <button type="submit" class="btn-submit btn-block">Gửi liên kết đặt lại &nbsp;<i class="fa-solid fa-paper-plane"></i></button>
             </form>
-            <p class="page-subtitle" style="margin-top:18px;"><a href="tai-khoan.php">← Quay lại đăng nhập</a></p>
+            <p class="page-subtitle" style="margin-top:18px;"><a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>">← Quay lại đăng nhập</a></p>
         </div>
     </div>
 

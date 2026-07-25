@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var siteRoot = window.SITE_ROOT || '';
+    function siteUrl(path) { return siteRoot + '/' + path; }
+
     var mainImage = document.getElementById('mainProductImage');
     var thumbs = Array.prototype.slice.call(document.querySelectorAll('.product-gallery-thumbs .thumb'));
     var prevBtn = document.querySelector('.gallery-nav-prev');
@@ -74,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
             params.append('ma_san_pham', maSanPham);
             params.append('so_luong', soLuong);
 
-            fetch('gio-hang-ajax.php', {
+            fetch(siteUrl('gio-hang-ajax.php'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params.toString()
@@ -147,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
         btnOpenCompareModal.addEventListener('click', function () {
             compareModal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            loadCompareSuggestions();
         });
     }
 
@@ -160,44 +164,60 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str || '';
+        return div.innerHTML;
+    }
+
+    function renderResults(items, heading) {
+        if (!compareSearchResults) return;
+        if (!items.length) {
+            compareSearchResults.innerHTML = '<div class="compare-no-result">Không tìm thấy sản phẩm phù hợp.</div>';
+            compareSearchResults.classList.add('show');
+            return;
+        }
+        var headingHtml = heading ? '<div class="compare-result-heading">' + escapeHtml(heading) + '</div>' : '';
+        compareSearchResults.innerHTML = headingHtml + items.map(function (item) {
+            return '<div class="compare-result-item" data-id="' + item.id + '">' +
+                '<img src="' + escapeHtml(item.hinh_anh) + '" alt="">' +
+                '<div class="compare-result-info">' +
+                    '<span class="compare-result-name">' + escapeHtml(item.ten_san_pham) + '</span>' +
+                    '<span class="compare-result-price">' + escapeHtml(item.gia_display) + '</span>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+        compareSearchResults.classList.add('show');
+
+        Array.prototype.slice.call(compareSearchResults.querySelectorAll('.compare-result-item')).forEach(function (el) {
+            el.addEventListener('click', function () {
+                selectCompareProduct(el.getAttribute('data-id'));
+            });
+        });
+    }
+
+    function loadCompareSuggestions() {
+        if (!compareModal || !compareSearchResults) return;
+        var currentId = compareModal.getAttribute('data-current-id');
+        var danhMuc = compareModal.getAttribute('data-danh-muc');
+        var thuongHieu = compareModal.getAttribute('data-thuong-hieu');
+        var url = siteUrl('so-sanh-ajax.php') + '?action=suggest&exclude=' + encodeURIComponent(currentId) +
+            '&danh_muc=' + encodeURIComponent(danhMuc) + '&thuong_hieu=' + encodeURIComponent(thuongHieu);
+        fetch(url)
+            .then(function (res) { return res.json(); })
+            .then(function (items) {
+                if (comparePlaceholder) comparePlaceholder.style.display = 'none';
+                renderResults(items, 'Gợi ý sản phẩm cùng hãng:');
+            });
+    }
+
     if (compareSearchInput && compareModal) {
         var currentId = compareModal.getAttribute('data-current-id');
         var danhMuc = compareModal.getAttribute('data-danh-muc');
         var searchTimer = null;
 
-        function escapeHtml(str) {
-            var div = document.createElement('div');
-            div.textContent = str || '';
-            return div.innerHTML;
-        }
-
-        function renderResults(items) {
-            if (!compareSearchResults) return;
-            if (!items.length) {
-                compareSearchResults.innerHTML = '<div class="compare-no-result">Không tìm thấy sản phẩm phù hợp.</div>';
-                compareSearchResults.classList.add('show');
-                return;
-            }
-            compareSearchResults.innerHTML = items.map(function (item) {
-                return '<div class="compare-result-item" data-id="' + item.id + '">' +
-                    '<img src="' + escapeHtml(item.hinh_anh) + '" alt="">' +
-                    '<div class="compare-result-info">' +
-                        '<span class="compare-result-name">' + escapeHtml(item.ten_san_pham) + '</span>' +
-                        '<span class="compare-result-price">' + escapeHtml(item.gia_display) + '</span>' +
-                    '</div>' +
-                '</div>';
-            }).join('');
-            compareSearchResults.classList.add('show');
-
-            Array.prototype.slice.call(compareSearchResults.querySelectorAll('.compare-result-item')).forEach(function (el) {
-                el.addEventListener('click', function () {
-                    selectCompareProduct(el.getAttribute('data-id'));
-                });
-            });
-        }
-
         function selectCompareProduct(id) {
-            fetch('so-sanh-ajax.php?action=detail&id=' + encodeURIComponent(id))
+            fetch(siteUrl('so-sanh-ajax.php') + '?action=detail&id=' + encodeURIComponent(id))
                 .then(function (res) { return res.json(); })
                 .then(function (data) {
                     if (data.error) return;
@@ -230,15 +250,15 @@ document.addEventListener('DOMContentLoaded', function () {
             var q = compareSearchInput.value.trim();
             clearTimeout(searchTimer);
             if (q.length < 2) {
-                if (compareSearchResults) compareSearchResults.classList.remove('show');
+                loadCompareSuggestions();
                 return;
             }
             searchTimer = setTimeout(function () {
-                var url = 'so-sanh-ajax.php?action=search&q=' + encodeURIComponent(q) +
+                var url = siteUrl('so-sanh-ajax.php') + '?action=search&q=' + encodeURIComponent(q) +
                     '&exclude=' + encodeURIComponent(currentId) + '&danh_muc=' + encodeURIComponent(danhMuc);
                 fetch(url)
                     .then(function (res) { return res.json(); })
-                    .then(renderResults);
+                    .then(function (items) { renderResults(items); });
             }, 300);
         });
 

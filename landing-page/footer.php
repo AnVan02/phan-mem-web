@@ -447,7 +447,7 @@
     .theme-toggle button {
         width: 32px;
         height: 32px;
-        font-size: 0.9rem;
+        font-size: 0.9625rem;
     }
 
     .main-chat {
@@ -466,7 +466,7 @@
     }
 
     .chat-header h5 {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
     }
 
     .icon_chatbot {
@@ -478,7 +478,7 @@
     .btn-reload {
         width: 28px;
         height: 28px;
-        font-size: 0.85rem;
+        font-size: 0.875rem;
     }
 
     .chat-body {
@@ -493,7 +493,7 @@
     .message {
         max-width: 85%;
         padding: 10px 14px;
-        font-size: 0.85rem;
+        font-size: 0.875rem;
         line-height: 1.4;
         border-radius: 12px;
         margin-bottom: 4px;
@@ -515,18 +515,18 @@
     .chat-footer input {
         height: 36px;
         padding: 0 14px;
-        font-size: 0.85rem;
+        font-size: 0.875rem;
         border-radius: 18px;
     }
 
     .chat-footer input::placeholder {
-        font-size: 0.8rem;
+        font-size: 0.875rem;
     }
 
     .chat-footer button {
         width: 36px;
         height: 36px;
-        font-size: 0.85rem;
+        font-size: 0.875rem;
     }
 
     .transition-wrapper,
@@ -542,7 +542,7 @@
             gap: 30px;
         }
         .section-title {
-            font-size: 15px;
+            font-size: 16px;
             
         }
         
@@ -567,7 +567,7 @@
             gap: 25px;
         }
         .section-title {
-            font-size: 14px;
+            font-size: 15px;
         }
         #chatbot-popup {
             width: 99vw !important;

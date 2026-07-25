@@ -56,7 +56,7 @@ function gui_email_dat_lai_mat_khau($email_nhan, $ten_khach_hang, $link_dat_lai)
             </p>
             <p>Nếu nút trên không hoạt động, hãy sao chép liên kết sau vào trình duyệt:<br>
             <a href='{$link_dat_lai}'>{$link_dat_lai}</a></p>
-            <p style='color:#6b7280; font-size:13px;'>Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này. Mật khẩu của bạn sẽ không thay đổi.</p>
+            <p style='color:#6b7280; font-size:14px;'>Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này. Mật khẩu của bạn sẽ không thay đổi.</p>
             <br>
             <p>Trân trọng,<br>Đội ngũ Viết Sơn Achieva</p>
         </div>

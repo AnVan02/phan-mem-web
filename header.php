@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/admin/config/config.php';
 $da_dang_nhap_kh = isset($_SESSION['khach_hang_id']);
 $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
@@ -19,8 +19,8 @@ try {
 <header class="site-header">
     <div class="container header-main-inner">
         <div class="site-logo">
-            <a href="index.php" title="Trang chủ Viết Sơn">
-                <img src="assets/image/Logo ACVS/ACVS.png" alt="">
+            <a href="<?php echo htmlspecialchars(asset_url('index.php')); ?>" title="Trang chủ Viết Sơn">
+                <img src="<?php echo htmlspecialchars(asset_url('assets/image/Logo ACVS/ACVS.png')); ?>" alt="">
             </a>
         </div>
 
@@ -30,26 +30,42 @@ try {
 
         <nav class="main-nav">
             <ul>
-                    <!-- Dropdown nhỏ -->
-                <li class="has-submenu">
-                    <a href="cong-dong.php">
+
+                <li class="has-megamenu">
+                    <a href="<?php echo htmlspecialchars(asset_url('may-tinh-lap-san.php')); ?>">
                         Về công ty
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="ve-chung-toi.php">Thông tin công ty</a></li>
-                        <li><a href="chinh-sach-bao-hanh.php">Chính sách bảo hành </a></li>
-                        <li><a href="cong-dong.php?trang=podcast">Chính sách sản phẩm</a></li>
-                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Chính sách công ty </a></li>
-                        <?php foreach ($menu_chinh_sach['ve-cong-ty'] as $tr_menu): ?>
-                            <li><a href="chinh-sach.php?slug=<?php echo urlencode($tr_menu['policy_slug']); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <div class="megamenu">
+                        <div class="megamenu-inner">
+                            <div class="megamenu-content-group">
+                                <div class="megamenu-cols">
+                                    <div class="megamenu-col">
+                                        <h4>Thông tin công ty</h4>
+                                        <p class="megamenu-desc">Tìm hiểu về chúng tôi, các chính sách và cam kết nhằm mang đến
+                                            sản phẩm chất lượng cùng dịch vụ khách hàng chuyên nghiệp..
+                                        </p>
+                                        <ul>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('ve-chung-toi.php')); ?>">Thông tin công ty</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('chinh-sach-bao-hanh.php')); ?>">Chính sách bảo hành </a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('cong-dong.php' . '?trang=podcast')); ?>">Chính sách sản phẩm</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('cong-dong.php' . '?trang=gioi-thieu-ban-be')); ?>">Chính sách công ty </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="megamenu-promo">
+                                    <a href="<?php echo htmlspecialchars(asset_url('uu-dai.php' . '?bo-suu-tap=007')); ?>">
+                                        <img src="<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>" alt="Máy tính chơi game lắp sẵn">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Mega menu -->
                 <li class="has-megamenu">
-                    <a href="may-tinh-lap-san.php">
+                    <a href="<?php echo htmlspecialchars(asset_url('may-tinh-lap-san.php')); ?>">
                         Máy tính lắp sẵn
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
@@ -58,32 +74,31 @@ try {
                             <div class="megamenu-content-group">
                                 <div class="megamenu-cols">
                                     <div class="megamenu-col">
-                                        <h4>Máy tính chơi game lắp sẵn</h4>
-                                        <p class="megamenu-desc">Màn hình máy tính được tối ưu hóa để chơi game mượt mà ở độ phân giải 1080p, 1440p hoặc 4K.</p>
+                                        <h4>Sản phẩm và máy bộ </h4>
+                                        <p class="megamenu-desc"> Khám phá danh mục máy bộ, linh kiện máy tính và các sản phẩm công nghệ
+                                            được tuyển chọn, đáp ứng nhu cầu từ học tập, làm việc đến chơi game và
+                                            sáng tạo nội dung.
+                                        </p>
                                         <ul>
-                                            <li><a href="san-pham.php">Sản phẩm</a></li>
-                                            <li><a href="san-pham.php?loai=rosa">Máy bộ PC</a></li>
-                                            <li><a href="san-pham.php?loai=amd">Người chơi thứ ba</a></li>
-                                            <li><a href="may-tinh-lap-san.php?so-sanh=1">So sánh các máy tính chơi game lắp sẵn</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">Sản phẩm</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?thuong-hieu=rosa')); ?>">Máy bộ ROSA</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="megamenu-promo">
-                                    <a href="uu-dai.php?bo-suu-tap=007">
-                                        <img src="assets/image/pc.webp" alt="Máy tính chơi game lắp sẵn">
+                                    <a href="<?php echo htmlspecialchars(asset_url('uu-dai.php' . '?bo-suu-tap=007')); ?>">
+                                        <img src="<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>" alt="Máy tính chơi game lắp sẵn">
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
                 <!-- Mega menu -->
                 <li class="has-megamenu">
-                    <a href="san-pham.php">
+                    <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">
                         Linh kiện máy tính
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
-                    
                     <div class="megamenu">
                         <div class="megamenu-inner">
                             <div class="megamenu-content-group">
@@ -91,99 +106,99 @@ try {
                                     <div class="megamenu-col">
                                         <h4>Linh kiện chính</h4>
                                         <ul>
-                                            <li><a href="san-pham.php?danh_muc=1">CPU</a></li>
-                                            <li><a href="san-pham.php?loai=mainboard">Mainboard</a></li>
-                                            <li><a href="san-pham.php?loai=vga">VGA - Card màn hình</a></li>
-                                            <li><a href="san-pham.php?loai=ram">RAM</a></li>
-                                            <li><a href="san-pham.php?loai=ssd">SSD</a></li>
-                                            <li><a href="san-pham.php?loai=manhinh">Màn hình</a></li>
-                                            <li><a href="san-pham.php?loai=asus">ASUS</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=amd,intel')); ?>">CPU (AMD - Intel)</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=asrock')); ?>">Mainboard (ASRock)</a></li>
                                         </ul>
                                     </div>
                                     <div class="megamenu-col">
-                                        <h4>Lưu trữ &amp; Tản nhiệt</h4>
+                                        <h4>RAM &amp; Lưu trữ theo hãng</h4>
                                         <ul>
-                                            <li><a href="san-pham.php?loai=hdd">Ổ cứng SSD/HDD</a></li>
-                                            <li><a href="san-pham.php?loai=nguon">Nguồn máy tính</a></li>
-                                            <li><a href="san-pham.php?loai=tan-nhiet">Tản nhiệt</a></li>
-                                            <li><a href="san-pham.php?loai=vo-case">Vỏ case</a></li>
-                                            <li><a href="san-pham.php?loai=agi">Agi</a></li>
-                                            <li><a href="san-pham.php?loai=gskill">Gskill</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="megamenu-col">
-                                        <h4>Màn hình</h4>
-                                        <ul>
-                                            <li><a href="san-pham.php?loai=aoc">AOC</a></li>
-                                            <li><a href="san-pham.php?loai=benq">Benq</a></li>
-                                            <li><a href="san-pham.php?loai=unv">UNV</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=gskill')); ?>">G.Skill</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=kingston')); ?>">Kingston</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=kingbank')); ?>">KingBank</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=agi')); ?>">AGI</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=lexar')); ?>">Lexar</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <li><a href="bao-hanh.php">Bảo hành </a></li>
                 </li>
+
+                <!-- Mega menu -->
+                <li class="has-megamenu">
+                    <a href="<?php echo htmlspecialchars(asset_url('may-tinh-lap-san.php')); ?>">
+                        Mô Tả Sản Phẩm
+                        <span class="submenu-arrow" aria-hidden="true"></span>
+                    </a>
+                    <div class="megamenu">
+                        <div class="megamenu-inner">
+                            <div class="megamenu-content-group">
+                                <div class="megamenu-cols">
+                                    <div class="megamenu-col">
+                                        <h4>Landing Page sản phẩm</h4>
+                                        <p class="megamenu-desc">
+                                            Khám phá các landing page giới thiệu sản phẩm, công nghệ và giải pháp
+                                            từ những thương hiệu hàng đầu trong lĩnh vực phần cứng máy tính.
+                                        </p>
+                                        <ul>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('landing-page/chương-trinh-intel.php')); ?>">INTEL</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('landing-page/nen-tang-ai-local.php')); ?>">KINGSTON</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('cong-dong.php' . '?trang=podcast')); ?>">PALIT</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('cong-dong.php' . '?trang=gioi-thieu-ban-be')); ?>">Giới thiệu bạn bè</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="megamenu-promo">
+                                    <a href="<?php echo htmlspecialchars(asset_url('uu-dai.php' . '?bo-suu-tap=007')); ?>">
+                                        <img src="<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>" alt="Máy tính chơi game lắp sẵn">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="<?php echo htmlspecialchars(asset_url('bao-hanh.php')); ?>">Bảo hành </a></li>
+
 
                 <!-- Dropdown nhỏ -->
                 <li class="has-submenu">
-                    <a href="cong-dong.php">
+                    <a href="<?php echo htmlspecialchars(asset_url('cong-dong.php')); ?>">
                         Cộng đồng
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="ve-chung-toi.php">Về công ty </a></li>
-                        <li><a href="tin-tuc-moi.php">Tin tức</a></li>
-                        <li><a href="cong-dong.php?trang=podcast">Mô tả sản phầm</a></li>
-                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
+                        <li><a href="<?php echo htmlspecialchars(asset_url('tin-tuc-moi.php')); ?>">Tin tức</a></li>
                         <?php foreach ($menu_chinh_sach['cong-dong'] as $tr_menu): ?>
-                            <li><a href="chinh-sach.php?slug=<?php echo urlencode($tr_menu['policy_slug']); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
+                            <li><a href="<?php echo htmlspecialchars(asset_url('chinh-sach.php?slug=' . urlencode($tr_menu['policy_slug']))); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </li>
 
 
-                <!-- Dropdown nhỏ -->
-                <li class="has-submenu">
-                    <a href="cong-dong.php">
-                        Mô tả sản phẩm
-                        <span class="submenu-arrow" aria-hidden="true"></span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="landing-page/chương-trinh-intel.php">INTEL</a></li>
-                        <li><a href="landing-page/nen-tang-ai-local.php">KINGSTON</a></li>
-                        <li><a href="cong-dong.php?trang=podcast">PALIT</a></li>
-                        <li><a href="cong-dong.php?trang=gioi-thieu-ban-be">Giới thiệu bạn bè</a></li>
-                        
-                        <?php foreach ($menu_chinh_sach['mo-ta-san-pham'] as $tr_menu): ?>
-                            <li><a href="chinh-sach.php?slug=<?php echo urlencode($tr_menu['policy_slug']); ?>"><?php echo htmlspecialchars($tr_menu['policy_title']); ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </li>
-
-
-            <a href="tai-khoan.php" class="main-nav-account">
-                <i class="fa-solid fa-circle-user"></i> Tài khoản
-            </a>
+                <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>" class="main-nav-account" <?php echo $da_dang_nhap_kh ? '' : 'data-account-trigger="1"'; ?>>
+                    <i class="fa-solid fa-circle-user"></i> Tài khoản
+                </a>
         </nav>
 
         <div class="header-icons">
-            <button type="button" class="icon-btn search-toggle" aria-label="Tìm kiếm"><img width="30" height="30" src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/external-search-user-interface-tanah-basah-detailed-outline-tanah-basah.png" alt="external-search-user-interface-tanah-basah-detailed-outline-tanah-basah"/></button>
-            <a href="tai-khoan.php" class="icon-btn" aria-label="Tài khoản">
+            <button type="button" class="icon-btn search-toggle" aria-label="Tìm kiếm"><img width="30" height="30" src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/external-search-user-interface-tanah-basah-detailed-outline-tanah-basah.png" alt="external-search-user-interface-tanah-basah-detailed-outline-tanah-basah" /></button>
+            <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>" class="icon-btn" aria-label="Tài khoản" <?php echo $da_dang_nhap_kh ? '' : 'data-account-trigger="1"'; ?>>
                 <?php if ($da_dang_nhap_kh): ?>
                     <span class="header-account-avatar"><?php echo htmlspecialchars(mb_strtoupper(mb_substr($ten_khach_hang_header, 0, 1, 'UTF-8'), 'UTF-8')); ?></span>
                 <?php else: ?>
-                    <img width="30" height="30" src="https://img.icons8.com/ios/50/user-male-circle--v1.png" alt="user"/>
+                    <img width="30" height="30" src="https://img.icons8.com/ios/50/user-male-circle--v1.png" alt="user" />
                 <?php endif; ?>
             </a>
-            <a href="gio-hang.php" class="icon-btn cart-icon-btn" aria-label="Giỏ hàng">
-                <img width="30" height="30" src="https://img.icons8.com/badges/48/add-shopping-cart.png" alt="shopping-cart-loaded"/>
+            <a href="<?php echo htmlspecialchars(asset_url('gio-hang.php')); ?>" class="icon-btn cart-icon-btn" aria-label="Giỏ hàng">
+                <img width="30" height="30" src="https://img.icons8.com/badges/48/add-shopping-cart.png" alt="shopping-cart-loaded" />
                 <span class="cart-count-badge" id="cartCountBadge" style="display:none;">0</span>
             </a>
         </div>
 
-        <form class="search-box" action="tim-kiem.php" method="get" autocomplete="off">
+        <form class="search-box" action="<?php echo htmlspecialchars(asset_url('tim-kiem.php')); ?>" method="get" autocomplete="off">
             <input type="text" name="q" id="headerSearchInput" placeholder="Tìm theo tên, mô tả hoặc mã sản phẩm..."
                 aria-label="Tìm kiếm" value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
             <button type="submit" aria-label="Tìm kiếm">
@@ -192,5 +207,25 @@ try {
             <div class="search-suggest" id="headerSearchSuggest"></div>
         </form>
     </div>
-</header>
 
+    <?php if (!$da_dang_nhap_kh): ?>
+    <div class="account-modal-overlay" id="accountModalOverlay">
+        <div class="account-modal" role="dialog" aria-modal="true" aria-labelledby="accountModalTitle">
+            <button type="button" class="account-modal-close" id="accountModalClose" aria-label="Đóng">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="account-modal-title" id="accountModalTitle">Tài khoản</h2>
+            <div class="account-modal-mascot">
+                <i class="fa-solid fa-circle-user"></i>
+            </div>
+            <p class="account-modal-desc">
+                Vui lòng đăng nhập tài khoản để xem ưu đãi và thanh toán dễ dàng hơn.
+            </p>
+            <div class="account-modal-actions">
+                <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php?tab=dang-ky')); ?>" class="account-modal-btn account-modal-btn-outline">Đăng ký</a>
+                <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php?tab=dang-nhap')); ?>" class="account-modal-btn account-modal-btn-solid">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+</header>

@@ -1,55 +1,59 @@
+<?php
+$footer_lang = ($_COOKIE['site_lang'] ?? 'vi') === 'en' ? 'en' : 'vi';
+$t = (require __DIR__ . '/lang/' . $footer_lang . '.php')['footer'];
+$t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
+?>
 <footer class="footer">
     <div class="footer__container">
 
         <div class="footer__info">
 
             <div class="footer__block">
-                <h4 class="footer__heading">Liên hệ</h4>
+                <h4 class="footer__heading"><?php echo $t['contact_heading']; ?></h4>
                 <ul class="footer__list">
-                    <li><a href="mailto:support@vietsontdc.com">Hỗ trợ khách hàng</a></li>
-                    <li><strong>Phòng KD:</strong> (028) 39293770</li>
-                    <li><strong>Bảo hành HN:</strong> 0936699336</li>
-                    <li><strong>Bảo hành HCM:</strong> (028) 39260996</li>
+                    <li><a href="mailto:support@vietsontdc.com"><?php echo $t['contact_support']; ?></a></li>
+                    <li><strong><?php echo $t['contact_sales']; ?></strong> (028) 39293770</li>
+                    <li><strong><?php echo $t['contact_warranty_hn']; ?></strong> 0936699336</li>
+                    <li><strong><?php echo $t['contact_warranty_hcm']; ?></strong> (028) 39260996</li>
                 </ul>
             </div>
 
             <div class="footer__block">
-                <h4 class="footer__heading">Chính sách</h4>
+                <h4 class="footer__heading"><?php echo $t['policy_heading']; ?></h4>
                 <ul class="footer__list">
-                    <li><a href="#">Giới thiệu công ty</a></li>
-                    <li><a href="#">Chính sách đổi trả</a></li>
-                    <li><a href="#">Chính sách giao hàng</a></li>
-                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#"><?php echo $t['policy_about']; ?></a></li>
+                    <li><a href="#"><?php echo $t['policy_return']; ?></a></li>
+                    <li><a href="#"><?php echo $t['policy_shipping']; ?></a></li>
+                    <li><a href="#"><?php echo $t['policy_warranty']; ?></a></li>
 
                 </ul>
             </div>
 
             <div class="footer__block">
-                <h4 class="footer__heading">Chi nhánh</h4>
+                <h4 class="footer__heading"><?php echo $t['branch_heading']; ?></h4>
                 <ul class="footer__list">
-                    <li><strong>Hà Nội:</strong> Tầng 4, Số 1 Thái Hà, Đống Đa</li>
-                    <li><strong>TP.HCM:</strong> 150Ter Bùi Thị Xuân, P.Bến Thành</li>
-                    <li><a href="index.php?page=chinh-sach-bao-hanh">Chính sách bảo hành - đổi trả</a></li>
-                    <li><a href="index.php?page=Tra-Cuu-Thong-Tin-Bao-Hanh-Viet-Son">Tra cứu bảo hành</a></li>
+                    <li><strong><?php echo $t['branch_hn_label']; ?></strong> <?php echo $t['branch_hn_address']; ?></li>
+                    <li><strong><?php echo $t['branch_hcm_label']; ?></strong> <?php echo $t['branch_hcm_address']; ?></li>
+                    <li><a href="<?php echo htmlspecialchars(asset_url('index.php?page=chinh-sach-bao-hanh')); ?>"><?php echo $t['branch_warranty_return']; ?></a></li>
+                    <li><a href="<?php echo htmlspecialchars(asset_url('index.php?page=Tra-Cuu-Thong-Tin-Bao-Hanh-Viet-Son')); ?>"><?php echo $t['branch_warranty_lookup']; ?></a></li>
                 </ul>
             </div>
 
             <div class="footer__block">
-                <h4 class="footer__heading">Cửa hàng</h4>
+                <h4 class="footer__heading"><?php echo $t['shop_heading']; ?></h4>
                 <ul class="footer__list">
-                    <li><a href="#">PC dựng sẵn</a></li>
-                    <li><a href="#">Linh kiện máy tính</a></li>
-                    <li><a href="#">Thiết bị chơi game</a></li>
-                    <li><a href="#">Phụ kiện chính hãng</a></li>
+                    <li><a href="#"><?php echo $t['shop_prebuilt']; ?></a></li>
+                    <li><a href="#"><?php echo $t['shop_components']; ?></a></li>
+                    <li><a href="#"><?php echo $t['shop_gaming']; ?></a></li>
+                    <li><a href="#"><?php echo $t['shop_accessories']; ?></a></li>
                 </ul>
             </div>
 
             <div class="footer__block footer__block--about">
-                <h4 class="footer__heading">Vì đam mê công nghệ</h4>
+                <h4 class="footer__heading"><?php echo $t['about_heading']; ?></h4>
                 <p class="footer__description">
-                    <strong>Linh kiện chính hãng – Dịch vụ tận tâm.</strong>
-                    Viết Sơn mang đến đa dạng linh kiện máy tính, PC lắp sẵn và giải pháp build PC theo yêu cầu, giúp
-                    bạn sở hữu cấu hình tối ưu với mức chi phí hợp lý.
+                    <strong><?php echo $t['about_description_strong']; ?></strong>
+                    <?php echo $t['about_description']; ?>
                 </p>
             </div>
 
@@ -73,25 +77,66 @@
 
         <!-- Language + copyright row -->
         <div class="footer__meta">
-            <div class="footer__lang">
-                <img width="40" height="40" src="https://img.icons8.com/color/48/vietnam.png" alt="vietnam" />
-                <span>Việt Nam</span>
+            <div class="footer__lang" id="footerLangToggle">
+                <img width="20" height="20"
+                    src="https://img.icons8.com/color/48/<?php echo $footer_lang === 'en' ? 'great-britain' : 'vietnam'; ?>.png"
+                    alt="<?php echo $footer_lang === 'en' ? 'english' : 'vietnam'; ?>" />
+                <span><?php echo $t['lang_label']; ?></span>
+                <i class="fa-solid fa-chevron-down"></i>
+
+                <div class="footer__lang-dropdown" id="footerLangDropdown">
+                    <button type="button" class="footer__lang-option<?php echo $footer_lang === 'vi' ? ' is-active' : ''; ?>"
+                        data-lang="vi">
+                        <img width="20" height="20" src="https://img.icons8.com/color/48/vietnam.png" alt="vietnam" />
+                        Tiếng Việt
+                    </button>
+                    <button type="button" class="footer__lang-option<?php echo $footer_lang === 'en' ? ' is-active' : ''; ?>"
+                        data-lang="en">
+                        <img width="20" height="20" src="https://img.icons8.com/color/48/great-britain.png"
+                            alt="english" />
+                        English
+                    </button>
+                </div>
             </div>
-            <p class="footer__copyright">© Copyright 2026, ACHIEVA VIETSON Co., Ltd</p>
+            <p class="footer__copyright"><?php echo $t['copyright']; ?></p>
         </div>
 
         <!-- Bottom legal bar -->
         <div class="footer__bottom">
             <div class="footer__legal">
-                <a href="#">Điều khoản</a>
-                <a href="#">Chính sách bảo mật</a>
-                <a href="#">Điều khoản dịch vụ</a>
-                <a href="#">Không bán hoặc chia sẻ thông tin cá nhân của tôi</a>
+                <a href="#"><?php echo $t['legal_terms']; ?></a>
+                <a href="#"><?php echo $t['legal_privacy']; ?></a>
+                <a href="#"><?php echo $t['legal_service_terms']; ?></a>
+                <a href="#"><?php echo $t['legal_do_not_sell']; ?></a>
             </div>
         </div>
 
     </div>
 </footer>
 <script>
-document.getElementById('current-year').textContent = new Date().getFullYear();
+(function () {
+    var toggle = document.getElementById('footerLangToggle');
+    var dropdown = document.getElementById('footerLangDropdown');
+    if (!toggle || !dropdown) return;
+
+    toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('is-open');
+        toggle.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', function () {
+        dropdown.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+    });
+
+    dropdown.querySelectorAll('.footer__lang-option').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var lang = btn.getAttribute('data-lang');
+            document.cookie = 'site_lang=' + lang + ';path=/;max-age=' + (60 * 60 * 24 * 365);
+            location.reload();
+        });
+    });
+})();
 </script>

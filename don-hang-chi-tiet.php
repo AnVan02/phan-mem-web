@@ -2,7 +2,7 @@
 require_once 'admin/config/config.php';
 
 if (!isset($_SESSION['khach_hang_id'])) {
-    header('Location: tai-khoan.php');
+    header('Location: ' . asset_url('tai-khoan.php'));
     exit;
 }
 
@@ -26,7 +26,7 @@ $chi_tiet_list = $ct_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($chi_tiet_list as &$ct) {
     $images = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', (string) $ct['hinh_anh']))));
-    $ct['hinh_anh_dau'] = !empty($images) ? $images[0] : 'assets/image/pc.webp';
+    $ct['hinh_anh_dau'] = asset_url(!empty($images) ? $images[0] : 'assets/image/pc.webp');
     $ct['thanh_tien']   = (int) $ct['don_gia'] * (int) $ct['so_luong'];
 }
 unset($ct);
@@ -48,7 +48,7 @@ require 'head.php';
     <section class="cart-page">
         <div class="container">
             <div class="cart-page-header">
-                <span class="cart-eyebrow"><a href="tai-khoan.php">← Đơn hàng của tôi</a></span>
+                <span class="cart-eyebrow"><a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>">← Đơn hàng của tôi</a></span>
                 <h1 class="cart-title">Đơn hàng #<?php echo (int) $don_hang['ma_don_hang']; ?></h1>
                 <span class="my-order-status order-detail-status"
                     style="color:<?php echo $trang_thai_nhan[(int) $don_hang['trang_thai']][1]; ?>">
@@ -112,7 +112,7 @@ require 'head.php';
                             </div>
                         </div>
 
-                        <a href="san-pham.php" class="btn-continue-shopping"
+                        <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="btn-continue-shopping"
                             style="width:100%; justify-content:center; margin-top:16px;">Tiếp tục mua sắm <i
                                 class="fa-solid fa-arrow-right"></i></a>
                     </div>

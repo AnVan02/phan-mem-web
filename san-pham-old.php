@@ -110,7 +110,7 @@
     .a-card p {
         margin: 15px 0;
         color: #555;
-        font-size: 15px;
+        font-size: 16px;
     }
 
     /* checklist */
@@ -125,7 +125,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .a-checklist i {
@@ -198,7 +198,7 @@
 
     .af-text p {
         margin: 0;
-        font-size: 14px;
+        font-size: 15px;
         color: #666;
     }
 

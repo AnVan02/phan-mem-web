@@ -86,7 +86,7 @@
   }
 
   .stat-card .label {
-      font-size: 13px;
+      font-size: 14px;
       color: #777;
   }
 
@@ -112,7 +112,7 @@
   }
 
   .dg-filter-field label {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
       color: #555;
   }
@@ -140,7 +140,7 @@
       text-decoration: none;
       padding: 10px 15px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 14px;
       height: 40px;
       display: flex;
       align-items: center;
@@ -164,7 +164,7 @@
       text-align: left;
       background: #f8f9fa;
       padding: 15px 10px;
-      font-size: 13px;
+      font-size: 14px;
       border-bottom: 2px solid #eee;
       color: var(--primary);
   }
@@ -172,7 +172,7 @@
   .admin-table td {
       padding: 15px 10px;
       border-bottom: 1px solid #eee;
-      font-size: 14px;
+      font-size: 15px;
       vertical-align: top;
   }
 
@@ -188,7 +188,7 @@
       color: #d93025;
       padding: 2px 6px;
       border-radius: 4px;
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 700;
   }
 
@@ -197,7 +197,7 @@
       color: #1e8e3e;
       padding: 2px 6px;
       border-radius: 4px;
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 700;
   }
 
@@ -208,7 +208,7 @@
       background: #f0f7ff;
       border-left: 4px solid var(--primary);
       border-radius: 4px;
-      font-size: 13px;
+      font-size: 14px;
   }
 
   .dg-btn-reply-toggle {
@@ -216,7 +216,7 @@
       border: none;
       color: var(--primary);
       cursor: pointer;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
       padding: 0;
       margin-top: 10px;

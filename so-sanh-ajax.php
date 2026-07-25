@@ -14,7 +14,7 @@ function format_gia($gia_ban, $giam_gia) {
 
 function first_image($hinh_anh) {
     $images = array_values(array_filter(array_map('trim', preg_split('/[,;]+/', (string) $hinh_anh))));
-    return !empty($images) ? $images[0] : 'assets/image/pc.webp';
+    return asset_url(!empty($images) ? $images[0] : 'assets/image/pc.webp');
 }
 
 $action = $_GET['action'] ?? '';
@@ -56,6 +56,59 @@ if ($action === 'search') {
     exit;
 }
 
+if ($action === 'suggest') {
+    $exclude = (int) ($_GET['exclude'] ?? 0);
+    $ma_danh_muc = (int) ($_GET['danh_muc'] ?? 0);
+    $ma_thuong_hieu = (int) ($_GET['thuong_hieu'] ?? 0);
+    $limit = 8;
+
+    $rows = [];
+    $ids_da_lay = [$exclude];
+
+    if ($ma_danh_muc > 0) {
+        $stmt = $pdo->prepare("SELECT sp.ma_san_pham, sp.ten_san_pham, sp.hinh_anh, sp.gia_ban, sp.giam_gia, th.ten_thuong_hieu
+            FROM san_pham sp
+            LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
+            WHERE sp.trang_thai = 1 AND sp.ma_san_pham != :exclude AND sp.ma_danh_muc = :danh_muc
+            ORDER BY sp.ma_san_pham DESC
+            LIMIT " . (int) $limit);
+        $stmt->execute([
+            ':exclude'  => $exclude,
+            ':danh_muc' => $ma_danh_muc,
+        ]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as $r) {
+            $ids_da_lay[] = (int) $r['ma_san_pham'];
+        }
+    }
+
+    $con_thieu = $limit - count($rows);
+    if ($con_thieu > 0 && $ma_thuong_hieu > 0) {
+        $placeholders = implode(',', array_fill(0, count($ids_da_lay), '?'));
+        $stmt = $pdo->prepare("SELECT sp.ma_san_pham, sp.ten_san_pham, sp.hinh_anh, sp.gia_ban, sp.giam_gia, th.ten_thuong_hieu
+            FROM san_pham sp
+            LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
+            WHERE sp.trang_thai = 1 AND sp.ma_thuong_hieu = ? AND sp.ma_san_pham NOT IN ($placeholders)
+            ORDER BY sp.ma_san_pham DESC
+            LIMIT " . (int) $con_thieu);
+        $stmt->execute(array_merge([$ma_thuong_hieu], $ids_da_lay));
+        $rows = array_merge($rows, $stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    $result = array_map(function ($r) {
+        return [
+            'id'              => (int) $r['ma_san_pham'],
+            'ten_san_pham'    => $r['ten_san_pham'],
+            'hinh_anh'        => first_image($r['hinh_anh']),
+            'gia_display'     => format_gia($r['gia_ban'], $r['giam_gia']),
+            'ten_thuong_hieu' => $r['ten_thuong_hieu'],
+        ];
+    }, $rows);
+
+    echo json_encode($result);
+    exit;
+}
+
 if ($action === 'detail') {
     $id = (int) ($_GET['id'] ?? 0);
 
@@ -81,7 +134,7 @@ if ($action === 'detail') {
         'ten_thuong_hieu' => $sp['ten_thuong_hieu'] ?? '',
         'ten_dung_luong'  => $sp['ten_dung_luong'] ?? '',
         'thong_so'        => $sp['thong-so'] ?? '',
-        'url'             => tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham']),
+        'url'             => asset_url(tao_url_san_pham($sp['ma_san_pham'], $sp['ten_san_pham'])),
     ]);
     exit;
 }

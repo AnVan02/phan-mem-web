@@ -18,7 +18,7 @@
 .product-page-header a {
     display: inline-block;
     color: #1e3c72;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -31,7 +31,7 @@
 .product-eyebrow {
     display: inline-block;
     color: #1e3c72;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -48,8 +48,28 @@
 
 .search-result-count {
     margin: 6px 0 0;
-    font-size: 13.5px;
+    font-size: 14px;
     color: #666;
+}
+
+.search-result-keyword {
+    color: #d0021b;
+}
+
+.no-result-box {
+    background: #fdf3d7;
+    border: 1px solid #f3dfa2;
+    color: #8a6d1e;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.no-result-box a {
+    color: #1e3c72;
+    font-weight: 600;
+    text-decoration: underline;
 }
 
 .cart-title {
@@ -115,7 +135,7 @@
 }
 
 .info-text {
-    font-size: 14px;
+    font-size: 15px;
     color: #666;
 }
 
@@ -136,7 +156,7 @@
     background: none;
     border: none;
     color: #1e3c72;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     padding: 10px 0;
     cursor: pointer;
@@ -192,7 +212,7 @@
 }
 
 .sidebar-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     margin: 0 0 12px;
@@ -219,7 +239,7 @@
     font-weight: 500;
     padding: 7px 8px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
     text-decoration: none;
 }
@@ -237,7 +257,7 @@
 }
 
 .sidebar-count {
-    font-size: 12px;
+    font-size: 14px;
     color: #999;
 }
 
@@ -246,7 +266,7 @@
 }
 
 .sidebar-note {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #4a5164;
     margin: 8px 0 0;
@@ -267,11 +287,11 @@
     padding: 6px 8px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .sidebar-gia-tuy-chinh span {
-    font-size: 12px;
+    font-size: 14px;
     color: #999;
 }
 
@@ -281,7 +301,7 @@
     color: #ffd700;
     border-radius: 6px;
     padding: 6px 10px;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -294,7 +314,7 @@
     border: 1px solid #1e3c72;
     border-radius: 8px;
     color: #1e3c72;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     text-decoration: none;
     background: #fff;
@@ -306,7 +326,7 @@
 }
 
 .sidebar-support p {
-    font-size: 13px;
+    font-size: 14px;
     margin: 0 0 10px;
     line-height: 1.5;
 }
@@ -342,7 +362,7 @@
         border: 1px solid #ddd;
         border-radius: 10px;
         color: #1e3c72;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
         font-family: 'Montserrat', Arial, sans-serif;
         cursor: pointer;
@@ -384,7 +404,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #888;
     margin-bottom: 14px;
@@ -414,7 +434,7 @@
 
 .category-hero-count {
     margin: 6px 0 0;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #777;
 }
@@ -444,7 +464,7 @@
 
 .sidebar-filter-title {
     margin: 0 0 12px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 800;
     color: #111;
     text-transform: uppercase;
@@ -467,7 +487,7 @@
     padding: 7px 10px;
     border-radius: 8px;
     color: #444;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
 }
@@ -504,7 +524,7 @@
 }
 
 .sort-bar-count {
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 700;
     color: #444;
 }
@@ -513,7 +533,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #444;
 }
@@ -523,7 +543,7 @@
     border-radius: 8px;
     border: 1px solid #ddd;
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: #111;
     background: #fff;
@@ -547,7 +567,7 @@
     gap: 10px;
     background: #EFF6FF;
     color: #1e40af;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     padding: 12px 18px;
     border-radius: 10px;
@@ -555,7 +575,7 @@
 }
 
 .product-notice i {
-    font-size: 15px;
+    font-size: 16px;
 }
 
 /* ---- Section nhóm danh mục ---- */
@@ -604,7 +624,7 @@
     height: 36px;
     padding: 0 6px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: #6b6b70;
     text-decoration: none;
@@ -654,7 +674,7 @@
     border: none;
     outline: none;
     padding: 12px 18px;
-    font-size: 14px;
+    font-size: 15px;
       font-family: 'Montserrat', Arial, sans-serif;
     flex: 1;
     color: #111;
@@ -687,7 +707,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #111;
     white-space: nowrap;
@@ -710,7 +730,7 @@
     padding: 7px 16px;
     border: 1.5px solid #e0e0e0;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #444;
     text-decoration: none;
@@ -731,7 +751,7 @@
 }
 
 .brand-filter-pill .brand-filter-count {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     color: inherit;
     opacity: 0.75;
@@ -832,7 +852,7 @@
 }
 
 .category-circle-sm .category-circle-name {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .category-circle:hover .category-circle-img {
@@ -903,7 +923,7 @@
     z-index: 2;
     background: #ffd700;
     color: #1e3c72;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 999px;
@@ -919,7 +939,7 @@
     gap: 5px;
     background: rgba(255, 255, 255, 0.92);
     color: #1e3c72;
-    font-size: 10.5px;
+    font-size: 13.5px;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 999px;
@@ -927,7 +947,7 @@
 
 .product-badge-official i {
     color: #059669;
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .product-flash-banner {
@@ -937,7 +957,7 @@
     gap: 6px;
     background: linear-gradient(90deg, #1e3c72, #2a5298);
     color: #ffd700;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     padding: 6px 10px;
     border-radius: 8px;
@@ -945,14 +965,14 @@
 }
 
 .product-flash-banner i {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .product-installment {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 11.5px;
+    font-size: 14.5px;
     color: #6b6b70;
     margin-bottom: 6px;
 }
@@ -966,7 +986,7 @@
 }
 
 .product-prepay {
-    font-size: 12px;
+    font-size: 14px;
     color: #6b6b70;
     margin-bottom: 8px;
 }
@@ -979,7 +999,7 @@
     display: flex;
     gap: 2px;
     color: #f59e0b;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .product-media {
@@ -1032,7 +1052,7 @@
 .product-spec {
     display: inline-flex;
     align-items: center;
-    font-size: 11.5px;
+    font-size: 14.5px;
     letter-spacing: .2px;
     padding: 4px 11px;
     border-radius: 999px;
@@ -1061,7 +1081,7 @@
 }
 
 .product-name {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: #111;
     margin: 0 0 6px;
@@ -1080,7 +1100,7 @@
 }
 
 .product-desc-text {
-    font-size: 12.5px;
+    font-size: 14px;
     line-height: 1.5;
     color: #6b6b70;
     margin: 0 0 10px;
@@ -1095,7 +1115,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 10px 0 14px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .product-desc tr {
@@ -1121,7 +1141,7 @@
     width: 14px;
     margin-right: 8px;
     color: #b0b0b0;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -1150,7 +1170,7 @@
 }
 
 .product-price-old {
-    font-size: 13px;
+    font-size: 14px;
     color: #9ca3af;
     text-decoration: line-through;
 }
@@ -1178,7 +1198,7 @@
     border: 1px solid #eee;
     border-radius: 50%;
     padding: 0;
-    font-size: 12.5px;
+    font-size: 14px;
     color: #6b7280;
     cursor: pointer;
     transition: color .15s ease, border-color .15s ease, background .15s ease;
@@ -1193,7 +1213,7 @@
 }
 
 .product-stock {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -1221,7 +1241,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.2;
 }
 
@@ -1232,7 +1252,7 @@
 
 .ticket-content b {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 800;
 }
 
@@ -1298,25 +1318,25 @@
 
     .product-brand,
     .product-spec {
-        font-size: 10.5px;
+        font-size: 13.5px;
         padding: 3px 9px;
     }
 
     .product-name {
-        font-size: 13.5px;
+        font-size: 14px;
         min-height: calc(1.35em * 2);
     }
 
     .product-desc-text {
-        font-size: 11.5px;
+        font-size: 14.5px;
         margin-bottom: 8px;
     }
 
     .product-price {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .product-prepay {
-        font-size: 11px;
+        font-size: 14px;
     }
 }

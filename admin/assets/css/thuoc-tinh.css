@@ -20,7 +20,7 @@
 .attr-add-form input[type="text"] {
     flex: 1;
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     padding: 9px 12px;
     border: 1px solid #e0e0e3;
     border-radius: 8px;
@@ -67,7 +67,7 @@
     flex: 1;
     min-width: 0;
       font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     padding: 7px 10px;
     border: 1px solid transparent;
     border-radius: 6px;
@@ -113,7 +113,7 @@
 }
 
 .attr-usage {
-    font-size: 12px;
+    font-size: 14px;
     color: #9b9ba1;
     white-space: nowrap;
     flex-shrink: 0;
