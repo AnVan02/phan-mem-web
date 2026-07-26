@@ -26,7 +26,7 @@ $site_root         = $site_root ?? '';
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <script>window.SITE_ROOT = <?php echo json_encode(rtrim($site_root, '/')); ?>;</script>

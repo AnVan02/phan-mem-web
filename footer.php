@@ -9,7 +9,7 @@ $t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
         <div class="footer__info">
 
             <div class="footer__block">
-                <h4 class="footer__heading"><?php echo $t['contact_heading']; ?></h4>
+                <h3 class="footer__heading"><?php echo $t['contact_heading']; ?></h3>
                 <ul class="footer__list">
                     <li><a href="mailto:support@vietsontdc.com"><?php echo $t['contact_support']; ?></a></li>
                     <li><strong><?php echo $t['contact_sales']; ?></strong> (028) 39293770</li>
@@ -19,7 +19,7 @@ $t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
             </div>
 
             <div class="footer__block">
-                <h4 class="footer__heading"><?php echo $t['policy_heading']; ?></h4>
+                <h3 class="footer__heading"><?php echo $t['policy_heading']; ?></h3>
                 <ul class="footer__list">
                     <li><a href="#"><?php echo $t['policy_about']; ?></a></li>
                     <li><a href="#"><?php echo $t['policy_return']; ?></a></li>
@@ -30,7 +30,7 @@ $t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
             </div>
 
             <div class="footer__block">
-                <h4 class="footer__heading"><?php echo $t['branch_heading']; ?></h4>
+                <h3 class="footer__heading"><?php echo $t['branch_heading']; ?></h3>
                 <ul class="footer__list">
                     <li><strong><?php echo $t['branch_hn_label']; ?></strong> <?php echo $t['branch_hn_address']; ?></li>
                     <li><strong><?php echo $t['branch_hcm_label']; ?></strong> <?php echo $t['branch_hcm_address']; ?></li>
@@ -40,7 +40,7 @@ $t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
             </div>
 
             <div class="footer__block">
-                <h4 class="footer__heading"><?php echo $t['shop_heading']; ?></h4>
+                <h3 class="footer__heading"><?php echo $t['shop_heading']; ?></h3>
                 <ul class="footer__list">
                     <li><a href="#"><?php echo $t['shop_prebuilt']; ?></a></li>
                     <li><a href="#"><?php echo $t['shop_components']; ?></a></li>
@@ -50,7 +50,7 @@ $t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
             </div>
 
             <div class="footer__block footer__block--about">
-                <h4 class="footer__heading"><?php echo $t['about_heading']; ?></h4>
+                <h3 class="footer__heading"><?php echo $t['about_heading']; ?></h3>
                 <p class="footer__description">
                     <strong><?php echo $t['about_description_strong']; ?></strong>
                     <?php echo $t['about_description']; ?>

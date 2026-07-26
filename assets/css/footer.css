@@ -3,7 +3,7 @@
     background-color: #1e3c72;
     color: #d0d0d0;
     padding: 60px 20px 0;
-    font-family: Montserrat;
+    font-family: 'Inter', sans-serif; /* body text dùng Inter */
     box-sizing: border-box;
     overflow-x: hidden;
 }
@@ -52,6 +52,7 @@
 }
 
 .footer__heading {
+    font-family: 'Montserrat', sans-serif; /* Headings dùng Montserrat */
     font-size: 20px;
     font-weight: 700;
     margin: 0 0 18px;

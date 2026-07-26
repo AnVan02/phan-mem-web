@@ -1,316 +1,736 @@
-/* ===== Trang Tài khoản quản trị (Admin) ===== */
-/* Layout khung dùng chung nằm trong admin-layout.css, form/table dùng chung nằm trong post-editor.css & article.css */
-/* File này chỉ chỉnh những phần riêng của trang Tài khoản: form thêm/sửa, cột Họ tên, badge Vai trò */
+﻿/* ===== THIẾT KẾ MỚI CHO TRANG QUẢN TRỊ TÀI KHOẢN ===== */
 
-/* ---- Khối form + panel "Lưu ý" nằm cạnh nhau, lấp hết chiều ngang ---- */
-.account-form-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    flex-wrap: wrap;
+:root {
+    --purple-primary: #6366f1;
+    --purple-light: #e0e7ff;
+    --purple-hover: #4f46e5;
+    --bg-light: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-main: #334155;
+    --text-muted: #64748b;
 }
 
-#form-tai-khoan {
-    flex: 1 1 560px;
-    max-width: 640px;
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f5f9;
 }
 
-/* ---- Panel "Lưu ý": lấp khoảng trống bên phải form ---- */
-.account-tips {
-    flex: 1 1 260px;
-    max-width: 360px;
-    align-self: stretch;
-    background: #fff;
-    border-radius: 14px;
-    border: 1px solid #edeef2;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-    padding: 22px 24px;
+/* Page Header */
+.tk-page-header {
+    margin-bottom: 24px;
 }
-
-.account-tips h3 {
+.tk-page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+}
+.tk-page-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 0 0 14px;
-    font-size: 15px;
-    color: #4b6cb7;
-}
-
-.account-tips h3 i {
-    font-size: 15px;
-}
-
-.account-tips ul {
     margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
-
-.account-tips li {
-    position: relative;
-    padding-left: 20px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #5b6272;
-}
-
-.account-tips li::before {
-    content: "\f00c";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 2px;
-    font-size: 13px;
-    color: #4b6cb7;
-}
-
-@media (max-width: 900px) {
-    .account-tips {
-        max-width: none;
-        flex-basis: 100%;
-    }
-}
-
-#form-tai-khoan h3 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#form-tai-khoan h3::before {
-    content: "";
-    width: 4px;
-    height: 18px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #1e3c72, #4b6cb7);
-}
-
-#form-tai-khoan .banner-form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-#form-tai-khoan .field-row {
-    display: flex;
-    gap: 14px;
-}
-
-#form-tai-khoan .field-row > div {
-    flex: 1;
-    min-width: 0;
-}
-
-/* Ô nhập trong form tài khoản: viền + focus rõ ràng */
-#form-tai-khoan input[type="text"],
-#form-tai-khoan input[type="email"],
-#form-tai-khoan input[type="password"],
-#form-tai-khoan select {
-    transition: border-color .15s ease, box-shadow .15s ease;
-}
-
-#form-tai-khoan input[type="text"]:focus,
-#form-tai-khoan input[type="email"]:focus,
-#form-tai-khoan input[type="password"]:focus,
-#form-tai-khoan select:focus {
-    outline: none;
-    border-color: #4b6cb7;
-    box-shadow: 0 0 0 3px rgba(75, 108, 183, .18);
-}
-
-#form-tai-khoan input::placeholder {
-    color: #9aa2b1;
-}
-
-/* Gợi ý nhỏ "(bỏ trống nếu không đổi)" trong label mật khẩu */
-#form-tai-khoan .field-label {
-    display: block;
-}
-
-#form-tai-khoan .banner-form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 4px;
-}
-
-/* ---- Cột "Họ tên": avatar tròn + tên ---- */
-.account-name-cell {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.account-avatar {
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
+.tk-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--purple-primary);
     border-radius: 50%;
-    background: linear-gradient(135deg, #1e3c72, #4b6cb7);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
+    display: inline-block;
+    box-shadow: 0 0 8px var(--purple-primary);
+}
+
+/* Flash message */
+.tk-flash {
+    padding: 14px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 500;
+    font-size: 14.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tk-flash-success {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+.tk-flash-error {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+}
+
+/* Cards Layout */
+.tk-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+    padding: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Header */
+.tk-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 18px;
+}
+.tk-card-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--purple-light);
+    color: var(--purple-primary);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(30, 60, 114, .25);
+    font-size: 18px;
+}
+.tk-card-icon--list {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+.tk-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    letter-spacing: 0.5px;
 }
 
-.account-avatar-img {
+/* Form Layout Grid */
+.tk-form-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+}
+
+.tk-form-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.tk-field-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.tk-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.tk-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #475569;
+}
+.tk-label-hint {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.tk-input, .tk-select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    font-size: 14.5px;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    transition: all 0.2s ease;
+    outline: none;
+}
+.tk-input:focus, .tk-select:focus {
+    border-color: var(--purple-primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+/* Password input wrap with eye toggle */
+.tk-input-wrap {
+    position: relative;
+    width: 100%;
+}
+.tk-input-wrap .tk-input {
+    padding-right: 48px;
+}
+.tk-eye-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 16px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tk-eye-btn:hover {
+    color: var(--purple-primary);
+}
+
+/* File Dropzone Upload */
+.tk-dropzone {
+    border: 2px dashed #cbd5e1;
+    background-color: var(--bg-light);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tk-dropzone:hover, .tk-dropzone.tk-drag-over {
+    border-color: var(--purple-primary);
+    background-color: #f5f7ff;
+}
+.tk-dropzone-placeholder i {
+    font-size: 32px;
+    color: var(--purple-primary);
+    margin-bottom: 12px;
+}
+.tk-dropzone-placeholder p {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-main);
+    margin: 0 0 4px 0;
+}
+.tk-dropzone-placeholder span {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+.tk-dropzone-preview {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.tk-file-input {
+    display: none;
+}
+
+/* Right Security Panel */
+.tk-security-panel {
+    background: linear-gradient(135deg, #f5f3ff 0%, #edd4f8 100%);
+    border-radius: 20px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #fae8ff;
+}
+.tk-security-icon-wrap {
+    position: relative;
+    margin-bottom: 24px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tk-security-shield {
+    font-size: 64px;
+    color: #818cf8;
+    filter: drop-shadow(0 8px 16px rgba(129, 140, 248, 0.3));
+}
+.tk-security-lock {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 32px;
+    height: 32px;
+    background: #6366f1;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+    border: 3px solid #ffffff;
+}
+.tk-security-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #4338ca;
+    margin: 0 0 12px 0;
+}
+.tk-security-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #4f46e5;
+    opacity: 0.85;
+    margin: 0;
+    max-width: 220px;
+}
+
+/* Form Buttons */
+.tk-form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+.tk-btn-primary {
+    background-color: var(--purple-primary);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.tk-btn-primary:hover {
+    background-color: var(--purple-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+.tk-btn-secondary {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14.5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.tk-btn-secondary:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+/* ==========================================================================
+   TABLE CARD STYLING
+   ========================================================================== */
+.tk-table-card {
+    padding: 0;
+}
+.tk-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 30px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.tk-table-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.tk-table-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Search Box */
+.tk-search-wrap {
+    position: relative;
+    width: 280px;
+}
+.tk-search-input {
+    width: 100%;
+    padding: 10px 16px 10px 42px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    font-size: 13.5px;
+    background-color: var(--bg-light);
+    outline: none;
+    transition: all 0.2s ease;
+}
+.tk-search-input:focus {
+    background-color: #ffffff;
+    border-color: var(--purple-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.tk-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Filter Button */
+.tk-filter-btn {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.tk-filter-btn:hover, .tk-filter-btn.active {
+    background-color: var(--bg-light);
+    border-color: #cbd5e1;
+}
+
+/* Filter Panel dropdown list */
+.tk-filter-panel {
+    background-color: var(--bg-light);
+    padding: 16px 30px;
+    border-bottom: 1px solid var(--border-color);
+    animation: slideDown 0.2s ease-out;
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.tk-filter-roles {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+.tk-filter-role {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.tk-filter-role:hover {
+    border-color: #cbd5e1;
+    color: var(--text-main);
+}
+.tk-filter-role.active {
+    background-color: var(--purple-primary);
+    border-color: var(--purple-primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Table Design */
+.tk-table-wrap {
+    overflow-x: auto;
+    width: 100%;
+}
+.tk-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14.5px;
+}
+.tk-table th {
+    background-color: var(--bg-light);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+.tk-table td {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+.tk-row {
+    transition: background-color 0.15s ease;
+}
+.tk-row:hover {
+    background-color: #fafbfd;
+}
+
+.tk-td-num {
+    color: var(--text-muted);
+    font-weight: 600;
+    width: 50px;
+}
+.tk-td-email {
+    color: var(--text-muted);
+}
+.tk-td-date {
+    color: var(--text-muted);
+    font-size: 13.5px;
+}
+
+/* User Profile Column */
+.tk-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.tk-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a78bfa 0%, #6366f1 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.15);
+    flex-shrink: 0;
+}
+.tk-avatar-img {
     background: none;
     box-shadow: none;
     overflow: hidden;
-    padding: 0;
 }
-
-.account-avatar-img img {
+.tk-avatar-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
-.account-avatar-preview {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 8px;
-    box-shadow: 0 2px 6px rgba(30, 60, 114, .25);
-}
-
-.account-avatar-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.account-name-cell .admin-badge {
+.tk-badge-you {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
     margin-left: 4px;
 }
 
-/* ---- Hàng trong bảng: hiệu ứng hover ---- */
-.admin-table tbody tr {
-    transition: background-color .12s ease;
-}
-
-.admin-table tbody tr:hover td {
-    background: #f7f8fb;
-}
-
-/* ---- Badge vai trò ---- */
-.role-badge {
+/* Custom Role badges */
+.tk-role-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 700;
-    white-space: nowrap;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+.tk-role-badge i {
+    font-size: 11px;
 }
 
-.role-badge::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: .7;
+/* Quản trị viên (tím nhạt) */
+.tk-role-0 {
+    background-color: #f5f3ff;
+    color: #6d28d9;
 }
-
-/* Quản trị viên (toàn quyền) */
-.role-badge.role-0 {
-    background: #fef3c7;
-    color: #92400e;
-}
-
-/* Biên tập viên */
-.role-badge.role-1 {
-    background: #dbeafe;
+/* Biên tập viên (xanh dương nhạt) */
+.tk-role-1 {
+    background-color: #eff6ff;
     color: #1d4ed8;
 }
-
-/* Cộng tác viên / vai trò còn lại */
-.role-badge.role-2 {
-    background: #dcfce7;
-    color: #166534;
+/* Vai trò khác */
+.tk-role-2 {
+    background-color: #f0fdf4;
+    color: #15803d;
 }
 
-/* Vai trò chưa có màu riêng: dùng tông trung tính an toàn */
-.role-badge:not(.role-0):not(.role-1):not(.role-2) {
-    background: #ede9fe;
-    color: #5b21b6;
-}
-
-/* ---- Nút hành động Sửa / Xoá trong bảng ---- */
-.admin-actions {
+/* Actions buttons (Edit, Delete) */
+.tk-actions {
     display: flex;
     gap: 8px;
 }
+.tk-action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.tk-action-edit {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+}
+.tk-action-edit:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+}
+.tk-action-delete {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fee2e2;
+}
+.tk-action-delete:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.2);
+}
 
-.admin-actions a {
-    display: inline-flex;
+/* Empty search state */
+.tk-empty {
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+.tk-empty i {
+    font-size: 40px;
+    margin-bottom: 12px;
+    color: #cbd5e1;
+}
+.tk-empty p {
+    font-size: 14.5px;
+    margin: 0;
+}
+
+/* Pagination container */
+.tk-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.tk-paging-info {
+    font-size: 13.5px;
+    color: var(--text-muted);
+}
+.tk-paging-controls {
+    display: flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
+}
+.tk-page-btn {
+    width: 32px;
+    height: 32px;
     border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background-color .15s ease, transform .1s ease;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+.tk-page-btn:hover:not(:disabled) {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    border-color: #cbd5e1;
+}
+.tk-page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.tk-page-numbers {
+    display: flex;
+    gap: 4px;
+}
+.tk-page-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.tk-page-num:hover {
+    background-color: var(--bg-light);
+}
+.tk-page-num.active {
+    background-color: var(--purple-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.25);
 }
 
-.admin-actions a i {
-    font-size: 14px;
+/* Responsive Styling */
+@media (max-width: 1024px) {
+    .tk-form-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .tk-security-panel {
+        padding: 30px;
+    }
 }
-
-.admin-actions a.edit {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
-
-.admin-actions a.edit:hover {
-    background: #bfdbfe;
-}
-
-.admin-actions a.delete {
-    background: #fee2e2;
-    color: #dc2626;
-}
-
-.admin-actions a.delete:hover {
-    background: #fecaca;
-}
-
-.admin-actions a:active {
-    transform: scale(.96);
-}
-
-/* ---- Trạng thái không có tài khoản nào (nếu bảng để trống) ---- */
-.admin-table-wrap .admin-table-empty {
-    text-align: center;
-    padding: 40px 16px;
-    color: #8b93a3;
-    font-size: 15px;
-}
-
-@media (max-width: 600px) {
-    #form-tai-khoan .field-row {
-        flex-direction: column;
+@media (max-width: 640px) {
+    .tk-card {
+        padding: 20px;
+    }
+    .tk-field-row {
+        grid-template-columns: 1fr;
         gap: 0;
     }
-
-    .account-avatar {
-        width: 28px;
-        height: 28px;
-        font-size: 14px;
+    .tk-table-header {
+        padding: 20px;
     }
-
-    .admin-table-wrap {
-        overflow-x: auto;
+    .tk-search-wrap {
+        width: 100%;
+    }
+    .tk-table td, .tk-table th {
+        padding: 14px 16px;
+    }
+    .tk-pagination {
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
     }
 }

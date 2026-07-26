@@ -177,7 +177,7 @@ if ($duoc_xem_don_hang && isset($pdo)) {
                             class="admin-subnav-item <?php echo $active_page === 'tai-khoan' ? 'active' : ''; ?>">Danh sách
                             admin</a>
                         <a href="<?php echo $ADMIN_ROOT; ?>quanly_nhatky/danh-gia-san-pham.php"
-                            class="admin-subnav-item <?php echo $active_page = 'danh-gia-san-pham' ? 'active' : ''; ?>">Đánh giá
+                            class="admin-subnav-item <?php echo $active_page === 'danh-gia-san-pham' ? 'active' : ''; ?>">Đánh giá
                             sản phẩm </a>
                         <a href="<?php echo $ADMIN_ROOT; ?>quanly_nhatky/nhat-ky.php" class="admin-subnav-item">Nhật ký hoạt
                             động</a>

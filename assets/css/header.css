@@ -18,7 +18,7 @@ body {
     top: 0;
     z-index: 1000;
     background: #fff;
-    font-family: 'Montserrat', Sans-Serif;
+    font-family: 'Inter', sans-serif; /* body/nav dùng Inter */
 
 }
 
@@ -61,9 +61,8 @@ body {
 }
 
 .logo-text {
-    font-family:  'Montserrat', Sans-Serif;
+    font-family: 'Montserrat', sans-serif; /* Logo vẫn dùng Montserrat */
     font-weight: 800;
-    font-style: Sans-Serif;
     font-size: 26px;
     letter-spacing: 1px;
     color: var(--brand-blue);
@@ -77,6 +76,7 @@ body {
 /* ---- Nav ---- */
 .main-nav {
     flex: 1;
+    overflow: visible; /* Cho phép dropdown absolute không bị cắt */
 }
 
 .main-nav .main-nav-account {
@@ -91,7 +91,7 @@ body {
     margin: 0;
     padding: 0;
     color: var(--header-text);
-    position: relative;
+    position: static; /* static để submenu/megamenu tính vị trí từ li cha */
 }
 
 .has-submenu {
@@ -105,8 +105,9 @@ body {
 .main-nav a {
     display: block;
     color: #000000;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 17px;
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.2s ease;
@@ -249,13 +250,23 @@ body {
     height: 46px;
     margin-top: 0;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible; /* visible để .search-suggest không bị clip */
     background: #fff;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+/* Dùng pseudo để giữ bo tròn góc cho phần input+button */
+.search-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .search-box.is-open {
@@ -920,13 +931,12 @@ body {
 .account-modal-btn-solid {
     background: var(--brand-blue);
     color: var(--brand-gold);
-    border: 1.5px solid var(--brand-blue);
-    box-shadow: 0 8px 20px -8px rgba(30, 60, 114, 0.55);
+    border: none; /* bỏ hairline border cùng màu nền — không cần thiết */
+    box-shadow: 0 6px 12px -4px rgba(30, 60, 114, 0.45);
 }
 
 .account-modal-btn-solid:hover {
     background: var(--brand-blue-light);
-    border-color: var(--brand-blue-light);
 }
 
 @media (max-width: 480px) {

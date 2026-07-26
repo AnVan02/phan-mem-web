@@ -1,6 +1,6 @@
 /* ===== Về chúng tôi ===== */
 .about-page-wrapper {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Inter', sans-serif; /* body text dùng Inter */
     color: #1a1a1a;
     width: 100%;
     background-color: #f4f6fa;
@@ -22,7 +22,8 @@
 /* ===== Hero ===== */
 .about-hero {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden đã xóa — dùng clip-path trên pseudo thay thế để
+       không clip các positioned children (vd: .about-hero-year) */
     background: linear-gradient(135deg, #0c1f4d 0%, #1e3c72 55%, #14295c 100%);
     padding: 90px 0 110px;
 }
@@ -108,6 +109,7 @@
 }
 
 .about-story-title {
+    font-family: 'Montserrat', sans-serif; /* heading dùng Montserrat */
     font-size: 30px;
     font-weight: 800;
     color: #14295c;
@@ -128,10 +130,10 @@
 }
 
 .about-story-text {
-    max-width: 980px;
+    max-width: 65ch; /* ~80 chars/line — giảm từ 980px để tránh line too long */
     margin: 0 auto;
     font-size: 16.5px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.9;
     color: #4a5164;
 }
@@ -205,6 +207,7 @@
 
 .about-quote-text {
     margin: 0;
+    max-width: 70ch; /* ~80 chars/line */
     font-size: 16px;
     font-weight: 600;
     line-height: 1.85;
@@ -290,6 +293,7 @@
 }
 
 .about-mission-title {
+    font-family: 'Montserrat', sans-serif; /* heading dùng Montserrat */
     font-size: 26px;
     font-weight: 800;
     color: #14295c;
@@ -317,8 +321,9 @@
 }
 
 .about-mission-text {
+    max-width: 68ch; /* ~80 chars/line */
     font-size: 15.5px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.85;
     color: #545c70;
     margin: 0 0 16px;

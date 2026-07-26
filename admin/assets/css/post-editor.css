@@ -1,218 +1,412 @@
-/* ===== Form thêm/sửa bài viết dạng 2 cột ===== */
-.post-editor-grid {
-    display: grid;
-    grid-template-columns: 1fr 440px;
-    gap: 22px;
-    align-items: start;
+﻿/* ===== THIẾT KẾ MỚI CHO TRANG SỬA/THÊM SẢN PHẨM (POST-EDITOR) ===== */
+
+:root {
+    --purple-primary: #6366f1;
+    --purple-light: #e0e7ff;
+    --purple-hover: #4f46e5;
+    --bg-light: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-main: #334155;
+    --text-muted: #64748b;
 }
 
-.post-main,
-.post-side {
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+}
+
+/* Page Header & Back Btn */
+.pe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.pe-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.pe-btn-back {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.pe-btn-back:hover {
+    color: var(--purple-primary);
+    border-color: var(--purple-primary);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+}
+.pe-page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+.pe-btn-top-back {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.pe-btn-top-back:hover {
+    background-color: var(--bg-light);
+}
+
+/* Editor Grid */
+.pe-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 40px;
+}
+
+.pe-main {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    min-width: 0;
+    gap: 24px;
+}
+.pe-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.post-box {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px 22px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+/* Post Cards */
+.pe-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
-
-.post-box h3 {
+.pe-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bg-light);
+}
+.pe-card-icon {
+    color: var(--purple-primary);
     font-size: 16px;
+}
+.pe-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #1e3c72;
+}
+
+/* Form Inputs */
+.pe-label {
+    display: block;
     font-weight: 600;
-    margin: 0 0 14px;
+    font-size: 13.5px;
+    color: #475569;
+    margin-bottom: 8px;
+    margin-top: 14px;
 }
-
-/* ---- Tiêu đề bài viết ---- */
-.post-title-input {
+.pe-label:first-of-type {
+    margin-top: 0;
+}
+.pe-input, .pe-select, .pe-textarea {
     width: 100%;
-    border: none;
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 22px;
-    font-weight:600;
-    color: #111;
-    padding: 4px 0;
-}
-
-.post-title-input:focus {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    color: var(--text-main);
+    background-color: var(--bg-light);
     outline: none;
+    transition: all 0.2s ease;
 }
-
-.post-title-input::placeholder {
-    color: #c7c7cc;
+.pe-input:focus, .pe-select:focus, .pe-textarea:focus {
+    border-color: var(--purple-primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
 }
-
-/* ---- Input dùng chung trong sidebar cài đặt ---- */
-.post-box input[type="text"],
-.post-box input[type="date"],
-.post-box input[type="file"],
-.post-box input[type="number"],
-.post-box input[type="email"],
-.post-box input[type="password"],
-.post-box select,
-.post-box textarea {
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 16px;
-    padding: 15px 16px;
-    border: 1px solid #e0e0e3;
-    border-radius: 8px;
-    background: #fafafa;
-    color: #1a1a1a;
-    width: 100%;
-    margin-bottom: 4px;
-}
-
-.post-box textarea {
+.pe-textarea {
     resize: vertical;
 }
 
-.post-box input:focus,
-.post-box select:focus,
-.post-box textarea:focus {
-    outline: none;
-    border-color: #1e3c72;
-    background: #fff;
+/* Product Title Input Card */
+.pe-title-card {
+    padding: 18px 24px;
 }
-
-.post-box .hint {
-    display: block;
-    font-size: 14px;
-    color: #9b9ba1;
-    margin: 8px 0 8px;
-}
-
-/* ---- Box Xuất bản ---- */
-.post-box .admin-checkbox {
-    margin-bottom: 14px;
-}
-
-.post-publish-btn {
+.pe-title-input {
     width: 100%;
-    justify-content: center;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-main);
+    outline: none;
+    padding: 6px 0;
 }
 
-/* ---- Hàng 2 cột cho các trường ngắn (giá, số lượng...) ---- */
-.post-box .field-row {
+/* Row wrapper */
+.pe-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Publish box controls */
+.pe-publish-row {
     display: flex;
-    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
-
-.post-box .field-row > div {
-    flex: 1;
-    min-width: 0;
+.pe-toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-
-.post-box label.field-label {
-    display: block;
-    font-size: 14px;
-    font-weight: 700;
-    color: #6b6b70;
-    margin-bottom: 6px;
-}
-
-/* ---- Nhóm Giá / Kho trong post-box "Giá & kho" ---- */
-.price-stock-group {
-    margin-bottom: 18px;
-}
-
-.price-stock-group:last-child {
-    margin-bottom: 0;
-}
-
-.price-stock-group-label {
-    display: block;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #b9b9be;
-    font-weight: 800;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #f1f1f3;
-}
-
-.input-suffix {
+/* IOS Style Toggle Switch */
+.pe-switch {
     position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
 }
-
-.input-suffix input {
-    padding-right: 34px;
+.pe-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
-
-.input-suffix .suffix {
+.pe-slider {
     position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    cursor: pointer;
+    inset: 0;
+    background-color: #cbd5e1;
+    transition: .3s;
+    border-radius: 24px;
+}
+.pe-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+input:checked + .pe-slider {
+    background-color: var(--purple-primary);
+}
+input:checked + .pe-slider:before {
+    transform: translateX(20px);
+}
+
+.pe-date-picker-box {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.pe-date-picker-icon {
+    color: var(--text-muted);
+    font-size: 16px;
+}
+.pe-date-picker-text {
+    flex: 1;
+}
+.pe-date-picker-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 2px;
+}
+.pe-date-picker-val {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.pe-btn-publish {
+    width: 100%;
+    background-color: var(--purple-primary);
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
     font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.pe-btn-publish:hover {
+    background-color: var(--purple-hover);
+}
+
+.pe-btn-cancel-link {
+    display: block;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-top: 12px;
+}
+.pe-btn-cancel-link:hover {
+    color: var(--purple-primary);
+}
+
+/* Bottom Actions Panel */
+.pe-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+.pe-btn-submit {
+    background-color: var(--purple-primary);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.pe-btn-submit:hover {
+    background-color: var(--purple-hover);
+}
+
+/* Suffix inside input wrapper */
+.pe-input-suffix-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.pe-input-suffix-wrap .pe-input {
+    padding-right: 36px;
+}
+.pe-input-suffix {
+    position: absolute;
+    right: 14px;
+    color: var(--text-muted);
     font-weight: 700;
-    color: #9b9ba1;
+    font-size: 13.5px;
     pointer-events: none;
 }
 
-.price-preview {
-    font-size: 14px;
-    color: #6b6b70;
-    margin-top: 2px;
+/* Drag drop multi images / preview list */
+.pe-image-dropzone {
+    border: 2px dashed #cbd5e1;
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.pe-image-dropzone:hover {
+    border-color: var(--purple-primary);
+    background-color: #f5f7ff;
+}
+.pe-image-dropzone i {
+    font-size: 24px;
+    color: var(--purple-primary);
+    margin-bottom: 8px;
+}
+.pe-image-dropzone p {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-main);
+}
+.pe-image-dropzone span {
+    font-size: 11px;
+    color: var(--text-muted);
 }
 
-.price-preview strong {
-    color: #1e3c72;
-}
-
-/* ---- Xem trước ảnh đã chọn ---- */
-.anh-preview-list {
+.pe-preview-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin: 4px 0 8px;
+    gap: 10px;
+    margin-top: 16px;
 }
-
-.anh-preview-item {
-    position: relative;
+.pe-preview-item {
     width: 64px;
     height: 64px;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid #e0e0e3;
+    position: relative;
+    border: 1px solid var(--border-color);
 }
-
-.anh-preview-item img {
+.pe-preview-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
-
-.anh-preview-remove {
+.pe-preview-remove {
     position: absolute;
     top: 2px;
     right: 2px;
-    width: 18px;
-    height: 18px;
-    line-height: 16px;
-    padding: 0;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(0,0,0,0.6);
+    color: #ffffff;
     border: none;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
     cursor: pointer;
 }
-
-.anh-preview-remove:hover {
-    background: #d92c2c;
+.pe-preview-remove:hover {
+    background-color: #dc2626;
 }
 
-@media (max-width: 992px) {
-    .post-editor-grid {
+/* Editor TinyMCE placeholder styling */
+.tox-tinymce {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .pe-grid {
         grid-template-columns: 1fr;
     }
 }
