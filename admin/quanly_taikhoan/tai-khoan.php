@@ -2,14 +2,54 @@
     require_once '../config/config.php';
     yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI], '../dang-nhap.php');
 
-    $danh_sach = $pdo->query("SELECT * FROM account ORDER BY account_id ASC")->fetchAll(PDO::FETCH_ASSOC);
+    $tu_khoa = isset($_GET['q']) ? trim($_GET['q']) : '';
+    $vai_tro = isset($_GET['role']) && $_GET['role'] !== '' ? $_GET['role'] : 'all';
+
+    $sql_where = "WHERE 1=1";
+    $tham_so = [];
+    
+    if ($tu_khoa !== '') {
+        $sql_where .= " AND (account_name LIKE :q OR account_email LIKE :q)";
+        $tham_so[':q'] = '%' . $tu_khoa . '%';
+    }
+    
+    if ($vai_tro !== 'all') {
+        $sql_where .= " AND account_type = :role";
+        $tham_so[':role'] = (int) $vai_tro;
+    }
+
+    $dem_stmt = $pdo->prepare("SELECT COUNT(*) FROM account $sql_where");
+    $dem_stmt->execute($tham_so);
+    $tong_so = (int) $dem_stmt->fetchColumn();
+
+    $so_dong = 10;
+    $tong_so_trang = max(1, (int) ceil($tong_so / $so_dong));
+    $trang_hien_tai = isset($_GET['trang']) ? (int) $_GET['trang'] : 1;
+    if ($trang_hien_tai < 1) $trang_hien_tai = 1;
+    if ($trang_hien_tai > $tong_so_trang) $trang_hien_tai = $tong_so_trang;
+    $bat_dau = ($trang_hien_tai - 1) * $so_dong;
+
+    $danh_sach_stmt = $pdo->prepare("SELECT * FROM account $sql_where ORDER BY account_id DESC LIMIT :gioi_han OFFSET :bat_dau");
+    foreach ($tham_so as $k => $v) {
+        $danh_sach_stmt->bindValue($k, $v);
+    }
+    $danh_sach_stmt->bindValue(':gioi_han', $so_dong, PDO::PARAM_INT);
+    $danh_sach_stmt->bindValue(':bat_dau', $bat_dau, PDO::PARAM_INT);
+    $danh_sach_stmt->execute();
+    $danh_sach = $danh_sach_stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $sua_id = isset($_GET['sua']) ? (int) $_GET['sua'] : 0;
     $dang_sua = null;
     if ($sua_id > 0) {
-        foreach ($danh_sach as $tk) {
-            if ((int) $tk['account_id'] === $sua_id) { $dang_sua = $tk; break; }
-        }
+        $stmt_sua = $pdo->prepare("SELECT * FROM account WHERE account_id = :id");
+        $stmt_sua->execute([':id' => $sua_id]);
+        $dang_sua = $stmt_sua->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function xay_url_trang($trang) {
+        $params = $_GET;
+        $params['trang'] = $trang;
+        return 'tai-khoan.php?' . http_build_query($params);
     }
 
     $thong_bao = [
@@ -159,12 +199,15 @@
             <div class="tk-table-header">
                 <div class="tk-table-title-wrap">
                     <div class="tk-card-icon tk-card-icon--list"><i class="fa-solid fa-list"></i></div>
-                    <h2 class="tk-card-title">DANH SÁCH TÀI KHOẢN (<?php echo count($danh_sach); ?>)</h2>
+                    <h2 class="tk-card-title">DANH SÁCH TÀI KHOẢN (<?php echo $tong_so; ?>)</h2>
                 </div>
                 <div class="tk-table-tools">
                     <div class="tk-search-wrap">
-                        <input type="text" id="tkSearch" class="tk-search-input" placeholder="T&#236;m ki&#7871;m theo Họ tên ho&#7863;c email...">
-                        <i class="fa-solid fa-magnifying-glass tk-search-icon"></i>
+                        <form action="" method="GET" style="display: flex; width: 100%;">
+                            <input type="text" name="q" class="tk-search-input" placeholder="Tìm kiếm theo Họ tên hoặc email..." value="<?php echo htmlspecialchars($tu_khoa); ?>">
+                            <input type="hidden" name="role" value="<?php echo htmlspecialchars($vai_tro); ?>">
+                            <button type="submit" style="background:none; border:none; margin-left: -30px; cursor:pointer;"><i class="fa-solid fa-magnifying-glass tk-search-icon" style="position: static;"></i></button>
+                        </form>
                     </div>
                     <button class="tk-filter-btn" id="tkFilterBtn">
                         <i class="fa-solid fa-sliders"></i> Bộ lọc
@@ -172,12 +215,12 @@
                 </div>
             </div>
 
-            <div class="tk-filter-panel" id="tkFilterPanel" style="display:none">
+            <div class="tk-filter-panel" id="tkFilterPanel" style="<?php echo $vai_tro !== 'all' ? '' : 'display:none;'; ?>">
                 <label class="tk-label">Lọc theo vai trò:</label>
                 <div class="tk-filter-roles">
-                    <button class="tk-filter-role active" data-role="all">Tất cả</button>
+                    <a href="tai-khoan.php?q=<?php echo urlencode($tu_khoa); ?>&role=all" class="tk-filter-role <?php echo $vai_tro === 'all' ? 'active' : ''; ?>" style="text-decoration: none;">Tất cả</a>
                     <?php foreach ($DS_VAI_TRO as $ma_vt => $ten_vt): ?>
-                        <button class="tk-filter-role" data-role="<?php echo $ma_vt; ?>"><?php echo htmlspecialchars($ten_vt); ?></button>
+                        <a href="tai-khoan.php?q=<?php echo urlencode($tu_khoa); ?>&role=<?php echo $ma_vt; ?>" class="tk-filter-role <?php echo (string)$vai_tro === (string)$ma_vt ? 'active' : ''; ?>" style="text-decoration: none;"><?php echo htmlspecialchars($ten_vt); ?></a>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -240,19 +283,27 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <div class="tk-empty" id="tkEmpty" style="display:none">
+                <?php if (count($danh_sach) === 0): ?>
+                <div class="tk-empty" id="tkEmpty" style="display:flex">
                     <i class="fa-solid fa-users-slash"></i><p>Không tìm thấy tài khoản nào.</p>
                 </div>
+                <?php endif; ?>
             </div>
 
+            <?php if ($tong_so_trang > 1): ?>
             <div class="tk-pagination">
-                <span class="tk-paging-info" id="tkPagingInfo"></span>
+                <span class="tk-paging-info">Hiển thị <?php echo $bat_dau + 1; ?> đến <?php echo min($bat_dau + $so_dong, $tong_so); ?> của <?php echo $tong_so; ?> kết quả</span>
                 <div class="tk-paging-controls">
-                    <button class="tk-page-btn" id="tkPrevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <div class="tk-page-numbers" id="tkPageNumbers"></div>
-                    <button class="tk-page-btn" id="tkNextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                    <a href="<?php echo xay_url_trang(max(1, $trang_hien_tai - 1)); ?>" class="tk-page-btn <?php echo $trang_hien_tai <= 1 ? 'disabled' : ''; ?>" style="text-decoration:none;"><i class="fa-solid fa-chevron-left"></i></a>
+                    <div class="tk-page-numbers">
+                        <?php for ($p = 1; $p <= $tong_so_trang; $p++): ?>
+                            <a href="<?php echo xay_url_trang($p); ?>" class="tk-page-num <?php echo $p === $trang_hien_tai ? 'active' : ''; ?>" style="text-decoration:none;"><?php echo $p; ?></a>
+                        <?php endfor; ?>
+                    </div>
+                    <a href="<?php echo xay_url_trang(min($tong_so_trang, $trang_hien_tai + 1)); ?>" class="tk-page-btn <?php echo $trang_hien_tai >= $tong_so_trang ? 'disabled' : ''; ?>" style="text-decoration:none;"><i class="fa-solid fa-chevron-right"></i></a>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
 
     </main>
@@ -267,17 +318,6 @@
     if(eb){eb.addEventListener('click',function(){var s=pi.type==='password';pi.type=s?'text':'password';ei.className=s?'fa-regular fa-eye-slash':'fa-regular fa-eye';});}
     var fb=document.getElementById('tkFilterBtn'),fp=document.getElementById('tkFilterPanel');
     if(fb){fb.addEventListener('click',function(){var o=fp.style.display!=='none';fp.style.display=o?'none':'block';fb.classList.toggle('active',!o);});}
-    var rows=Array.from(document.querySelectorAll('.tk-row')),si=document.getElementById('tkSearch'),
-        em=document.getElementById('tkEmpty'),inf=document.getElementById('tkPagingInfo'),
-        ns=document.getElementById('tkPageNumbers'),pb=document.getElementById('tkPrevBtn'),nb=document.getElementById('tkNextBtn'),
-        PP=10,pg=1,rl='all',q='';
-    function filt(){return rows.filter(function(r){return(!q||r.dataset.name.includes(q)||r.dataset.email.includes(q))&&(rl==='all'||r.dataset.role===rl);});}
-    function render(){var list=filt(),tot=list.length,pgs=Math.max(1,Math.ceil(tot/PP));if(pg>pgs)pg=pgs;var s=(pg-1)*PP,e=Math.min(s+PP,tot);rows.forEach(function(r){r.style.display='none';});list.forEach(function(r,i){r.style.display=(i>=s&&i<e)?'':'none';});em.style.display=tot===0?'flex':'none';inf.textContent=tot>0?'Hiển thị '+(s+1)+' đến '+e+' của '+tot+' kết quả':'';ns.innerHTML='';for(var p=1;p<=pgs;p++){var b=document.createElement('button');b.className='tk-page-num'+(p===pg?' active':'');b.textContent=p;(function(pp){b.addEventListener('click',function(){pg=pp;render();});})(p);ns.appendChild(b);}pb.disabled=pg<=1;nb.disabled=pg>=pgs;}
-    if(si)si.addEventListener('input',function(){q=si.value.trim().toLowerCase();pg=1;render();});
-    document.querySelectorAll('.tk-filter-role').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tk-filter-role').forEach(function(x){x.classList.remove('active');});b.classList.add('active');rl=b.dataset.role;pg=1;render();});});
-    if(pb)pb.addEventListener('click',function(){if(pg>1){pg--;render();}});
-    if(nb)nb.addEventListener('click',function(){var p=Math.ceil(filt().length/PP);if(pg<p){pg++;render();}});
-    render();
 })();
 </script>
 </body>

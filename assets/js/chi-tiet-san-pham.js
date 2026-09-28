@@ -203,11 +203,16 @@ document.addEventListener('DOMContentLoaded', function () {
         var thuongHieu = compareModal.getAttribute('data-thuong-hieu');
         var url = siteUrl('so-sanh-ajax.php') + '?action=suggest&exclude=' + encodeURIComponent(currentId) +
             '&danh_muc=' + encodeURIComponent(danhMuc) + '&thuong_hieu=' + encodeURIComponent(thuongHieu);
-        fetch(url)
+        if (suggestController) suggestController.abort();
+        suggestController = new AbortController();
+        fetch(url, { signal: suggestController.signal })
             .then(function (res) { return res.json(); })
             .then(function (items) {
                 if (comparePlaceholder) comparePlaceholder.style.display = 'none';
                 renderResults(items, 'Gợi ý sản phẩm cùng hãng:');
+            })
+            .catch(function (error) {
+                if (error.name !== 'AbortError') console.error(error);
             });
     }
 
@@ -215,9 +220,16 @@ document.addEventListener('DOMContentLoaded', function () {
         var currentId = compareModal.getAttribute('data-current-id');
         var danhMuc = compareModal.getAttribute('data-danh-muc');
         var searchTimer = null;
+        var suggestController = null;
+        var searchController = null;
+        var detailController = null;
 
         function selectCompareProduct(id) {
-            fetch(siteUrl('so-sanh-ajax.php') + '?action=detail&id=' + encodeURIComponent(id))
+            if (detailController) detailController.abort();
+            detailController = new AbortController();
+            fetch(siteUrl('so-sanh-ajax.php') + '?action=detail&id=' + encodeURIComponent(id), {
+                signal: detailController.signal
+            })
                 .then(function (res) { return res.json(); })
                 .then(function (data) {
                     if (data.error) return;
@@ -243,6 +255,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (compareTableWrapper) compareTableWrapper.style.display = 'block';
                     if (compareSearchResults) compareSearchResults.classList.remove('show');
                     compareSearchInput.value = data.ten_san_pham;
+                })
+                .catch(function (error) {
+                    if (error.name !== 'AbortError') console.error(error);
                 });
         }
 
@@ -250,15 +265,21 @@ document.addEventListener('DOMContentLoaded', function () {
             var q = compareSearchInput.value.trim();
             clearTimeout(searchTimer);
             if (q.length < 2) {
+                if (searchController) searchController.abort();
                 loadCompareSuggestions();
                 return;
             }
             searchTimer = setTimeout(function () {
+                if (searchController) searchController.abort();
+                searchController = new AbortController();
                 var url = siteUrl('so-sanh-ajax.php') + '?action=search&q=' + encodeURIComponent(q) +
                     '&exclude=' + encodeURIComponent(currentId) + '&danh_muc=' + encodeURIComponent(danhMuc);
-                fetch(url)
+                fetch(url, { signal: searchController.signal })
                     .then(function (res) { return res.json(); })
-                    .then(function (items) { renderResults(items); });
+                    .then(function (items) { renderResults(items); })
+                    .catch(function (error) {
+                        if (error.name !== 'AbortError') console.error(error);
+                    });
             }, 300);
         });
 

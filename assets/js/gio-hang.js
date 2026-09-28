@@ -6,6 +6,15 @@
     if (!cartList) return;
 
     var summaryTotal = document.getElementById('cartSummaryTotal');
+    var rowControllers = new WeakMap();
+
+    function taoController(row) {
+        var controller = rowControllers.get(row);
+        if (controller) controller.abort();
+        controller = new AbortController();
+        rowControllers.set(row, controller);
+        return controller;
+    }
 
     function formatTien(so) {
         return Math.round(so).toLocaleString('vi-VN') + '₫';
@@ -33,6 +42,7 @@
 
     function capNhatSoLuong(row, soLuongMoi) {
         var maGioHang = row.getAttribute('data-ma-gio-hang');
+        var controller = taoController(row);
         var params = new URLSearchParams();
         params.append('action', 'cap_nhat');
         params.append('ma_gio_hang', maGioHang);
@@ -41,7 +51,8 @@
         fetch(siteUrl('gio-hang-ajax.php'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params.toString()
+            body: params.toString(),
+            signal: controller.signal
         })
             .then(function (res) { return res.json(); })
             .then(function (data) {
@@ -88,6 +99,7 @@
         if (removeBtn) {
             removeBtn.addEventListener('click', function () {
                 var maGioHang = row.getAttribute('data-ma-gio-hang');
+                var controller = taoController(row);
                 var params = new URLSearchParams();
                 params.append('action', 'xoa');
                 params.append('ma_gio_hang', maGioHang);
@@ -95,7 +107,8 @@
                 fetch(siteUrl('gio-hang-ajax.php'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: params.toString()
+                    body: params.toString(),
+                    signal: controller.signal
                 })
                     .then(function (res) { return res.json(); })
                     .then(function (data) {

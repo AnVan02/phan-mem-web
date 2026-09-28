@@ -1,0 +1,38 @@
+.security-page { color: #24323a; background: #f4f7f6; font-family: Inter, sans-serif; }
+.security-container { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+.security-hero { padding: 72px 0 92px; color: #fff; background: radial-gradient(circle at 82% 20%, rgba(239, 118, 82, .35), transparent 28%), linear-gradient(120deg, #123f48, #087f83 58%, #0c626d); }
+.security-hero__content { max-width: 780px; }
+.security-kicker { display: inline-flex; gap: 9px; align-items: center; color: #ffd8a8; font: 700 13px Montserrat, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.security-hero h1 { margin: 18px 0 14px; font: 800 clamp(2.2rem, 5vw, 4.2rem)/1.08 Montserrat, sans-serif; }
+.security-hero p { max-width: 680px; margin: 0; color: #d8f0ed; font-size: 17px; line-height: 1.75; }
+.security-updated { margin-top: 22px !important; color: #a8d5d0 !important; font-size: 13px !important; }
+.security-body { padding: 54px 0 80px; }
+.security-section { margin-bottom: 24px; padding: 34px clamp(22px, 4vw, 44px); border: 1px solid #dce7e3; background: #fff; box-shadow: 0 12px 28px rgba(22, 52, 56, .04); }
+.security-section__heading { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+.security-index { display: grid; flex: 0 0 42px; place-items: center; width: 42px; height: 42px; color: #fff; background: #087f83; font: 700 13px Montserrat, sans-serif; }
+.security-label { margin: 0 0 5px; color: #ef7652; font: 700 11px Montserrat, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.security-section h2 { margin: 0; color: #163a43; font: 800 clamp(1.35rem, 3vw, 1.8rem)/1.2 Montserrat, sans-serif; }
+.security-section p { color: #53666c; font-size: 15px; line-height: 1.75; }
+.security-intro { margin: 0 0 22px; }
+.security-compliance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.security-compliance-card { display: grid; grid-template-columns: 74px 1fr; gap: 16px; align-items: start; padding: 18px; border: 1px solid #e2ece9; background: #fbfdfc; }
+.security-mark { display: grid; place-items: center; min-height: 64px; color: #087f83; border: 2px solid #9bc9c4; font: 800 13px/1.15 Montserrat, sans-serif; text-align: center; }
+.security-compliance-card h3, .security-info-card h3 { margin: 2px 0 7px; color: #183c44; font: 700 15px Montserrat, sans-serif; }
+.security-compliance-card p { margin: 0; font-size: 13px; line-height: 1.6; }
+.security-status { grid-column: 2; width: fit-content; margin-top: -4px; padding: 5px 8px; color: #856b35; background: #fff4d9; font-size: 11px; font-weight: 700; }
+.security-info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.security-info-card { display: flex; gap: 16px; padding: 20px; background: #eef8f6; }
+.security-info-card > i { color: #087f83; font-size: 22px; }
+.security-info-card p { margin: 0; font-size: 14px; }
+.security-section a { color: #087f83; font-weight: 700; }
+.security-access-list { display: grid; gap: 12px; }
+.security-access-list > div { display: flex; gap: 16px; padding: 16px 18px; border-left: 3px solid #ef7652; background: #fbf8f5; }
+.security-access-list i { width: 22px; padding-top: 3px; color: #ef7652; text-align: center; }
+.security-access-list p { margin: 0; font-size: 14px; line-height: 1.65; }
+.security-access-list strong { color: #183c44; font-family: Montserrat, sans-serif; }
+.security-callout, .security-empty { display: flex; gap: 15px; align-items: flex-start; padding: 18px 20px; background: #eaf5f3; }
+.security-callout > i, .security-empty > i { color: #087f83; font-size: 20px; }
+.security-callout strong, .security-empty strong { display: block; color: #183c44; font: 700 14px Montserrat, sans-serif; }
+.security-callout span, .security-empty p { display: block; margin: 6px 0 0; color: #53666c; font-size: 13px; line-height: 1.65; }
+.security-empty { background: #f8faf9; border: 1px dashed #bfd6d1; }
+@media (max-width: 680px) { .security-hero { padding: 52px 0 64px; } .security-compliance-grid, .security-info-grid { grid-template-columns: 1fr; } .security-compliance-card { grid-template-columns: 64px 1fr; } .security-status { grid-column: 2; } .security-section { padding: 26px 20px; } }

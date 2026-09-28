@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/admin/config/config.php';
 $da_dang_nhap_kh = isset($_SESSION['khach_hang_id']);
 $ten_khach_hang_header = $_SESSION['khach_hang_ten'] ?? '';
@@ -64,9 +64,9 @@ try {
                 </li>
 
                 <!-- Mega menu -->
-                <li class="has-megamenu">
+               <li class="has-megamenu">
                     <a href="<?php echo htmlspecialchars(asset_url('may-tinh-lap-san.php')); ?>">
-                        Máy tính lắp sẵn
+                        Sản phẩm
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <div class="megamenu">
@@ -74,29 +74,29 @@ try {
                             <div class="megamenu-content-group">
                                 <div class="megamenu-cols">
                                     <div class="megamenu-col">
-                                        <h4>Sản phẩm và máy bộ </h4>
-                                        <p class="megamenu-desc"> Khám phá danh mục máy bộ, linh kiện máy tính và các sản phẩm công nghệ
-                                            được tuyển chọn, đáp ứng nhu cầu từ học tập, làm việc đến chơi game và
-                                            sáng tạo nội dung.
+                                        <h4>Sản phẩm</h4>
+                                        <p class="megamenu-desc"> 
+                                            Khám phá đa dạng sản phẩm công nghệ và linh kiện máy tính chất lượng, đáp ứng mọi nhu cầu từ học tập, làm việc, giải trí, chơi game đến sáng tạo nội dung. 
                                         </p>
                                         <ul>
                                             <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">Sản phẩm</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?thuong-hieu=rosa')); ?>">Máy bộ ROSA</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=amd,intel')); ?>">CPU - Intel</a></li>
+                                            <!--<li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?thuong-hieu=rosa')); ?>">Máy bộ ROSA</a></li>-->
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="megamenu-promo">
                                     <a href="<?php echo htmlspecialchars(asset_url('uu-dai.php' . '?bo-suu-tap=007')); ?>">
-                                        <img src="<?php echo htmlspecialchars(asset_url('assets/image/pc.webp')); ?>" alt="Máy tính chơi game lắp sẵn">
+                                        <img src="<?php echo htmlspecialchars(asset_url('assets/image/san-pham.png')); ?>" alt="Máy tính chơi game lắp sẵn">
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <!-- Mega menu -->
-                <li class="has-megamenu">
+                <!--<li class="has-megamenu">
                     <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>">
-                        Linh kiện máy tính
+                        Sản phẩm
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <div class="megamenu">
@@ -106,30 +106,21 @@ try {
                                     <div class="megamenu-col">
                                         <h4>Linh kiện chính</h4>
                                         <ul>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=amd,intel')); ?>">CPU (AMD - Intel)</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=asrock')); ?>">Mainboard (ASRock)</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=amd,intel')); ?>">CPU - Intel</a></li>
+                                           
                                         </ul>
                                     </div>
-                                    <div class="megamenu-col">
-                                        <h4>RAM &amp; Lưu trữ theo hãng</h4>
-                                        <ul>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=gskill')); ?>">G.Skill</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=kingston')); ?>">Kingston</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=kingbank')); ?>">KingBank</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=agi')); ?>">AGI</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('san-pham.php' . '?danh-muc=lexar')); ?>">Lexar</a></li>
-                                        </ul>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
+                </li>-->
 
                 <!-- Mega menu -->
                 <li class="has-megamenu">
                     <a href="<?php echo htmlspecialchars(asset_url('may-tinh-lap-san.php')); ?>">
-                        Mô Tả Sản Phẩm
+                        Landing Page
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <div class="megamenu">
@@ -143,10 +134,7 @@ try {
                                             từ những thương hiệu hàng đầu trong lĩnh vực phần cứng máy tính.
                                         </p>
                                         <ul>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('landing-page/chương-trinh-intel.php')); ?>">INTEL</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('landing-page/nen-tang-ai-local.php')); ?>">KINGSTON</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('cong-dong.php' . '?trang=podcast')); ?>">PALIT</a></li>
-                                            <li><a href="<?php echo htmlspecialchars(asset_url('cong-dong.php' . '?trang=gioi-thieu-ban-be')); ?>">Giới thiệu bạn bè</a></li>
+                                            <li><a href="<?php echo htmlspecialchars(asset_url('landing-page/chuong-trinh-intel.php')); ?>">INTEL</a></li>
 
                                         </ul>
                                     </div>
@@ -160,13 +148,20 @@ try {
                         </div>
                     </div>
                 </li>
+                <!--<li class="has-megamenu">
+                    <a href="<?php echo htmlspecialchars(asset_url('khuyen-mai.php'));?>">
+                        Khuyễn mãi
+                        <span class="submenu-arrow" aria-hidden="true"></span>
+                    </a>
+
+                </li>-->
                 <li><a href="<?php echo htmlspecialchars(asset_url('bao-hanh.php')); ?>">Bảo hành </a></li>
 
 
                 <!-- Dropdown nhỏ -->
                 <li class="has-submenu">
                     <a href="<?php echo htmlspecialchars(asset_url('cong-dong.php')); ?>">
-                        Cộng đồng
+                        Tin tức
                         <span class="submenu-arrow" aria-hidden="true"></span>
                     </a>
                     <ul class="submenu">
@@ -176,11 +171,11 @@ try {
                         <?php endforeach; ?>
                     </ul>
                 </li>
+            </ul>
 
-
-                <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>" class="main-nav-account" <?php echo $da_dang_nhap_kh ? '' : 'data-account-trigger="1"'; ?>>
-                    <i class="fa-solid fa-circle-user"></i> Tài khoản
-                </a>
+            <a href="<?php echo htmlspecialchars(asset_url('tai-khoan.php')); ?>" class="main-nav-account" <?php echo $da_dang_nhap_kh ? '' : 'data-account-trigger="1"'; ?>>
+                <i class="fa-solid fa-circle-user"></i> Tài khoản
+            </a>
         </nav>
 
         <div class="header-icons">

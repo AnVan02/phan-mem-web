@@ -109,7 +109,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/admin-layout.css">
-    <link rel="stylesheet" href="../assets/css/article.css">
+    <link rel="stylesheet" href="../assets/css/nhat-ky.css">
 </head>
 
 <body>
@@ -117,101 +117,115 @@
         <?php include '../includes/sidebar.php'; ?>
 
         <main class="admin-main">
-            <div class="admin-main-header">
-                <h1><i class="fa-solid fa-clock-rotate-left"></i> Nhật ký hoạt động</h1>
+            <div class="nk-page-header">
+                <h1 class="nk-page-title"><i class="fa-solid fa-clock-rotate-left"></i> Nhật ký hoạt động</h1>
             </div>
 
-            <div class="admin-panel">
-                <form action="" method="GET" class="admin-filter-bar">
-                    <select name="account_id">
-                        <option value="">Tất cả tài khoản</option>
-                        <?php foreach ($danh_sach_tai_khoan as $tk): ?>
-                            <option value="<?php echo (int) $tk['account_id']; ?>" <?php echo $account_id_loc === (int) $tk['account_id'] ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($tk['account_name']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+            <div class="nk-card">
+                <div class="nk-card-header">
+                    <h2 class="nk-card-title">LỌC NHẬT KÝ</h2>
+                </div>
+                <div class="nk-card-body">
+                    <form action="" method="GET" class="nk-filter-bar">
+                        <select name="account_id" class="nk-select">
+                            <option value="">Tất cả tài khoản</option>
+                            <?php foreach ($danh_sach_tai_khoan as $tk): ?>
+                                <option value="<?php echo (int) $tk['account_id']; ?>" <?php echo $account_id_loc === (int) $tk['account_id'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($tk['account_name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
 
-                    <select name="hanh_dong">
-                        <option value="">Tất cả hành động</option>
-                        <?php foreach ($DS_HANH_DONG as $ma => $nhan): ?>
-                            <option value="<?php echo $ma; ?>" <?php echo $hanh_dong_loc === $ma ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($nhan[0]); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                        <select name="hanh_dong" class="nk-select">
+                            <option value="">Tất cả hành động</option>
+                            <?php foreach ($DS_HANH_DONG as $ma => $nhan): ?>
+                                <option value="<?php echo $ma; ?>" <?php echo $hanh_dong_loc === $ma ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($nhan[0]); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
 
-                    <select name="doi_tuong">
-                        <option value="">Tất cả đối tượng</option>
-                        <?php foreach ($DS_DOI_TUONG as $ma => $nhan): ?>
-                            <option value="<?php echo $ma; ?>" <?php echo $doi_tuong_loc === $ma ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($nhan); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                        <select name="doi_tuong" class="nk-select">
+                            <option value="">Tất cả đối tượng</option>
+                            <?php foreach ($DS_DOI_TUONG as $ma => $nhan): ?>
+                                <option value="<?php echo $ma; ?>" <?php echo $doi_tuong_loc === $ma ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($nhan); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
 
-                    <input type="date" name="tu_ngay" value="<?php echo htmlspecialchars($tu_ngay_loc); ?>" title="Từ ngày">
-                    <input type="date" name="den_ngay" value="<?php echo htmlspecialchars($den_ngay_loc); ?>" title="Đến ngày">
-                    <input type="text" name="q" placeholder="Tìm theo mô tả, tên tài khoản..." value="<?php echo htmlspecialchars($tu_khoa_loc); ?>">
+                        <input type="date" name="tu_ngay" class="nk-input" value="<?php echo htmlspecialchars($tu_ngay_loc); ?>" title="Từ ngày">
+                        <input type="date" name="den_ngay" class="nk-input" value="<?php echo htmlspecialchars($den_ngay_loc); ?>" title="Đến ngày">
+                        <input type="text" name="q" class="nk-input" placeholder="Tìm theo mô tả, tên tài khoản..." value="<?php echo htmlspecialchars($tu_khoa_loc); ?>" style="flex: 2;">
 
-                    <button type="submit" class="btn-admin btn-admin-primary"><i class="fa-solid fa-filter"></i> Lọc</button>
-                    <?php if ($co_loc): ?>
-                        <a href="nhat-ky.php" class="btn-admin btn-admin-secondary">Xoá lọc</a>
-                    <?php endif; ?>
-                </form>
+                        <div class="nk-filter-actions">
+                            <button type="submit" class="nk-btn nk-btn-primary"><i class="fa-solid fa-filter"></i> Lọc</button>
+                            <?php if ($co_loc): ?>
+                                <a href="nhat-ky.php" class="nk-btn nk-btn-secondary"><i class="fa-solid fa-xmark"></i> Xoá lọc</a>
+                            <?php endif; ?>
+                        </div>
+                    </form>
 
-                <h2>Tất cả hoạt động (<?php echo $tong_so_dong; ?>)</h2>
-                <?php if (count($danh_sach) === 0): ?>
-                    <div class="admin-empty">Chưa có hoạt động nào phù hợp.</div>
-                <?php else: ?>
-                    <div class="admin-table-wrap">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Thời gian</th>
-                                    <th>Tài khoản</th>
-                                    <th>Hành động</th>
-                                    <th>Đối tượng</th>
-                                    <th>Mô tả</th>
-                                    <th>IP</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($danh_sach as $nk):
-                                    $nhan_hanh_dong = $DS_HANH_DONG[$nk['hanh_dong']] ?? [$nk['hanh_dong'], 'off'];
-                                ?>
-                                    <tr>
-                                        <td><?php echo date('d/m/Y H:i:s', strtotime($nk['thoi_gian'])); ?></td>
-                                        <td class="title-cell"><?php echo htmlspecialchars($nk['account_name']); ?></td>
-                                        <td><span class="admin-badge <?php echo $nhan_hanh_dong[1]; ?>"><?php echo htmlspecialchars($nhan_hanh_dong[0]); ?></span></td>
-                                        <td><?php echo htmlspecialchars($DS_DOI_TUONG[$nk['doi_tuong']] ?? $nk['doi_tuong']); ?><?php echo $nk['doi_tuong_id'] ? ' #' . (int) $nk['doi_tuong_id'] : ''; ?></td>
-                                        <td><?php echo htmlspecialchars($nk['mo_ta'] ?? ''); ?></td>
-                                        <td><?php echo htmlspecialchars($nk['dia_chi_ip'] ?? ''); ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                    <div class="nk-card-header" style="padding: 0 0 16px; border-bottom: none;">
+                        <h2 class="nk-card-title">TẤT CẢ HOẠT ĐỘNG</h2>
+                        <span class="nk-card-count"><?php echo $tong_so_dong; ?></span>
                     </div>
 
-                    <?php if ($tong_so_trang > 1): ?>
-                        <div class="admin-pagination">
-                            <a class="page-nav <?php echo $trang_hien_tai <= 1 ? 'disabled' : ''; ?>"
-                               href="<?php echo xay_url_trang_nhat_ky(max(1, $trang_hien_tai - 1)); ?>">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </a>
-
-                            <?php for ($i = 1; $i <= $tong_so_trang; $i++): ?>
-                                <a class="page-num <?php echo $i === $trang_hien_tai ? 'active' : ''; ?>"
-                                   href="<?php echo xay_url_trang_nhat_ky($i); ?>"><?php echo $i; ?></a>
-                            <?php endfor; ?>
-
-                            <a class="page-nav <?php echo $trang_hien_tai >= $tong_so_trang ? 'disabled' : ''; ?>"
-                               href="<?php echo xay_url_trang_nhat_ky(min($tong_so_trang, $trang_hien_tai + 1)); ?>">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </a>
+                    <?php if (count($danh_sach) === 0): ?>
+                        <div class="nk-empty">
+                            <i class="fa-solid fa-folder-open" style="font-size: 32px; margin-bottom: 12px; color: #dcdce4;"></i>
+                            <br>Chưa có hoạt động nào phù hợp.
                         </div>
+                    <?php else: ?>
+                        <div class="nk-table-wrap">
+                            <table class="nk-table">
+                                <thead>
+                                    <tr>
+                                        <th>Thời gian</th>
+                                        <th>Tài khoản</th>
+                                        <th>Hành động</th>
+                                        <th>Đối tượng</th>
+                                        <th>Mô tả</th>
+                                        <th>IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($danh_sach as $nk):
+                                        $nhan_hanh_dong = $DS_HANH_DONG[$nk['hanh_dong']] ?? [$nk['hanh_dong'], 'off'];
+                                    ?>
+                                        <tr>
+                                            <td class="nk-col-time"><?php echo date('d/m/Y H:i:s', strtotime($nk['thoi_gian'])); ?></td>
+                                            <td class="nk-col-account"><?php echo htmlspecialchars($nk['account_name']); ?></td>
+                                            <td><span class="nk-badge <?php echo $nhan_hanh_dong[1]; ?>"><?php echo htmlspecialchars($nhan_hanh_dong[0]); ?></span></td>
+                                            <td class="nk-col-object"><?php echo htmlspecialchars($DS_DOI_TUONG[$nk['doi_tuong']] ?? $nk['doi_tuong']); ?><?php echo $nk['doi_tuong_id'] ? ' #' . (int) $nk['doi_tuong_id'] : ''; ?></td>
+                                            <td class="nk-col-desc"><?php echo htmlspecialchars($nk['mo_ta'] ?? ''); ?></td>
+                                            <td class="nk-col-ip"><?php echo htmlspecialchars($nk['dia_chi_ip'] ?? ''); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <?php if ($tong_so_trang > 1): ?>
+                            <div class="nk-pagination">
+                                <a class="nk-page-link <?php echo $trang_hien_tai <= 1 ? 'disabled' : ''; ?>"
+                                   href="<?php echo xay_url_trang_nhat_ky(max(1, $trang_hien_tai - 1)); ?>">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
+
+                                <?php for ($i = 1; $i <= $tong_so_trang; $i++): ?>
+                                    <a class="nk-page-link <?php echo $i === $trang_hien_tai ? 'active' : ''; ?>"
+                                       href="<?php echo xay_url_trang_nhat_ky($i); ?>"><?php echo $i; ?></a>
+                                <?php endfor; ?>
+
+                                <a class="nk-page-link <?php echo $trang_hien_tai >= $tong_so_trang ? 'disabled' : ''; ?>"
+                                   href="<?php echo xay_url_trang_nhat_ky(min($tong_so_trang, $trang_hien_tai + 1)); ?>">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endif; ?>
+                </div>
             </div>
         </main>
     </div>

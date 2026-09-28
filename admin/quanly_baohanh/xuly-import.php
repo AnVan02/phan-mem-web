@@ -12,6 +12,19 @@
         return $ket_qua - 1;
     }
 
+    function xoaNamespaceXml($xml_string)
+    {
+        // 1. Xóa khai báo namespace: xmlns="..." và xmlns:xxx="..."
+        $xml_string = preg_replace('/\s+xmlns(?::\w+)?="[^"]*"/', '', $xml_string);
+        $xml_string = preg_replace('/\s+xmlns(?::\w+)?=\'[^\']*\'/', '', $xml_string);
+        // 2. Xóa các thuộc tính có namespace prefix: mc:Ignorable="...", xr:uid="..."
+        $xml_string = preg_replace('/\s+\w+:\w+="[^"]*"/', '', $xml_string);
+        $xml_string = preg_replace('/\s+\w+:\w+=\'[^\']*\'/', '', $xml_string);
+        // 3. Xóa namespace prefix khỏi tên thẻ: <x:row> → <row>, </x:row> → </row>
+        $xml_string = preg_replace('/(<\/?)(\w+):/', '$1', $xml_string);
+        return $xml_string;
+    }
+
     function docFileXlsx($duong_dan)
     {
         $zip = new ZipArchive();
@@ -22,7 +35,7 @@
         $chuoi_dung_chung = [];
         $shared_xml = $zip->getFromName('xl/sharedStrings.xml');
         if ($shared_xml !== false) {
-            $sx = new SimpleXMLElement($shared_xml);
+            $sx = new SimpleXMLElement(xoaNamespaceXml($shared_xml));
             foreach ($sx->si as $si) {
                 if (isset($si->t)) {
                     $chuoi_dung_chung[] = (string) $si->t;
@@ -40,7 +53,7 @@
         if ($sheet_xml === false) {
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $ten = $zip->getNameIndex($i);
-                if (preg_match('#^xl/worksheets/sheet\d+\.xml$#', $ten)) {
+                if (preg_match('#^xl/worksheets/sheet\\d+\\.xml$#', $ten)) {
                     $sheet_xml = $zip->getFromName($ten);
                     break;
                 }
@@ -52,7 +65,7 @@
             throw new Exception('Không tìm thấy dữ liệu trong file Excel.');
         }
 
-        $sheet = new SimpleXMLElement($sheet_xml);
+        $sheet = new SimpleXMLElement(xoaNamespaceXml($sheet_xml));
         $rows = [];
         foreach ($sheet->sheetData->row as $row_xml) {
             $du_lieu_dong = [];
@@ -86,6 +99,7 @@
             $rows[] = array_values($du_lieu_dong);
         }
 
+        unset($sheet, $sheet_xml, $chuoi_dung_chung, $sx, $shared_xml);
         return $rows;
     }
 
@@ -164,7 +178,15 @@
 
     $ten_file = uniqid('bao-hanh-', true) . '.' . $duoi;
     $duong_dan_luu = $thu_muc . $ten_file;
-    move_uploaded_file($file['tmp_name'], $duong_dan_luu);
+    if (!move_uploaded_file($file['tmp_name'], $duong_dan_luu)) {
+        header('Location: bao-hanh.php?msg=loi_dinh_dang');
+        exit;
+    }
+    register_shutdown_function(function () use ($duong_dan_luu) {
+        if (is_file($duong_dan_luu)) {
+            @unlink($duong_dan_luu);
+        }
+    });
 
     // --- Đọc và import dữ liệu vào bảng bao_hanh ---
     try {
@@ -201,7 +223,14 @@
 
     for ($i = 1; $i < count($rows); $i++) {
         $row = $rows[$i];
-        if (count(array_filter($row, function ($v) { return trim((string) $v) !== ''; })) === 0) {
+        $co_du_lieu = false;
+        foreach ($row as $value) {
+            if (trim((string) $value) !== '') {
+                $co_du_lieu = true;
+                break;
+            }
+        }
+        if (!$co_du_lieu) {
             continue;
         }
         $tong++;
@@ -236,6 +265,8 @@
             $that_bai++;
         }
     }
+
+    unset($rows, $row);
 
     if ($tong === 0) {
         header('Location: bao-hanh.php?msg=loi_khong_co_du_lieu');

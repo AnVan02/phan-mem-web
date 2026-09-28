@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchSuggest = document.getElementById('headerSearchSuggest');
     if (searchInput && searchSuggest) {
         var debounceTimer = null;
+        var searchController = null;
         var activeIndex = -1;
         var currentItems = [];
 
@@ -135,10 +136,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             debounceTimer = setTimeout(function () {
+                if (searchController) searchController.abort();
+                searchController = new AbortController();
                 fetch(siteUrl('tim-kiem-ajax.php') + '?action=suggest&q=' + encodeURIComponent(tuKhoa))
                     .then(function (res) { return res.json(); })
                     .then(function (items) { hienGoiY(items, tuKhoa); })
-                    .catch(function () { dongGoiY(); });
+                    .catch(function (error) {
+                        if (error.name !== 'AbortError') dongGoiY();
+                    });
             }, 250);
         });
 
@@ -211,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(function (data) {
                 if (data.success) window.capNhatBadgeGioHang(data.cart_count);
             })
-            .catch(function () {});
+            .catch(function () { });
     }
 
     // Popup mời đăng nhập khi bấm icon/tên "Tài khoản" lúc chưa đăng nhập

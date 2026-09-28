@@ -104,10 +104,10 @@ $t['copyright'] = str_replace('{year}', date('Y'), $t['copyright']);
         <!-- Bottom legal bar -->
         <div class="footer__bottom">
             <div class="footer__legal">
-                <a href="#"><?php echo $t['legal_terms']; ?></a>
-                <a href="#"><?php echo $t['legal_privacy']; ?></a>
-                <a href="#"><?php echo $t['legal_service_terms']; ?></a>
-                <a href="#"><?php echo $t['legal_do_not_sell']; ?></a>
+                <a href="<?php echo htmlspecialchars(asset_url('dieu-khoan.php')); ?>"><?php echo $t['legal_terms']; ?></a>
+                <a href="<?php echo htmlspecialchars(asset_url('chinh-sach-bao-mat.php')); ?>"><?php echo $t['legal_privacy']; ?></a>
+                <a href="<?php echo htmlspecialchars(asset_url('dieu-khoan.php#dich-vu')); ?>"><?php echo $t['legal_service_terms']; ?></a>
+                <a href="<?php echo htmlspecialchars(asset_url('chinh-sach-bao-mat.php#yeu-cau-xoa')); ?>"><?php echo $t['legal_do_not_sell']; ?></a>
             </div>
         </div>
 

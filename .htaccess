@@ -1,7 +1,11 @@
 RewriteEngine On
 
-# Chuyển hướng robots.txt sang robots.php động
+# Hiển thị trang lỗi thân thiện khi URL không tồn tại.
+ErrorDocument 404 /VietSon-Achieva/404.php
+
+# Chuyển hướng robots.txt và sitemap.xml sang file PHP động
 RewriteRule ^robots\.txt$ robots.php [L]
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
 # Trang tĩnh: /ten-trang -> ten-trang.php nếu file đó tồn tại
 RewriteCond %{REQUEST_FILENAME}.php -f

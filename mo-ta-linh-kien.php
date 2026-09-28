@@ -289,49 +289,36 @@ if ($ten_dong_hien_tai !== '') {
 
 
 // Áp dụng bộ lọc dòng / thương hiệu / khoảng giá / sắp xếp lên danh sách hiển thị
-$danh_sach_hien_thi = $san_pham_list;
+$danh_sach_hien_thi = [];
+$bucket_dang_loc = ($gia_filter !== '' && isset($gia_buckets_dinh_nghia[$gia_filter]))
+    ? $gia_buckets_dinh_nghia[$gia_filter]
+    : null;
 
-if ($ma_dl_filter > 0) {
-    $danh_sach_hien_thi = array_filter($danh_sach_hien_thi, function ($sp) use ($ma_dl_filter) {
-        return (int) ($sp['ma_dung_luong'] ?? 0) === $ma_dl_filter;
-    });
+foreach ($san_pham_list as $sp) {
+    if ($ma_dl_filter > 0 && (int) ($sp['ma_dung_luong'] ?? 0) !== $ma_dl_filter) {
+        continue;
+    }
+    if ($ma_th_filter > 0 && (int) ($sp['ma_thuong_hieu'] ?? 0) !== $ma_th_filter) {
+        continue;
+    }
+    if (!empty($size_filter) && !in_array(trich_dung_luong($sp['ten_san_pham']), $size_filter, true)) {
+        continue;
+    }
+    if (!empty($ck_filter) && !in_array(trim($sp['chuan_ket_noi'] ?? ''), $ck_filter, true)) {
+        continue;
+    }
+
+    $gia = (int) $sp['gia_ban'];
+    if ($gia_tu !== null && $gia < $gia_tu || $gia_den !== null && $gia > $gia_den) {
+        continue;
+    }
+    if ($gia_tu === null && $gia_den === null && $bucket_dang_loc !== null
+        && ($gia < $bucket_dang_loc['min'] || $gia >= $bucket_dang_loc['max'])) {
+        continue;
+    }
+
+    $danh_sach_hien_thi[] = $sp;
 }
-
-if ($ma_th_filter > 0) {
-    $danh_sach_hien_thi = array_filter($danh_sach_hien_thi, function ($sp) use ($ma_th_filter) {
-        return (int) ($sp['ma_thuong_hieu'] ?? 0) === $ma_th_filter;
-    });
-}
-
-if (!empty($size_filter)) {
-    $danh_sach_hien_thi = array_filter($danh_sach_hien_thi, function ($sp) use ($size_filter) {
-        return in_array(trich_dung_luong($sp['ten_san_pham']), $size_filter, true);
-    });
-}
-
-if (!empty($ck_filter)) {
-    $danh_sach_hien_thi = array_filter($danh_sach_hien_thi, function ($sp) use ($ck_filter) {
-        return in_array(trim($sp['chuan_ket_noi'] ?? ''), $ck_filter, true);
-    });
-}
-
-if ($gia_tu !== null || $gia_den !== null) {
-    // Khoảng giá tự nhập được ưu tiên hơn khoảng giá dựng sẵn
-    $danh_sach_hien_thi = array_filter($danh_sach_hien_thi, function ($sp) use ($gia_tu, $gia_den) {
-        $g = (int) $sp['gia_ban'];
-        if ($gia_tu !== null && $g < $gia_tu) return false;
-        if ($gia_den !== null && $g > $gia_den) return false;
-        return true;
-    });
-} elseif ($gia_filter !== '' && isset($gia_buckets_dinh_nghia[$gia_filter])) {
-    $bucket_dang_loc    = $gia_buckets_dinh_nghia[$gia_filter];
-    $danh_sach_hien_thi = array_filter($danh_sach_hien_thi, function ($sp) use ($bucket_dang_loc) {
-        $g = (int) $sp['gia_ban'];
-        return $g >= $bucket_dang_loc['min'] && $g < $bucket_dang_loc['max'];
-    });
-}
-
-$danh_sach_hien_thi = array_values($danh_sach_hien_thi);
 
 if ($sort === 'gia-tang') {
     usort($danh_sach_hien_thi, function ($a, $b) {

@@ -26,7 +26,7 @@ return [
         'shop_accessories'       => 'Phụ kiện chính hãng',
         'about_heading'          => 'Vì đam mê công nghệ',
         'about_description_strong' => 'Linh kiện chính hãng – Dịch vụ tận tâm.',
-        'about_description'      => 'Viết Sơn mang đến đa dạng linh kiện máy tính, PC lắp sẵn và giải pháp build PC theo yêu cầu, giúp bạn sở hữu cấu hình tối ưu với mức chi phí hợp lý.',
+        'about_description'      => 'Achiva Viết Sơn mang đến đa dạng linh kiện máy tính, PC lắp sẵn và giải pháp build PC theo yêu cầu, giúp bạn sở hữu cấu hình tối ưu với mức chi phí hợp lý.',
         'lang_label'             => 'Việt Nam',
         'copyright'              => '© Copyright {year}, ACHIEVA VIETSON Co., Ltd',
         'legal_terms'            => 'Điều khoản',

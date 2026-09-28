@@ -1,4 +1,4 @@
-﻿<?php
+<?php
     require_once '../config/config.php';
     yeu_cau_dang_nhap([VAI_TRO_QUAN_TRI, VAI_TRO_NOI_DUNG], '../dang-nhap.php');
 
@@ -110,6 +110,9 @@
                     <input type="text" name="q" class="bv-search-input" placeholder="Tìm tên hoặc mã sản phẩm..." value="<?php echo htmlspecialchars($tu_khoa_loc); ?>">
                     <i class="fa-solid fa-magnifying-glass bv-search-icon"></i>
                 </form>
+                <button type="submit" form="bulkDeleteForm" class="bv-btn-add" style="background-color: #ef4444; margin-right: 8px;" onclick="return confirm('Bạn có chắc chắn muốn xoá các sản phẩm đã chọn không?');" title="Xóa các sản phẩm được tích chọn">
+                    <i class="fa-solid fa-trash-can"></i> Xóa đã chọn
+                </button>
                 <a href="them-san-pham.php" class="bv-btn-add">
                     <i class="fa-solid fa-plus"></i> Thêm sản phẩm mới
                 </a>
@@ -175,6 +178,7 @@
         <!-- Table List -->
         <div class="bv-card">
             <div class="bv-table-wrap">
+                <form id="bulkDeleteForm" action="xoa-nhieu-san-pham.php" method="POST">
                 <table class="bv-table">
                     <thead>
                         <tr>
@@ -207,7 +211,7 @@
                                 $gia_sau_giam = $giam_gia > 0 ? (int) round($gia_ban * (100 - $giam_gia) / 100) : $gia_ban;
                             ?>
                                 <tr class="bv-row">
-                                    <td><input type="checkbox" class="bv-row-checkbox"></td>
+                                    <td><input type="checkbox" name="ids[]" value="<?php echo $sp['ma_san_pham']; ?>" class="bv-row-checkbox"></td>
                                     <td class="bv-td-num"><?php echo $bat_dau + $i + 1; ?></td>
                                     <td>
                                         <div class="bv-thumb-wrap">
@@ -259,6 +263,7 @@
                         <?php endif; ?>
                     </tbody>
                 </table>
+                </form>
             </div>
 
             <!-- Table Footer / Pagination -->

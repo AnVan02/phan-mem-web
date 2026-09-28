@@ -51,123 +51,171 @@
         <?php include '../includes/sidebar.php'; ?>
 
         <main class="admin-main">
-            <div class="admin-main-header">
-                <h1>Banner thương hiệu</h1>
-                <a href="../quanly_sanpham/danh-sach-san-pham.php" class="link-out">← Danh sách sản phẩm</a>
+            <div class="bh-page-header">
+                <div>
+                    <h1 class="bh-page-title">Banner thương hiệu</h1>
+                    <p class="bh-page-subtitle"><span class="bh-dot"></span> Quản lý banner của các thương hiệu</p>
+                </div>
+                <a href="../quanly_sanpham/danh-sach-san-pham.php" class="bh-link-back">← Danh sách sản phẩm</a>
             </div>
 
             <?php if ($msg): ?>
-                <div class="admin-flash <?php echo $msg[0]; ?>"><?php echo htmlspecialchars($msg[1]); ?></div>
+                <div class="admin-flash <?php echo $msg[0]; ?>">
+                    <i class="fa-solid <?php echo $msg[0] === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'; ?>"></i>
+                    <?php echo htmlspecialchars($msg[1]); ?>
+                </div>
             <?php endif; ?>
 
-            <div class="post-box" id="form-banner">
-                <h3><?php echo $dang_sua ? 'Sửa thương hiệu / banner' : 'Thêm thương hiệu mới'; ?></h3>
-
-                <form action="xuly-banner.php" method="POST" enctype="multipart/form-data" class="banner-form">
-                    <input type="hidden" name="action" value="<?php echo $dang_sua ? 'sua' : 'them'; ?>">
-                    <?php if ($dang_sua): ?>
-                        <input type="hidden" name="id" value="<?php echo (int) $dang_sua['ma_thuong_hieu']; ?>">
-                    <?php endif; ?>
-
-                    <label class="field-label">Tên thương hiệu</label>
-                    <input type="text" name="ten_thuong_hieu" placeholder="Vd: AGI, Kingston, AMD..."
-                        value="<?php echo $dang_sua ? htmlspecialchars(trim($dang_sua['ten_thuong_hieu'])) : ''; ?>" required>
-
-                    <div class="field-row">
-                        <div>
-                            <label class="field-label">Ảnh banner (tải lên)</label>
-                            <input type="file" name="banner_file" accept="image/png,image/jpeg,image/webp">
-                        </div>
-                        <div>
-                            <label class="field-label">Hoặc dán URL ảnh banner</label>
-                            <input type="text" name="banner_url" placeholder="https://..."
-                                value="<?php echo $dang_sua && !empty($dang_sua['banner']) ? htmlspecialchars($dang_sua['banner']) : ''; ?>">
-                        </div>
+            <div class="bh-layout">
+                <!-- Form Card -->
+                <div class="bh-card" id="form-banner">
+                    <div class="bh-card-header">
+                        <div class="bh-card-icon"><i class="fa-solid fa-images"></i></div>
+                        <h2 class="bh-card-title"><?php echo $dang_sua ? 'SỬA THƯƠNG HIỆU / BANNER' : 'THÊM THƯƠNG HIỆU MỚI'; ?></h2>
                     </div>
-                    <span class="hint">Nếu chọn ảnh tải lên, ảnh tải lên sẽ được ưu tiên dùng thay cho URL.</span>
+                    
+                    <div class="bh-card-body">
+                        <form action="xuly-banner.php" method="POST" enctype="multipart/form-data" class="bh-form">
+                            <input type="hidden" name="action" value="<?php echo $dang_sua ? 'sua' : 'them'; ?>">
+                            <?php if ($dang_sua): ?>
+                                <input type="hidden" name="id" value="<?php echo (int) $dang_sua['ma_thuong_hieu']; ?>">
+                            <?php endif; ?>
 
-                    <label class="field-label">Nội dung banner</label>
-                    <textarea name="noi_dung_banner" rows="3" placeholder="Vd: Khám phá sản phẩm chính hãng từ AGI"><?php echo $dang_sua ? htmlspecialchars(trim($dang_sua['noi_dung_banner'] ?? '')) : ''; ?></textarea>
+                            <div class="bh-field">
+                                <label class="bh-label">Tên thương hiệu</label>
+                                <input type="text" name="ten_thuong_hieu" class="bh-input" placeholder="Vd: AGI, Kingston, AMD..."
+                                    value="<?php echo $dang_sua ? htmlspecialchars(trim($dang_sua['ten_thuong_hieu'])) : ''; ?>" required>
+                            </div>
 
-                    <div class="banner-form-actions">
-                        <button type="submit" class="btn-admin btn-admin-primary">
-                            <i class="fa-solid <?php echo $dang_sua ? 'fa-floppy-disk' : 'fa-plus'; ?>"></i>
-                            <?php echo $dang_sua ? 'Lưu thay đổi' : 'Thêm thương hiệu'; ?>
-                        </button>
-                        <?php if ($dang_sua): ?>
-                            <a href="banner.php" class="btn-admin btn-admin-secondary">Huỷ</a>
-                        <?php endif; ?>
+                            <div class="bh-field">
+                                <label class="bh-label">Ảnh banner (tải lên)</label>
+                                <label class="bh-dropzone" for="bannerFile">
+                                    <div class="bh-dropzone-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                                    <p class="bh-dropzone-title">Click hoặc kéo thả ảnh</p>
+                                    <p class="bh-dropzone-sub">Định dạng: JPG, PNG, WEBP</p>
+                                    <input type="file" name="banner_file" id="bannerFile" accept="image/png,image/jpeg,image/webp">
+                                </label>
+                            </div>
+
+                            <div class="bh-or-divider">HOẶC</div>
+
+                            <div class="bh-field">
+                                <label class="bh-label">Dán URL ảnh banner <span class="bh-label-hint">(Ưu tiên ảnh tải lên)</span></label>
+                                <input type="text" name="banner_url" class="bh-input" placeholder="https://..."
+                                    value="<?php echo $dang_sua && !empty($dang_sua['banner']) ? htmlspecialchars($dang_sua['banner']) : ''; ?>">
+                            </div>
+
+                            <div class="bh-field">
+                                <label class="bh-label">Nội dung banner</label>
+                                <textarea name="noi_dung_banner" class="bh-textarea" placeholder="Vd: Khám phá sản phẩm chính hãng từ AGI"><?php echo $dang_sua ? htmlspecialchars(trim($dang_sua['noi_dung_banner'] ?? '')) : ''; ?></textarea>
+                            </div>
+
+                            <div class="bh-form-actions">
+                                <button type="submit" class="bh-btn-primary">
+                                    <i class="fa-solid <?php echo $dang_sua ? 'fa-floppy-disk' : 'fa-plus'; ?>"></i>
+                                    <?php echo $dang_sua ? 'Lưu thay đổi' : 'Thêm thương hiệu'; ?>
+                                </button>
+                                <?php if ($dang_sua): ?>
+                                    <a href="banner.php" class="bh-btn-secondary">Huỷ</a>
+                                <?php endif; ?>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-            <div class="admin-panel">
-                <h2>Danh sách thương hiệu (<?php echo count($thuong_hieu_list); ?>)</h2>
+                </div>
 
-                <?php if (empty($thuong_hieu_list)): ?>
-                    <div class="admin-empty">Chưa có thương hiệu nào.</div>
-                <?php else: ?>
-                    <div class="admin-table-wrap">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Banner</th>
-                                    <th>Thương hiệu</th>
-                                    <th>Nội dung banner</th>
-                                    <th>Trạng thái</th>
-                                    <th>Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($thuong_hieu_list as $th):
-                                    $co_banner = !empty($th['banner']);
-                                ?>
+                <!-- Table Card -->
+                <div class="bh-card">
+                    <div class="bh-card-header">
+                        <div class="bh-card-icon icon-list"><i class="fa-solid fa-list"></i></div>
+                        <h2 class="bh-card-title">DANH SÁCH THƯƠNG HIỆU</h2>
+                        <span class="bh-card-count"><?php echo count($thuong_hieu_list); ?></span>
+                    </div>
+
+                    <?php if (empty($thuong_hieu_list)): ?>
+                        <div class="bh-empty">
+                            <i class="fa-solid fa-box-open"></i>
+                            <p>Chưa có thương hiệu nào.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="bh-table-wrap">
+                            <table class="bh-table">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <img class="thumb banner-thumb"
-                                                src="<?php
-                                                    if ($co_banner) {
-                                                        $la_url_ngoai = preg_match('#^https?://#i', $th['banner']);
-                                                        if ($la_url_ngoai) {
-                                                            echo htmlspecialchars($th['banner']);
-                                                        } else {
-                                                            $duong_dan_anh = '../../' . $th['banner'];
-                                                            $version = file_exists($duong_dan_anh) ? filemtime($duong_dan_anh) : time();
-                                                            echo htmlspecialchars($duong_dan_anh) . '?v=' . $version;
-                                                        }
-                                                    } else {
-                                                        echo '../../assets/image/pc.webp';
-                                                    }
-                                                ?>"
-                                                loading="lazy"
-                                                onerror="this.onerror=null;this.src='../../assets/image/pc.webp';" alt="">
-                                        </td>
-                                        <td><?php echo htmlspecialchars(trim($th['ten_thuong_hieu'])); ?></td>
-                                        <td class="title-cell"><?php echo htmlspecialchars(mb_substr(trim($th['noi_dung_banner'] ?? ''), 0, 80)); ?></td>
-                                        <td>
-                                            <?php if ($co_banner): ?>
-                                                <span class="admin-badge on">Có banner</span>
-                                            <?php else: ?>
-                                                <span class="admin-badge off">Chưa có</span>
-
-                                            <?php endif; ?>
-                                        </td>
-                                        <td>
-                                            <div class="admin-actions">
-                                                <a class="edit" href="banner.php?sua=<?php echo (int) $th['ma_thuong_hieu']; ?>#form-banner">Sửa</a>
-                                                <?php if ($co_banner): ?>
-                                                    <a class="delete-baner" href="xuly-banner.php?action=xoa_banner&id=<?php echo (int) $th['ma_thuong_hieu']; ?>"
-                                                        onclick="return confirm('Xoá banner của thương hiệu này? (Vẫn giữ thương hiệu)');">Xoá banner</a>
-                                                <?php endif; ?>
-                                                <a class="delete" href="xuly-banner.php?action=xoa&id=<?php echo (int) $th['ma_thuong_hieu']; ?>"
-                                                    onclick="return confirm('Xoá hẳn thương hiệu này?');">Xoá</a>
-                                            </div>
-                                        </td>
+                                        <th>Banner</th>
+                                        <th>Thương hiệu</th>
+                                        <th>Nội dung</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hành động</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($thuong_hieu_list as $th):
+                                        $co_banner = !empty($th['banner']);
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <div class="bh-thumb-wrap">
+                                                    <img src="<?php
+                                                        if ($co_banner) {
+                                                            $la_url_ngoai = preg_match('#^https?://#i', $th['banner']);
+                                                            if ($la_url_ngoai) {
+                                                                echo htmlspecialchars($th['banner']);
+                                                            } else {
+                                                                $duong_dan_anh = '../../' . $th['banner'];
+                                                                $version = file_exists($duong_dan_anh) ? filemtime($duong_dan_anh) : time();
+                                                                echo htmlspecialchars($duong_dan_anh) . '?v=' . $version;
+                                                            }
+                                                        } else {
+                                                            echo '../../assets/image/pc.webp';
+                                                        }
+                                                    ?>"
+                                                    loading="lazy"
+                                                    onerror="this.onerror=null;this.src='../../assets/image/pc.webp';" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="bh-name-cell">
+                                                    <strong><?php echo htmlspecialchars(trim($th['ten_thuong_hieu'])); ?></strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="bh-content-cell" title="<?php echo htmlspecialchars(trim($th['noi_dung_banner'] ?? '')); ?>">
+                                                    <?php echo htmlspecialchars(mb_substr(trim($th['noi_dung_banner'] ?? ''), 0, 40)) . (mb_strlen(trim($th['noi_dung_banner'] ?? '')) > 40 ? '...' : ''); ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <?php if ($co_banner): ?>
+                                                    <span class="bh-badge on">Có banner</span>
+                                                <?php else: ?>
+                                                    <span class="bh-badge off">Chưa có</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <div class="bh-actions">
+                                                    <a href="banner.php?sua=<?php echo (int) $th['ma_thuong_hieu']; ?>#form-banner" class="bh-action-btn bh-action-edit" title="Sửa">
+                                                        <i class="fa-solid fa-pen"></i> Sửa
+                                                    </a>
+                                                    <?php if ($co_banner): ?>
+                                                        <a href="xuly-banner.php?action=xoa_banner&id=<?php echo (int) $th['ma_thuong_hieu']; ?>" 
+                                                           class="bh-action-btn bh-action-del-banner" 
+                                                           onclick="return confirm('Xoá banner của thương hiệu này? (Vẫn giữ thương hiệu)');" title="Xoá banner">
+                                                            <i class="fa-regular fa-image"></i> Xoá ảnh
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <a href="xuly-banner.php?action=xoa&id=<?php echo (int) $th['ma_thuong_hieu']; ?>" 
+                                                       class="bh-action-btn bh-action-delete" 
+                                                       onclick="return confirm('Xoá hẳn thương hiệu này?');" title="Xoá thương hiệu">
+                                                        <i class="fa-solid fa-trash-can"></i> Xoá
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </main>
     </div>

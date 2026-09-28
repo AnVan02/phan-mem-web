@@ -1,25 +1,604 @@
-/* ===== Trang quản lý Banner thương hiệu ===== */
+/* ===================================================
+   Banner thương hiệu – Admin  |  banner-thuong-hieu.css
+   =================================================== */
 
-.banner-form {
+/* ---------- Page header ---------- */
+.bh-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.bh-page-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin: 0 0 4px;
+    letter-spacing: -0.3px;
+}
+
+.bh-page-subtitle {
+    font-size: 13px;
+    color: #9b9ba1;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bh-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e3c72, #4b6cb7);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.bh-link-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #1e3c72;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(30, 60, 114, 0.07);
+    transition: background 0.18s, color 0.18s;
+}
+
+.bh-link-back:hover {
+    background: rgba(30, 60, 114, 0.14);
+    color: #0f2040;
+}
+
+/* ---------- Flash message ---------- */
+.admin-flash {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 22px;
+    animation: bh-fade-in 0.3s ease;
+}
+
+.admin-flash.success {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.admin-flash.error {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+/* ---------- Main layout grid ---------- */
+.bh-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* ---------- Card chung ---------- */
+.bh-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(30, 60, 114, 0.07);
+    overflow: hidden;
+}
+
+.bh-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px 18px;
+    border-bottom: 1px solid #f0f0f4;
+}
+
+.bh-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1e3c72, #4b6cb7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.bh-card-icon.icon-list {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.bh-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.bh-card-count {
+    margin-left: auto;
+    background: #f4f4f6;
+    color: #6b6b70;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.bh-card-body {
+    padding: 24px;
+}
+
+/* ---------- Form ---------- */
+.bh-form {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 18px;
 }
 
-.banner-form-actions {
+.bh-field {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.banner-thumb {
-    width: 80px;
-    height: 46px;
-    object-fit: cover;
-    border-radius: 6px;
-    background: #f1f1f3;
-}
-
-.admin-table td.title-cell {
+.bh-label {
+    font-size: 12px;
+    font-weight: 700;
     color: #6b6b70;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.bh-label-hint {
+    font-weight: 400;
+    font-size: 11px;
+    color: #b0b0ba;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 4px;
+}
+
+.bh-input,
+.bh-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #e8e8ee;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #1a1a2e;
+    background: #fafafa;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.bh-input:focus,
+.bh-textarea:focus {
+    border-color: #4b6cb7;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.12);
+}
+
+.bh-textarea {
+    resize: vertical;
+    min-height: 88px;
+    line-height: 1.6;
+}
+
+/* Hàng 2 cột */
+.bh-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* Divider OR */
+.bh-or-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c0c0c8;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin: 2px 0;
+}
+
+.bh-or-divider::before,
+.bh-or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #ebebef;
+}
+
+/* Upload dropzone */
+.bh-dropzone {
+    border: 2px dashed #d0d0da;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s;
+    position: relative;
+    background: #fafafa;
+}
+
+.bh-dropzone:hover,
+.bh-dropzone.is-over {
+    border-color: #4b6cb7;
+    background: rgba(75, 108, 183, 0.04);
+}
+
+.bh-dropzone.has-file {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.04);
+}
+
+.bh-dropzone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.bh-dropzone-icon {
+    font-size: 26px;
+    color: #4b6cb7;
+    margin-bottom: 8px;
+}
+
+.bh-dropzone-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 3px;
+}
+
+.bh-dropzone-sub {
+    font-size: 11px;
+    color: #9b9ba1;
+    margin: 0;
+}
+
+/* Preview ảnh banner hiện tại */
+.bh-current-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #f4f4f6;
+    border-radius: 10px;
+    border: 1px solid #e8e8ee;
+}
+
+.bh-current-preview img {
+    width: 90px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 7px;
+    flex-shrink: 0;
+    background: #e8e8ee;
+}
+
+.bh-current-preview-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.bh-current-preview-label {
+    font-size: 11px;
+    color: #9b9ba1;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.bh-current-preview-name {
+    font-size: 12px;
+    color: #1a1a2e;
+    font-weight: 600;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hint text */
+.bh-hint {
+    font-size: 11.5px;
+    color: #a0a0aa;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+}
+
+.bh-hint i {
+    color: #f59e0b;
+    font-size: 12px;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+/* Form actions */
+.bh-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.bh-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #1e3c72, #4b6cb7);
+    color: #fff;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Montserrat', Arial, sans-serif;
+    cursor: pointer;
+    transition: opacity 0.18s, transform 0.15s;
+}
+
+.bh-btn-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.bh-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f4f4f6;
+    color: #6b6b70;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Montserrat', Arial, sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.bh-btn-secondary:hover {
+    background: #e8e8ee;
+    color: #1a1a2e;
+}
+
+/* ---------- Bảng danh sách ---------- */
+.bh-table-wrap {
+    overflow-x: auto;
+    border-radius: 0 0 16px 16px;
+}
+
+.bh-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.bh-table thead tr {
+    background: #f8f8fc;
+    border-bottom: 1px solid #f0f0f4;
+}
+
+.bh-table th {
+    padding: 13px 16px;
+    text-align: left;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #9b9ba1;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.bh-table tbody tr {
+    border-bottom: 1px solid #f5f5f8;
+    transition: background 0.15s;
+}
+
+.bh-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.bh-table tbody tr:hover {
+    background: #fafafe;
+}
+
+.bh-table td {
+    padding: 14px 16px;
+    color: #1a1a2e;
+    vertical-align: middle;
+}
+
+/* Cột ảnh thumbnail */
+.bh-thumb-wrap {
+    width: 100px;
+    height: 58px;
+    border-radius: 9px;
+    overflow: hidden;
+    background: #f0f0f4;
+    flex-shrink: 0;
+    border: 1px solid #ebebef;
+}
+
+.bh-thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Cột tên thương hiệu */
+.bh-name-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bh-name-cell strong {
+    font-weight: 700;
+    color: #1a1a2e;
+    font-size: 14px;
+}
+
+/* Nội dung banner */
+.bh-content-cell {
+    color: #6b6b70;
+    font-size: 13px;
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Badge trạng thái */
+.bh-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.bh-badge.on {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.bh-badge.off {
+    background: #f4f4f6;
+    color: #9b9ba1;
+}
+
+/* Hành động */
+.bh-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bh-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', Arial, sans-serif;
+    transition: background 0.15s, transform 0.12s;
+}
+
+.bh-action-btn:hover {
+    transform: translateY(-1px);
+}
+
+.bh-action-edit {
+    background: rgba(30, 60, 114, 0.08);
+    color: #1e3c72;
+}
+
+.bh-action-edit:hover {
+    background: rgba(30, 60, 114, 0.15);
+}
+
+.bh-action-del-banner {
+    background: rgba(245, 158, 11, 0.10);
+    color: #b45309;
+}
+
+.bh-action-del-banner:hover {
+    background: rgba(245, 158, 11, 0.20);
+}
+
+.bh-action-delete {
+    background: rgba(220, 38, 38, 0.08);
+    color: #dc2626;
+}
+
+.bh-action-delete:hover {
+    background: rgba(220, 38, 38, 0.15);
+}
+
+/* Empty state */
+.bh-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 52px 24px;
+    color: #c0c0c8;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bh-empty i {
+    font-size: 36px;
+    color: #dcdce4;
+}
+
+/* ---------- Animations ---------- */
+@keyframes bh-fade-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+    .bh-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .bh-field-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .bh-table th:nth-child(3),
+    .bh-table td:nth-child(3) {
+        display: none;
+    }
+
+    .bh-card-body {
+        padding: 16px;
+    }
 }

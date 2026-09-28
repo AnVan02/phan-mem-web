@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ══ TRANG CHỦ ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ══ SẢN PHẨM ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/san-pham</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ══ DANH MỤC ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/danh-muc</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ══ TIN TỨC ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/tin-tuc-moi</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ══ MÔ TẢ LINH KIỆN ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/mo-ta-linh-kien</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ══ THƯƠNG HIỆU ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/thuong-hieu</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ══ BẢO HÀNH ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/bao-hanh</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ══ TÌM KIẾM ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/tim-kiem</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ══ VỀ CHÚNG TÔI ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/ve-chung-toi</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ══ CAM KẾT KHÁCH HÀNG ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/cam-ket-khach-hang</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ══ CHÍNH SÁCH ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/chinh-sach</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://vietsonachieva.com/chinh-sach-bao-hanh</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://vietsonachieva.com/chinh-sach-bao-mat</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://vietsonachieva.com/chinh-sach-cookie</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ══ ĐIỀU KHOẢN ══ -->
+  <url>
+    <loc>https://vietsonachieva.com/dieu-khoan</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

@@ -22,11 +22,11 @@ $site_root         = $site_root ?? '';
     <?php if ($canonical_url !== ''): ?>
     <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url); ?>">
     <?php endif; ?>
-    <link rel="shortcut icon" href="<?php echo htmlspecialchars(asset_url('assets/images/icon/logo VS_icon.jpg')); ?>">
+    <link rel="icon" type="image/png" href="<?php echo htmlspecialchars(asset_url('assets/image/Logo ACVS/SVG/ACVS background.svg')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
     <script>window.SITE_ROOT = <?php echo json_encode(rtrim($site_root, '/')); ?>;</script>

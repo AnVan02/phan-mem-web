@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultsArea = document.querySelector('.warranty-results-area');
     const searchInput = document.querySelector('#serial-search');
     const clearBtn = document.querySelector('#clear-search');
+    let searchController = null;
 
     function toggleClearBtn() {
         if (!clearBtn || !searchInput) return;
@@ -41,10 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const formData = new FormData();
             formData.append('search', searchValue);
 
+            if (searchController) searchController.abort();
+            searchController = new AbortController();
+
             // Fetch dữ liệu ngầm không load lại trang
             fetch(window.location.href, {
                 method: 'POST',
-                body: formData
+                body: formData,
+                signal: searchController.signal
             })
                 .then(response => response.text())
                 .then(html => {
@@ -60,7 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .catch(error => {
-                    resultsArea.innerHTML = '<div class="search-error-msg">Mất kết nối mạng, vui lòng thử lại!</div>';
+                    if (error.name !== 'AbortError') {
+                        resultsArea.innerHTML = '<div class="search-error-msg">Mất kết nối mạng, vui lòng thử lại!</div>';
+                    }
                 });
         });
     }

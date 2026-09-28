@@ -150,10 +150,6 @@ require 'head.php';
 
     <section class="cart-page">
         <div class="container">
-            <div class="cart-page-header">
-                <span class="cart-eyebrow">— Giỏ hàng của bạn</span>
-                <h1 class="cart-title">Giỏ hàng</h1>
-            </div>
 
             <?php if ($don_hang_thanh_cong): ?>
                 <div class="cart-order-success">
@@ -177,11 +173,107 @@ require 'head.php';
 
             <?php if (!$don_hang_thanh_cong): ?>
                 <?php if (empty($gio_hang_items)): ?>
-                    <div class="cart-empty">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <p>Giỏ hàng của bạn đang trống.</p>
-                        <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="btn-continue-shopping">Xem sản phẩm <i class="fa-solid fa-arrow-right"></i></a>
+                    <!-- ===== EMPTY CART ===== -->
+                    <nav class="cart-breadcrumb" aria-label="Breadcrumb">
+                        <a href="<?php echo htmlspecialchars(asset_url('index.php')); ?>" class="cart-breadcrumb-home" aria-label="Trang chủ">
+                            <i class="fa-solid fa-house"></i>
+                        </a>
+                        <span class="cart-breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+                        <span class="cart-breadcrumb-current">Giỏ hàng của bạn</span>
+                    </nav>
+
+                    <div class="cart-page-title-wrap">
+                        <h1 class="cart-page-title">Giỏ hàng</h1>
+                        <div class="cart-page-title-line"></div>
                     </div>
+
+                    <div class="cart-empty-card">
+                        <!-- Illustration -->
+                        <div class="cart-empty-illustration">
+                            <svg viewBox="0 0 340 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <circle cx="160" cy="155" r="110" fill="#EEF2FF"/>
+                                <text x="52" y="72" font-size="16" fill="#CBD5E1" font-weight="bold">&#10005;</text>
+                                <text x="285" y="88" font-size="14" fill="#CBD5E1" font-weight="bold">&#10005;</text>
+                                <text x="38" y="188" font-size="12" fill="#CBD5E1" font-weight="bold">&#10005;</text>
+                                <path d="M80 238 Q68 222 75 210 Q88 220 80 238Z" fill="#86EFAC"/>
+                                <path d="M80 238 Q75 218 85 210 Q90 225 80 238Z" fill="#4ADE80"/>
+                                <line x1="80" y1="238" x2="80" y2="215" stroke="#4ADE80" stroke-width="1.5"/>
+                                <path d="M245 242 Q260 228 252 216 Q240 226 245 242Z" fill="#86EFAC"/>
+                                <path d="M245 242 Q248 222 238 218 Q234 232 245 242Z" fill="#4ADE80"/>
+                                <line x1="245" y1="242" x2="245" y2="219" stroke="#4ADE80" stroke-width="1.5"/>
+                                <polygon points="110,220 118,234 102,234" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+                                <polygon points="222,62 229,74 215,74" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+                                <rect x="95" y="120" width="130" height="90" rx="8" fill="#94A3B8"/>
+                                <rect x="100" y="125" width="120" height="80" rx="6" fill="#B0BEC5"/>
+                                <line x1="120" y1="125" x2="120" y2="205" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="140" y1="125" x2="140" y2="205" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="160" y1="125" x2="160" y2="205" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="180" y1="125" x2="180" y2="205" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="200" y1="125" x2="200" y2="205" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="100" y1="145" x2="220" y2="145" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="100" y1="165" x2="220" y2="165" stroke="#90A4AE" stroke-width="1.5"/>
+                                <line x1="100" y1="185" x2="220" y2="185" stroke="#90A4AE" stroke-width="1.5"/>
+                                <path d="M80 110 Q80 95 95 95 L110 95" stroke="#607D8B" stroke-width="8" fill="none" stroke-linecap="round"/>
+                                <rect x="76" y="108" width="8" height="16" rx="4" fill="#607D8B"/>
+                                <circle cx="120" cy="218" r="12" fill="#607D8B"/>
+                                <circle cx="120" cy="218" r="6" fill="#455A64"/>
+                                <circle cx="200" cy="218" r="12" fill="#607D8B"/>
+                                <circle cx="200" cy="218" r="6" fill="#455A64"/>
+                                <rect x="108" y="207" width="104" height="6" rx="3" fill="#607D8B"/>
+                                <circle cx="195" cy="105" r="28" fill="#3B82F6"/>
+                                <circle cx="187" cy="99" r="3" fill="white"/>
+                                <circle cx="203" cy="99" r="3" fill="white"/>
+                                <path d="M186 110 Q195 104 204 110" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                <path d="M178 120 L170 130 L185 122Z" fill="#3B82F6"/>
+                            </svg>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="cart-empty-content">
+                            <div class="cart-empty-icon-wrap">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </div>
+                            <h2 class="cart-empty-title">Giỏ hàng của bạn đang trống</h2>
+                            <p class="cart-empty-desc">Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ hàng.<br>Hãy khám phá các sản phẩm tuyệt vời của chúng tôi!</p>
+                            <a href="<?php echo htmlspecialchars(asset_url('san-pham.php')); ?>" class="cart-empty-btn">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                Khám phá sản phẩm
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Trust badges -->
+                    <div class="cart-trust-badges">
+                        <div class="cart-trust-item">
+                            <div class="cart-trust-icon cart-trust-icon--green">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="cart-trust-text">
+                                <strong>Sản phẩm chính hãng</strong>
+                                <span>Đảm bảo 100% chính hãng</span>
+                            </div>
+                        </div>
+                        <div class="cart-trust-item">
+                            <div class="cart-trust-icon cart-trust-icon--purple">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <div class="cart-trust-text">
+                                <strong>Giao hàng nhanh chóng</strong>
+                                <span>Giao hàng tận nơi toàn quốc</span>
+                            </div>
+                        </div>
+                        <div class="cart-trust-item">
+                            <div class="cart-trust-icon cart-trust-icon--orange">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div class="cart-trust-text">
+                                <strong>Hỗ trợ tận tâm</strong>
+                                <span>Hỗ trợ 24/7, giải đáp nhanh chóng</span>
+                            </div>
+                        </div>
+                    </div>
+
                 <?php else: ?>
                     <div class="cart-layout">
                         <div class="cart-items-col">
@@ -234,7 +326,7 @@ require 'head.php';
                                     <input type="hidden" name="action" value="dat_hang">
                                     <div class="form-group" style="position: relative; display: flex; gap: 10px;">
                                         <input type="text" name="ma_giam_gia" id="ma_giam_gia" placeholder="Nhập mã giảm giá (nếu có)" style="flex: 1; text-transform: uppercase;">
-                                        <button type="button" id="btnApplyDiscount" style="padding: 10px 15px; background: #1f2937; color: white; border: none; border-radius: 6px; cursor: pointer;">Áp dụng</button>
+                                        <button type="button" id="btnApplyDiscount" style="padding: 10px 15px; background: #1f2937; color: white; border: none; border-radius: 6px; cursor: pointer;">Ap dụng</button>
                                     </div>
                                     <div id="discountMessage" style="margin-bottom: 15px; font-size: 15px;"></div>
                                     <div class="form-group">
@@ -247,18 +339,16 @@ require 'head.php';
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <textarea name="email" id="email" placeholder="Nhập emai của bạn " required><?php echo $khach_hang_dang_nhap ? htmlspecialchars($khach_hang_dang_nhap['customer_email']) : ''; ?></textarea>
+                                        <textarea name="email" id="email" placeholder="Nhập email của bạn" required><?php echo $khach_hang_dang_nhap ? htmlspecialchars($khach_hang_dang_nhap['customer_email']) : ''; ?></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="dia_chi">Địa chỉ nhận hàng</label>
                                         <textarea name="dia_chi" id="dia_chi" rows="3" placeholder="Nhập địa chỉ nhận hàng" required><?php echo $khach_hang_dang_nhap ? htmlspecialchars($khach_hang_dang_nhap['customer_address']) : ''; ?></textarea>
                                     </div>
-                                    
                                     <div class="form-group">
                                         <label for="ghi_chu">Ghi chú (tuỳ chọn)</label>
                                         <textarea name="ghi_chu" id="ghi_chu" rows="2" placeholder="Ghi chú thêm cho đơn hàng"></textarea>
                                     </div>
-
                                     <button type="submit" class="btn-checkout">Đặt hàng <i class="fa-solid fa-arrow-right"></i></button>
                                 </form>
                             </div>

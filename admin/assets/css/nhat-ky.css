@@ -1,0 +1,274 @@
+/* ===================================================
+   Nhật ký hoạt động – Admin  |  nhat-ky.css
+   =================================================== */
+
+/* ---------- Page header ---------- */
+.nk-page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.nk-page-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nk-page-title i {
+    color: #4b6cb7;
+    font-size: 22px;
+}
+
+/* ---------- Card layout ---------- */
+.nk-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(30, 60, 114, 0.05);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.nk-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nk-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.nk-card-count {
+    background: #f4f4f6;
+    color: #6b6b70;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+}
+
+.nk-card-body {
+    padding: 24px;
+}
+
+/* ---------- Filter bar ---------- */
+.nk-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: #fcfcfd;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e8e8ee;
+    margin-bottom: 24px;
+}
+
+.nk-select,
+.nk-input {
+    padding: 10px 14px;
+    border: 1.5px solid #e8e8ee;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #1a1a2e;
+    background: #fff;
+    outline: none;
+    transition: all 0.2s;
+    min-width: 140px;
+    flex: 1;
+}
+
+.nk-select:focus,
+.nk-input:focus {
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.1);
+}
+
+.nk-filter-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.nk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: 'Montserrat', Arial, sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.nk-btn-primary {
+    background: linear-gradient(135deg, #1e3c72, #4b6cb7);
+    color: #fff;
+}
+
+.nk-btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(75, 108, 183, 0.3);
+    transform: translateY(-1px);
+}
+
+.nk-btn-secondary {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.nk-btn-secondary:hover {
+    background: #fecaca;
+}
+
+/* ---------- Table ---------- */
+.nk-table-wrap {
+    overflow-x: auto;
+}
+
+.nk-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.nk-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: #9b9ba1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #f8f8fc;
+    border-bottom: 2px solid #f0f0f4;
+    white-space: nowrap;
+}
+
+.nk-table td {
+    padding: 14px 16px;
+    color: #1a1a2e;
+    border-bottom: 1px solid #f5f5f8;
+    vertical-align: middle;
+}
+
+.nk-table tbody tr:hover {
+    background: #fafafe;
+}
+
+/* Specific columns */
+.nk-col-time {
+    color: #6b6b70;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.nk-col-account {
+    font-weight: 600;
+    color: #1e3c72;
+}
+
+.nk-col-object {
+    font-weight: 500;
+}
+
+.nk-col-desc {
+    color: #4a4a52;
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+.nk-col-ip {
+    color: #9b9ba1;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+/* Badge */
+.nk-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.nk-badge.on {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.nk-badge.off {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Empty state */
+.nk-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #9b9ba1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Pagination */
+.nk-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px 24px;
+    border-top: 1px solid #f0f0f4;
+}
+
+.nk-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: #f4f4f6;
+    color: #6b6b70;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nk-page-link:hover:not(.disabled) {
+    background: #e8e8ee;
+    color: #1a1a2e;
+}
+
+.nk-page-link.active {
+    background: #4b6cb7;
+    color: #fff;
+}
+
+.nk-page-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}

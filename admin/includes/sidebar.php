@@ -14,7 +14,11 @@ $la_quan_tri       = $vai_tro_hien_tai === VAI_TRO_QUAN_TRI;
 $so_ho_tro_chua_xu_ly = 0;
 if ($duoc_xem_don_hang && isset($pdo)) {
     try {
-        $so_ho_tro_chua_xu_ly = (int) $pdo->query("SELECT COUNT(*) FROM ho_tro_khach_hang WHERE trang_thai = 0")->fetchColumn();
+        if (!isset($_SESSION['ho_tro_count']) || !isset($_SESSION['ho_tro_count_time']) || time() - $_SESSION['ho_tro_count_time'] > 300) {
+            $_SESSION['ho_tro_count'] = (int) $pdo->query("SELECT COUNT(*) FROM ho_tro_khach_hang WHERE trang_thai = 0")->fetchColumn();
+            $_SESSION['ho_tro_count_time'] = time();
+        }
+        $so_ho_tro_chua_xu_ly = $_SESSION['ho_tro_count'];
     } catch (PDOException $e) {
         $so_ho_tro_chua_xu_ly = 0;
     }
